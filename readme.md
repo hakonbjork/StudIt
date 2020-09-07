@@ -1,5 +1,3 @@
 # Group gr2060 repository
 
-Welcome to IT1901 course fall 2020
-
-Good luck!
+En README.md-fil på rotnivå i repoet skal beskrive repo-innholdet, spesielt hvilken mappe inni repoet som utgjør kodingsprosjektet.
