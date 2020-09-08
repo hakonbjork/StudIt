@@ -1,8 +1,10 @@
-#Folders
-/target/
-/bin/
+# Directories
+target/
+bin/
 .settings/
 
-#Files
+# Files
 .project
 .classpath
+
+
