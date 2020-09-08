@@ -9,3 +9,11 @@ Testing is found under Studit/test/..
 
 To run the application, click the gitpod link
 
+## User Stories
+
+En bruker får muligheten til å logge seg inn og se en fagoversikt fra NTNU. 
+
+**Issues:**
+* [ ] Enkelt brukergrensesnitt for selve applikasjonen
+* [ ] Brukergrensesnitt innlogging
+* [ ] Håndtdering av brukernavn / passord
