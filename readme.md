@@ -5,7 +5,7 @@
 Main part of the coding project is found under StudIt/..  
 Testing is found under Studit/test/..
 
-##Installation
+## Installation
 
 To run the application, click the gitpod link
 
