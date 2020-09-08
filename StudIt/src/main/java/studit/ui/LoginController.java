@@ -1,4 +1,4 @@
-package studit;
+package studit.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,15 +15,15 @@ public class LoginController{
     }
 
     public void initialize(){
-        LoginManager.initialize();
+        studit.core.LoginManager.initialize();
     }
 
-    ///Gjør en handling når man trykker på login
+    ///Checks if login creditentials are correct, and does an action corresponding
     public void loginButtonAction(){
         String username = usernameField.getText();
         String password = passwordField.getText();
-        if (LoginManager.match(username, password)){
-            System.out.print("Success");
+        if (studit.core.LoginManager.match(username, password)){
+            System.out.print("Success ");
         }
         else{
             System.out.print("Failure, "+username+ ", "+password + " ");

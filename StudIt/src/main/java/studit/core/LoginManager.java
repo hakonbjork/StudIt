@@ -1,4 +1,4 @@
-package studit;
+package studit.core;
 
 import java.util.HashMap;
 
@@ -10,13 +10,13 @@ public class LoginManager{
         initialize();
     }
 
-    ///Setter en foreløpig database med brukernavn og passord
+    ///Sets a database with username and passwords
     public static void initialize(){
         DB.put("user", "password");
         DB.put("admin", "password1");
     }
 
-    ///Sjekker om følgende brukernavn og passord eksisterer sammen i databasen
+    ///Checks if the username and password exists together in the database
     public static boolean match(String username, String password){
         if (DB.containsKey(username)){
             if (DB.get(username).equals(password)){
