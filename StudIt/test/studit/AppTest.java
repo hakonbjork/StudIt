@@ -23,11 +23,4 @@ public class AppTest extends ApplicationTest {
         stage.show();
     }
 
-    @Test
-    public void testController() {
-        final Button clickMeButton = (Button) parent.lookup("#clickMeButton");
-        String oldText = clickMeButton.getText();
-        clickOn(clickMeButton);
-        Assertions.assertFalse(clickMeButton.getText().equals(oldText));
-    }
 }
