@@ -8,6 +8,7 @@ module studit {
 
 
     exports studit.ui;
+    exports studit.core;
 
     opens studit.ui to javafx.fxml;
 }

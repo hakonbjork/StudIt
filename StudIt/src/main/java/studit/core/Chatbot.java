@@ -43,5 +43,9 @@ public class Chatbot {
 	public void show() {
 		chatStage.setIconified(false);
 	}
+	
+	public void manageInput(String input) {
+		System.out.println("Performing action on: " + input);
+	}
 
 }

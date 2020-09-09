@@ -24,6 +24,6 @@
       <TextArea prefHeight="111.0" prefWidth="220.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <TextField BorderPane.alignment="CENTER" />
+      <TextField fx:id="txt_user_entry" onKeyPressed="#userEntry" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>

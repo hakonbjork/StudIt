@@ -11,7 +11,7 @@ import studit.core.Chatbot;
 
 public class AppController implements Initializable {
 	
-	private static Chatbot chatbot = null;
+	public static Chatbot chatbot = null;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -37,6 +37,7 @@ public class AppController implements Initializable {
     public static void closeChatbot() {
     	chatbot = null;
     }
+
     
 	
 
