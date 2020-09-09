@@ -15,17 +15,20 @@ public class Chatbot {
 		displayWindow();
 	}
 	
+	/*
+	 * Opens a new window for our chatbot
+	 */
 	private void displayWindow() {
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("/studit/ui/Chatbot.fxml"));
 			Stage chatStage = new Stage();
-			
-			chatStage.setTitle("Chat");
-			chatStage.initStyle(StageStyle.TRANSPARENT);
-			
 			Scene scene = new Scene(root);
+			
+			// Setting the background to be transparent, so we can create rouned corners in our css file
+			chatStage.initStyle(StageStyle.TRANSPARENT);
 			scene.setFill(Color.TRANSPARENT);
+			
 			scene.getStylesheets().setAll(getClass().getResource("/studit/ui/chatbot.css").toExternalForm());
 			chatStage.setScene(scene);
 			chatStage.show();

@@ -12,8 +12,13 @@
 
 
 #pane_chatbot {
-	-fx-background-size: 1200 900;
-	-fx-background-radius: 0 0 18 18;
-	-fx-border-radius: 0 0 18 18;
+	-fx-background-radius: 12 12 12 12;
+	-fx-border-radius: 12 12 12 12;
 	-fx-background-color: -fx-color-primary;
+}
+
+#toolbar_main {
+	-fx-background-radius: 12 12 0 0;
+	-fx-border-radius: 12 12 0 0;
+	-fx-background-color: -fx-color-primary-dark;
 }

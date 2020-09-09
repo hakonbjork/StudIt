@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-
 <BorderPane fx:id="pane_chatbot" minHeight="200.0" minWidth="150.0" prefHeight="300.0" prefWidth="220.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.ChatbotController">
    <top>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ToolBar fx:id="toolbar_main" onMouseDragged="#moveWindow" onMousePressed="#setOffset" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-            <HBox prefHeight="0.0" prefWidth="200.0">
+            <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="200.0" spacing="10.0">
                <children>
-                <Button mnemonicParsing="false" text="Button" textAlignment="CENTER" />
+                  <Button fx:id="btn_minimize" mnemonicParsing="false" onAction="#minimizeChatbot" text="-" />
+                <Button fx:id="btn_exit" mnemonicParsing="false" onAction="#exitChatbot" text="X" textAlignment="CENTER" />
                </children>
             </HBox>
         </items>
