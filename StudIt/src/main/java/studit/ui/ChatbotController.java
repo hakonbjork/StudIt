@@ -33,9 +33,11 @@ public class ChatbotController implements Initializable {
 
     @FXML
     void exitChatbot(ActionEvent event) {
+    	AppController.closeChatbot();
     	final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
+        
     }
 
     @FXML

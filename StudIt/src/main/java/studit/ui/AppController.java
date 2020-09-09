@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import studit.core.Chatbot;
 
 public class AppController implements Initializable {
+	
+	private static Chatbot chatbot = null;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -24,9 +26,18 @@ public class AppController implements Initializable {
 	 * Opens our new ChatBot window
 	 */
     @FXML
-    void chatClick(ActionEvent event) {
-    	new Chatbot();
+    private void chatClick(ActionEvent event) {
+    	if (chatbot == null) {
+    		chatbot = new Chatbot();
+    	} else {
+    		chatbot.show();
+    	}
     }
+    
+    public static void closeChatbot() {
+    	chatbot = null;
+    }
+    
 	
 
 }

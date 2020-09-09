@@ -11,6 +11,8 @@ import javafx.stage.StageStyle;
 
 public class Chatbot {
 	
+	private Stage chatStage;
+	
 	public Chatbot() {
 		displayWindow();
 	}
@@ -22,7 +24,7 @@ public class Chatbot {
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("/studit/ui/Chatbot.fxml"));
-			Stage chatStage = new Stage();
+			chatStage = new Stage();
 			Scene scene = new Scene(root);
 			
 			// Setting the background to be transparent, so we can create rouned corners in our css file
@@ -36,6 +38,10 @@ public class Chatbot {
 			System.out.println("Error loading ChatbotController.FXML -> Is the file corrupt?");
 			e.printStackTrace();
 		}
+	}
+
+	public void show() {
+		chatStage.setIconified(false);
 	}
 
 }
