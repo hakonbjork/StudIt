@@ -45,7 +45,12 @@ public class Chatbot {
 	}
 	
 	public void manageInput(String input) {
-		System.out.println("Performing action on: " + input);
+		
+		// Splitting string by spaces, and removing all newline chars
+		String[] command = input.replaceAll("\n", "").split(" ");
+		for (String word : command) {
+			System.out.println(word);
+		}
 	}
 
 }

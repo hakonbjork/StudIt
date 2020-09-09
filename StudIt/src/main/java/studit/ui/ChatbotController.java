@@ -8,24 +8,36 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import studit.core.Chatbot;
 
 public class ChatbotController implements Initializable {
 	
 	private Stage stage = null;
 	private double xOffset = 0, yOffset = 0;
+	private int lineBreakLength = 0;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		txt_user_entry.textProperty().addListener(l -> checkForLineBreak());
 	}
 	
+	private void checkForLineBreak() {
+		if (lineBreakLength == 0) {
+			// 8.2 is an arbitrary value based on font and font size, hard to make less hardcoded
+			lineBreakLength = (int) (txt_user_entry.getWidth() / 8.1);
+		}	
+		
+		if (txt_user_entry.getText().length() % lineBreakLength == 0) {
+			txt_user_entry.setText(txt_user_entry.getText() + "\n");
+		}
+
+	}
+
 	//--------------------------------------------------Member Initialization-----------------------------------------------
 	 
     @FXML
@@ -38,7 +50,7 @@ public class ChatbotController implements Initializable {
     private Button btn_exit;
     
     @FXML
-    private TextField txt_user_entry;
+    private TextArea txt_user_entry;
     
 	//------------------------------------------------------Widget Logic----------------------------------------------------
 
@@ -91,6 +103,8 @@ public class ChatbotController implements Initializable {
     	if (event.getCode() == KeyCode.ENTER) {
     		String userInput = txt_user_entry.getText();
     		txt_user_entry.setText("");
+    		// Make sure that the caret is at first position for a new command!
+    		txt_user_entry.selectPositionCaret(0);
     		AppController.chatbot.manageInput(userInput);
     	}
     }
