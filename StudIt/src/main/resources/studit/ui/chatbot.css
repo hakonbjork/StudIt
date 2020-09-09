@@ -1,0 +1,19 @@
+* {
+	-fx-color-primary: #0b7de0;
+	-fx-color-primary-light: #63acff;
+	-fx-color-primary-dark: #0052ad;
+	-fx-color-primary-text: #ffffff;
+	
+	-fx-color-secondary: #f0f0f0;
+	-fx-color-secondary-light: #ffffff;
+	-fx-color-secondary-dark: #bebebe;
+	-fx-color-secondary-text: #212121;
+}
+
+
+#pane_chatbot {
+	-fx-background-size: 1200 900;
+	-fx-background-radius: 0 0 18 18;
+	-fx-border-radius: 0 0 18 18;
+	-fx-background-color: -fx-color-primary;
+}
