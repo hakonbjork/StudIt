@@ -27,7 +27,7 @@ public class Chatbot {
 			chatStage = new Stage();
 			Scene scene = new Scene(root);
 			
-			// Setting the background to be transparent, so we can create rouned corners in our css file
+			// Setting the background to be transparent, so we can create rounded corners in our css file
 			chatStage.initStyle(StageStyle.TRANSPARENT);
 			scene.setFill(Color.TRANSPARENT);
 			
