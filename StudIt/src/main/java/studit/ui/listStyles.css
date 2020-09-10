@@ -1,0 +1,17 @@
+.list-view {
+    -fx-background-color: none;
+    -fx-border-color: black; 
+    -fx-border-width: 2px;
+    background-color: none;
+    border-color: black; 
+    border-width: 2px;
+}
+
+.list-view .list-cell:even {
+    -fx-border-color: black; 
+    -fx-border-width: 2px;
+    -fx-border-top: none;
+    border-color: black; 
+    border-width: 2px;
+    border-top: none;
+}
