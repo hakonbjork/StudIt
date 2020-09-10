@@ -1,21 +1,22 @@
 package studit.ui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 
-public class AppController implements Initializable {
+public class AppController{ 
     
     ObservableList<String> list = FXCollections.observableArrayList();
+
+    @FXML
+    public void initialize() {
+        loadData();
+    }
 
     @FXML
     private ListView<String> coursesList;
@@ -31,16 +32,14 @@ public class AppController implements Initializable {
 
     }
 
+    //Ved å skrive inn noe i søkefeltet skal du få opp en listview
     @FXML
     void searchView(ActionEvent event) {
 
     }
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-        loadData();
-    }
-    
+    //Denne funksjonen burde egentlig være en som henter noe fra en database der data om hvert fag blir lagret.
+    //Så det under blir mockdata.
     private void loadData() {
     String a = "TDT4109";
     String b =  "TMA4145";
