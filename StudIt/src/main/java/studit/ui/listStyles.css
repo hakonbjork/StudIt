@@ -1,17 +1,31 @@
 .list-view {
-    -fx-background-color: none;
-    -fx-border-color: black; 
+    -fx-background-color: lightgrey;
+    background-color: lightgrey; 
+
+    /* -fx-border-color: black; 
     -fx-border-width: 2px;
-    background-color: none;
-    border-color: black; 
-    border-width: 2px;
+    border-width: 2px; */
 }
 
 .list-view .list-cell:even {
     -fx-border-color: black; 
     -fx-border-width: 2px;
-    -fx-border-top: none;
+    
+    -fx-margin: 3px;
     border-color: black; 
     border-width: 2px;
-    border-top: none;
+   
+    
+    margin: 3px;
+}
+
+.list view.list-cell:odd{
+    -fx-border-color: black; 
+    -fx-border-width: 2px;
+    
+    -fx-margin: 3px;
+    border-color: black; 
+    border-width: 2px;
+    
+    margin: 3px;
 }
