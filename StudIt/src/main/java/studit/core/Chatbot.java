@@ -12,9 +12,11 @@ import javafx.stage.StageStyle;
 public class Chatbot {
 	
 	private Stage chatStage;
+	private ChatbotManager chatbotManager;
 	
 	public Chatbot() {
 		displayWindow();
+		chatbotManager = new ChatbotManager();
 	}
 	
 	/*
@@ -45,12 +47,7 @@ public class Chatbot {
 	}
 	
 	public void manageInput(String input) {
-		
-		// Splitting string by spaces, and removing all newline chars
-		String[] command = input.replaceAll("\n", "").split(" ");
-		for (String word : command) {
-			System.out.println(word);
-		}
+		chatbotManager.manageInput(input);
 	}
 
 }
