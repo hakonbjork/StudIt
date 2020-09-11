@@ -6,7 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+
 
 
 public class AppController{ 
@@ -16,6 +20,11 @@ public class AppController{
     @FXML
     public void initialize() {
         loadData();
+        coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        System.out.println("Init");
+
+        //Actions on clicked list item
+        mouseClicked();
     }
 
     @FXML
@@ -38,6 +47,22 @@ public class AppController{
 
     }
 
+    
+    //Må lage en funksjon som observerer at elementer blir dobbeltrykket i listview slik at => noe skjer.
+    public void mouseClicked(){
+		//Detecting mouse clicked
+		coursesList.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent arg0) {
+				Integer name = coursesList.getSelectionModel().getSelectedIndex();
+                    System.out.println(String.valueOf(name));			
+                    //TODO bruke fagkoden som et argument for en funksjon som enten fikser en overlay eller ny side
+                    //****************************************Funksjon*********************************************
+                    
+			}
+		});
+	}
+    
     //Denne funksjonen burde egentlig være en som henter noe fra en database der data om hvert fag blir lagret.
     //Så det under blir mockdata.
     private void loadData() {
@@ -46,7 +71,7 @@ public class AppController{
     String c = "TTM4175";
     String d = "IT1901";
     list.addAll(a,b,c,d);
-    coursesList.getItems().addAll(list);
+    coursesList.setItems(list);
     }
 
 }
