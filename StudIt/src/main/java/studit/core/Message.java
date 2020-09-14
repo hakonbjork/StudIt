@@ -11,7 +11,10 @@ public class Message {
         this.text = text;
         this.user = user;
     }
-
+    
+    /*
+     * Returns formatted text with correct line breaks
+     */
     public String getText() {
     	
     	text = text.replace("\n", "");

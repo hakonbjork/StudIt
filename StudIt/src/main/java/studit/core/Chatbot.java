@@ -46,8 +46,8 @@ public class Chatbot {
 		chatStage.setIconified(false);
 	}
 	
-	public void manageInput(String input) {
-		chatbotManager.manageInput(input);
+	public String manageInput(String input) {
+		return chatbotManager.manageInput(input);
 	}
 
 }
