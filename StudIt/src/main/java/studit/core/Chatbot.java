@@ -46,6 +46,11 @@ public class Chatbot {
 		chatStage.setIconified(false);
 	}
 	
+	/*
+	 * Manages the user entered input and executes commands accordingly.
+	 * @param input - the user input to process
+	 * @return chatbot response
+	 */
 	public String manageInput(String input) {
 		return chatbotManager.manageInput(input);
 	}

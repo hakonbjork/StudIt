@@ -2,6 +2,11 @@ package studit.core;
 
 public class ChatbotManager {
 	
+	/*
+	 * Manages the user entered input and executes commands accordingly.
+	 * @param input - the user input to process
+	 * @return chatbot response
+	 */
 	public String manageInput(String input) {
 		// Splitting string by spaces, and removing all newline chars
 		String[] command = input.replaceAll("\n", "").toLowerCase().split(" ");

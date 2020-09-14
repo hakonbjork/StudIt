@@ -15,8 +15,8 @@
         <items>
             <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="280.0" spacing="10.0">
                <children>
-                  <Button fx:id="btn_minimize" mnemonicParsing="false" onAction="#minimizeChatbot" text="-" />
-                <Button fx:id="btn_exit" mnemonicParsing="false" onAction="#exitChatbot" text="X" textAlignment="CENTER" />
+                  <Button fx:id="btn_minimize" mnemonicParsing="false" onAction="#minimizeChatbot" prefHeight="32.0" prefWidth="32.0" text="-" />
+                <Button fx:id="btn_exit" mnemonicParsing="false" onAction="#exitChatbot" prefHeight="32.0" prefWidth="32.0" text="X" textAlignment="CENTER" />
                </children>
             </HBox>
         </items>
