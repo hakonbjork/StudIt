@@ -6,7 +6,6 @@ module studit {
     requires transitive javafx.graphics;
     requires javafx.controls;
 
-
     exports studit.ui;
     exports studit.core;
 

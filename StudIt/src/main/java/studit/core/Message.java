@@ -17,15 +17,34 @@ public class Message {
      */
     public String getText() {
     	
-    	text = text.replace("\n", "");
+    	String[] words = text.replace("\n", "").split(" ");
+    	
+    	String line = "", output = "";
+    	
+    	for (String word : words) {
+    		if (line.length() >= ChatbotController.lineBreakLength - 8) {
+    			output += line + '\n';
+    			line = "";
+    		} else {
+    			line += word + " ";
+    		}
+    	}
+    	
+    	output += line;
+    	
+    	return output;
+    	
+    	
+    	/*
     	String output = "";
     	for (int i = 0; i < text.length(); i++) {
     		output += text.charAt(i);
     		if (i % (ChatbotController.lineBreakLength - 8) == 0 && i != 0) {
     			output += "\n";
     		}
-    	}
-        return output;
+    	} */
+    	
+
     }
 
     public void setText(String text) {
