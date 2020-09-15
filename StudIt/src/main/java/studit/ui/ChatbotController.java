@@ -59,8 +59,8 @@ public class ChatbotController implements Initializable {
                     //hBoxLeft.setSpacing(5);
                     hBoxRight.setAlignment(Pos.CENTER_RIGHT);
                     //hBoxRight.setSpacing(5);
-                    lblUserRight.setPadding(new Insets(10, 0, 10, 0));
-                    lblUserLeft.setPadding(new Insets(10, 0, 10, 0));
+                    hBoxRight.setPadding(new Insets(5, 0, 5, 0));
+                    hBoxLeft.setPadding(new Insets(5, 0, 5, 0));
                 }
                 @Override
                 protected void updateItem(Message item, boolean empty) {

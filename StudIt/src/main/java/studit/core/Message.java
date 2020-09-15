@@ -22,9 +22,9 @@ public class Message {
     	String line = "", output = "";
     	
     	for (String word : words) {
-    		if (line.length() >= ChatbotController.lineBreakLength - 8) {
+    		if (line.length() + word.length() > ChatbotController.lineBreakLength - 8) {
     			output += line + '\n';
-    			line = "";
+    			line = word + " ";
     		} else {
     			line += word + " ";
     		}
