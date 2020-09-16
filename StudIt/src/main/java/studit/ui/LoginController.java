@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import studit.core.LoginManager;
 
 public class LoginController {
 
@@ -29,20 +30,21 @@ public class LoginController {
     }
 
     /*
-    * Checks if login creditentials are correct, logs in if it is. Else produces an error message in the application
+    * Checks if login credentials are correct, logs in if it is. Else produces an error message in the application
     */
     public void loginButtonAction() throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
         if (studit.core.LoginManager.match(username, password)){
-            System.out.print("Success ");
             VBox box = FXMLLoader.load(getClass().getResource("App.fxml"));
             Scene scene = new Scene(box);
-            scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
+            //scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
+            //The line above works in gitpod, but not in IDEA
             Stage stage = new Stage();
             stage.setScene(scene);
 		    stage.setTitle("Hello World");
             stage.show();
+            LoginManager.writeToFile(password);
             //Some way to close te initial window, or load new window instead.
         }
         else{

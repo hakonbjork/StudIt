@@ -1,6 +1,10 @@
 package studit.core;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class LoginManager{
 
@@ -26,11 +30,40 @@ public class LoginManager{
      */
     public static boolean match(String username, String password){
         if (DB.containsKey(username)){
-            if (DB.get(username).equals(password)){
-                return true;
-            }
+            return DB.get(username).equals(password);
         }
         return false;
+    }
+
+    /*
+    * Writes a string (for example a password) to a simple text file
+    * @param string - The string that will be written to the text file
+    */
+    public static void writeToFile(String string) throws FileNotFoundException {
+        String filename = "localSaved.txt";
+        PrintWriter outFile = new PrintWriter(filename);
+        outFile.println(string);
+        outFile.close();
+    }
+    /*
+     * Reads a simple line from a text file
+     * @return the string from the text file
+     */
+    public static String readFromFile() throws FileNotFoundException {
+        Scanner in = new Scanner(new FileReader("localSaved.txt"));
+        String string = in.nextLine();
+        in.close();
+        return string;
+    }
+
+    /*
+    * Testing
+    */
+    public static void main(String[] args) {
+        try {
+            String password = readFromFile();
+            System.out.println(password);
+        } catch (Exception e){ System.out.println("Failure..."); }
     }
 
 
