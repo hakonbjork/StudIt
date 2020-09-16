@@ -4,33 +4,33 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class LoginController {
 
-    @FXML
-    PasswordField passwordField;
-    @FXML
-    TextField usernameField;
-    @FXML
-    Button loginButton;
+    @FXML PasswordField passwordField;
+    @FXML TextField usernameField;
+    @FXML Button loginButton;
     @FXML VBox vBox;
 
     public LoginController() {
     }
 
+    /*
+     * Initializes the LoginManager with usernames and passwords
+    */
     public void initialize() {
         studit.core.LoginManager.initialize();
     }
 
-    /// Checks if login creditentials are correct, and does an action corresponding
+    /*
+    * Checks if login creditentials are correct, logs in if it is. Else produces an error message in the application
+    */
     public void loginButtonAction() throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -47,6 +47,7 @@ public class LoginController {
         }
         else{
             System.out.print("Failure, "+username+ ", "+password + " ");
+            //todo: Error message instead on application
         }
     }
 
