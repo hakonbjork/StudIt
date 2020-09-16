@@ -71,18 +71,12 @@
 }
 
 #chatbot_btn {
-    /* box-shadow: 0px 1px 0px 0px #f0f7fa;
-    -fx-box-shadow: 0px 1px 0px 0px #f0f7fa; */
-
     -fx-background-color:
         linear-gradient(to bottom, #33bdef 5%, #019ad2 100%),
         radial-gradient(center 50% -40%, radius 200%, #67c0f3 45%, #0089c8 50%);
     background-color:
         linear-gradient(to bottom, #33bdef 5%, #019ad2 100%),
         radial-gradient(center 50% -40%, radius 200%, #67c0f3 45%, #0089c8 50%);
-  
-  	color:#ffffff;
-    -fx-color:#ffffff;
     
     font-size: 30;
     -fx-font-size: 30;
@@ -93,8 +87,10 @@
    	padding:6px 24px;
     -fx-padding: 6px 24px;
 
-    text-decoration-color: white;
-    -fx-text-decoration-color: white;
+    -fx-font-color: white;
+
+    -fx-background-radius: 15px;
+    
    
 }
 
