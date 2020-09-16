@@ -18,7 +18,7 @@
   <children>         
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label fx:id="header_txtArea" layoutX="0.0" layoutY="0.0" text="StudIt">
+        <Label fx:id="header_txtArea" layoutX="20.0" layoutY="0.0" text="StudIt">
             <font>
                 <Font name="Avenir Next Bold" size="60.0" />
             </font>
@@ -27,8 +27,6 @@
         <menus>
             <Menu mnemonicParsing="false" text="Fagoversikt">
             </Menu>
-            <!-- <Menu mnemonicParsing="false" text="Chatbot">
-            </Menu> -->
         </menus>
         </MenuBar>
             <TextField fx:id="search_field" layoutX="85.0" layoutY="290.0" onAction="#searchView" prefHeight="70.0" prefWidth="890.0" promptText="Søk på fag">
@@ -56,7 +54,7 @@
                   <Font size="20.0" />
                </font>
             </TextArea>
-            <ListView fx:id="coursesList" layoutX="85.0" layoutY="440.0" prefHeight="634.0" prefWidth="890.0"/>
+            <ListView fx:id="coursesList" layoutX="85.0" layoutY="440.0" prefHeight="634.0" prefWidth="890.0" />
       </children>
     </AnchorPane>
   </children>

@@ -1,9 +1,18 @@
 .list-view {
     -fx-background-color: none;
     background-color: none; 
+
 }
 
-.list-view .list-cell:even{
+.list-cell:hover {
+    font-weight: bold;
+    -fx-font-weight: bold;
+
+    border-width: 4px;
+    -fx-border-width: 4px;
+}
+
+.list-cell:even{
      background-color: none;
     -fx-background-color: none;
 
@@ -21,17 +30,20 @@
 
     font-family: "Avenir next";
     -fx-font-family: "Avenir next";
-
-    padding: 4,4,4,4;
-    -fx-padding: 4,4,4,4;
 }
 
-.list-view .list-cell {
+.list-cell {
     background-color: none;
     -fx-background-color: none;
+
+    padding: 5px;
+    -fx-padding: 5px;
+
+    -fx-selection-bar: pink;
+    -fx-selection-bar-non-focused: pink ;
 }
 
-.list-view .list-cell:odd{
+ .list-cell:odd{
     background-color: none;
     -fx-background-color: none;
 
@@ -50,20 +62,17 @@
     font-family: "Avenir next";
     -fx-font-family: "Avenir next";
 
-    padding: 4,4,4,4;
-    -fx-padding: 4,4,4,4;
-
 }
 
-.list-view .list-cell:empty{
+.list-cell:empty{
     opacity: 0;
     -fx-opacity: 0;
 
 }
 
 #chatbot_btn {
-    box-shadow: 0px 1px 0px 0px #f0f7fa;
-    -fx-box-shadow: 0px 1px 0px 0px #f0f7fa;
+    /* box-shadow: 0px 1px 0px 0px #f0f7fa;
+    -fx-box-shadow: 0px 1px 0px 0px #f0f7fa; */
 
     -fx-background-color:
         linear-gradient(to bottom, #33bdef 5%, #019ad2 100%),
@@ -86,18 +95,15 @@
 
     text-decoration-color: white;
     -fx-text-decoration-color: white;
-
-    font-style: white;
-    -fx-font-style: white;
    
 }
 
 #chatbot_btn:hover {
     -fx-background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
-	-fx-background-color:#019ad2;
+	-fx-background-color:#5bccf5;
 
     background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
-	background-color:#019ad2;
+	background-color:#5bccf5;
 }
 
 #chatbot_btn:active {
@@ -116,13 +122,16 @@
 
 .text-area .content {
     -fx-background-color: transparent;
-    -fx-border-width: 2px;
-    -fx-border-color: gray;
     background-color: transparent;
+
+    -fx-border-width: 2px;
     border-width: 4px;
-    border-color: gray; 
-    font-size: 30;
+
+    -fx-border-color: gray;
+    border-color: gray;
+
     -fx-font-size: 30;
+    font-size: 30;
 } 
 
 #header_txtArea {
@@ -138,9 +147,6 @@
     min-height: 177;
     -fx-min-height: 177;
 
-    align-content: center;
-    -fx-align-content: center;
-
     font-family: 'Helvetica Neue', sans-serif; 
     -fx-font-family: 'Helvetica Neue', sans-serif; 
 
@@ -150,11 +156,9 @@
     letter-spacing: -1px; 
     -fx-letter-spacing: -1px; 
 
-    line-height: 1;
-    -fx-line-height: 1;
-
-    text-align: center;
-    -fx-text-align: center;
+    padding-left: 10px;
+    -fx-padding-left: 10px;
+    
 }
 
 #header_txtArea .content {
@@ -165,14 +169,10 @@
     -fx-border-bottom-width:2px;
     border-bottom-width:2px;
 
-    align-content: center;
-    -fx-align-content: center;
-
-    text-align: center;
-    -fx-text-align: center;
-
-
+    padding-left: 10px;
+    -fx-padding-left: 10px;
 }
+
 .menu-bar {
     font-size: 30;
     -fx-font-size: 30;
@@ -183,6 +183,7 @@
      min-width: 1920px;
     -fx-min-width: 1920px;
 }
+
 .menu-bar .content{
      border-color: black;
     -fx-border-color: black;
