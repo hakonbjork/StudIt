@@ -31,32 +31,32 @@
             </Menu> -->
         </menus>
         </MenuBar>
-            <TextField fx:id="search_field" layoutX="85.0" layoutY="270.0" onAction="#searchView" prefHeight="70.0" prefWidth="890.0" promptText="Søk på fag">
+            <TextField fx:id="search_field" layoutX="85.0" layoutY="290.0" onAction="#searchView" prefHeight="70.0" prefWidth="890.0" promptText="Søk på fag">
                <font>
                   <Font name="Avenir Next Bold" size="24.0" />
                </font>
             </TextField>
-            <Label layoutX="85.0" layoutY="375.0" text="Fagkode">
+            <Label layoutX="85.0" layoutY="395.0" text="Fagkode">
                <font>
                   <Font name="Avenir Next Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="330.0" layoutY="375.0" text="Fag">
+            <Label layoutX="330.0" layoutY="395.0" text="Fag">
                <font>
                   <Font name="Avenir Next Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="chatbot_btn" layoutX="1100.0" layoutY="270.0" mnemonicParsing="false" onAction="#openChatBot" prefHeight="70.0" prefWidth="340.0" text="Åpne chatbot">
+            <Button fx:id="chatbot_btn" layoutX="1100.0" layoutY="290.0" mnemonicParsing="false" onAction="#openChatBot" prefHeight="70.0" prefWidth="340.0" text="Åpne chatbot">
                <font>
                   <Font name="Avenir Next Bold" size="24.0" />
                </font>
             </Button>
-            <TextArea layoutX="1100.0" layoutY="340.0" prefHeight="250.0" prefWidth="310.0" text="I chatboten kan du spørre&#10;spørsmål om det du måtte&#10;lure på, så svarer den så &#10;godt den kan">
+            <TextArea layoutX="1100.0" layoutY="360.0" prefHeight="200.0" prefWidth="340.0" text="I chatboten kan du spørre&#10;spørsmål om det du måtte&#10;lure på, så svarer den så &#10;godt den kan">
                <font>
                   <Font size="20.0" />
                </font>
             </TextArea>
-            <ListView fx:id="coursesList" layoutX="85.0" layoutY="420.0" prefHeight="634.0" prefWidth="890.0"/>
+            <ListView fx:id="coursesList" layoutX="85.0" layoutY="440.0" prefHeight="634.0" prefWidth="890.0"/>
       </children>
     </AnchorPane>
   </children>

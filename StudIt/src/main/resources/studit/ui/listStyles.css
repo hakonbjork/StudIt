@@ -61,36 +61,37 @@
 
 }
 
-
-
-/* 
-.myButton {
-	box-shadow: 0px 1px 0px 0px #f0f7fa;
-	background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
-	background-color:#33bdef;
-	border-radius:6px;
-	border:1px solid #057fd0;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px -1px 0px #5b6178;
-} */
-
 #chatbot_btn {
+    box-shadow: 0px 1px 0px 0px #f0f7fa;
+    -fx-box-shadow: 0px 1px 0px 0px #f0f7fa;
+
     -fx-background-color:
         linear-gradient(to bottom, #33bdef 5%, #019ad2 100%),
-        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+        radial-gradient(center 50% -40%, radius 200%, #67c0f3 45%, #0089c8 50%);
     background-color:
-        linear-gradient(#f0ff35, #a9ff00),
-        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+        linear-gradient(to bottom, #33bdef 5%, #019ad2 100%),
+        radial-gradient(center 50% -40%, radius 200%, #67c0f3 45%, #0089c8 50%);
+  
   	color:#ffffff;
+    -fx-color:#ffffff;
+    
+    font-size: 30;
+    -fx-font-size: 30;
+
+    font-weight: bold;
+    -fx-font-weight: bold;
+   
+   	padding:6px 24px;
+    -fx-padding: 6px 24px;
+
+    text-decoration-color: white;
+    -fx-text-decoration-color: white;
+
+    font-style: white;
+    -fx-font-style: white;
    
 }
+
 #chatbot_btn:hover {
     -fx-background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
 	-fx-background-color:#019ad2;
@@ -107,22 +108,24 @@
 	-fx-top:1px;
 }
 
+#chatbot_btn .content {
+    color: white;
+    -fx-color: white;
+
+}
+
 .text-area .content {
     -fx-background-color: transparent;
     -fx-border-width: 2px;
     -fx-border-color: gray;
     background-color: transparent;
-    border-width: 2px;
+    border-width: 4px;
     border-color: gray; 
     font-size: 30;
     -fx-font-size: 30;
 } 
 
 #header_txtArea {
-
-    color: whitesmoke;
-    -fx-color: whitesmoke;
-
     -fx-font-size: 80;
     font-size: 80;
 
@@ -132,8 +135,8 @@
     min-width: 1920px;
     -fx-min-width: 1920px;
 
-    min-height: 180;
-    -fx-min-height: 180;
+    min-height: 177;
+    -fx-min-height: 177;
 
     align-content: center;
     -fx-align-content: center;
@@ -165,6 +168,10 @@
     align-content: center;
     -fx-align-content: center;
 
+    text-align: center;
+    -fx-text-align: center;
+
+
 }
 .menu-bar {
     font-size: 30;
@@ -183,7 +190,7 @@
     -fx-border-bottom-width:2px;
     border-bottom-width:2px;
 
-     background-color: whitesmoke;
+    background-color: whitesmoke;
     -fx-background-color: whitesmoke;
 
 }
