@@ -14,8 +14,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller = "studit.ui.AppController">
-  <children>         
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller = "studit.ui.AppController">
+  <top>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
         <Label fx:id="header_txtArea" layoutX="20.0" layoutY="0.0" text="StudIt">
@@ -44,18 +44,19 @@
                   <Font name="Avenir Next Bold" size="24.0" />
                </font>
             </Label>
+            
             <Button fx:id="chatbot_btn" layoutX="1100.0" layoutY="290.0" mnemonicParsing="false" onAction="#openChatBot" prefHeight="70.0" prefWidth="340.0" text="Åpne chatbot">
                <font>
                   <Font name="Avenir Next Bold" size="24.0" />
                </font>
             </Button>
-            <TextArea layoutX="1100.0" layoutY="360.0" prefHeight="200.0" prefWidth="340.0" text="I chatboten kan du spørre&#10;spørsmål om det du måtte&#10;lure på, så svarer den så &#10;godt den kan">
+            <TextArea layoutX="1100.0" layoutY="370.0" prefHeight="130.0" prefWidth="340.0" text="I chatboten kan du spørre&#10;spørsmål om det du måtte&#10;lure på, så svarer den så &#10;godt den kan">
                <font>
                   <Font size="20.0" />
                </font>
             </TextArea>
-            <ListView fx:id="coursesList" layoutX="85.0" layoutY="440.0" prefHeight="634.0" prefWidth="890.0" />
-      </children>
-    </AnchorPane>
-  </children>
-</BorderPane>
+                </children>
+                <ListView fx:id="coursesList" layoutX="85.0" layoutY="440.0" prefHeight="634.0" prefWidth="890.0" />
+            </AnchorPane>
+        </top>
+        </BorderPane>
