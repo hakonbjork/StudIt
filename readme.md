@@ -15,6 +15,9 @@ GUI implementations is under *studi/ui/..*
 
 To run the application, click the gitpod link and run: `mvn javafx:run`  
 For unit testing and code coverage, run `mvn test`  
+
+To login once the application is started, enter *user* as username and *password* as password
+
 Code coverage is found under *target/site/jacoco*
 
 ## User Stories
