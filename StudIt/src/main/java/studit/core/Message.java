@@ -33,17 +33,6 @@ public class Message {
     	output += line;
     	
     	return output;
-    	
-    	
-    	/*
-    	String output = "";
-    	for (int i = 0; i < text.length(); i++) {
-    		output += text.charAt(i);
-    		if (i % (ChatbotController.lineBreakLength - 8) == 0 && i != 0) {
-    			output += "\n";
-    		}
-    	} */
-    	
 
     }
 
