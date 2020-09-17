@@ -1,4 +1,4 @@
-# User Stories
+# Brukerhistorier
 
 ## Ny student (us-1)
 Som en kommende student ved NTNU vil jeg finne informasjon om fag jeg vet jeg skal ta når jeg begynner å studere. Da kan jeg være forberedt på hva som venter meg.
