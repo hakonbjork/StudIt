@@ -12,8 +12,9 @@ public class Message {
         this.user = user;
     }
     
-    /*
+    /**
      * Returns formatted text with correct line breaks
+     * @return String ready to be printed to the screen
      */
     public String getText() {
     	
