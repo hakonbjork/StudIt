@@ -1,6 +1,6 @@
-## User Stories
+# User Stories
 
-# Ny student (us-1)
+## Ny student (us-1)
 Som en kommende student ved NTNU vil jeg finne informasjon om fag jeg vet jeg skal ta når jeg begynner å studere. Da kan jeg være forberedt på hva som venter meg.
 
 **Brukeren har behov for å finne relevant informasjon om faget sitt før han/hun begynner på skolen. Det må da være tydelig hvilket fag man trykker på i form av navn/fagkode.**
