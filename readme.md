@@ -11,7 +11,11 @@ To run the application, click the gitpod link
 
 ## User Stories
 
-En bruker får muligheten til å logge seg inn og se en fagoversikt fra NTNU. 
+## User Stories
+
+- As a coming student I want to find information about a subject I am going to take at NTNU, so that I can be prepared when I start to study
+- As a student I want to find information about different subjects at NTNU, so I can compare subjects I consider to choose
+- As a student I want to ask questions about a subject I am taking at NTNU, that I want to know the answer to immediately
 
 **Issues:**
 * [ ] Enkelt brukergrensesnitt for selve applikasjonen
