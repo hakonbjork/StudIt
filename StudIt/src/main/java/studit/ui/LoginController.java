@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import studit.core.LoginManager;
@@ -36,8 +37,8 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
         if (studit.core.LoginManager.match(username, password)){
-            VBox box = FXMLLoader.load(getClass().getResource("App.fxml"));
-            Scene scene = new Scene(box);
+            BorderPane pane = FXMLLoader.load(getClass().getResource("App.fxml"));
+            Scene scene = new Scene(pane);
             //scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
             //The line above works in gitpod, but not in IDEA
             Stage stage = new Stage();
