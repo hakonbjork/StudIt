@@ -1,6 +1,7 @@
 .list-view {
     -fx-background-color: none;
     background-color: none; 
+<<<<<<< HEAD
 
 }
 
@@ -13,6 +14,11 @@
 }
 
 .list-cell:even{
+=======
+}
+
+.list-view .list-cell:even{
+>>>>>>> origin/dev-chatbot-branch
      background-color: none;
     -fx-background-color: none;
 
@@ -22,14 +28,20 @@
     border-color: black;
     -fx-border-color: black;
 
+<<<<<<< HEAD
     height: 55px;
     -fx-box-height: 55px;
+=======
+    height: 35px;
+    -fx-box-height: 35px;
+>>>>>>> origin/dev-chatbot-branch
 
     font-size: 25;
     -fx-font-size: 25;
 
     font-family: "Avenir next";
     -fx-font-family: "Avenir next";
+<<<<<<< HEAD
 }
 
 .list-cell {
@@ -44,6 +56,19 @@
 }
 
  .list-cell:odd{
+=======
+
+    padding: 4px;
+    -fx-padding: 4px;
+}
+
+.list-view .list-cell {
+    background-color: none;
+    -fx-background-color: none;
+}
+
+.list-view .list-cell:odd{
+>>>>>>> origin/dev-chatbot-branch
     background-color: none;
     -fx-background-color: none;
 
@@ -53,8 +78,13 @@
     border-color: black;
     -fx-border-color: black;
 
+<<<<<<< HEAD
     height: 55px;
     -fx-box-height: 55px;
+=======
+    height: 35px;
+    -fx-box-height: 35px;
+>>>>>>> origin/dev-chatbot-branch
 
     font-size: 25;
     -fx-font-size: 25;
@@ -62,6 +92,7 @@
     font-family: "Avenir next";
     -fx-font-family: "Avenir next";
 
+<<<<<<< HEAD
 }
 
 .list-cell:empty{
@@ -202,4 +233,15 @@
 
     border-width: 1px;
     -fx-border-width: 1px;
+=======
+    padding: 4px;
+    -fx-padding: 4px;
+
+}
+
+.list-view .list-cell:empty{
+    opacity: 0;
+    -fx-opacity: 0;
+
+>>>>>>> origin/dev-chatbot-branch
 }
