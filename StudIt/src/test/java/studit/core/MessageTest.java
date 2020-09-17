@@ -1,4 +1,4 @@
-package core;
+package studit.core;
 
 import static org.junit.jupiter.api.Assertions.*;
 
