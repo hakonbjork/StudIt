@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import studit.core.Chatbot;
+import studit.core.chatbot.Chatbot;
 
 public class AppController { 
     

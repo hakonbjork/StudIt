@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import studit.core.chatbot.Message;
+
 public class MessageTest {
 	
 	private Message chatbotMessage;
