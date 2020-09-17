@@ -14,7 +14,7 @@ Brukeren har behov for å finne relevant informasjon om faget sitt før han/hun 
 **Viktig å kunne gjøre:**
 - Trykke på et fag og få opp relevant informasjon
 
----
+
 
 ## Ny student (us-2)
 Som student ved NTNU vil jeg kunne spørre spørsmål om fag jeg tar, som jeg trenger svar på med en gang.
