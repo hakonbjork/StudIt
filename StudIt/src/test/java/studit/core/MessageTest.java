@@ -5,42 +5,33 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import studit.core.Message;
-
-class MessageTest {
+public class MessageTest {
 	
 	private Message chatbotMessage;
 	private Message userMessage;
 	
 	@BeforeEach
 	public void init() {
-		chatbotMessage = new Message("chatbot", "");
-		userMessage = new Message("user", "");
+        chatbotMessage = new Message("", "chatbot");
+		userMessage = new Message("", "user");
 	}
 
 	@Test
-	void testGetText() {
+	public void testGetText() {
 		String testMsg = "test-message";
+		String expectedMsg= "test-message ";
 		chatbotMessage.setText(testMsg);
 		userMessage.setText(testMsg);
-		
-		assertEquals(chatbotMessage.getText(), testMsg);
-		assertEquals(userMessage.getText(), testMsg);
+        
+		assertEquals(chatbotMessage.getText(), expectedMsg);
+		assertEquals(userMessage.getText(), expectedMsg);
 	}
 
-	@Test
-	void testSetText() {
-		fail("Not yet implemented");
-	}
 
 	@Test
-	void testGetUser() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testSetUser() {
-		fail("Not yet implemented");
+	public void testGetUser() {
+		assertEquals(chatbotMessage.getUser(), "chatbot");
+		assertEquals(userMessage.getUser(), "user");
 	}
 
 }
