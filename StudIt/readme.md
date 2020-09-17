@@ -16,7 +16,7 @@ The project is organized with 2 * 2 = 4 source code folders, code and resources 
 
 
 ## The Domain-layer
-The domain-layer consists of all classes and logic related to the data which the application is about and deals with. In our application, theese classes can be found in the studit.core-package. **Kunne du forklart log-in og chatbot** 
+The domain-layer consists of all classes and logic related to the data which the application is about and deals with. The classes to related database-management and the chatbot-management can be found in the studit.core-package. 
 
 ## The UI-layer
 The UI-layer consits of all classes and logic related to the visuals and actions affecting the UI. The user interface of the app stats with a login-page which leads to the main-page where the user has a overview of the courses. In addition there is a button, when clicked on, a chatbot appears which works as a overlay on the main-page.
