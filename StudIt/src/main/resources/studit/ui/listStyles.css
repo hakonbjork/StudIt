@@ -1,24 +1,9 @@
 .list-view {
     -fx-background-color: none;
     background-color: none; 
-<<<<<<< HEAD
-
-}
-
-.list-cell:hover {
-    font-weight: bold;
-    -fx-font-weight: bold;
-
-    border-width: 4px;
-    -fx-border-width: 4px;
-}
-
-.list-cell:even{
-=======
 }
 
 .list-view .list-cell:even{
->>>>>>> origin/dev-chatbot-branch
      background-color: none;
     -fx-background-color: none;
 
@@ -28,35 +13,14 @@
     border-color: black;
     -fx-border-color: black;
 
-<<<<<<< HEAD
-    height: 55px;
-    -fx-box-height: 55px;
-=======
     height: 35px;
     -fx-box-height: 35px;
->>>>>>> origin/dev-chatbot-branch
 
     font-size: 25;
     -fx-font-size: 25;
 
     font-family: "Avenir next";
     -fx-font-family: "Avenir next";
-<<<<<<< HEAD
-}
-
-.list-cell {
-    background-color: none;
-    -fx-background-color: none;
-
-    padding: 5px;
-    -fx-padding: 5px;
-
-    -fx-selection-bar: pink;
-    -fx-selection-bar-non-focused: pink ;
-}
-
- .list-cell:odd{
-=======
 
     padding: 4px;
     -fx-padding: 4px;
@@ -68,7 +32,6 @@
 }
 
 .list-view .list-cell:odd{
->>>>>>> origin/dev-chatbot-branch
     background-color: none;
     -fx-background-color: none;
 
@@ -78,13 +41,8 @@
     border-color: black;
     -fx-border-color: black;
 
-<<<<<<< HEAD
-    height: 55px;
-    -fx-box-height: 55px;
-=======
     height: 35px;
     -fx-box-height: 35px;
->>>>>>> origin/dev-chatbot-branch
 
     font-size: 25;
     -fx-font-size: 25;
@@ -92,148 +50,6 @@
     font-family: "Avenir next";
     -fx-font-family: "Avenir next";
 
-<<<<<<< HEAD
-}
-
-.list-cell:empty{
-    opacity: 0;
-    -fx-opacity: 0;
-
-}
-
-#chatbot_btn {
-    /* box-shadow: 0px 1px 0px 0px #f0f7fa;
-    -fx-box-shadow: 0px 1px 0px 0px #f0f7fa; */
-
-    -fx-background-color:
-        linear-gradient(to bottom, #33bdef 5%, #019ad2 100%),
-        radial-gradient(center 50% -40%, radius 200%, #67c0f3 45%, #0089c8 50%);
-    background-color:
-        linear-gradient(to bottom, #33bdef 5%, #019ad2 100%),
-        radial-gradient(center 50% -40%, radius 200%, #67c0f3 45%, #0089c8 50%);
-  
-  	color:#ffffff;
-    -fx-color:#ffffff;
-    
-    font-size: 30;
-    -fx-font-size: 30;
-
-    font-weight: bold;
-    -fx-font-weight: bold;
-   
-   	padding:6px 24px;
-    -fx-padding: 6px 24px;
-
-    text-decoration-color: white;
-    -fx-text-decoration-color: white;
-   
-}
-
-#chatbot_btn:hover {
-    -fx-background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
-	-fx-background-color:#5bccf5;
-
-    background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
-	background-color:#5bccf5;
-}
-
-#chatbot_btn:active {
-    position:relative;
-	top:1px;
-
-    -fx-position:relative;
-	-fx-top:1px;
-}
-
-#chatbot_btn .content {
-    color: white;
-    -fx-color: white;
-
-}
-
-.text-area .content {
-    -fx-background-color: transparent;
-    background-color: transparent;
-
-    -fx-border-width: 2px;
-    border-width: 4px;
-
-    -fx-border-color: gray;
-    border-color: gray;
-
-    -fx-font-size: 30;
-    font-size: 30;
-} 
-
-#header_txtArea {
-    -fx-font-size: 80;
-    font-size: 80;
-
-    border-bottom-color: black;
-    -fx-border-bottom-color: black;
-
-    min-width: 1920px;
-    -fx-min-width: 1920px;
-
-    min-height: 177;
-    -fx-min-height: 177;
-
-    font-family: 'Helvetica Neue', sans-serif; 
-    -fx-font-family: 'Helvetica Neue', sans-serif; 
-
-    font-weight: bold; 
-    -fx-font-weight: bold; 
-
-    letter-spacing: -1px; 
-    -fx-letter-spacing: -1px; 
-
-    padding-left: 10px;
-    -fx-padding-left: 10px;
-    
-}
-
-#header_txtArea .content {
-
-    border-color: black;
-    -fx-border-color: black;
-
-    -fx-border-bottom-width:2px;
-    border-bottom-width:2px;
-
-    padding-left: 10px;
-    -fx-padding-left: 10px;
-}
-
-.menu-bar {
-    font-size: 30;
-    -fx-font-size: 30;
-
-    font-family: "Avenir next";
-    -fx-font-family: "Avenir next";
-
-     min-width: 1920px;
-    -fx-min-width: 1920px;
-}
-
-.menu-bar .content{
-     border-color: black;
-    -fx-border-color: black;
-
-    -fx-border-bottom-width:2px;
-    border-bottom-width:2px;
-
-    background-color: whitesmoke;
-    -fx-background-color: whitesmoke;
-
-}
-
-.menu-bar .menus{
-    border:black;
-    -fx-border: black;
-
-    border-width: 1px;
-    -fx-border-width: 1px;
-=======
     padding: 4px;
     -fx-padding: 4px;
 
@@ -243,5 +59,4 @@
     opacity: 0;
     -fx-opacity: 0;
 
->>>>>>> origin/dev-chatbot-branch
 }
