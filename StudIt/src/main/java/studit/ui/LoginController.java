@@ -44,7 +44,7 @@ public class LoginController {
             stage.setScene(scene);
 		    stage.setTitle("Hello World");
             stage.show();
-            LoginManager.writeToFile(password);
+            LoginManager.writeToFile(password, "keys.txt");
             //Some way to close te initial window, or load new window instead.
         }
         else{
