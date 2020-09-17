@@ -2,18 +2,28 @@
 
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.idi.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2060/gr2060)
 
-Main part of the coding project is found under StudIt/..  
-Testing is found under Studit/test/..
 
-## Installation
+## Project structure
+Main code is under *Studit/src/main/..*  
+Testing is found under *Studit/src/test/..*  
 
-To run the application, click the gitpod link
+---
+Application logic is under *studit/core/..*  
+GUI implementations is under *studi/ui/..*
+
+## Installation and testing
+
+To run the application, click the gitpod link and run: `mvn javafx:run`  
+For unit testing and code coverage, run `mvn test`  
+Code coverage is found under *target/site/jacoco*
 
 ## User Stories
 
-En bruker får muligheten til å logge seg inn og se en fagoversikt fra NTNU. 
+- As a coming student I want to find information about a subject I am going to take at NTNU, so that I can be prepared when I start to study
+- As a student I want to find information about different subjects at NTNU, so I can compare subjects I consider to choose
+- As a student I want to ask questions about a subject I am taking at NTNU, that I want to know the answer to immediately
 
 **Issues:**
-* [ ] Enkelt brukergrensesnitt for selve applikasjonen
-* [ ] Brukergrensesnitt innlogging
-* [ ] Håndtdering av brukernavn / passord
+* [X] Enkelt brukergrensesnitt for selve applikasjonen
+* [X] Brukergrensesnitt innlogging
+* [X] Håndtdering av brukernavn / passord (midlertidlig)
