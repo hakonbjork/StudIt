@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -7,7 +8,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller = "studit.ui.NyttFagController">
    <center>
@@ -29,7 +29,8 @@
                   <Label layoutX="114.0" layoutY="221.0" prefHeight="22.0" prefWidth="98.0" text="Rate:" />
                   <TextField fx:id="kommentarField" layoutX="211.0" layoutY="271.0" prefHeight="25.0" prefWidth="260.0" />
                   <Label layoutX="114.0" layoutY="273.0" prefHeight="22.0" prefWidth="98.0" text="Kommentar:" />
-                  <Button fx:id="leggTilButton" layoutX="114.0" layoutY="332.0" mnemonicParsing="false" onAction="#leggTilButtonClick" prefHeight="25.0" prefWidth="359.0" text="Legg til" />             </children>
+                  <Button fx:id="leggTilButton" layoutX="114.0" layoutY="332.0" mnemonicParsing="false" onAction="#leggTilFag" prefHeight="25.0" prefWidth="359.0" text="Legg til" />
+            </children>
           </AnchorPane>
         </children>
       </VBox>

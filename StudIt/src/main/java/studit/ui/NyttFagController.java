@@ -25,7 +25,14 @@ public class NyttFagController {
     private Button leggTilButton;
 
     @FXML
-    void leggTilButtonClick(){
+    public void initialize() {
+
+        System.out.println("init nyttfag controller");
+
+    }
+        
+    @FXML
+    void leggTilFag(){
 
         String fagkode = fagkodeField.getText();
         String fagnavn = fagnavnField.getText();
@@ -33,6 +40,11 @@ public class NyttFagController {
         String kommentar = kommentarField.getText();
 
         courseListManager.writeToDb(fagkode, fagnavn, rate, kommentar);
+
+        fagkodeField.clear();
+        fagnavnField.clear();
+        rateField.clear();
+        kommentarField.clear();
 
     }
 
