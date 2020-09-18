@@ -1,0 +1,15 @@
+studit/ui/AppController.class
+studit/ui/App.class
+studit/core/chatbot/Chatbot.class
+studit/ui/AppController$1.class
+module-info.class
+studit/core/LoginManager.class
+studit/core/chatbot/KeyboardLinker.class
+studit/ui/ChatbotController.class
+studit/ui/CourseController.class
+studit/core/chatbot/Message.class
+studit/core/chatbot/ChatbotManager.class
+studit/ui/LoginApp.class
+studit/ui/LoginController.class
+studit/ui/ChatbotController$1.class
+studit/core/chatbot/ChatbotManager$1.class

@@ -40,7 +40,7 @@ public class LoginController {
             BorderPane pane = FXMLLoader.load(getClass().getResource("App.fxml"));
             Scene scene = new Scene(pane);
             //scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
-            //The line above works in gitpod, but not in IDEA
+            //The line above works in gitpod, but not in IDE
             Stage stage = new Stage();
             stage.setScene(scene);
 		    stage.setTitle("Hello World");

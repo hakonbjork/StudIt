@@ -1,6 +1,7 @@
 package studit.ui;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,12 +16,17 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.chatbot.Chatbot;
+import studit.core.mainpage.CourseListManager;
 
 public class AppController { 
     
     public static Chatbot chatbot = null;
+
+    private CourseListManager courseListManager = new CourseListManager();
+
     ObservableList<String> list = FXCollections.observableArrayList();
 
     @FXML
@@ -31,6 +37,9 @@ public class AppController {
         //Actions on clicked list item
         mouseClicked();
     }
+
+    @FXML 
+    private Button nyttfagButton;
 
     @FXML
     private ListView<String> coursesList;
@@ -54,6 +63,16 @@ public class AppController {
         chatbot = null;
     }
 
+    @FXML
+    void nyttFagButtonClickedOn(ActionEvent event) throws IOException {
+        BorderPane pane = FXMLLoader.load(getClass().getResource("NyttFag.fxml"));
+            Scene scene = new Scene(pane);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+		    stage.setTitle("Nytt Fag");
+            stage.show();
+    }
+    
     @FXML
     void searchView(ActionEvent event) {
 
@@ -94,12 +113,13 @@ public class AppController {
     * @return None
     */
     private void loadData() {
-    String a = "TDT4109";
-    String b =  "TMA4145";
-    String c = "TTM4175";
-    String d = "IT1901";
-    list.addAll(a,b,c,d);
-    coursesList.setItems(list);
+
+        Map<String, String[]> data = CourseListManager.loadJson("db.json");
+
+        for (String name : data.keySet())
+            list.add(name);
+
+        coursesList.setItems(list);
     }
 
 }
