@@ -1,4 +1,4 @@
-package studit.core.mainpage;
+package studit.core.json;
 
 import java.io.IOException;
 import java.nio.file.Paths;
