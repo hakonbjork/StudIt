@@ -1,0 +1,141 @@
+.scene {
+    background-image: url(resources/background.jpg);
+}
+
+.list-view {
+    -fx-background-color: none;
+    background-color: none; 
+}
+
+
+.list-view .list-cell:even{
+     background-color: none;
+    -fx-background-color: none;
+
+     border-width: 2px;
+    -fx-border-width: 2px;
+
+    border-color: black;
+    -fx-border-color: black;
+
+    height: 35px;
+    -fx-box-height: 35px;
+
+    font-size: 25;
+    -fx-font-size: 25;
+
+    font-family: "Avenir next";
+    -fx-font-family: "Avenir next";
+  
+    padding: 4px;
+    -fx-padding: 4px;
+
+    margin: 4px;
+    -fx-margin: 4px;
+}
+
+.list-view .list-cell {
+    background-color: none;
+    -fx-background-color: none;
+
+    border-radius: 10%;
+    -fx-border-radius: 10%;
+
+     border-width: 2px;
+    -fx-border-width: 2px;
+    
+     height: 35px;
+    -fx-box-height: 35px;
+
+    font-size: 25;
+    -fx-font-size: 25;
+
+    font-family: "Avenir next";
+    -fx-font-family: "Avenir next";
+
+     padding: 4px;
+    -fx-padding: 4px;
+
+    margin: 4px;
+    -fx-margin: 4px;
+}
+
+.list-view .list-cell:odd{
+    background-color: none;
+    -fx-background-color: none;
+
+     border-width: 2px;
+    -fx-border-width: 2px;
+
+    border-color: black;
+    -fx-border-color: black;
+
+    height: 35px;
+    -fx-box-height: 35px;
+
+    font-size: 25;
+    -fx-font-size: 25;
+
+    font-family: "Avenir next";
+    -fx-font-family: "Avenir next";
+
+    padding: 4px;
+    -fx-padding: 4px;
+
+    margin: 4px;
+    -fx-margin: 4px;
+
+}
+
+.list-view .list-cell:empty{
+    opacity: 0;
+    -fx-opacity: 0;
+}
+
+#login_btn {
+    color: white;
+    -fx-color: white;
+
+    -fx-background-color:#8ac1f2;
+    background-color: #8ac1f2;
+    
+    font-size: 30;
+    -fx-font-size: 30;
+
+    font-weight: bold;
+    -fx-font-weight: bold;
+   
+   	padding:6px 24px;
+    -fx-padding: 6px 24px;
+
+    -fx-border-radius: 15%;
+    border-radius: 15%;
+}
+
+#login_btn:hover {
+   background-color: #235ce2;
+    -fx-background-color: #235ce2;
+
+}
+
+#login_btn:active {
+    position:relative;
+	top:1px;
+
+    -fx-position:relative;
+	-fx-top:1px;
+}
+
+#login_btn .content {
+    color: white;
+    -fx-color: white;
+
+}
+
+#chatbot_btn {
+    border-top-right-radius: 20%;
+    -fx-border-top-right-radius: 20%;
+
+}
+
+
