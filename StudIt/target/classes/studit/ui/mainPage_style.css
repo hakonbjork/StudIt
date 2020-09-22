@@ -9,16 +9,10 @@
 
 
 .list-view .list-cell:even{
-     background-color: none;
+      background-color: none;
     -fx-background-color: none;
 
-     border-width: 2px;
-    -fx-border-width: 2px;
-
-    border-color: black;
-    -fx-border-color: black;
-
-    height: 35px;
+    height: 50px;
     -fx-box-height: 35px;
 
     font-size: 25;
@@ -26,25 +20,20 @@
 
     font-family: "Avenir next";
     -fx-font-family: "Avenir next";
-  
+
     padding: 4px;
     -fx-padding: 4px;
 
     margin: 4px;
     -fx-margin: 4px;
 }
+}
 
 .list-view .list-cell {
-    background-color: none;
+      background-color: none;
     -fx-background-color: none;
 
-    border-radius: 10%;
-    -fx-border-radius: 10%;
-
-     border-width: 2px;
-    -fx-border-width: 2px;
-    
-     height: 35px;
+    height: 50px;
     -fx-box-height: 35px;
 
     font-size: 25;
@@ -53,24 +42,19 @@
     font-family: "Avenir next";
     -fx-font-family: "Avenir next";
 
-     padding: 4px;
+    padding: 4px;
     -fx-padding: 4px;
 
     margin: 4px;
     -fx-margin: 4px;
+}
 }
 
 .list-view .list-cell:odd{
     background-color: none;
     -fx-background-color: none;
 
-     border-width: 2px;
-    -fx-border-width: 2px;
-
-    border-color: black;
-    -fx-border-color: black;
-
-    height: 35px;
+    height: 50px;
     -fx-box-height: 35px;
 
     font-size: 25;
@@ -84,7 +68,6 @@
 
     margin: 4px;
     -fx-margin: 4px;
-
 }
 
 .list-view .list-cell:empty{
@@ -129,12 +112,6 @@
 #login_btn .content {
     color: white;
     -fx-color: white;
-
-}
-
-#chatbot_btn {
-    border-top-right-radius: 20%;
-    -fx-border-top-right-radius: 20%;
 
 }
 

@@ -7,47 +7,42 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-background-color: white; -fx-background-radius: 30;" stylesheets="@mainPage_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.AppController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-background-color: white;" stylesheets="@mainPage_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.AppController">
    <top>
-      <AnchorPane prefHeight="48.0" prefWidth="1534.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <HBox>
          <children>
-            <VBox prefHeight="200.0" prefWidth="1532.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <VBox prefHeight="200.0" prefWidth="1532.0" style="-fx-background-color: #f5fbff;">
                <children>
-                  <HBox style="-fx-background-color: white;">
+                  <HBox prefHeight="201.0" prefWidth="1532.0">
                      <children>
-                        <Label minHeight="100.0" minWidth="164.0" prefHeight="100.0" prefWidth="164.0" text="Stud" textFill="#8ac1f2">
-                           <font>
-                              <Font name="Avenir Next Bold" size="64.0" />
-                           </font>
-                        </Label>
-                        <Label minHeight="103.0" minWidth="45.0" prefHeight="103.0" prefWidth="45.0" text="It" textFill="#0e4cd0">
-                           <font>
-                              <Font name="Avenir Next Bold" size="64.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="100.0" />
-                           </HBox.margin>
-                        </Label>
-                        <HBox id="searchbar" alignment="CENTER_LEFT" maxWidth="1164.0" prefHeight="87.0" prefWidth="1164.0" style="-fx-background-color: ebebeb; -fx-background-radius: 30;">
+                        <HBox alignment="CENTER" prefHeight="201.0" prefWidth="372.0" style="-fx-background-color: white;">
+                           <children>
+                              <ImageView fitHeight="106.0" fitWidth="291.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../Skjermbilde%202020-09-22%20kl.%2014.59.45.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox id="searchbar" alignment="CENTER_LEFT" maxWidth="1205.0" prefHeight="100.0" prefWidth="1205.0" style="-fx-background-color: white; -fx-background-radius: 30;">
                            <children>
                               <ImageView fitHeight="49.0" fitWidth="47.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@StudIt/src/main/resources/studit/icons/search.png" />
+                                    <Image url="@resources/studit/icons/search.pngresources/studit/icons/search.png" />
                                  </image>
                               </ImageView>
-                              <TextField id="search_field" prefHeight="59.0" prefWidth="1057.0" promptText="Søk på fag" style="-fx-background-color: ebebeb; -fx-background-radius: 20;">
+                              <TextField id="search_field" prefHeight="59.0" prefWidth="1057.0" promptText="Søk på fag" style="-fx-background-color: white; -fx-background-radius: 20;">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets right="20.0" />
                                  </HBox.margin>
                               </TextField>
                            </children>
@@ -55,33 +50,20 @@
                               <Insets left="20.0" />
                            </padding>
                            <HBox.margin>
-                              <Insets bottom="10.0" left="20.0" top="10.0" />
+                              <Insets bottom="50.0" left="40.0" right="20.0" top="50.0" />
                            </HBox.margin>
                         </HBox>
                      </children>
-                     <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
-                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>
          </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </AnchorPane>
+      </HBox>
    </top>
-   <right>
-      <VBox alignment="TOP_RIGHT" prefHeight="788.0" prefWidth="326.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </VBox>
-   </right>
    <center>
-      <VBox prefHeight="764.0" prefWidth="866.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="764.0" prefWidth="866.0" style="-fx-background-color: #f5fbff;" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="64.0" prefWidth="1116.0">
+            <HBox prefHeight="64.0" prefWidth="1116.0" style="-fx-background-color: #f5fbff#f5fbff;">
                <children>
                   <Label text="Fagkode">
                      <font>
@@ -104,21 +86,21 @@
                   </Label>
                </children>
                <VBox.margin>
-                  <Insets left="60.0" top="50.0" />
+                  <Insets left="70.0" top="50.0" />
                </VBox.margin>
             </HBox>
-            <ListView id="coursesList" fx:id="coursesList" maxWidth="1100.0" prefHeight="675.0" prefWidth="1016.0" style="-fx-background-color: white;">
+            <ListView id="coursesList" fx:id="coursesList" maxWidth="1100.0" prefHeight="624.0" prefWidth="801.0" style="-fx-background-color: white; -fx-background-radius: 30;">
                <VBox.margin>
-                  <Insets left="70.0" right="20.0" />
+                  <Insets left="60.0" right="20.0" />
                </VBox.margin>
             </ListView>
          </children>
       </VBox>
    </center>
    <left>
-      <VBox id="menu" opacity="0.71" prefHeight="788.0" prefWidth="300.0" style="-fx-background-color: #8ac1f2#8ac1f2;" BorderPane.alignment="CENTER">
+      <VBox id="menu" opacity="0.71" prefHeight="788.0" prefWidth="315.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Button id="chatbot_btn" fx:id="chatbot_btn" mnemonicParsing="false" onAction="#openChatBot" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: transparent;" text="Chatbot" textAlignment="CENTER" textFill="WHITE">
+            <Button id="chatbot_btn" fx:id="chatbot_btn" mnemonicParsing="false" onAction="#openChatBot" prefHeight="126.0" prefWidth="318.0" style="-fx-background-color: transparent;" text="Chatbot" textAlignment="CENTER" textFill="#888889">
                <font>
                   <Font name="Avenir Next Bold" size="36.0" />
                </font>
@@ -126,21 +108,22 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button id="ntnu_btn" fx:id="ntnu_btn" mnemonicParsing="false" onAction="#ntnuAction" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: transparenttransparent;" text="NTNU" textAlignment="CENTER" textFill="WHITE">
+            <Button id="ntnu_btn" fx:id="ntnu_btn" mnemonicParsing="false" onAction="#ntnuAction" prefHeight="116.0" prefWidth="318.0" style="-fx-background-color: transparenttransparent;" text="NTNU" textAlignment="CENTER" textFill="#888889">
                <font>
                   <Font name="Avenir Next Bold" size="36.0" />
                </font>
             </Button>
-            <Button id="contact_btn" fx:id="contact_btn" mnemonicParsing="false" onAction="#contactAction" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: transparenttransparent;" text="Kontakt" textAlignment="CENTER" textFill="WHITE">
+            <Button id="contact_btn" fx:id="contact_btn" mnemonicParsing="false" onAction="#contactAction" prefHeight="167.0" prefWidth="318.0" style="-fx-background-color: transparenttransparent;" text="Kontakt" textAlignment="CENTER" textFill="#888889">
                <font>
                   <Font name="Avenir Next Bold" size="36.0" />
                </font>
             </Button>
-            <Button id="logout_btn" fx:id="logout_btn" mnemonicParsing="false" onAction="#logoutAction" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: transparenttransparent;" text="Logg ut" textAlignment="CENTER" textFill="WHITE">
+            <Button id="logout_btn" fx:id="logout_btn" mnemonicParsing="false" onAction="#logoutAction" prefHeight="24.0" prefWidth="315.0" style="-fx-background-color: transparenttransparent;" text="Logg ut" textAlignment="CENTER" textFill="#888889">
                <font>
                   <Font name="Avenir Next Bold" size="36.0" />
                </font>
             </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="471.0" stroke="WHITE" strokeType="INSIDE" width="318.0" />
          </children>
       </VBox>
    </left>
