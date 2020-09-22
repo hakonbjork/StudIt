@@ -19,7 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.chatbot.Chatbot;
-import studit.core.mainpage.CourseListManager;
+import studit.core.json.CourseListManager;
 
 public class AppController { 
     
