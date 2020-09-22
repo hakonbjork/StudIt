@@ -42,6 +42,15 @@ public class AppController {
     private Button chatbot_btn;
 
     @FXML
+    private Button ntnu_btn;
+
+    @FXML
+    private Button contact_btn;
+
+    @FXML
+    private Button logout_btn;
+
+    @FXML
     void openChatBot(ActionEvent event) {
         if (chatbot == null) {
     		chatbot = new Chatbot();
@@ -58,6 +67,23 @@ public class AppController {
     void searchView(ActionEvent event) {
 
     }
+
+    @FXML
+    void ntnuAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void logoutAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void contactAction(ActionEvent event) {
+
+    }
+
+
 
     
     /** A function that does something when a element in the listview is clicked on.

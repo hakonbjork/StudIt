@@ -1,15 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 
-   
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller = "studit.ui.AppController">
-<top>
-<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.172-ea">
-      <children>
-         <Label fx:id="label" layoutX="283.0" layoutY="145.0" text="Label" />
-      </children>
-   </AnchorPane>
-</top>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="1375.0" style="-fx-background-color: white; -fx-background-radius: 30;" stylesheets="@mainPage_style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.CourseController">
+   <top>
+      <AnchorPane prefHeight="48.0" prefWidth="1534.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="1532.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <HBox style="-fx-background-color: white;">
+                     <children>
+                        <Label minHeight="100.0" minWidth="164.0" prefHeight="110.0" prefWidth="164.0" text="Stud" textFill="#8ac1f2">
+                           <font>
+                              <Font name="Avenir Next Bold" size="64.0" />
+                           </font>
+                        </Label>
+                        <Label minHeight="103.0" minWidth="45.0" prefHeight="103.0" prefWidth="45.0" text="It" textFill="#0e4cd0">
+                           <font>
+                              <Font name="Avenir Next Bold" size="64.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="100.0" />
+                           </HBox.margin>
+                        </Label>
+                        <HBox id="searchbar" alignment="CENTER_LEFT" maxWidth="1164.0" prefHeight="87.0" prefWidth="1164.0" style="-fx-background-color: ebebeb; -fx-background-radius: 30;">
+                           <children>
+                              <ImageView fitHeight="49.0" fitWidth="47.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@resources/studit/icons/search.pngresources/studit/icons/search.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField id="search_field" prefHeight="59.0" prefWidth="1057.0" promptText="Søk på fag" style="-fx-background-color: ebebeb; -fx-background-radius: 20;">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="20.0" top="10.0" />
+                           </HBox.margin>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </AnchorPane>
+   </top>
+   <right>
+      <VBox alignment="TOP_RIGHT" prefHeight="788.0" prefWidth="326.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <children>
+            <TextField prefHeight="179.0" prefWidth="326.0" />
+            <TextField prefHeight="179.0" prefWidth="326.0" />
+            <TextField prefHeight="179.0" prefWidth="326.0" />
+         </children>
+      </VBox>
+   </right>
+   <center>
+      <VBox prefHeight="764.0" prefWidth="866.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="64.0" prefWidth="1116.0" style="-fx-background-color: none;">
+               <children>
+                  <TextField prefHeight="64.0" prefWidth="749.0" style="-fx-border-color: white;" text="TDT4109">
+                     <font>
+                        <Font name="Avenir Next Bold" size="36.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="30.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <TextArea prefHeight="278.0" prefWidth="749.0" promptText="Her kommer tekst om faget" style="-fx-border-color: black; -fx-border-radius: 20; -fx-border-width: 4px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="commentField" prefHeight="430.0" prefWidth="749.0" style="-fx-border-color: white;">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </TextArea>
+         </children>
+      </VBox>
+   </center>
+   <left>
+      <VBox id="menu" opacity="0.71" prefHeight="788.0" prefWidth="300.0" style="-fx-background-color: #8ac1f2#8ac1f2;" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="contact_btn" fx:id="mainpage_btn" mnemonicParsing="false" onAction="#mainpageAction" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: transparenttransparent;" text="Fagside" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Avenir Next Bold" size="36.0" />
+               </font>
+            </Button>
+            <Button id="chatbot_btn" fx:id="chatbot_btn" mnemonicParsing="false" onAction="#openChatBot" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: transparent;" text="Chatbot" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Avenir Next Bold" size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <Button id="ntnu_btn" fx:id="ntnu_btn" mnemonicParsing="false" onAction="#ntnuAction" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: transparenttransparent;" text="NTNU" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Avenir Next Bold" size="36.0" />
+               </font>
+            </Button>
+            <Button id="logout_btn" fx:id="logout_btn" mnemonicParsing="false" onAction="#logoutAction" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: transparenttransparent;" text="Logg ut" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Avenir Next Bold" size="36.0" />
+               </font>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets right="30.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
 </BorderPane>
