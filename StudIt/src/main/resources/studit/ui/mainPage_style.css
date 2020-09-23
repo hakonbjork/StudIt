@@ -1,6 +1,6 @@
 #borderpane {
-    -fx-background-color:  #c1e6ff;
-    background-color:  #c1e6ff;
+    -fx-background-color:  #cee7f8;
+    background-color:  #cee7f8;
 }
 
 #searchbar {
@@ -87,18 +87,18 @@
 }
 
 #chatbot_btn, #ntnu_btn, #mainPage_btn, #logout_btn {
-    -fx-background-color: transparent;
-    -fx-background: linear-gradient(right, #0688fa 0%, #0688fa 51%, #2dabf9 90%);
+    -fx-background-color: white;
 }
 
 #chatbot_btn:hover, #ntnu_btn:hover, #mainPage_btn:hover, #logout_btn:hover {
     background-position: right center; /* change the direction of the change here */
+    -fx-background: linear-gradient(right, #0688fa 0%, #0688fa 51%, #2dabf9 90%);
 
-    border-bottom-color: #235ce2;
-    -fx-border-bottom-color: #235ce2;
+    border-bottom: grey;
+    -fx-border-bottom: grey;
 
-    border-top-color: #235ce2;
-    -fx-border-top-color: #235ce2;
+    border-top: grey;
+    -fx-border-top: grey;
     }
 
 
