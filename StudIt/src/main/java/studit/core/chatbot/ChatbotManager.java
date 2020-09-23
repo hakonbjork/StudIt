@@ -15,8 +15,8 @@ public class ChatbotManager {
 	private KeyboardLinker linker;
 	
 	public ChatbotManager() {
-		writeDummyCommandsToDb();
-		linker = new KeyboardLinker(loadJson("test.json"));
+		//writeDummyCommandsToDb();
+		linker = new KeyboardLinker(loadJson("keywordLinks.json"));
 		System.out.println(linker.getRecognizedWords());
 	}
 	
