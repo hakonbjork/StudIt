@@ -76,16 +76,18 @@ public class AppController {
 
     }
 
+     /** Logs user out, and redirects to the login window
+    */
     @FXML
     void logoutAction(ActionEvent event) {
 
     }
-
+    /** redirects user to the main page
+    */
     @FXML
-    void contactAction(ActionEvent event) {
+    void mainPageAction(ActionEvent event) {
 
     }
-
 
 
     
