@@ -45,7 +45,7 @@ public class AppController {
     private Button ntnu_btn;
 
     @FXML
-    private Button contact_btn;
+    private Button mainPage_btn;
 
     @FXML
     private Button logout_btn;
@@ -70,6 +70,9 @@ public class AppController {
 
     @FXML
     void ntnuAction(ActionEvent event) {
+
+        //go to NTNU homepage (question if you want to open web-browser)?
+        //or a new window with information about NTNU?
 
     }
 

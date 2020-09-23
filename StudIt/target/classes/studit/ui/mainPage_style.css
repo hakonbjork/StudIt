@@ -1,5 +1,25 @@
-.scene {
-    background-image: url(resources/background.jpg);
+#borderpane {
+    -fx-background-color:  #c1e6ff;
+    background-color:  #c1e6ff;
+}
+
+#searchbar {
+    -fx-background-color: white;
+    -fx-border-radius: 30%;
+    -fx-margin: 80px 40px 80px 0;
+    -fx-padding: 0 0 0 20;
+}
+
+#coursesList {
+    -fx-background-color: white;
+    -fx-border-radius: 30%;
+    -fx-margin: 0px 40px 20px 60;
+    -fx-padding: 2 10 10 10;
+}
+
+#menu {
+    -fx-background-color: white;
+
 }
 
 .list-view {
@@ -7,12 +27,17 @@
     background-color: none; 
 }
 
-
 .list-view .list-cell:even{
       background-color: none;
     -fx-background-color: none;
 
-    height: 50px;
+    border-top-width: 1px;
+    -fx-border-top-width: 1px;
+
+    border-top-color: grey;
+    -fx-border-top-color: grey;
+
+    height: 35px;
     -fx-box-height: 35px;
 
     font-size: 25;
@@ -26,35 +51,20 @@
 
     margin: 4px;
     -fx-margin: 4px;
-}
-}
 
-.list-view .list-cell {
-      background-color: none;
-    -fx-background-color: none;
-
-    height: 50px;
-    -fx-box-height: 35px;
-
-    font-size: 25;
-    -fx-font-size: 25;
-
-    font-family: "Avenir next";
-    -fx-font-family: "Avenir next";
-
-    padding: 4px;
-    -fx-padding: 4px;
-
-    margin: 4px;
-    -fx-margin: 4px;
-}
 }
 
 .list-view .list-cell:odd{
     background-color: none;
     -fx-background-color: none;
 
-    height: 50px;
+    border-top-width: 1px;
+    -fx-border-top-width: 1px;
+
+    border-top-color: grey;
+    -fx-border-top-color: grey;
+
+    height: 35px;
     -fx-box-height: 35px;
 
     font-size: 25;
@@ -68,6 +78,7 @@
 
     margin: 4px;
     -fx-margin: 4px;
+
 }
 
 .list-view .list-cell:empty{
@@ -75,44 +86,23 @@
     -fx-opacity: 0;
 }
 
-#login_btn {
-    color: white;
-    -fx-color: white;
-
-    -fx-background-color:#8ac1f2;
-    background-color: #8ac1f2;
-    
-    font-size: 30;
-    -fx-font-size: 30;
-
-    font-weight: bold;
-    -fx-font-weight: bold;
-   
-   	padding:6px 24px;
-    -fx-padding: 6px 24px;
-
-    -fx-border-radius: 15%;
-    border-radius: 15%;
+#chatbot_btn, #ntnu_btn, #mainPage_btn, #logout_btn {
+    -fx-background-color: transparent;
+    -fx-background: linear-gradient(right, #0688fa 0%, #0688fa 51%, #2dabf9 90%);
 }
 
-#login_btn:hover {
-   background-color: #235ce2;
-    -fx-background-color: #235ce2;
+#chatbot_btn:hover, #ntnu_btn:hover, #mainPage_btn:hover, #logout_btn:hover {
+    background-position: right center; /* change the direction of the change here */
 
-}
+    border-bottom-color: #235ce2;
+    -fx-border-bottom-color: #235ce2;
 
-#login_btn:active {
-    position:relative;
-	top:1px;
+    border-top-color: #235ce2;
+    -fx-border-top-color: #235ce2;
+    }
 
-    -fx-position:relative;
-	-fx-top:1px;
-}
 
-#login_btn .content {
-    color: white;
-    -fx-color: white;
 
-}
+
 
 
