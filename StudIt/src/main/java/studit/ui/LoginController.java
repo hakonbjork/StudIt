@@ -21,6 +21,7 @@ public class LoginController {
     @FXML Button login_btn;
     @FXML VBox vBox;
     @FXML Text registerUser;
+    @FXML Text forgotPassword;
 
     public LoginController() {
     }
@@ -37,6 +38,14 @@ public class LoginController {
     public void registerUser(){
         // Code 
     }
+
+    /*
+    * Checks if email is registered, sends password to user if it is
+    */
+    public void forgotPassword(){
+        //code
+    }
+
 
     /*
     * Checks if login credentials are correct, logs in if it is. Else produces an error message in the application

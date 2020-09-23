@@ -35,8 +35,12 @@ public class CourseController {
 
     }
 
+    /*
+    * Goes back to main page
+    */
     @FXML
     void mainpageAction(ActionEvent event) {
+
 
     }
 
@@ -60,8 +64,7 @@ public class CourseController {
 
    public void writeComment(String text){
         comment =  commentField.getText();
-        commentField.setText(comment);
+        //code to post the comment to the comment-section
+        //should maybe be in recent written order
    }
-
-
 }
