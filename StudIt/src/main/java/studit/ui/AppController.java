@@ -15,6 +15,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.chatbot.Chatbot;
 
@@ -31,6 +32,9 @@ public class AppController {
         //Actions on clicked list item
         mouseClicked();
     }
+
+    @FXML
+    private BorderPane rootPane;
 
     @FXML
     private ListView<String> coursesList;
@@ -103,16 +107,15 @@ public class AppController {
                     System.out.println(name);	
                     		
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
-                        Parent root = loader.load();
+                        BorderPane newPane = FXMLLoader.load(getClass().getResource("Course.fxml"));
+                        rootPane.getChildren().setAll(newPane);
+
+                        // CourseController courseController = loader.getController();
+                        // courseController.setLabelText(name);
    
-                    
-                        CourseController courseController = loader.getController();
-                        courseController.setLabelText(name);
-   
-                        Stage stage = new Stage();
-                        stage.setScene(new Scene(root));
-                        stage.show();
+                        // Stage stage = new Stage();
+                        // stage.setScene(new Scene(root));
+                        // stage.show();
    
                         } catch (IOException e) {
                             System.out.println(e);
