@@ -108,7 +108,7 @@ public class AppController {
                     		
                     try {
                         BorderPane newPane = FXMLLoader.load(getClass().getResource("Course.fxml"));
-                        rootPane.getChildren().add(newPane);
+                        rootPane.getChildren().setAll(newPane);
 
                         } catch (IOException e) {
                             System.out.println(e);
