@@ -84,19 +84,22 @@ public class AppController {
     */
     @FXML
     void logoutAction(ActionEvent event) {
-
+        //code
     }
+
+
     /** redirects user to the main page
     */
     @FXML
     void mainPageAction() {
-        try {
-            BorderPane newPane = FXMLLoader.load(getClass().getResource("App.fxml"));
-            rootPane.getChildren().setAll(newPane);
+        System.out.println("hei");
+        // try {
+        //     BorderPane newPane = FXMLLoader.load(getClass().getResource("Course.fxml"));
+        //     rootPane.getChildren().setAll(newPane);
   
-            } catch (IOException e) {
-                System.out.println(e);
-            }
+        //     } catch (IOException e) {
+        //         System.out.println(e);
+        //     }
     }
 
 

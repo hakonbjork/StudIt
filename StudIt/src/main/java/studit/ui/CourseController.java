@@ -16,7 +16,7 @@ public class CourseController {
     private Label label;
 
     @FXML
-    private Button mainpage_btn;
+    private Button mainPage_btn;
 
     @FXML
     private Button chatbot_btn;
@@ -30,8 +30,11 @@ public class CourseController {
     @FXML
     private TextArea commentField;
 
+    /*
+    * logs user out, and goes to login scene
+     */
     @FXML
-    void logoutAction(ActionEvent event) {
+    void logoutAction() {
 
     }
 
@@ -39,16 +42,16 @@ public class CourseController {
     * Goes back to main page
     */
     @FXML
-    void mainPageAction(ActionEvent event) {
+    void mainPageAction() {
          System.out.println("hei");
-     // try {
-     //      BorderPane newPane = FXMLLoader.load(getClass().getResource("App.fxml"));
-     //      rootPane.getChildren().setAll(newPane);
+          try {
+               BorderPane newPane = FXMLLoader.load(getClass().getResource("App.fxml"));
+               rootPane.getChildren().setAll(newPane);
 
-     //      } catch (IOException e) {
-     //          System.out.println(e);
-     //      }
-    }
+          } catch (IOException e) {
+               System.out.println(e);
+               }
+          }
 
     /*
     * Gives the user a choice to open NTNU homepage in web-browser
