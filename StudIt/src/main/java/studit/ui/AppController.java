@@ -108,15 +108,8 @@ public class AppController {
                     		
                     try {
                         BorderPane newPane = FXMLLoader.load(getClass().getResource("Course.fxml"));
-                        rootPane.getChildren().setAll(newPane);
+                        rootPane.getChildren().add(newPane);
 
-                        // CourseController courseController = loader.getController();
-                        // courseController.setLabelText(name);
-   
-                        // Stage stage = new Stage();
-                        // stage.setScene(new Scene(root));
-                        // stage.show();
-   
                         } catch (IOException e) {
                             System.out.println(e);
                         }
