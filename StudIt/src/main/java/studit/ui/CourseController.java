@@ -39,14 +39,23 @@ public class CourseController {
     * Goes back to main page
     */
     @FXML
-    void mainpageAction(ActionEvent event) {
+    void mainPageAction(ActionEvent event) {
+         System.out.println("hei");
+     // try {
+     //      BorderPane newPane = FXMLLoader.load(getClass().getResource("App.fxml"));
+     //      rootPane.getChildren().setAll(newPane);
 
-
+     //      } catch (IOException e) {
+     //          System.out.println(e);
+     //      }
     }
 
+    /*
+    * Gives the user a choice to open NTNU homepage in web-browser
+    */
     @FXML
     void ntnuAction(ActionEvent event) {
-
+          System.out.println("NTNU");
     }
 
     @FXML
@@ -62,8 +71,9 @@ public class CourseController {
        label.setText(text);
    }
 
-   public void writeComment(String text){
+   public void writeComment(){
         comment =  commentField.getText();
+        System.out.println(comment.toString());
         //code to post the comment to the comment-section
         //should maybe be in recent written order
    }

@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="rootPane" fx:id="rootPane" prefHeight="1020.0" prefWidth="1612.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.AppController">
+<BorderPane id="rootPane" fx:id="rootPane" prefHeight="1020.0" prefWidth="1612.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.CourseController">
    <top>
       <HBox prefHeight="232.0" prefWidth="1642.0">
          <children>

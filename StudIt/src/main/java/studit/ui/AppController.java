@@ -89,8 +89,14 @@ public class AppController {
     /** redirects user to the main page
     */
     @FXML
-    void mainPageAction(ActionEvent event) {
-
+    void mainPageAction() {
+        try {
+            BorderPane newPane = FXMLLoader.load(getClass().getResource("App.fxml"));
+            rootPane.getChildren().setAll(newPane);
+  
+            } catch (IOException e) {
+                System.out.println(e);
+            }
     }
 
 
@@ -108,7 +114,7 @@ public class AppController {
                     		
                     try {
                         BorderPane newPane = FXMLLoader.load(getClass().getResource("Course.fxml"));
-                        rootPane.getChildren().setAll(newPane);
+                        rootPane.getChildren().addAll(newPane);
 
                         } catch (IOException e) {
                             System.out.println(e);
