@@ -3,11 +3,12 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
@@ -15,7 +16,7 @@
 
 <BorderPane id="rootPane" fx:id="rootPane" prefHeight="1020.0" prefWidth="1612.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.CourseController">
    <top>
-      <HBox prefHeight="232.0" prefWidth="1642.0">
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="232.0" prefWidth="1642.0">
          <children>
             <VBox prefHeight="232.0" prefWidth="1830.0">
                <children>
@@ -30,10 +31,10 @@
                               </ImageView>
                            </children>
                            <HBox.margin>
-                              <Insets right="60.0" />
+                              <Insets />
                            </HBox.margin>
                         </HBox>
-                        <HBox id="searchbar" alignment="CENTER_LEFT" maxWidth="1205.0" prefHeight="100.0" prefWidth="1186.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+                        <HBox id="searchbar" alignment="CENTER_LEFT" maxHeight="60.0" prefHeight="60.0" prefWidth="2000.0" style="-fx-background-color: white; -fx-background-radius: 30;">
                            <children>
                               <ImageView fitHeight="49.0" fitWidth="47.0" opacity="0.64" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -53,7 +54,7 @@
                               <Insets left="20.0" />
                            </padding>
                            <HBox.margin>
-                              <Insets bottom="80.0" right="40.0" top="80.0" />
+                              <Insets left="40.0" right="40.0" top="40.0" />
                            </HBox.margin>
                         </HBox>
                      </children>
@@ -67,36 +68,28 @@
       </HBox>
    </top>
    <center>
-      <VBox prefHeight="833.0" prefWidth="1294.0" style="-fx-background-color: #d4f6ff#d4f6ff;" BorderPane.alignment="CENTER">
+      <FlowPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <HBox prefHeight="64.0" prefWidth="1116.0">
-               <VBox.margin>
-                  <Insets left="70.0" />
-               </VBox.margin>
-               <children>
-                  <Label id="label" fx:id="label" text="Label">
-                     <font>
-                        <Font name="Avenir Next Bold" size="64.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
-            <ListView id="coursesList" fx:id="coursesList" prefHeight="624.0" prefWidth="1186.0" style="-fx-background-color: white; -fx-background-radius: 30;">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="40.0" right="40.0" />
-               </VBox.margin>
+            <Label id="label" fx:id="label" text="Label">
+               <font>
+                  <Font name="Avenir Next Bold" size="64.0" />
+               </font>
                <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+                  <Insets right="5.0" />
                </padding>
-            </ListView>
+            </Label>
+            <TextArea prefHeight="200.0" prefWidth="200.0" />
+            <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Skriv en kommentar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextArea>
+            <TextArea prefHeight="200.0" prefWidth="200.0" />
          </children>
-      </VBox>
+      </FlowPane>
    </center>
    <left>
-      <VBox id="menu" opacity="0.71" prefHeight="788.0" prefWidth="318.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <VBox id="menu" minHeight="-Infinity" minWidth="-Infinity" opacity="0.71" prefHeight="788.0" prefWidth="318.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <Button id="mainPage_btn" fx:id="mainPageAction" minHeight="-Infinity" mnemonicParsing="false" prefHeight="86.0" prefWidth="318.0" text="Hjem" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
                <font>
