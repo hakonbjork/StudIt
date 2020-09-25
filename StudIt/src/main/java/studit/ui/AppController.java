@@ -114,7 +114,7 @@ public class AppController {
     */
     private void loadData() {
 
-        Map<String, String[]> data = CourseListManager.loadJson("db.json");
+        Map<String, String[]> data = courseListManager.loadJson("db.json");
 
         for (String name : data.keySet())
             list.add(name);

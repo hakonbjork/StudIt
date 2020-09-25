@@ -54,13 +54,7 @@ public class CourseList implements Iterable<CourseItem> {
     return getCourseItems(null);
   }
 
-  public Collection<CourseItem> getCheckedCourseItems() {
-    return getCourseItems(true);
-  }
 
-  public Collection<CourseItem> getUncheckedCourseItems() {
-    return getCourseItems(false);
-  }
 
   // støtte for lytting
 

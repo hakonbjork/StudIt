@@ -2,7 +2,6 @@ package studit.core.json;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -14,8 +13,10 @@ public class CourseListManager {
 	 * Writes a list of dummy keyword connections to our json database
 	 */
 	public void writeToDb(String fagkode, String fagnavn, String score, String kommentar) {
+
 		
-		Map<String, String[]> output = new HashMap<>();
+        Map<String, String[]> output = loadJson("db.json");
+        
 		output.put(fagkode, new String[]{fagkode, fagnavn, score, kommentar});
 		
 		
@@ -35,7 +36,7 @@ public class CourseListManager {
      * @param filename - Filename under resources/studit/db. E.g "test.json"
      * @return Map<String, String[]> containing our values
      */
-    public static Map<String, String[]> loadJson(String filename) {
+    public Map<String, String[]> loadJson(String filename) {
         String path = "src/main/resources/studit/db/" + filename;
 
         ObjectMapper mapper = new ObjectMapper();
