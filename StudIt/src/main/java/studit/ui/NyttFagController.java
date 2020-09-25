@@ -3,9 +3,10 @@ package studit.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import studit.core.mainpage.CourseListManager;
+import studit.core.json.CourseListManager;
 
 public class NyttFagController {
+
 
     private CourseListManager courseListManager = new CourseListManager();
 
@@ -24,10 +25,18 @@ public class NyttFagController {
     @FXML
     private Button leggTilButton;
 
+    private AppController controller;
+
     @FXML
     public void initialize() {
 
         System.out.println("init nyttfag controller");
+
+    }
+
+    public void initData(AppController controller){
+
+        this.controller = controller;
 
     }
         
@@ -45,6 +54,8 @@ public class NyttFagController {
         fagnavnField.clear();
         rateField.clear();
         kommentarField.clear();
+
+        controller.loadData();
 
     }
 

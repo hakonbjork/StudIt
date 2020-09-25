@@ -65,12 +65,28 @@ public class AppController {
 
     @FXML
     void nyttFagButtonClickedOn(ActionEvent event) throws IOException {
-        BorderPane pane = FXMLLoader.load(getClass().getResource("NyttFag.fxml"));
-            Scene scene = new Scene(pane);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-		    stage.setTitle("Nytt Fag");
-            stage.show();
+
+        FXMLLoader loader = new FXMLLoader(
+            getClass().getResource("NyttFag.fxml"));
+
+        Stage stage = new Stage();
+            stage.setScene(
+            new Scene(loader.load())
+        );
+    
+
+        NyttFagController controller = loader.getController();
+
+
+            controller.initData(this);
+
+       stage.show();
+
+ 
+            
+
+
+            
     }
     
     @FXML
@@ -112,7 +128,7 @@ public class AppController {
     /** This function should actually fetch data from a database. This will be implemented later.
     * @return None
     */
-    private void loadData() {
+    public void loadData() {
 
         Map<String, String[]> data = courseListManager.loadJson("db.json");
 
@@ -121,5 +137,6 @@ public class AppController {
 
         coursesList.setItems(list);
     }
+
 
 }
