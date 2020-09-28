@@ -3,7 +3,7 @@ package studit.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import studit.core.json.CourseListManager;
+import studit.json.CourseListManager;
 
 public class NyttFagController {
 
@@ -29,7 +29,7 @@ public class NyttFagController {
 
     @FXML
     public void initialize() {
-
+        
         System.out.println("init nyttfag controller");
 
     }
@@ -56,7 +56,7 @@ public class NyttFagController {
         kommentarField.clear();
 
         controller.updateData();
-
+        // TODO fire changeHappened to listeners
     }
 
 }

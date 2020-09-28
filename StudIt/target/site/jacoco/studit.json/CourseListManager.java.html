@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CourseListManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">studit</a> &gt; <a href="index.source.html" class="el_package">studit.json</a> &gt; <span class="el_source">CourseListManager.java</span></div><h1>CourseListManager.java</h1><pre class="source lang-java linenums">package studit.json;
+
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.Map;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+<span class="fc" id="L10">public class CourseListManager {</span>
+
+    /**
+	 * Writes a list of dummy keyword connections to our json database
+	 */
+	public void writeToDb(String fagkode, String fagnavn, String score, String kommentar) {
+
+		
+<span class="nc" id="L18">        Map&lt;String, String[]&gt; output = loadJson(&quot;db.json&quot;);</span>
+        
+<span class="nc" id="L20">		output.put(fagkode, new String[]{fagkode, fagnavn, score, kommentar});</span>
+		
+		
+<span class="nc" id="L23">		ObjectMapper mapper = new ObjectMapper();</span>
+		try {
+<span class="nc" id="L25">			mapper.writeValue(Paths.get(&quot;src/main/resources/studit/db/db.json&quot;).toFile(), output);</span>
+<span class="nc" id="L26">		} catch (IOException e) {</span>
+<span class="nc" id="L27">			System.out.println(&quot;Error occured while printing json to file&quot;);</span>
+<span class="nc" id="L28">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L30">    }</span>
+    
+    
+    /**
+     * Reads Json file on the format Map&lt;String, String[]&gt; and returns the list
+     * 
+     * @param filename - Filename under resources/studit/db. E.g &quot;test.json&quot;
+     * @return Map&lt;String, String[]&gt; containing our values
+     */
+    public Map&lt;String, String[]&gt; loadJson(String filename) {
+<span class="fc" id="L40">        String path = &quot;src/main/resources/studit/db/&quot; + filename;</span>
+
+<span class="fc" id="L42">        ObjectMapper mapper = new ObjectMapper();</span>
+        try {
+<span class="fc" id="L44">            Map&lt;String, String[]&gt; keywords = mapper.readValue(Paths.get(path).toFile(),</span>
+<span class="fc" id="L45">                    new TypeReference&lt;Map&lt;String, String[]&gt;&gt;() {</span>
+                    });
+<span class="fc" id="L47">            return keywords;</span>
+<span class="nc" id="L48">        } catch (IOException e) {</span>
+<span class="nc" id="L49">            System.out.println(&quot;Error occured while reading json '&quot; + filename + &quot;'.&quot;);</span>
+<span class="nc" id="L50">            e.printStackTrace();</span>
+        }
+<span class="nc" id="L52">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

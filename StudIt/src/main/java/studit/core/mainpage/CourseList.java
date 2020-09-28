@@ -32,12 +32,10 @@ public class CourseList implements Iterable<CourseItem> {
       CourseListItem.setScore(item.getScore());
     }
     items.add(CourseListItem);
-    fireCourseListChanged();
   }
 
   public void removeCourseItem(CourseItem item) {
     items.remove(item);
-    fireCourseListChanged();
   }
 
   @Override
@@ -55,26 +53,4 @@ public class CourseList implements Iterable<CourseItem> {
   }
 
 
-
-  // støtte for lytting
-
-  private Collection<CourseListListener> CourseListListeners = new ArrayList<>();
-
-  public void addCourseListListener(CourseListListener listener) {
-    CourseListListeners.add(listener);
-  }
-
-  public void removeCourseListListener(CourseListListener listener) {
-    CourseListListeners.remove(listener);
-  }
-
-  protected void fireCourseListChanged(CourseItem item) {
-    fireCourseListChanged();
-  }
-
-  protected void fireCourseListChanged() {
-    for (CourseListListener listener : CourseListListeners) {
-      listener.CourseListChanged(this);
-    }
-  }
 }

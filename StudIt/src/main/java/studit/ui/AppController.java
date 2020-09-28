@@ -19,7 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.chatbot.Chatbot;
-import studit.core.json.CourseListManager;
+import studit.json.CourseListManager;
 
 public class AppController { 
     
@@ -147,9 +147,8 @@ public class AppController {
             if (!list.contains(name)){
             list.add(name);
 
-            }
+        }
         coursesList.setItems(list);
-
 
     }
 
