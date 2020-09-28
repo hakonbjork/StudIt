@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
 import studit.core.chatbot.Chatbot;
 import javafx.scene.control.Button;
 
@@ -11,6 +12,9 @@ public class CourseController {
     
     public static Chatbot chatbot = null;
     private String comment;
+
+    @FXML
+    private BorderPane rootPane;
 
     @FXML
     private Label label;
@@ -43,10 +47,12 @@ public class CourseController {
     */
     @FXML
     void mainPageAction() {
-         System.out.println("hei");
           try {
-               BorderPane newPane = FXMLLoader.load(getClass().getResource("App.fxml"));
-               rootPane.getChildren().setAll(newPane);
+               this.rootPane = new FXMLLoader.load(getClass().getResource("App.fxml"));
+               appController.initialize();
+
+               // BorderPane newPane = FXMLLoader.load(getClass().getResource("App.fxml"));
+               // rootPane.getChildren().setAll(newPane);
 
           } catch (IOException e) {
                System.out.println(e);
