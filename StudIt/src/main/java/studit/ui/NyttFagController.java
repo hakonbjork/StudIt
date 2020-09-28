@@ -55,7 +55,7 @@ public class NyttFagController {
         rateField.clear();
         kommentarField.clear();
 
-        controller.loadData();
+        controller.updateData();
 
     }
 

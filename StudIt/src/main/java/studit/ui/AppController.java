@@ -138,5 +138,20 @@ public class AppController {
         coursesList.setItems(list);
     }
 
+    public void updateData() {
+
+        Map<String, String[]> data = courseListManager.loadJson("db.json");
+
+        for (String name : data.keySet())
+
+            if (!list.contains(name)){
+            list.add(name);
+
+            }
+        coursesList.setItems(list);
+
+
+    }
+
 
 }
