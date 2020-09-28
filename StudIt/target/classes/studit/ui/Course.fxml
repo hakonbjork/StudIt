@@ -14,13 +14,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="rootPane" fx:id="rootPane" prefHeight="1020.0" prefWidth="1612.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.CourseController">
+<BorderPane id="rootPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.CourseController">
    <top>
-      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="232.0" prefWidth="1642.0">
+      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="232.0" prefWidth="1282.0">
          <children>
-            <VBox prefHeight="232.0" prefWidth="1830.0">
+            <VBox prefHeight="232.0" prefWidth="1700.0">
                <children>
-                  <HBox prefHeight="232.0" prefWidth="1612.0" style="-fx-background-color: #d4f6ff#d4f6ff;">
+                  <HBox prefHeight="232.0" prefWidth="1704.0" style="-fx-background-color: #d4f6ff#d4f6ff;">
                      <children>
                         <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="201.0" prefWidth="318.0" style="-fx-background-color: white;">
                            <children>
@@ -34,14 +34,14 @@
                               <Insets />
                            </HBox.margin>
                         </HBox>
-                        <HBox id="searchbar" alignment="CENTER_LEFT" maxHeight="60.0" prefHeight="60.0" prefWidth="2000.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+                        <HBox id="searchbar" alignment="CENTER_LEFT" maxHeight="60.0" prefHeight="60.0" prefWidth="1247.0" style="-fx-background-color: white; -fx-background-radius: 30;">
                            <children>
                               <ImageView fitHeight="49.0" fitWidth="47.0" opacity="0.64" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../icons/search.png" />
                                  </image>
                               </ImageView>
-                              <TextField id="search_field" prefHeight="59.0" prefWidth="1032.0" promptText="Søk på fag" style="-fx-background-color: white; -fx-background-radius: 20;">
+                              <TextField id="search_field" prefHeight="59.0" prefWidth="1279.0" promptText="Søk på fag" style="-fx-background-color: white; -fx-background-radius: 20;">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -68,20 +68,29 @@
       </HBox>
    </top>
    <center>
-      <FlowPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d4f6ff#d4f6ff #d4f6ff#d4f6ff;">
+      <FlowPane prefHeight="1038.0" prefWidth="962.0" style="-fx-background-color: #d4f6ff#d4f6ff #d4f6ff#d4f6ff;">
          <children>
-            <Label id="label" fx:id="label" prefHeight="94.0" prefWidth="1328.0" text="Label">
-               <font>
-                  <Font name="Avenir Next Bold" size="64.0" />
-               </font>
-               <padding>
-                  <Insets right="5.0" />
-               </padding>
-               <FlowPane.margin>
-                  <Insets top="20.0" />
-               </FlowPane.margin>
-            </Label>
-            <TextArea prefHeight="432.0" prefWidth="873.0" style="-fx-background-color: transparent;">
+            <HBox prefHeight="94.0" prefWidth="913.0">
+               <children>
+                  <Label id="label" fx:id="label" alignment="BOTTOM_LEFT" prefHeight="94.0" prefWidth="751.0" text="Label">
+                     <font>
+                        <Font name="Avenir Next Bold" size="64.0" />
+                     </font>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label id="label" fx:id="label1" alignment="BOTTOM_LEFT" prefHeight="94.0" prefWidth="456.0" text="Kommentarer" textAlignment="RIGHT">
+                     <font>
+                        <Font name="Avenir Next Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <TextArea prefHeight="250.0" prefWidth="580.0" style="-fx-background-color: transparent;">
                <font>
                   <Font name="Avenir Book" size="18.0" />
                </font>
@@ -89,19 +98,22 @@
                   <Insets bottom="10.0" top="10.0" />
                </FlowPane.margin>
             </TextArea>
-            <VBox prefHeight="420.0" prefWidth="405.0">
+            <VBox prefHeight="228.0" prefWidth="278.0">
                <children>
-                  <TextArea prefHeight="432.0" prefWidth="405.0">
+                  <TextArea prefHeight="60.0" prefWidth="278.0">
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </TextArea>
+                  <TextArea prefHeight="63.0" prefWidth="278.0" />
+                  <TextArea prefHeight="65.0" prefWidth="278.0" />
+                  <TextArea prefHeight="61.0" prefWidth="278.0" />
                </children>
                <FlowPane.margin>
-                  <Insets left="20.0" />
+                  <Insets left="20.0" top="10.0" />
                </FlowPane.margin>
             </VBox>
-            <TextArea prefHeight="77.0" prefWidth="872.0" promptText="Skriv en kommentar">
+            <TextArea prefHeight="55.0" prefWidth="872.0" promptText="Skriv en kommentar">
                <font>
                   <Font size="18.0" />
                </font>
@@ -109,6 +121,14 @@
                   <Insets right="800.0" top="60.0" />
                </FlowPane.margin>
             </TextArea>
+            <Button mnemonicParsing="false" text="Legg til">
+               <font>
+                  <Font name="Avenir Book" size="18.0" />
+               </font>
+               <FlowPane.margin>
+                  <Insets top="10.0" />
+               </FlowPane.margin>
+            </Button>
          </children>
          <padding>
             <Insets left="20.0" />
@@ -116,7 +136,7 @@
       </FlowPane>
    </center>
    <left>
-      <VBox id="menu" minHeight="-Infinity" minWidth="-Infinity" opacity="0.71" prefHeight="788.0" prefWidth="318.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <VBox id="menu" minHeight="-Infinity" minWidth="-Infinity" opacity="0.71" prefHeight="566.0" prefWidth="318.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <Button id="mainPage_btn" fx:id="mainPageAction" minHeight="-Infinity" mnemonicParsing="false" prefHeight="86.0" prefWidth="318.0" text="Hjem" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
                <font>
@@ -141,7 +161,7 @@
                   <Font name="Avenir Next Bold" size="24.0" />
                </font>
             </Button>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="444.0" stroke="WHITE" strokeType="INSIDE" width="318.0" VBox.vgrow="ALWAYS" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="228.0" stroke="WHITE" strokeType="INSIDE" width="318.0" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </left>

@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="rootPane" fx:id="rootPane" prefHeight="1020.0" prefWidth="1612.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.AppController">
+<BorderPane id="rootPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.AppController">
    <top>
       <HBox prefHeight="232.0" prefWidth="1642.0">
          <children>
@@ -107,7 +107,7 @@
       </VBox>
    </center>
    <left>
-      <VBox id="menu" opacity="0.71" prefHeight="788.0" prefWidth="318.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <VBox id="menu" opacity="0.71" prefHeight="400.0" prefWidth="318.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <Button id="mainPage_btn" fx:id="mainPageAction" minHeight="-Infinity" mnemonicParsing="false" prefHeight="86.0" prefWidth="318.0" text="Hjem" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
                <font>
