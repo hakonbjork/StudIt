@@ -132,7 +132,7 @@
                   <Font name="Avenir Next Bold" size="24.0" />
                </font>
             </Button>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="444.0" stroke="WHITE" strokeType="INSIDE" width="318.0" VBox.vgrow="ALWAYS" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="228.0" stroke="WHITE" strokeType="INSIDE" width="318.0" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </left>
