@@ -87,7 +87,16 @@ public class AppController {
     */
     @FXML
     void logoutAction(ActionEvent event) {
-        //code
+        try {
+          Parent root2 = new FXMLLoader.load(getClass().getResource("login.fxml"));
+          Scene scene = new Scene(root2);
+          App.primaryStage.setScene(scene);
+
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    
     }
 
 
@@ -111,18 +120,19 @@ public class AppController {
 				String name = coursesList.getSelectionModel().getSelectedItem();	
                     		
                     try {
-                        this.rootPane = new FXMLLoader.load(getClass().getResource("Course.fxml"));
+                        Parent root2 = new FXMLLoader.load(getClass().getResource("Course.fxml"));
+                        Scene scene = new Scene(root2);
+                        App.primaryStage.setScene(scene);
 
-                        // AnchorPane newPane = FXMLLoader.load(getClass().getResource("Course.fxml"));
-                        // mainPane.getChildren().addAll(newPane);
-                       // rootPane.getChildren().addAll(newPane);
+                        CourseController courseController = loader.getController();
+                        courseController.setLabel(name);
 
                         } catch (IOException e) {
                             System.out.println(e);
                         }
 			}
         });
-        return rootPane;
+
 	}
     
     /** This function should actually fetch data from a database. This will be implemented later.
