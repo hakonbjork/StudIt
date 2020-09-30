@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import studit.core.LoginManager;
 
-public class LoginController {
+public class LoginController implements Initializable {
 
     @FXML PasswordField passwordField;
     @FXML TextField usernameField;
