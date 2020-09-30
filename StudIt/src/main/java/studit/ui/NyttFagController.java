@@ -3,12 +3,10 @@ package studit.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import studit.json.CourseListManager;
+import studit.core.mainpage.CourseItem;
 
 public class NyttFagController {
 
-
-    private CourseListManager courseListManager = new CourseListManager();
 
     @FXML
     private TextField fagkodeField;
@@ -48,7 +46,13 @@ public class NyttFagController {
         String rate = rateField.getText();
         String kommentar = kommentarField.getText();
 
-        courseListManager.writeToDb(fagkode, fagnavn, rate, kommentar);
+        CourseItem item = controller.getCourseList().createCourseItem();
+        item.setFagkode(fagkode);
+        item.setFagnavn(fagnavn);
+        item.setScore(rate);
+        item.setKommentar(kommentar);
+
+        controller.getCourseList().addCourseItem(item);
 
         fagkodeField.clear();
         fagnavnField.clear();
@@ -56,7 +60,6 @@ public class NyttFagController {
         kommentarField.clear();
 
         controller.updateData();
-        // TODO fire changeHappened to listeners
     }
 
 }

@@ -18,7 +18,7 @@ public class CourseModule extends SimpleModule {
     super(NAME, Version.unknownVersion());
     addSerializer(CourseItem.class, new CourseItemSerializer());
     addSerializer(CourseList.class, new CourseListSerializer());
-    //addDeserializer(CourseItem.class, new CourseItemDeserializer());
-    //addDeserializer(CourseList.class, new CourseListDeserializer());
+    addDeserializer(CourseItem.class, new CourseItemDeserializer());
+    addDeserializer(CourseList.class, new CourseListDeserializer());
   }
 }

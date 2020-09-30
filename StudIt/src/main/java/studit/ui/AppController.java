@@ -1,6 +1,12 @@
 package studit.ui;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import javafx.collections.FXCollections;
@@ -19,19 +25,72 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.chatbot.Chatbot;
-import studit.json.CourseListManager;
+import studit.core.mainpage.CourseItem;
+import studit.core.mainpage.CourseList;
+import studit.json.CoursePersistence;
 
-public class AppController { 
-    
+public class AppController {
+
     public static Chatbot chatbot = null;
 
-    private CourseListManager courseListManager = new CourseListManager();
+    private CourseList courseList;
+
+    private CoursePersistence coursePersistence = new CoursePersistence();
+
+    // makes class more testable
+    CourseList getCourseList() {
+        return this.courseList;
+    }
 
     ObservableList<String> list = FXCollections.observableArrayList();
 
+    private void initializeCourseList() {
+        // setter opp data
+        Reader reader = null;
+        // try to read file from home folder first
+
+        try {
+            reader = new FileReader("src/main/resources/studit/db/db.json");
+        } catch (FileNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+    
+        try {
+
+            courseList = coursePersistence.readCourseList(reader);
+
+            for (CourseItem item: courseList.getCourseItems()){
+
+                list.add(item.getFagkode());
+
+            }
+
+        coursesList.setItems(list);
+            
+
+        } catch (IOException e) {
+      
+            System.out.println(e);
+
+        } finally {
+
+        try {
+            if (reader != null) {
+                reader.close();
+            }
+        } catch (IOException e) {
+            // ignore
+        }
+    }
+  }
+
+
     @FXML
     public void initialize() {
-        loadData();
+        
+        initializeCourseList();
+
         coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         //Actions on clicked list item
@@ -77,16 +136,10 @@ public class AppController {
 
         NyttFagController controller = loader.getController();
 
-
             controller.initData(this);
 
        stage.show();
-
- 
-            
-
-
-            
+    
     }
     
     @FXML
@@ -130,27 +183,30 @@ public class AppController {
     */
     public void loadData() {
 
-        Map<String, String[]> data = courseListManager.loadJson("db.json");
 
-        for (String name : data.keySet())
-            list.add(name);
-
-        coursesList.setItems(list);
     }
 
     public void updateData() {
 
-        Map<String, String[]> data = courseListManager.loadJson("db.json");
+        for(CourseItem item: courseList){
 
-        for (String name : data.keySet())
-
-            if (!list.contains(name)){
-            list.add(name);
+            if(!list.contains(item.getFagkode())){
+                list.add(item.getFagkode());
+            }
 
         }
         coursesList.setItems(list);
 
+        try (Writer writer = new FileWriter("src/main/resources/studit/db/db.json", StandardCharsets.UTF_8)) {
+
+        coursePersistence.writeCourseList(courseList, writer);
+
+      } catch (IOException e) {
+
+        System.err.println("Fikk ikke skrevet til db.json");
+      }
+
+
+        
     }
-
-
 }
