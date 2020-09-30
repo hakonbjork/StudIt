@@ -46,7 +46,8 @@ public class NyttFagController {
         String rate = rateField.getText();
         String kommentar = kommentarField.getText();
 
-        CourseItem item = controller.getCourseList().createCourseItem();
+        CourseItem item = new CourseItem();
+        
         item.setFagkode(fagkode);
         item.setFagnavn(fagnavn);
         item.setScore(rate);
@@ -60,6 +61,7 @@ public class NyttFagController {
         kommentarField.clear();
 
         controller.updateData();
+
     }
 
 }

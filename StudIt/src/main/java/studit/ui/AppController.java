@@ -33,7 +33,7 @@ public class AppController {
 
     public static Chatbot chatbot = null;
 
-    private CourseList courseList;
+    private CourseList courseList = new CourseList();
 
     private CoursePersistence coursePersistence = new CoursePersistence();
 

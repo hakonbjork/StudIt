@@ -15,6 +15,7 @@ public class CourseItemSerializer extends JsonSerializer<CourseItem> {
   @Override
   public void serialize(CourseItem item, JsonGenerator jsonGen, SerializerProvider serializerProvider)
       throws IOException {
+          
     jsonGen.writeStartObject();
     jsonGen.writeFieldName(item.getFagkode());
     jsonGen.writeStartArray();
@@ -26,5 +27,7 @@ public class CourseItemSerializer extends JsonSerializer<CourseItem> {
     
     jsonGen.writeEndArray();
     jsonGen.writeEndObject();
+
+
   }
 }
