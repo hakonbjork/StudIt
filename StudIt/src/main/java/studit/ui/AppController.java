@@ -32,6 +32,22 @@ public class AppController {
         //Actions on clicked list item
         mouseClicked();
     }
+    
+    
+    @FXML
+    private ListView<String> coursesList;
+
+    @FXML
+    private Button mainPageAction;
+
+    @FXML
+    private Button openChatBot;
+
+    @FXML
+    private Button ntnuAction;
+
+    @FXML
+    private Button logoutAction;
 
     @FXML
     private BorderPane rootPane;
@@ -39,23 +55,7 @@ public class AppController {
     @FXML
     private AnchorPane mainPane;
 
-    @FXML
-    private ListView<String> coursesList;
-
-     @FXML
-    private TextField search_field;
-
-    @FXML
-    private Button chatbot_btn;
-
-    @FXML
-    private Button ntnu_btn;
-
-    @FXML
-    private Button mainPage_btn;
-
-    @FXML
-    private Button logout_btn;
+   
 
     @FXML
     void openChatBot(ActionEvent event) {
@@ -86,8 +86,22 @@ public class AppController {
      /** Logs user out, and redirects to the login window
     */
     @FXML
-    void logoutAction(ActionEvent event) {
-        //code
+    void logoutAction() {
+        try {
+        stage.close();  
+
+        Parent root2 = new FXMLLoader.load(getClass().getResource("login.fxml"));
+        Scene scene = new Scene(root2);
+        App.primaryStage.setScene(scene);
+
+        LoginController loginController = loader.getController();
+        loginController.initialize();
+
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    
     }
 
 
@@ -111,18 +125,19 @@ public class AppController {
 				String name = coursesList.getSelectionModel().getSelectedItem();	
                     		
                     try {
-                        this.rootPane = new FXMLLoader.load(getClass().getResource("Course.fxml"));
+                        Parent root2 = new FXMLLoader.load(getClass().getResource("Course.fxml"));
+                        Scene scene = new Scene(root2);
+                        App.primaryStage.setScene(scene);
 
-                        // AnchorPane newPane = FXMLLoader.load(getClass().getResource("Course.fxml"));
-                        // mainPane.getChildren().addAll(newPane);
-                       // rootPane.getChildren().addAll(newPane);
+                        CourseController courseController = loader.getController();
+                        courseController.initialize();
 
                         } catch (IOException e) {
                             System.out.println(e);
                         }
 			}
         });
-        return rootPane;
+
 	}
     
     /** This function should actually fetch data from a database. This will be implemented later.

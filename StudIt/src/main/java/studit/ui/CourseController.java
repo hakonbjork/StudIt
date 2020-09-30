@@ -1,45 +1,72 @@
+// package studit.ui;
+
+// import javafx.event.ActionEvent;
+// import javafx.fxml.FXML;
+// import javafx.scene.control.Label;
+// import javafx.scene.control.TextArea;
+// import javafx.scene.layout.BorderPane;
+// import javafx.scene.layout.FlowPane;
+// import studit.core.chatbot.Chatbot;
+// import javafx.scene.Parent;
+// import javafx.scene.control.Button;
+// import javafx.fxml.FXMLLoader;
+// import javafx.fxml.Initializable;
+// import javafx.stage.Stage;
+
+
 package studit.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import studit.core.chatbot.Chatbot;
-import javafx.scene.control.Button;
 
-public class CourseController {
-    
+
+public class CourseController implements Initializable { 
+
+    CourseController courseController = new CourseController();
+
+
     public static Chatbot chatbot = null;
-    private String comment;
 
-    @FXML
-    private BorderPane rootPane;
+    @FXML private BorderPane rootPane;
+    @FXML private FlowPane flowPane;
 
-    @FXML
-    private Label label;
+    @FXML private Button mainPageAction;
+    @FXML private Button chatbotAction;
+    @FXML private Button ntnuAction;
+    @FXML private Button logoutAction;
+    @FXML private Button addComment;
+    @FXML private Button mainPage_btn;
+    @FXML private Button openChatBot;
 
-    @FXML
-    private Button mainPage_btn;
 
-    @FXML
-    private Button chatbot_btn;
+    @FXML private Label label1;
+    @FXML private Label label;
 
-    @FXML
-    private Button ntnu_btn;
+    @FXML private TextArea comment1;
+    @FXML private TextArea comment2;
+    @FXML private TextArea comment3;
+    @FXML private TextArea commentField;
 
-    @FXML
-    private Button logout_btn;
-
-    @FXML
-    private TextArea commentField;
-
+   
+     public void initialize(String name) {
+		label.setText(name);
+     }
+     
     /*
     * logs user out, and goes to login scene
      */
     @FXML
     void logoutAction() {
+          Parent root2 = new FXMLLoader.load(getClass().getResource("login.fxml"));
+          Scene scene = new Scene(root2);
+          App.primaryStage.setScene(scene);
+          
 
+     } catch (IOException e) {
+          System.out.println(e);
     }
 
     /*
@@ -48,11 +75,10 @@ public class CourseController {
     @FXML
     void mainPageAction() {
           try {
-               this.rootPane = new FXMLLoader.load(getClass().getResource("App.fxml"));
-               appController.initialize();
-
-               // BorderPane newPane = FXMLLoader.load(getClass().getResource("App.fxml"));
-               // rootPane.getChildren().setAll(newPane);
+               Parent root2 = new FXMLLoader.load(getClass().getResource("App.fxml"));
+               Scene scene = new Scene(root2);
+               CourseController.primaryStage.setScene(scene);
+               App.start();
 
           } catch (IOException e) {
                System.out.println(e);
@@ -67,6 +93,7 @@ public class CourseController {
           System.out.println("NTNU");
     }
 
+
     @FXML
     void openChatBot(ActionEvent event) {
          if (chatbot == null) {
@@ -76,14 +103,14 @@ public class CourseController {
     	}
     }
 
-    public void setLabelText(String text){
+    public void setLabel(String text){
        label.setText(text);
    }
 
-   public void writeComment(){
-        comment =  commentField.getText();
-        System.out.println(comment.toString());
-        //code to post the comment to the comment-section
-        //should maybe be in recent written order
+     @FXML
+     void addCommentAction(ActionEvent event) {
+
+          String comment = commentField.getText();
+          comment1.setText(comment);
    }
 }
