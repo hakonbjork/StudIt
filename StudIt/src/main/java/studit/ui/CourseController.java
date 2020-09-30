@@ -5,45 +5,47 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import studit.core.chatbot.Chatbot;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.stage.Stage;
 
 
-public class CourseController implements Initializable{
-    
+public class CourseController implements Initializable { 
+
+    CourseController courseController = new CourseController();
+
+
     public static Chatbot chatbot = null;
-    private String comment;
 
-    @FXML
-    private BorderPane rootPane;
+    @FXML private BorderPane rootPane;
+    @FXML private FlowPane flowPane;
 
-    @FXML
-    private Label label;
+    @FXML private Button mainPageAction;
+    @FXML private Button chatbotAction;
+    @FXML private Button ntnuAction;
+    @FXML private Button logoutAction;
+    @FXML private Button addComment;
+    @FXML private Button mainPage_btn;
+    @FXML private Button openChatBot;
 
-    @FXML
-    private Button mainPage_btn;
 
-    @FXML
-    private Button chatbot_btn;
+    @FXML private Label label1;
+    @FXML private Label label;
 
-    @FXML
-    private Button ntnu_btn;
+    @FXML private TextArea comment1;
+    @FXML private TextArea comment2;
+    @FXML private TextArea comment3;
+    @FXML private TextArea commentField;
 
-    @FXML
-    private Button logout_btn;
-
-    @FXML
-     private Button addComment_btn;
-
-    @FXML
-    private TextArea commentField;
-
+   
+     public void initialize(String name) {
+		label.setText(name);
+     }
      
-
-
     /*
     * logs user out, and goes to login scene
      */
@@ -66,17 +68,8 @@ public class CourseController implements Initializable{
           try {
                Parent root2 = new FXMLLoader.load(getClass().getResource("App.fxml"));
                Scene scene = new Scene(root2);
-               App.primaryStage.setScene(scene);
-               App.start();
-
-               } catch (IOException e) {
-                    System.out.println(e);
-                    
-               // //this.rootPane = new FXMLLoader.load(getClass().getResource("App.fxml"));
-               // mainPage.getScene().getWindow().hide();
-
-               // // BorderPane newPane = FXMLLoader.load(getClass().getResource("App.fxml"));
-               // // rootPane.getChildren().setAll(newPane);
+               CourseController.primaryStage.setScene(scene);
+               CourseController.start();
 
           } catch (IOException e) {
                System.out.println(e);
@@ -101,19 +94,14 @@ public class CourseController implements Initializable{
     	}
     }
 
-    
     public void setLabel(String text){
        label.setText(text);
    }
 
      @FXML
-     void addComment(ActionEvent event) {
-        if(commentField.isEmpty){
-             System.out.println("empty field");
-        }
-        else {
-          comment = commentField.getText();
+     void addComment() {
+
+          String comment = commentField.getText();
           comment1.setText(comment);
-        }
    }
 }
