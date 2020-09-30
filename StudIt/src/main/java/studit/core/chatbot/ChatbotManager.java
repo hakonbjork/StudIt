@@ -2,20 +2,22 @@ package studit.core.chatbot;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import studit.core.chatbot.KeyboardLinker.Match;
 
 public class ChatbotManager {
 	
 	private KeyboardLinker linker;
 	
 	public ChatbotManager() {
-		//writeDummyCommandsToDb();
+		writeDummyCommandsToDb();
 		linker = new KeyboardLinker(loadJson("keywordLinks.json"));
 		System.out.println(linker.getRecognizedWords());
 	}
@@ -39,6 +41,11 @@ public class ChatbotManager {
 			}
 		}
 		
+		List<Match> matches = linker.matchCommand(command);
+		for (Match match : matches) {
+			System.out.println(match);
+		}
+		
 		
 		if (response.equals("")) {
 			response += "Jeg beklager, men det forstod jeg ikke helt. Kanskje du mente...?";
@@ -52,15 +59,19 @@ public class ChatbotManager {
 	 */
 	private void writeDummyCommandsToDb() {
 		
-		Map<String, String[]> output = new HashMap<>();
-		output.put("foo", new String[]{"random", "keywords", "here"
-				+ ""});
-		output.put("foo1", new String[]{"more", "random", "stuff"});
-		output.put("foo2", new String[]{"you", "get", "the", "picture"});
+		List<KeywordLink> links = new ArrayList<>();
+		
+		
+		links.add(new KeywordLink("greeting",  Map.of(
+				"hei", 10.0f, "hallo", 10.0f, "heisann", 10.0f, "hoi", 5.0f), 1));
+		links.add(new KeywordLink("foo1",  Map.of(
+				"more", 0.8f, "random", 0.4f, "stuff", 0.6f), 2));
+		links.add(new KeywordLink("foo2",  Map.of(
+				"you", 0.8f, "get", 0.4f, "the", 0.6f, "picture", 0.1f), 2));
 		
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			mapper.writeValue(Paths.get("src/main/resources/studit/db/test.json").toFile(), output);
+			mapper.writeValue(Paths.get("src/main/resources/studit/db/keywordLinks.json").toFile(), links);
 		} catch (IOException e) {
 			System.out.println("Error occured while printing dummy json to file");
 			e.printStackTrace();
@@ -69,17 +80,17 @@ public class ChatbotManager {
 	}
 	
 	/**
-	 * Reads Json file on the format Map<String, String[]> and returns the list
+	 * Reads Json file on the format List<KeywordLink> and returns the list
 	 * @param filename - Filename under resources/studit/db. E.g "test.json"
-	 * @return Map<String, String[]> containing our values
+	 * @return ArrayList containing our keyword links
 	 */
-	private Map<String, String[]> loadJson(String filename) {
+	private List<KeywordLink> loadJson(String filename) {
 		String path = "src/main/resources/studit/db/" + filename;
 		
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			Map<String, String[]> keywords = mapper.readValue(Paths.get(path).toFile(), new TypeReference<Map<String, String[]>>(){});
-			return keywords;
+			List<KeywordLink> links = mapper.readValue(Paths.get(path).toFile(), new TypeReference<List<KeywordLink>>(){});
+			return links;
 		} catch (IOException e) {
 			System.out.println("Error occured while reading json '" + filename + "'.");
 			e.printStackTrace();

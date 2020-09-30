@@ -1,42 +1,92 @@
 package studit.core.chatbot;
 
+import static studit.core.Commons.contains;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 public class KeyboardLinker {
 	
-	private Map<String, String[]> keywords;
-	private Map<Integer, String> recognizedWords;
+	private List<KeywordLink> links;
+	private BiMap<Integer, String> recognizedWords;
+	private Map<String, Keyword[]> commandIDs;
+	private Map<String, Integer> precedences;
 	
-	public KeyboardLinker(Map<String, String[]> keywords) {
-		this.keywords = keywords;
+	public KeyboardLinker(List<KeywordLink> links) {
+		this.links = links;
 		extractKeywords();
-		getKeywordId("randum");
-		getKeywordId("mure");
-		getKeywordId("hallelujah");
+		for (String key : commandIDs.keySet()) {
+			System.out.println(key + " " + commandIDs.get(key)[0].toString());
+		}
+		
 	}
 	
 	/**
-	 * Initializes recognizedWords list and adds to it all the words from the keywords hashmap.
+	 * Initializes recognizedWords and commandIDs
 	 */
 	private void extractKeywords() {
-		recognizedWords = new HashMap<>();
-		// This will be our word ID
-		int i = 0;
-		for (String[] command : keywords.values()) {
-			for (String word : command) {
-				recognizedWords.put(i, word);
-				i += 1;
-			}
+		recognizedWords = HashBiMap.create();
+		commandIDs = new HashMap<>();
+		precedences = new HashMap<>();
+		
+		Set<String> uniqueWords = new HashSet<>();
+		
+		for (KeywordLink link : links) {
+			uniqueWords.addAll(link.getWords());
+			precedences.put(link.getCommand(), link.getPrecedence());
 		}
+		
+		int id = 0;
+		
+		for (String word : uniqueWords) {
+			recognizedWords.put(id, word);
+			id += 1;
+		}
+		
+		for (KeywordLink link : links) {
+			commandIDs.put(link.getCommand(), getIDArray(link.getKeywords()));
+		}
+		
 	}
-	
+
+	/**
+	 * Finds the word id's in a string array
+	 * @param weightedKeywords HashMap containing our words and weights
+	 * @return Keyword[] of weights and IDs
+	 */
+	private Keyword[] getIDArray(Map<String, Float> weightedKeywords) {
+		
+		Keyword[] keywords = new Keyword[weightedKeywords.size()];
+		
+		
+		int i = 0;
+		for (String word : weightedKeywords.keySet()) {
+			
+			keywords[i] = new Keyword(word, weightedKeywords.get(word));
+			i+=1;
+		}
+
+		return keywords;
+	}
+
 	public Map<Integer, String> getRecognizedWords() {
 		return recognizedWords;
 	}
 	
-	private int getKeywordId(String word) {
+	/**
+	 * Iterates over recognized words in our vocabulary and finds the closest match
+	 * @param word the word we want to match
+	 * @return id if match is over 50% confident, -1 if no match found
+	 */
+	private int getKeywordID(String word) {
 		
 		int matchID = -1;
 		float matchPct = 0.0f;
@@ -54,16 +104,83 @@ public class KeyboardLinker {
 			}
 			
 			float pct = (float) (unions-complements) / (unions + complements);
-			System.out.println("Word: " + word + " matching:" + recognizedWords.get(key) + " pct: " + pct);
-			if (pct >= 0.5f && pct > matchPct) {
+			if (pct >= 0.65f && pct > matchPct) {
 				matchID = key;
 				matchPct = pct;
 			}
 		}
 		
+		System.out.println(recognizedWords.get(matchID));
 		return matchID;
+		
+	}
+	
+	public List<Match> matchCommand(String[] words) {
+		
+		Integer[] matchIDs = new Integer[words.length];
+		
+		for (int i = 0; i < words.length; i++) {
+			matchIDs[i] = getKeywordID(words[i]);
+		}
+		
+		List<Match> matches = new ArrayList<>();
+		
+		for (String key : commandIDs.keySet()) {
+			float match = 0.0f;
+			for (Keyword keyword : commandIDs.get(key)) {
+				if (contains(matchIDs, keyword.ID)) {
+					match += keyword.weight;
+				}
+			}
+			
+			matches.add(new Match(key, match, precedences.get(key)));
 
+		}
+		
+		Collections.sort(matches);
+		return matches;
+	}
+	
+	class Keyword {
+		public int ID;
+		public float weight;
+
+		public Keyword(String word, float weight) {
+			ID = recognizedWords.inverse().get(word);
+			this.weight = weight;
+		}
+		
+		@Override
+		public String toString() {
+			return "Keyword [ID=" + ID + ", weight=" + weight + "]";
+		}
+	}
+	
+	class Match implements Comparable<Match>{
+		public float match;
+		public String command;
+		public int precedence;
+		
+		public Match(String command, float match, int precedence) {
+			// super();
+			this.match = match;
+			this.command = command;
+			this.precedence = precedence;
+		}
+		
+		@Override
+		public int compareTo(Match o) {
+			if (o.precedence < this.precedence) return 1;
+			return o.match < this.match ? -1 : 1;
+		}
+
+		@Override
+		public String toString() {
+			return "Match [match=" + match + ", command=" + command + ", precedence=" + precedence + "]";
+		}
 		
 	}
 
+
 }
+
