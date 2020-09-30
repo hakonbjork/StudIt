@@ -1,17 +1,26 @@
+// package studit.ui;
+
+// import javafx.event.ActionEvent;
+// import javafx.fxml.FXML;
+// import javafx.scene.control.Label;
+// import javafx.scene.control.TextArea;
+// import javafx.scene.layout.BorderPane;
+// import javafx.scene.layout.FlowPane;
+// import studit.core.chatbot.Chatbot;
+// import javafx.scene.Parent;
+// import javafx.scene.control.Button;
+// import javafx.fxml.FXMLLoader;
+// import javafx.fxml.Initializable;
+// import javafx.stage.Stage;
+
+
 package studit.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import studit.core.chatbot.Chatbot;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.stage.Stage;
 
 
 public class CourseController implements Initializable { 
@@ -69,7 +78,7 @@ public class CourseController implements Initializable {
                Parent root2 = new FXMLLoader.load(getClass().getResource("App.fxml"));
                Scene scene = new Scene(root2);
                CourseController.primaryStage.setScene(scene);
-               CourseController.start();
+               App.start();
 
           } catch (IOException e) {
                System.out.println(e);
@@ -99,7 +108,7 @@ public class CourseController implements Initializable {
    }
 
      @FXML
-     void addComment() {
+     void addCommentAction(ActionEvent event) {
 
           String comment = commentField.getText();
           comment1.setText(comment);
