@@ -121,7 +121,7 @@
                   <Insets right="800.0" top="60.0" />
                </FlowPane.margin>
             </TextArea>
-            <Button id="addComment_btn" fx:id="addCommentAction" mnemonicParsing="false" onAction="#handleCommentAction" style="-fx-background-radius: 3;" text="Legg til">
+            <Button id="addComment_btn" fx:id="addCommentAction" mnemonicParsing="false" onAction="#handleAddCommentAction" style="-fx-background-radius: 3;" text="Legg til">
                <font>
                   <Font name="Avenir Book" size="18.0" />
                </font>
