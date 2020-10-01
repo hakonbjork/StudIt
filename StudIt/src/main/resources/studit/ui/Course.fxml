@@ -121,7 +121,7 @@
                   <Insets right="800.0" top="60.0" />
                </FlowPane.margin>
             </TextArea>
-            <Button id="addComment_btn" fx:id="addComment" mnemonicParsing="false" onAction="#addCommentAction" text="Legg til">
+            <Button id="addComment_btn" fx:id="addCommentAction" mnemonicParsing="false" onAction="#handleCommentAction" style="-fx-background-radius: 3;" text="Legg til">
                <font>
                   <Font name="Avenir Book" size="18.0" />
                </font>
@@ -138,7 +138,7 @@
    <left>
       <VBox id="menu" minHeight="-Infinity" minWidth="-Infinity" opacity="0.71" prefHeight="566.0" prefWidth="318.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Button id="mainPage_btn" fx:id="mainPageAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#mainPageAction" prefHeight="86.0" prefWidth="318.0" text="Hjem" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
+            <Button id="mainPage_btn" fx:id="mainPageAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleMainPageAction" prefHeight="86.0" prefWidth="318.0" text="Hjem" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Avenir Next Bold" size="24.0" />
                </font>
@@ -151,12 +151,12 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button id="ntnu_btn" fx:id="ntnuAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#ntnuAction" prefHeight="84.0" prefWidth="318.0" text="NTNU" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
+            <Button id="ntnu_btn" fx:id="ntnuAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleNtnuAction" prefHeight="84.0" prefWidth="318.0" text="NTNU" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Avenir Next Bold" size="24.0" />
                </font>
             </Button>
-            <Button id="logout_btn" fx:id="logoutAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#logoutAction" prefHeight="91.0" prefWidth="318.0" text="Logg ut" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
+            <Button id="logout_btn" fx:id="logoutAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="91.0" prefWidth="318.0" text="Logg ut" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Avenir Next Bold" size="24.0" />
                </font>
