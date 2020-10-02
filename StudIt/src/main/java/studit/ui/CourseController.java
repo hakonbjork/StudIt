@@ -13,17 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import studit.core.chatbot.Chatbot;
 
 public class CourseController implements Initializable { 
-
-    App app = new App();
-    Course course = new Course();
-    public static Chatbot chatbot = null;
-
 
     @FXML private BorderPane rootPane;
     @FXML private FlowPane flowPane;
@@ -43,12 +39,17 @@ public class CourseController implements Initializable {
     @FXML private TextArea comment2;
     @FXML private TextArea comment3;
     @FXML private TextArea commentField;
+    @FXML private TextField search;
+
+    App app = new App();
+    Course course = new Course();
+    public static Chatbot chatbot = null;
 
 
 
    	@Override
-   public void initialize(URL location, ResourceBundle resources) {
-   }
+    public void initialize(URL location, ResourceBundle resources) {
+    }
 
    /** 
     * Function to set the label - the name of the subject on the top of the page

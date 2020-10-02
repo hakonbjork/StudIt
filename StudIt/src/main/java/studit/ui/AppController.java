@@ -2,6 +2,7 @@ package studit.ui;
 
 import java.io.IOException;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,6 +32,8 @@ public class AppController {
 
     public static Chatbot chatbot = null;
     ObservableList<String> list = FXCollections.observableArrayList();
+
+
 
     /**
     * Function to initialize AppController
@@ -72,6 +75,34 @@ public class AppController {
     void searchView(ActionEvent event) {
 
     }
+
+    public void changed(ObservableValue observable, Object oldVal, Object newVal) {
+        search((String) oldVal, (String) newVal);
+    }
+
+    public void search(String oldVal, String newVal) {
+        if (oldVal != null && (newVal.length() < oldVal.length())) {
+        coursesList.setItems(list);
+    }
+
+    String value = newVal.toUpperCase();
+
+    ObservableList<String> subentries = FXCollections.observableArrayList();
+    for (Object entry : coursesList.getItems()) {
+      boolean match = true;
+      String entryText = (String) entry;
+      if (!entryText.toUpperCase().contains(value)) {
+        match = false;
+        break;
+      }
+      if (match) {
+        subentries.add(entryText);
+      }
+    }
+    coursesList.setItems(subentries);
+  }
+
+
 
     /**
     * Should give the option to go to the subjects web-page
