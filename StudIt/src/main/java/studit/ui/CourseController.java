@@ -32,7 +32,7 @@ public class CourseController implements Initializable {
     @FXML private Button mainPage_btn;
     @FXML private Button openChatBot;
 
-    @FXML private Label label1;
+    @FXML private Label comments;
     @FXML private Label label;
 
     @FXML private TextArea comment1;
@@ -57,7 +57,7 @@ public class CourseController implements Initializable {
     * @return none
     */
    public void setLabel(String label) {
-       this.label1.setText(label);
+       this.label.setText(label);
    }
      
     /**

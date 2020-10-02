@@ -8,12 +8,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -29,6 +31,12 @@ public class AppController {
     @FXML private Button logoutAction;
     @FXML private BorderPane rootPane;
     @FXML private AnchorPane mainPane;
+
+    @FXML private Button mainPage_btn;
+    @FXML private Button chatbot_btn;
+    @FXML private Button ntnu_btn;
+    @FXML private Button logout_btn;
+
 
     public static Chatbot chatbot = null;
     ObservableList<String> list = FXCollections.observableArrayList();
@@ -66,13 +74,16 @@ public class AppController {
         chatbot = null;
     }
 
+
+
     /**
     * Function to search for subjects. The listview will then only show subjects with 
     * the letters in the search field
     * @return none
     */
     @FXML
-    void searchView(ActionEvent event) {
+    void handleSearchViewAction(KeyEvent event) {
+        
 
     }
 
@@ -85,22 +96,21 @@ public class AppController {
         coursesList.setItems(list);
     }
 
-    String value = newVal.toUpperCase();
+        String value = newVal.toUpperCase();
 
-    ObservableList<String> subentries = FXCollections.observableArrayList();
-    for (Object entry : coursesList.getItems()) {
-      boolean match = true;
-      String entryText = (String) entry;
-      if (!entryText.toUpperCase().contains(value)) {
-        match = false;
-        break;
-      }
-      if (match) {
-        subentries.add(entryText);
-      }
+        ObservableList<String> subentries = FXCollections.observableArrayList();
+        for (Object entry : coursesList.getItems()) {
+            boolean match = true;
+            String entryText = (String) entry;
+        if (!entryText.toUpperCase().contains(value)) {
+            match = false;
+            break;
+        } if (match) {
+            subentries.add(entryText);
+        }
     }
-    coursesList.setItems(subentries);
-  }
+        coursesList.setItems(subentries);
+}
 
 
 
@@ -120,26 +130,25 @@ public class AppController {
      /** 
      * logs user out, and opens to login scene, closes current scene
      */
-    @FXML
-    void handleLogoutAction() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-            Parent root = loader.load();
+     @FXML void handleLogoutAction(ActionEvent event) {
+         try {
 
-            Stage controllerStage = (Stage) mainPageAction.getScene().getWindow();
-            // do what you have to do
-            controllerStage.hide();
-        
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        Parent root = loader.load();
+    
+        Stage stage2 = new Stage();
+        stage2.setScene(new Scene(root));
+        stage2.setTitle("StudIt");
+        stage2.show();
+
+        Stage stage = (Stage) logout_btn.getScene().getWindow();
+            stage.hide();
             
-             
 
-            } catch (IOException e) {
+        } catch (IOException e) {
                 System.out.println(e);
             }
-	}
+	    }
 
 
     /** 
@@ -191,12 +200,12 @@ public class AppController {
     * @return None
     */
     private void loadData() {
-    String a = "TDT4109";
-    String b =  "TMA4145";
-    String c = "TTM4175";
-    String d = "IT1901";
-    list.addAll(a,b,c,d);
-    coursesList.setItems(list);
+        String a = "TDT4109";
+        String b =  "TMA4145";
+        String c = "TTM4175";
+        String d = "IT1901";
+        list.addAll(a,b,c,d);
+        coursesList.setItems(list);
     }
 
 }

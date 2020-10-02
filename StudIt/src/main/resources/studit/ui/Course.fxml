@@ -80,7 +80,7 @@
                         <Insets right="5.0" />
                      </padding>
                   </Label>
-                  <Label id="label" fx:id="label1" alignment="BOTTOM_LEFT" prefHeight="94.0" prefWidth="456.0" text="Kommentarer" textAlignment="RIGHT">
+                  <Label id="comments" fx:id="comments" alignment="BOTTOM_LEFT" prefHeight="94.0" prefWidth="456.0" text="Kommentarer" textAlignment="RIGHT">
                      <font>
                         <Font name="Avenir Next Bold" size="24.0" />
                      </font>

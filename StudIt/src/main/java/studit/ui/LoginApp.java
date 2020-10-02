@@ -13,7 +13,7 @@ public class LoginApp extends Application {
     final Parent parent = FXMLLoader.load(getClass().getResource("Login.fxml"));
     parent.getStylesheets().add(getClass().getResource("mainPage.css").toExternalForm());
 
-    primaryStage.setTitle("StudIt");
+    primaryStage.setTitle("Login");
     primaryStage.setScene(new Scene(parent));
     primaryStage.show();
   }
