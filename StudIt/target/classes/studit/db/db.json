@@ -1,11 +1,18 @@
 {
-    "items": [
-        {
-            "code": "tdt4109",
-            "name": "itgk",
-            "rate": "10",
-            "kommentar": "yey"
-        }
-    ]
+  "items" : [ {
+    "code" : "yey",
+    "name" : "itgk",
+    "rate" : null,
+    "kommentar" : null
+  }, {
+    "code" : "tdt4109",
+    "name" : "itgk",
+    "rate" : "20",
+    "kommentar" : "bra"
+  }, {
+    "code" : "tdt1043",
+    "name" : "hei",
+    "rate" : "heihei",
+    "kommentar" : "o"
+  } ]
 }
-

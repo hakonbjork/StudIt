@@ -9,25 +9,21 @@ import studit.core.mainpage.CourseItem;
 public class CourseItemSerializer extends JsonSerializer<CourseItem> {
 
   /*
-   * format: { "TDT4109": [xxx, xxx, xxx, xxx] }
+   * format: { "code": xx, "name": xx ... }
    */
 
   @Override
   public void serialize(CourseItem item, JsonGenerator jsonGen, SerializerProvider serializerProvider)
       throws IOException {
-          
-    jsonGen.writeStartObject();
-    jsonGen.writeFieldName(item.getFagkode());
-    jsonGen.writeStartArray();
 
-    jsonGen.writeFieldName(item.getFagkode());
-    jsonGen.writeFieldName(item.getFagnavn());
-    jsonGen.writeFieldName(item.getScore());
-    jsonGen.writeFieldName(item.getKommentar());
-    
-    jsonGen.writeEndArray();
-    jsonGen.writeEndObject();
+        jsonGen.writeStartObject();
 
+        jsonGen.writeStringField("code", item.getFagkode());
+        jsonGen.writeStringField("name", item.getFagnavn());
+        jsonGen.writeStringField("rate", item.getScore());
+        jsonGen.writeStringField("kommentar", item.getKommentar());
+        
+        jsonGen.writeEndObject();
 
   }
 }
