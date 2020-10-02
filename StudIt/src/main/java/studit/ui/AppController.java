@@ -82,7 +82,7 @@ public class AppController {
     * @return none
     */
     @FXML
-    void handleSearchViewAction(KeyEvent event) {
+    void handleSearchAction(KeyEvent event) {
         
 
     }
