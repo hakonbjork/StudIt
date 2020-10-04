@@ -1,5 +1,5 @@
 /workspace/gr2060/StudIt/src/test/java/studit/ui/AppTest.java
-/workspace/gr2060/StudIt/src/test/java/studit/json/CourseListManagerTest.java
 /workspace/gr2060/StudIt/src/test/java/studit/core/ChatbotManagerTest.java
 /workspace/gr2060/StudIt/src/test/java/studit/core/LoginManagerTest.java
+/workspace/gr2060/StudIt/src/test/java/studit/json/CoursePersistenceTest.java
 /workspace/gr2060/StudIt/src/test/java/studit/core/MessageTest.java

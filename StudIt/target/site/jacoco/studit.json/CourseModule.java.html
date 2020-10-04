@@ -15,11 +15,11 @@ public class CourseModule extends SimpleModule {
    * Initializes this CourseModule with appropriate serializers and deserializers.
    */
   public CourseModule() {
-<span class="nc" id="L18">    super(NAME, Version.unknownVersion());</span>
-<span class="nc" id="L19">    addSerializer(CourseItem.class, new CourseItemSerializer());</span>
-<span class="nc" id="L20">    addSerializer(CourseList.class, new CourseListSerializer());</span>
-    //addDeserializer(CourseItem.class, new CourseItemDeserializer());
-    //addDeserializer(CourseList.class, new CourseListDeserializer());
-<span class="nc" id="L23">  }</span>
+<span class="fc" id="L18">    super(NAME, Version.unknownVersion());</span>
+<span class="fc" id="L19">    addSerializer(CourseItem.class, new CourseItemSerializer());</span>
+<span class="fc" id="L20">    addSerializer(CourseList.class, new CourseListSerializer());</span>
+<span class="fc" id="L21">    addDeserializer(CourseItem.class, new CourseItemDeserializer());</span>
+<span class="fc" id="L22">    addDeserializer(CourseList.class, new CourseListDeserializer());</span>
+<span class="fc" id="L23">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

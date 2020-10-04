@@ -11,14 +11,16 @@ import javafx.stage.Stage;
   @Override
   public void start(final Stage primaryStage) throws Exception {
 <span class="nc" id="L13">    final Parent parent = FXMLLoader.load(getClass().getResource(&quot;Login.fxml&quot;));</span>
-<span class="nc" id="L14">    primaryStage.setTitle(&quot;StudIt&quot;);</span>
-<span class="nc" id="L15">    primaryStage.setScene(new Scene(parent));</span>
-<span class="nc" id="L16">    primaryStage.show();</span>
-<span class="nc" id="L17">  }</span>
+<span class="nc" id="L14">    parent.getStylesheets().add(getClass().getResource(&quot;mainPage.css&quot;).toExternalForm());</span>
+
+<span class="nc" id="L16">    primaryStage.setTitle(&quot;Login&quot;);</span>
+<span class="nc" id="L17">    primaryStage.setScene(new Scene(parent));</span>
+<span class="nc" id="L18">    primaryStage.show();</span>
+<span class="nc" id="L19">  }</span>
 
   public static void main(final String[] args) {
-<span class="nc" id="L20">    launch(args);</span>
-<span class="nc" id="L21">  }</span>
+<span class="nc" id="L22">    launch(args);</span>
+<span class="nc" id="L23">  }</span>
   
   
 }

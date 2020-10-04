@@ -7,7 +7,7 @@ import java.util.Map;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-<span class="fc" id="L10">public class CourseListManager {</span>
+<span class="nc" id="L10">public class CourseListManager {</span>
 
     /**
 	 * Writes a list of dummy keyword connections to our json database
@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 <span class="nc" id="L26">		} catch (IOException e) {</span>
 <span class="nc" id="L27">			System.out.println(&quot;Error occured while printing json to file&quot;);</span>
 <span class="nc" id="L28">			e.printStackTrace();</span>
-		}
+<span class="nc" id="L29">		}</span>
 <span class="nc" id="L30">    }</span>
     
     
@@ -37,14 +37,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
      * @return Map&lt;String, String[]&gt; containing our values
      */
     public Map&lt;String, String[]&gt; loadJson(String filename) {
-<span class="fc" id="L40">        String path = &quot;src/main/resources/studit/db/&quot; + filename;</span>
+<span class="nc" id="L40">        String path = &quot;src/main/resources/studit/db/&quot; + filename;</span>
 
-<span class="fc" id="L42">        ObjectMapper mapper = new ObjectMapper();</span>
+<span class="nc" id="L42">        ObjectMapper mapper = new ObjectMapper();</span>
         try {
-<span class="fc" id="L44">            Map&lt;String, String[]&gt; keywords = mapper.readValue(Paths.get(path).toFile(),</span>
-<span class="fc" id="L45">                    new TypeReference&lt;Map&lt;String, String[]&gt;&gt;() {</span>
+<span class="nc" id="L44">            Map&lt;String, String[]&gt; keywords = mapper.readValue(Paths.get(path).toFile(),</span>
+<span class="nc" id="L45">                    new TypeReference&lt;Map&lt;String, String[]&gt;&gt;() {</span>
                     });
-<span class="fc" id="L47">            return keywords;</span>
+<span class="nc" id="L47">            return keywords;</span>
 <span class="nc" id="L48">        } catch (IOException e) {</span>
 <span class="nc" id="L49">            System.out.println(&quot;Error occured while reading json '&quot; + filename + &quot;'.&quot;);</span>
 <span class="nc" id="L50">            e.printStackTrace();</span>

@@ -6,26 +6,25 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 import studit.core.mainpage.CourseItem;
 
-<span class="nc" id="L9">public class CourseItemSerializer extends JsonSerializer&lt;CourseItem&gt; {</span>
+<span class="fc" id="L9">public class CourseItemSerializer extends JsonSerializer&lt;CourseItem&gt; {</span>
 
   /*
-   * format: { &quot;TDT4109&quot;: [xxx, xxx, xxx, xxx] }
+   * format: { &quot;code&quot;: xx, &quot;name&quot;: xx ... }
    */
 
   @Override
   public void serialize(CourseItem item, JsonGenerator jsonGen, SerializerProvider serializerProvider)
       throws IOException {
-<span class="nc" id="L18">    jsonGen.writeStartObject();</span>
-<span class="nc" id="L19">    jsonGen.writeFieldName(item.getFagkode());</span>
-<span class="nc" id="L20">    jsonGen.writeStartArray();</span>
 
-<span class="nc" id="L22">    jsonGen.writeFieldName(item.getFagkode());</span>
-<span class="nc" id="L23">    jsonGen.writeFieldName(item.getFagnavn());</span>
-<span class="nc" id="L24">    jsonGen.writeFieldName(item.getScore());</span>
-<span class="nc" id="L25">    jsonGen.writeFieldName(item.getKommentar());</span>
-    
-<span class="nc" id="L27">    jsonGen.writeEndArray();</span>
-<span class="nc" id="L28">    jsonGen.writeEndObject();</span>
-<span class="nc" id="L29">  }</span>
+<span class="nc" id="L19">        jsonGen.writeStartObject();</span>
+
+<span class="nc" id="L21">        jsonGen.writeStringField(&quot;code&quot;, item.getFagkode());</span>
+<span class="nc" id="L22">        jsonGen.writeStringField(&quot;name&quot;, item.getFagnavn());</span>
+<span class="nc" id="L23">        jsonGen.writeStringField(&quot;rate&quot;, item.getScore());</span>
+<span class="nc" id="L24">        jsonGen.writeStringField(&quot;kommentar&quot;, item.getKommentar());</span>
+        
+<span class="nc" id="L26">        jsonGen.writeEndObject();</span>
+
+<span class="nc" id="L28">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

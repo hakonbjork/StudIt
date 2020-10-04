@@ -32,50 +32,26 @@ import java.util.List;
 <span class="nc" id="L32">      CourseListItem.setScore(item.getScore());</span>
     }
 <span class="nc" id="L34">    items.add(CourseListItem);</span>
-<span class="nc" id="L35">    fireCourseListChanged();</span>
-<span class="nc" id="L36">  }</span>
+<span class="nc" id="L35">  }</span>
 
   public void removeCourseItem(CourseItem item) {
-<span class="nc" id="L39">    items.remove(item);</span>
-<span class="nc" id="L40">    fireCourseListChanged();</span>
-<span class="nc" id="L41">  }</span>
+<span class="nc" id="L38">    items.remove(item);</span>
+<span class="nc" id="L39">  }</span>
 
   @Override
   public Iterator&lt;CourseItem&gt; iterator() {
-<span class="nc" id="L45">    return items.iterator();</span>
+<span class="nc" id="L43">    return items.iterator();</span>
   }
 
   private Collection&lt;CourseItem&gt; getCourseItems(Boolean checked) {
-<span class="nc" id="L49">    Collection&lt;CourseItem&gt; result = new ArrayList&lt;&gt;(items.size());</span>
-<span class="nc" id="L50">    return result;</span>
+<span class="nc" id="L47">    Collection&lt;CourseItem&gt; result = new ArrayList&lt;&gt;(items.size());</span>
+<span class="nc" id="L48">    return result;</span>
   }
 
   public Collection&lt;CourseItem&gt; getCourseItems() {
-<span class="nc" id="L54">    return getCourseItems(null);</span>
+<span class="nc" id="L52">    return getCourseItems(null);</span>
   }
 
 
-
-  // støtte for lytting
-
-<span class="nc" id="L61">  private Collection&lt;CourseListListener&gt; CourseListListeners = new ArrayList&lt;&gt;();</span>
-
-  public void addCourseListListener(CourseListListener listener) {
-<span class="nc" id="L64">    CourseListListeners.add(listener);</span>
-<span class="nc" id="L65">  }</span>
-
-  public void removeCourseListListener(CourseListListener listener) {
-<span class="nc" id="L68">    CourseListListeners.remove(listener);</span>
-<span class="nc" id="L69">  }</span>
-
-  protected void fireCourseListChanged(CourseItem item) {
-<span class="nc" id="L72">    fireCourseListChanged();</span>
-<span class="nc" id="L73">  }</span>
-
-  protected void fireCourseListChanged() {
-<span class="nc bnc" id="L76" title="All 2 branches missed.">    for (CourseListListener listener : CourseListListeners) {</span>
-<span class="nc" id="L77">      listener.CourseListChanged(this);</span>
-<span class="nc" id="L78">    }</span>
-<span class="nc" id="L79">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

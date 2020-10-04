@@ -1,17 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CourseController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">studit</a> &gt; <a href="index.source.html" class="el_package">studit.ui</a> &gt; <span class="el_source">CourseController.java</span></div><h1>CourseController.java</h1><pre class="source lang-java linenums">package studit.ui;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
+import studit.core.chatbot.Chatbot;
+
+<span class="nc" id="L22">public class CourseController implements Initializable { </span>
+
+    @FXML private BorderPane rootPane;
+    @FXML private FlowPane flowPane;
+
+    @FXML private Button mainPageAction;
+    @FXML private Button chatbotAction;
+    @FXML private Button ntnuAction;
+    @FXML private Button logoutAction;
+    @FXML private Button addComment;
+    @FXML private Button mainPage_btn;
+    @FXML private Button openChatBot;
+
+    @FXML private Label comments;
+    @FXML private Label label;
+
+    @FXML private TextArea comment1;
+    @FXML private TextArea comment2;
+    @FXML private TextArea comment3;
+    @FXML private TextArea commentField;
+    @FXML private TextField search;
+
+<span class="nc" id="L44">    App app = new App();</span>
+<span class="nc" id="L45">    Course course = new Course();</span>
+<span class="nc" id="L46">    public static Chatbot chatbot = null;</span>
 
 
-<span class="nc" id="L7">public class CourseController{ </span>
 
+   	@Override
+    public void initialize(URL location, ResourceBundle resources) {
+<span class="nc" id="L52">    }</span>
+
+   /** 
+    * Function to set the label - the name of the subject on the top of the page
+    * @param label1 the label to set
+    * @return none
+    */
+   public void setLabel(String label) {
+<span class="nc" id="L60">       this.label.setText(label);</span>
+<span class="nc" id="L61">   }</span>
+     
+    /**
+    * logs user out, and goes to login scene
+    * closes the current window
+    * @return none
+     */
     @FXML
-    private Label label;
+    void handleLogoutAction() {
+        try {
+<span class="nc" id="L71">            FXMLLoader loader = new FXMLLoader(getClass().getResource(&quot;Login.fxml&quot;));</span>
+<span class="nc" id="L72">            Parent root = loader.load();</span>
 
-    public void setLabelText(String text){
-<span class="nc" id="L13">       label.setText(text);</span>
-<span class="nc" id="L14">   }</span>
+<span class="nc" id="L74">            Stage controllerStage = (Stage) mainPageAction.getScene().getWindow();</span>
+            // do what you have to do
+<span class="nc" id="L76">            controllerStage.hide();</span>
+        
+<span class="nc" id="L78">            Stage stage = new Stage();</span>
+<span class="nc" id="L79">            stage.setScene(new Scene(root));</span>
+<span class="nc" id="L80">            stage.show();</span>
+            
+             
+
+<span class="nc" id="L84">            } catch (IOException e) {</span>
+<span class="nc" id="L85">                System.out.println(e);</span>
+<span class="nc" id="L86">            }</span>
+<span class="nc" id="L87">	}</span>
+
+
+    /** 
+    * Opens main-page scene and closes the current scene
+    * @return none
+    */
+    @FXML
+    void handleMainPageAction() {
+        try {
+<span class="nc" id="L97">            FXMLLoader loader = new FXMLLoader(getClass().getResource(&quot;App.fxml&quot;));</span>
+<span class="nc" id="L98">            Parent root = loader.load();</span>
+
+<span class="nc" id="L100">            Stage stage = new Stage();</span>
+<span class="nc" id="L101">            stage.setScene(new Scene(root));</span>
+<span class="nc" id="L102">            stage.show();</span>
+
+<span class="nc" id="L104">            } catch (IOException e) {</span>
+<span class="nc" id="L105">                System.out.println(e);</span>
+<span class="nc" id="L106">            }</span>
+<span class="nc" id="L107">		}</span>
+		
+
+    /**
+    * Gives the user a choice to open NTNU homepage in web-browser
+    * @return none
+    */
+    @FXML
+    void handleNtnuAction(ActionEvent event) {
+<span class="nc" id="L116">          System.out.println(&quot;NTNU&quot;);</span>
+<span class="nc" id="L117">    }</span>
+
+    /**
+    * Opens Chatbot
+    * @return none
+    */
+    @FXML
+    void openChatBot(ActionEvent event) {
+<span class="nc bnc" id="L125" title="All 2 branches missed.">         if (chatbot == null) {</span>
+<span class="nc" id="L126">    		chatbot = new Chatbot();</span>
+    	} else {
+<span class="nc" id="L128">    		chatbot.show();</span>
+    	}
+<span class="nc" id="L130">    }</span>
+
+    
+    /** 
+    * Posts the comment written in the field to the empty comment section
+    * @return none
+    */
+     @FXML
+     void handleAddCommentAction(ActionEvent event) {
+<span class="nc" id="L139">          String comment = commentField.getText();</span>
+
+<span class="nc bnc" id="L141" title="All 8 branches missed.">          if(comment1.getText().equals(&quot;&quot;) || (! comment1.getText().equals(&quot;&quot;)) &amp;&amp; (! comment2.getText().equals(&quot;&quot;)) &amp;&amp; (! comment3.getText().equals(&quot;&quot;))){</span>
+<span class="nc" id="L142">                comment1.setText(comment);</span>
+          }
+<span class="nc bnc" id="L144" title="All 4 branches missed.">          else if((! comment1.getText().equals(&quot;&quot;)) &amp;&amp; (comment2.getText().equals(&quot;&quot;))){</span>
+<span class="nc" id="L145">                comment2.setText(comment);</span>
+          }
+<span class="nc bnc" id="L147" title="All 4 branches missed.">          else if((! comment1.getText().equals(&quot;&quot;)) &amp;&amp; (! comment2.getText().equals(&quot;&quot;))){</span>
+<span class="nc" id="L148">              comment3.setText(comment);</span>
+          }
+<span class="nc" id="L150">   }</span>
+
+   
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
