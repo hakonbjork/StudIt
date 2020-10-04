@@ -16,8 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -36,8 +34,6 @@ public class ChatbotController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    Image img =
-        new Image("https://upload.wikimedia.org/wikipedia/commons/f/f1/Ruby_logo_64x64.png");
     txt_user_entry.textProperty().addListener(l -> checkForLineBreak());
 
     ObservableList<Message> chatMessages = FXCollections.observableArrayList();
@@ -53,7 +49,6 @@ public class ChatbotController implements Initializable {
         Label lblUserRight = new Label();
         Label lblTextRight = new Label();
         HBox hBoxRight = new HBox(lblTextRight, lblUserRight);
-        ImageView imageView = new ImageView();
 
         {
           hBoxLeft.setAlignment(Pos.CENTER_LEFT);
