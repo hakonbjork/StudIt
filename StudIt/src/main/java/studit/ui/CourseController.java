@@ -24,13 +24,11 @@ public class CourseController implements Initializable {
     @FXML private BorderPane rootPane;
     @FXML private FlowPane flowPane;
 
-    @FXML private Button mainPageAction;
-    @FXML private Button chatbotAction;
-    @FXML private Button ntnuAction;
-    @FXML private Button logoutAction;
-    @FXML private Button addComment;
+    @FXML private Button chatbot_btn;
+    @FXML private Button ntnu_btn;
+    @FXML private Button logout_btn;
+    @FXML private Button addComment_btn;
     @FXML private Button mainPage_btn;
-    @FXML private Button openChatBot;
 
     @FXML private Label comments;
     @FXML private Label label;
@@ -65,26 +63,25 @@ public class CourseController implements Initializable {
     * closes the current window
     * @return none
      */
-    @FXML
-    void handleLogoutAction() {
-        try {
+     @FXML void handleLogoutAction(ActionEvent event) {
+         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
             Parent root = loader.load();
+    
+            Stage stage2 = new Stage();
+            stage2.setScene(new Scene(root));
+            stage2.setTitle("StudIt");
+            stage2.show();
 
-            Stage controllerStage = (Stage) mainPageAction.getScene().getWindow();
-            // do what you have to do
-            controllerStage.hide();
-        
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            Stage stage = (Stage) rootPane.getScene().getWindow();
+            stage.hide();
             
-             
 
-            } catch (IOException e) {
+        } catch (IOException e) {
                 System.out.println(e);
             }
-	}
+	    }
+	
 
 
     /** 

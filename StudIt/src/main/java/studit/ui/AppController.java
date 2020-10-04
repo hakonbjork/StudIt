@@ -32,7 +32,7 @@ public class AppController implements ChangeListener<String> {
     @FXML private Button openChatBot;
     @FXML private Button ntnuAction;
     @FXML private Button logoutAction;
-    @FXML private BorderPane rootPane;
+    @FXML BorderPane rootPane;
     @FXML private AnchorPane mainPane;
     @FXML private TextField searchField;
 
@@ -44,20 +44,26 @@ public class AppController implements ChangeListener<String> {
 
     public static Chatbot chatbot = null;
     ObservableList<String> list = FXCollections.observableArrayList();
+    App app = new App();
 
+
+
+    public Scene getScene() {
+        return rootPane.getScene();
+   }
 
     /**
     * Function to initialize AppController
     * @return none
     */
-    @SuppressWarnings("unchecked") 
     public void initialize(){
-            searchField.textProperty().addListener(new ChangeListener<String>.changed(ObservableValue<? extends String>, String, String) {
-                @Override
-                public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                    filterCoursesList((String) oldValue, (String) newValue);
-                }
-            });
+        loadData();
+            // searchField.textProperty().addListener(new ChangeListener<String>.changed(ObservableValue<? extends String>, String, String) {
+            //     @Override
+            //     public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+            //         filterCoursesList((String) oldValue, (String) newValue);
+            //     }
+            // });
     }
 
     public void filterCoursesList(String oldValue, String newValue) {
@@ -142,16 +148,15 @@ public class AppController implements ChangeListener<String> {
      */
      @FXML void handleLogoutAction(ActionEvent event) {
          try {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-        Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            Parent root = loader.load();
     
-        Stage stage2 = new Stage();
-        stage2.setScene(new Scene(root));
-        stage2.setTitle("StudIt");
-        stage2.show();
+            Stage stage2 = new Stage();
+            stage2.setScene(new Scene(root));
+            stage2.setTitle("StudIt");
+            stage2.show();
 
-        Stage stage = (Stage) logout_btn.getScene().getWindow();
+            Stage stage = (Stage) rootPane.getScene().getWindow();
             stage.hide();
             
 
@@ -180,21 +185,22 @@ public class AppController implements ChangeListener<String> {
 		coursesList.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent arg0) {
-				String name = coursesList.getSelectionModel().getSelectedItem();
-                    System.out.println(name);	
-                    		
+				String name = coursesList.getSelectionModel().getSelectedItem();	
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
                         Parent root = loader.load();
-   
-                    
+                
+                        Stage stage2 = new Stage();
+                        stage2.setScene(new Scene(root));
+                        stage2.setTitle("StudIt");
+                        stage2.show();
+
+                        Stage stage = (Stage) rootPane.getScene().getWindow();
+                        stage.hide();
+            
                         CourseController courseController = loader.getController();
                         courseController.setLabel(name);
-   
-                        Stage stage = new Stage();
-                        stage.setScene(new Scene(root));
-                        stage.show();
-   
+
                         } catch (IOException e) {
                             System.out.println(e);
                         }
@@ -218,8 +224,9 @@ public class AppController implements ChangeListener<String> {
         coursesList.setItems(list);
     }
 
+
     @Override
-    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
         // TODO Auto-generated method stub
 
     }
