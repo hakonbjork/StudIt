@@ -1,28 +1,31 @@
 package studit.ui;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.chatbot.Chatbot;
 
-public class AppController { 
+public class AppController implements ChangeListener<String> { 
 
     @FXML private ListView<String> coursesList;
     @FXML private Button mainPageAction;
@@ -31,6 +34,7 @@ public class AppController {
     @FXML private Button logoutAction;
     @FXML private BorderPane rootPane;
     @FXML private AnchorPane mainPane;
+    @FXML private TextField searchField;
 
     @FXML private Button mainPage_btn;
     @FXML private Button chatbot_btn;
@@ -42,21 +46,38 @@ public class AppController {
     ObservableList<String> list = FXCollections.observableArrayList();
 
 
-
     /**
     * Function to initialize AppController
     * @return none
     */
-    @FXML
-    public void initialize() {
-        loadData();
-        coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-        //Actions on clicked list item
-        mouseClicked();
+    @SuppressWarnings("unchecked") 
+    public void initialize(){
+            searchField.textProperty().addListener(new ChangeListener<String>.changed(ObservableValue<? extends String>, String, String) {
+                @Override
+                public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                    filterCoursesList((String) oldValue, (String) newValue);
+                }
+            });
     }
+
+    public void filterCoursesList(String oldValue, String newValue) {
     
-   
+        ObservableList<String> filteredList = FXCollections.observableArrayList();
+        if(searchField == null || (newValue.length() < oldValue.length()) || newValue == null) {
+            coursesList.setItems(list);
+        }
+        else {
+            newValue = newValue.toUpperCase();
+            for(String course : coursesList.getItems()) {
+                if(course.toUpperCase().contains(newValue)) {
+                    filteredList.add(course);
+                }
+            }
+            coursesList.setItems(filteredList);
+        }    
+    }
+
+    
     /**
     * Gives the user a choice to open NTNU homepage in web-browser
     * @return none
@@ -82,16 +103,7 @@ public class AppController {
     * @return none
     */
     @FXML
-    void handleSearchViewAction(KeyEvent event) {
-        
-
-    }
-
-    public void changed(ObservableValue observable, Object oldVal, Object newVal) {
-        search((String) oldVal, (String) newVal);
-    }
-
-    public void search(String oldVal, String newVal) {
+    public void handleSearchViewAction(String oldVal, String newVal) {
         if (oldVal != null && (newVal.length() < oldVal.length())) {
         coursesList.setItems(list);
     }
@@ -110,9 +122,7 @@ public class AppController {
         }
     }
         coursesList.setItems(subentries);
-}
-
-
+    }
 
     /**
     * Should give the option to go to the subjects web-page
@@ -206,6 +216,12 @@ public class AppController {
         String d = "IT1901";
         list.addAll(a,b,c,d);
         coursesList.setItems(list);
+    }
+
+    @Override
+    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+        // TODO Auto-generated method stub
+
     }
 
 }
