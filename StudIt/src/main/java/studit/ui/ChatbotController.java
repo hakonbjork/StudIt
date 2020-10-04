@@ -115,8 +115,7 @@ public class ChatbotController implements Initializable {
 
   }
 
-  // --------------------------------------------------Member
-  // Initialization-----------------------------------------------
+  // ----------------------------------Member Initialization-----------------------------------
 
   @FXML
   private BorderPane pane_chatbot;
@@ -133,8 +132,7 @@ public class ChatbotController implements Initializable {
   @FXML
   private TextArea txt_user_entry;
 
-  // ------------------------------------------------------Widget
-  // Logic----------------------------------------------------
+  // ----------------------------------------Widget Logic-----------------------------------------
 
   @FXML
   void exitChatbot(ActionEvent event) {
