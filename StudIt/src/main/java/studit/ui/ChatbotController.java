@@ -29,7 +29,7 @@ public class ChatbotController implements Initializable {
   private Stage stage = null;
   private double xOffset = 0, yOffset = 0;
   // This value is hardcoded as it is based on current font, size and more, hard to make dynamic.
-  public static int lineBreakLength = 34;
+  public final static int lineBreakLength = 34;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
