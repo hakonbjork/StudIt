@@ -3,22 +3,23 @@ package studit.core.chatbot;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import studit.core.chatbot.KeyboardLinker.Match;
+import studit.core.chatbot.KeywordLinker.Match;
 
 public class ChatbotManager {
 
-  private KeyboardLinker linker;
+  private KeywordLinker linker;
   private CommandManager cmg;
 
   public ChatbotManager() {
     writeDummyCommandsToDb();
-    linker = new KeyboardLinker(loadJson("keywordLinks.json"));
+    linker = new KeywordLinker(loadJson("keywordLinks.json"));
     cmg = new CommandManager();
   }
 
@@ -30,7 +31,7 @@ public class ChatbotManager {
    */
   public String manageInput(String input) {
     // Splitting string by spaces, and removing all newline chars
-    String[] command = input.replaceAll("\n", "").toLowerCase().split(" ");
+    String[] command = input.replaceAll("[^a-zA-Z0-9 ]", "").toLowerCase().split(" ");
 
 
     String response = "";

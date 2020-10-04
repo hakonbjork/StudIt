@@ -13,14 +13,14 @@ import java.util.Set;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-public class KeyboardLinker {
+public class KeywordLinker {
 
   private List<KeywordLink> links;
   private BiMap<Integer, String> recognizedWords;
   private Map<String, Keyword[]> commandIDs;
   private Map<String, Integer> precedences;
 
-  public KeyboardLinker(List<KeywordLink> links) {
+  public KeywordLinker(List<KeywordLink> links) {
     this.links = links;
     extractKeywords();
 
