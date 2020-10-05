@@ -2,6 +2,8 @@
 
 // import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// import java.util.ArrayList;
+
 // import org.junit.jupiter.api.Assertions;
 // import org.junit.jupiter.api.BeforeEach;
 // import org.junit.jupiter.api.Test;
@@ -12,6 +14,8 @@
 // import org.testfx.framework.junit5.ApplicationTest;
 // import org.testfx.matcher.base.WindowMatchers;
 
+// import javafx.collections.FXCollections;
+// import javafx.collections.ObservableList;
 // import javafx.fxml.FXMLLoader;
 // import javafx.scene.Parent;
 // import javafx.scene.Scene;
@@ -27,27 +31,35 @@
 
 // public class AppTest extends ApplicationTest {
 
-//     private final AppController appController = new AppController();
+//     private AppController appController;
+//     private App app;
+//     private Course course;
+//     private ObservableList<String> list = FXCollections.observableArrayList();
 //     private ListView<String> listView = new ListView<>();
+
+//     @Override
+//         public void start(final Stage stage) throws Exception {
+//             final FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+//             final Parent root = loader.load();
+//             this.appController = loader.getController();
+//             this.list =  this.appController.getData();
+//             stage.setScene(new Scene(root));
+//             stage.show();
+//     }
 
 
 //     @BeforeEach
 //     public void setup() throws Exception {
-//         FxToolkit.setupSceneRoot(() -> {
-//             listView = new ListView<>();
-//             listView.setItems(observableArrayList("TDT4109", "TMA4145", "TTM4175", "IT1901"));
-//             listView.setPlaceholder(new Label("Empty!"));
-//             return new StackPane(listView);
-//         });
-//         FxToolkit.showStage();
+//         listView.setItems(list);        
 //     }
 
-//     @Override
-//     public void start(Stage stage) throws Exception {
-//         stage.setScene(appController.rootPane.getScene());
-//         stage.show();
-//         stage.toFront();
-//   }
+    
+//     @Test
+//     public void hasChatBotButton() {
+//         BorderPane rootNode = (BorderPane) appController.rootPane.getScene().getRoot();
+//         Button button = from(rootNode).lookup(".button").query();
+//         assertEquals("Chatbot", button.getText());
+//     }
 
 //     @Test
 //     public void hasMainPageButton() {
@@ -79,41 +91,28 @@
 //         ListView<String> coursesList = find("#coursesList");
 //         clickOn(ListCell).type(text);
         
-        
 //     }
 
-//     @Test
-//     public void hasListCell() {
-//         assertThat(listView).hasListCell("alice");
-//     }
+//     // @Test
+//     // public void hasListCell() {
+//     //     verifyThat(listView).hasListCell("TDT4109");
+//     // }
 
 //     @Test
 //     public void hasExactlyNumItems() {
-//         assertThat(listView).hasExactlyNumItems(4);
+//         int numberOfItems = listView.getItems().size();
+//         assertEquals(numberOfItems, 4);
 //     }
 
-//     // @Test 
-//     // public void testClickOnMainPage() {
-//     //     Button button = find("#mainPage_btn");
-//     //     clickOn(button);
-//     //     verify
+//     @Test 
+//     public void testClickOnMainPage() {
+//         Button button = find("#mainPage_btn");
+//         clickOn(button);
+//         verify
         
-//     // }
+//     }
 
-// //     /** 
-// //     * Helper function to get a row from a ListView.
-// //     * Type T is the type of the ListView data model.
-// //     */
-// //    fun getListViewRow(viewId: String, row: Int): ListCell<String> { 
-// //       val listView = lookup(viewId).query<ListView<String>>() 
-// //       return from(listView).lookup(".list-cell").nth(row).query() 
-// //    }
-// //    fun <T> getListViewRowByFirstName(viewId: String, textToFind: String): ListCell<T>? { 
-// //       val listView = lookup(viewId).query<ListView<T>>() 
-// //       val cells = from(listView).lookup(".list-cell").queryAll<ListCell<T>>() 
-// //       // assumes type T has a toString method starting with first name! 
-// //       return cells.find { it.item.toString().toLowerCase().startsWith(textToFind.toLowerCase()) } 
-// //    }
+ 
 
 //     }
 

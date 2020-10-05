@@ -2,9 +2,9 @@ package studit.ui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,7 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -46,11 +45,6 @@ public class AppController implements ChangeListener<String> {
     ObservableList<String> list = FXCollections.observableArrayList();
     App app = new App();
 
-
-
-    public Scene getScene() {
-        return rootPane.getScene();
-   }
 
     /**
     * Function to initialize AppController
@@ -85,7 +79,7 @@ public class AppController implements ChangeListener<String> {
 
     
     /**
-    * Gives the user a choice to open NTNU homepage in web-browser
+    * Opens chatbot
     * @return none
     */
     @FXML
@@ -96,7 +90,10 @@ public class AppController implements ChangeListener<String> {
     		chatbot.show();
     	}
     }
-
+    /**
+    * closes chatbot 
+    * @return none
+    */
     public static void closeChatbot() {
         chatbot = null;
     }
@@ -187,19 +184,26 @@ public class AppController implements ChangeListener<String> {
 			public void handle(MouseEvent arg0) {
 				String name = coursesList.getSelectionModel().getSelectedItem();	
                     try {
+                        
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
                         Parent root = loader.load();
-                
-                        Stage stage2 = new Stage();
-                        stage2.setScene(new Scene(root));
-                        stage2.setTitle("StudIt");
-                        stage2.show();
-
-                        Stage stage = (Stage) rootPane.getScene().getWindow();
-                        stage.hide();
-            
+                        Scene newScene = new Scene(root);
+                        Stage currentStage = (Stage) rootPane.getScene().getWindow();
+                                // currentStage.getScene().setRoot(root);
                         CourseController courseController = loader.getController();
                         courseController.setLabel(name);
+                        currentStage.setScene(new Scene(courseController.rootPane));
+                        currentStage.show();
+
+                        // Stage stage2 = new Stage();
+                        // stage2.setScene(new Scene(root));
+                        // stage2.setTitle("StudIt");
+                        // stage2.show();
+
+                        // Stage stage = (Stage) rootPane.getScene().getWindow();
+                        // stage.hide();
+            
+                        
 
                         } catch (IOException e) {
                             System.out.println(e);
@@ -222,6 +226,10 @@ public class AppController implements ChangeListener<String> {
         String d = "IT1901";
         list.addAll(a,b,c,d);
         coursesList.setItems(list);
+    }
+
+    public ObservableList<String> getData(){
+        return (ObservableList<String>) list;
     }
 
 

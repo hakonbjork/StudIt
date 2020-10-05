@@ -40,7 +40,7 @@
                                     <Image url="@../icons/search.png" />
                                  </image>
                               </ImageView>
-                              <TextField id="searchField" fx:id="searchViewAction" onKeyTyped="#handleSearchViewAction" prefHeight="42.0" prefWidth="1032.0" promptText="Søk på fag" style="-fx-background-color: white; -fx-background-radius: 20;">
+                              <TextField id="searchField" fx:id="searchViewAction" prefHeight="42.0" prefWidth="1032.0" promptText="Søk på fag" style="-fx-background-color: white; -fx-background-radius: 20;">
                                  <font>
                                     <Font size="30.0" />
                                  </font>

@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
+
+    private Stage primaryStage;
     
 	public static void main(String[] args) {
 		launch(args);
@@ -23,5 +25,6 @@ public class App extends Application {
 		primaryStage.setTitle("StudIt");
 		primaryStage.show();
     }
-	
+
+    
 }
