@@ -52,6 +52,9 @@ public class AppController implements ChangeListener<String> {
     */
     public void initialize(){
         loadData();
+        coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        //Actions on clicked list item
+        mouseClicked();
             // searchField.textProperty().addListener(new ChangeListener<String>.changed(ObservableValue<? extends String>, String, String) {
             //     @Override
             //     public void changed(ObservableValue observable, Object oldValue, Object newValue) {
