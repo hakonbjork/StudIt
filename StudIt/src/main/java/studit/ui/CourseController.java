@@ -32,12 +32,16 @@ public class CourseController implements Initializable {
 
     @FXML private Label comments;
     @FXML private Label label;
+    @FXML private Label rating;
+
 
     @FXML private TextArea comment1;
     @FXML private TextArea comment2;
     @FXML private TextArea comment3;
     @FXML private TextArea commentField;
     @FXML private TextField search;
+    @FXML private TextArea courseText;
+
 
     App app = new App();
     Course course = new Course();
@@ -47,6 +51,7 @@ public class CourseController implements Initializable {
 
    	@Override
     public void initialize(URL location, ResourceBundle resources) {
+        courseText.setEditable(false);
     }
 
    /** 
@@ -144,6 +149,15 @@ public class CourseController implements Initializable {
           else if((! comment1.getText().equals("")) && (! comment2.getText().equals(""))){
               comment3.setText(comment);
           }
+          else if((! comment1.getText().equals("")) && (! comment2.getText().equals(""))){
+              comment3.setText(comment);
+          }
+   }
+
+   @FXML 
+   void setRating(double rating){
+       String r = String.valueOf(rating);
+       this.rating.setText(r);
    }
 
    

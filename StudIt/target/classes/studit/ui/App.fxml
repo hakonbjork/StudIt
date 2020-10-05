@@ -19,7 +19,7 @@
          <children>
             <VBox prefHeight="232.0" prefWidth="1830.0">
                <children>
-                  <HBox prefHeight="235.0" prefWidth="1612.0" style="-fx-background-color: #c9efff;">
+                  <HBox prefHeight="235.0" prefWidth="1612.0" style="-fx-background-color: #d4f6ff#d4f6ff #d4f6ff#d4f6ff #d4f6ff#d4f6ff #d4f6ff;">
                      <children>
                         <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="201.0" prefWidth="318.0" style="-fx-background-color: white;">
                            <children>
@@ -40,7 +40,7 @@
                                     <Image url="@../icons/search.png" />
                                  </image>
                               </ImageView>
-                              <TextField id="searchView" fx:id="searchViewAction" prefHeight="42.0" prefWidth="1032.0" promptText="Søk på fag" style="-fx-background-color: white; -fx-background-radius: 20;">
+                              <TextField id="searchField" fx:id="searchViewAction" onKeyTyped="#handleSearchViewAction" prefHeight="42.0" prefWidth="1032.0" promptText="Søk på fag" style="-fx-background-color: white; -fx-background-radius: 20;">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -53,7 +53,7 @@
                               <Insets left="20.0" />
                            </padding>
                            <HBox.margin>
-                              <Insets bottom="80.0" left="40.0" right="40.0" top="40.0" />
+                              <Insets bottom="80.0" left="40.0" right="40.0" top="100.0" />
                            </HBox.margin>
                         </HBox>
                      </children>
@@ -67,7 +67,7 @@
       </HBox>
    </top>
    <center>
-      <VBox prefHeight="892.0" prefWidth="1294.0" style="-fx-background-color: #c9efff#c9efff;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="892.0" prefWidth="1294.0" style="-fx-background-color: #d4f6ff#d4f6ff #d4f6ff#d4f6ff #d4f6ff#d4f6ff #d4f6ff;" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="64.0" prefWidth="1116.0">
                <children>
