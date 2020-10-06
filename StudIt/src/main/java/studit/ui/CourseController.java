@@ -61,10 +61,6 @@ public class CourseController implements Initializable {
         mainScene = scene;
     }
 
-
-    public static Chatbot chatbot = null;
-    private Scene mainScene;
-
    	@Override
     public void initialize(URL location, ResourceBundle resources) {
         courseText.setEditable(false);

@@ -59,10 +59,6 @@ public class AppController implements ChangeListener<String> {
         return this.label;
     }
 
-    public void setLabel(String label){
-        this.label = label;
-    }
-
     
     /**
     * Function to initialize AppController
