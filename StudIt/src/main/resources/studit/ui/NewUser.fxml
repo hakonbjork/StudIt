@@ -1,27 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.NewUserController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="600.0" style="-fx-background-color: #d4f6ff#d4f6ff #d4f6ff#d4f6ff #d4f6ff#d4f6ff #d4f6ff #d4f6ff#d4f6ff #d4f6ff#d4f6ff #d4f6ff#d4f6ff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.NewUserController">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <bottom>
+      <Button fx:id="saveNewUserButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveNewUserAction" prefHeight="30.0" prefWidth="150.0" text="Save new user" textAlignment="CENTER" textFill="#06349c" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Avenir Next Bold" size="13.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="100.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="244.0" prefWidth="300.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-            <TextField fx:id="nameField" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
-            <TextField fx:id="usernameField" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mail" />
-            <TextField fx:id="mailField" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-            <PasswordField fx:id="userPasswordField" />
-            <Button fx:id="saveNewUserButton" mnemonicParsing="false" onAction="#saveNewUserAction" text="Save new user" />
-            <Text fx:id="infoTextField" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <TextField fx:id="nameField" promptText="Full name" style="-fx-font-style: italic;">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="100.0" right="100.0" top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="usernameField" promptText="Username">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="100.0" right="100.0" top="2.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="mailField" promptText="Email">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="100.0" right="100.0" top="2.0" />
+               </VBox.margin>
+            </TextField>
+            <PasswordField fx:id="userPasswordField" promptText="Password">
+               <VBox.margin>
+                  <Insets left="100.0" right="100.0" top="2.0" />
+               </VBox.margin>
+            </PasswordField>
+            <Text fx:id="infoTextField" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="557.0">
+               <font>
+                  <Font name="Avenir Book" size="14.0" />
+               </font>
+            </Text>
          </children>
       </VBox>
    </center>
+   <top>
+      <Label contentDisplay="CENTER" text="Register new user" textAlignment="CENTER" textFill="#06349c" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Avenir Next Bold" size="48.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="100.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
 </BorderPane>
