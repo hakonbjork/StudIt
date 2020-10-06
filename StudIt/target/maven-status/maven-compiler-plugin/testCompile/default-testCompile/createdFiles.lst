@@ -1,0 +1,4 @@
+studit/core/MessageTest.class
+studit/core/LoginManagerTest.class
+studit/core/ChatbotManagerTest.class
+studit/json/CoursePersistenceTest.class

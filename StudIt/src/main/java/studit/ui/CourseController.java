@@ -8,6 +8,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -43,6 +52,15 @@ public class CourseController implements Initializable {
     @FXML private TextArea courseText;
 
 
+    App app = new App();
+    Course course = new Course();
+    public static Chatbot chatbot = null;
+    private Scene mainScene;
+
+    public void setMainScene(Scene scene) {
+        mainScene = scene;
+    }
+
 
     public static Chatbot chatbot = null;
     private Scene mainScene;
@@ -57,22 +75,12 @@ public class CourseController implements Initializable {
     * @param label the label to set
     * @return none
     */
+
     @FXML
-    public void setLabel(String label) {
-        this.label.setText(label);
-    }
-
-
-    /** 
-    * Function to set the scene - to switch between scenes
-    * @param scene the label to set
-    * @return none
-    */
-   public void setMainScene(Scene scene) {
-        mainScene = scene;
-    }
-
-
+   public void setLabel(String label) {
+       this.label.setText(label);
+   }
+     
     /**
     * logs user out, and goes to login scene
     * closes the current window

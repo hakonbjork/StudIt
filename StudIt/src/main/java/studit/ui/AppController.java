@@ -41,13 +41,18 @@ public class AppController implements ChangeListener<String> {
 
 
     public static Chatbot chatbot = null;
-    ObservableList<String> list = FXCollections.observableArrayList();
+    public App app;
     public Scene mainScene;
-    public CourseController courseController;
-    public String label;
+    private ObservableList<String> list = FXCollections.observableArrayList();
+    private String label;
+    
 
     public void setSecondScene(Scene scene) {
         mainScene = scene;
+    }
+
+    public void setLabel(String label){
+        this.label = label;
     }
 
     public String getLabel(){
@@ -58,6 +63,7 @@ public class AppController implements ChangeListener<String> {
         this.label = label;
     }
 
+    
     /**
     * Function to initialize AppController
     * @return none
@@ -194,12 +200,15 @@ public class AppController implements ChangeListener<String> {
     public void mouseClicked(){
 		//Detecting mouse clicked
 		coursesList.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            private String label;
+            // private String label;
 			@Override
 			public void handle(MouseEvent arg0) {
-                super.label = coursesList.getSelectionModel().getSelectedItem();	
-                
+                    System.out.println((coursesList.getSelectionModel().getSelectedItem()));
+                    setLabel(coursesList.getSelectionModel().getSelectedItem());
+
                 try {
+
+
                     // FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
                     // CourseController courseController = (CourseController) loader.getController();
                     // courseController.setLabel(label);
@@ -213,9 +222,9 @@ public class AppController implements ChangeListener<String> {
             }
         });            
     }
-
-
-                
+           
+                    
+            
     /** This function should actually fetch data from a database. This will be implemented later.
     * @return None
     */
@@ -237,6 +246,4 @@ public class AppController implements ChangeListener<String> {
         // TODO Auto-generated method stub
 
     }
-
-
 }
