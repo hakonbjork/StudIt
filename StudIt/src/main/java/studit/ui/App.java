@@ -38,4 +38,5 @@ public class App extends Application {
 		primaryStage.setTitle("StudIt");
         primaryStage.show();
 
+    }
 }

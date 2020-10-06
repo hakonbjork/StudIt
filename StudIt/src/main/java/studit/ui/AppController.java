@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -147,7 +148,6 @@ public class AppController implements ChangeListener<String> {
 
     }
 
-     
      /** 
      * logs user out, and opens to login scene, closes current scene
      */
@@ -191,10 +191,17 @@ public class AppController implements ChangeListener<String> {
 			@Override
 			public void handle(MouseEvent arg0) {
 				String name = coursesList.getSelectionModel().getSelectedItem();	
-                    // try {
-
-                        Stage primaryStage = (Stage)((Node)arg0.getSource()).getScene().getWindow();
-                        primaryStage.setScene(mainScene);
+                try {
+                    Stage primaryStage = (Stage)((Node)arg0.getSource()).getScene().getWindow();
+                    primaryStage.setScene(mainScene);
+                } catch (Exception e) {
+                        System.out.println(e);
+                }
+            }
+        });
+                    
+    }
+                    
                         
                         // FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
                         // Parent root = loader.load();
@@ -216,12 +223,9 @@ public class AppController implements ChangeListener<String> {
             
                         
 
-                        // } catch (IOException e) {
-                        //     System.out.println(e);
-                        // }
+                        
 			
-		});
-        }
+		   
 
 
    
@@ -243,10 +247,11 @@ public class AppController implements ChangeListener<String> {
         return (ObservableList<String>) list;
     }
 
+    @Override
+    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+        // TODO Auto-generated method stub
 
-    // public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-    //     // TODO Auto-generated method stub
+    }
 
-    // }
-    
+
 }
