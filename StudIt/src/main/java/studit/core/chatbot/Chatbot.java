@@ -50,7 +50,7 @@ public class Chatbot {
   /*
    * Manages the user entered input and executes commands accordingly.
    * 
-   * @param input - the user input to process
+   * @param input - the user input we want to process
    * 
    * @return chatbot response
    */
