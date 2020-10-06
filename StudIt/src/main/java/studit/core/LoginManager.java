@@ -1,25 +1,15 @@
 package studit.core;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Scanner;
-
 public class LoginManager {
 
-    private static HashMap<String, String> DB = new HashMap<String, String>();
-
     public LoginManager() {
-        initialize();
     }
 
-    /*
+    /**
      * Sets a database with username and passwords
      */
     public static void initialize() {
-        DB.put("user", "password");
-        DB.put("admin", "password1");
+        UserManager.startStuff();
     }
 
     /*
