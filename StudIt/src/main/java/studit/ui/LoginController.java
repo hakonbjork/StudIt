@@ -15,7 +15,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import studit.core.LoginManager;
 
 public class LoginController implements Initializable {
 
@@ -35,12 +34,12 @@ public class LoginController implements Initializable {
     public LoginController() {
     }
 
-    /*
-     * Initializes the LoginManager with usernames and passwords
+    /**
+     * Initializes the UserManager database with usernames and passwords
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        studit.core.LoginManager.initialize();
+        studit.core.UserManager.startStuff();
     }
 
     /**
@@ -48,7 +47,16 @@ public class LoginController implements Initializable {
      * 
      */
     public void registerUser() {
-        // Code
+         try {
+            BorderPane pane = FXMLLoader.load(getClass().getResource("NewUser.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(pane);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (Exception e) {
+            System.out.println("Coud not open NewUser.fxml");
+        }
     }
 
     /*
@@ -74,8 +82,6 @@ public class LoginController implements Initializable {
             stage.setScene(scene);
             stage.setTitle("Hello World");
             stage.show();
-            LoginManager.writeToFile(password, "keys.txt");
-            // Some way to close te initial window, or load new window instead.
         } else {
             System.out.print("Failure, " + username + ", " + password + " ");
             // todo: Error message instead on application
