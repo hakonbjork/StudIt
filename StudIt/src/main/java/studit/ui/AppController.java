@@ -60,6 +60,8 @@ public class AppController implements ChangeListener<String> {
     public void setLabel(String label){
         this.label = label;
     }
+
+    
     /**
     * Function to initialize AppController
     * @return none
