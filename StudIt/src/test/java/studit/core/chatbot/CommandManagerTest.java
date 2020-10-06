@@ -1,18 +1,21 @@
 package studit.core.chatbot;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CommandManagerTest {
-
-  @Test
-  public void testCommandManager() {
-    fail("Not yet implemented");
+  
+  private CommandManager cm;
+  
+  @BeforeEach
+  public void init() {
+    cm = new CommandManager();
   }
 
   @Test
   public void testExecuteCommand() {
-    fail("Not yet implemented");
+    assertEquals(cm.executeCommand("hils"), "Hei! ");
   }
 
 }
