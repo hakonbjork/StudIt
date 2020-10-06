@@ -46,6 +46,11 @@ public class CourseController implements Initializable {
     App app = new App();
     Course course = new Course();
     public static Chatbot chatbot = null;
+    private Scene mainScene;
+
+    public void setMainScene(Scene scene) {
+        mainScene = scene;
+    }
 
 
 
@@ -94,18 +99,20 @@ public class CourseController implements Initializable {
     * @return none
     */
     @FXML
-    void handleMainPageAction() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
-            Parent root = loader.load();
+    void handleMainPageAction(ActionEvent actionEvent) {
+        Stage primaryStage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setScene(mainScene);
+        // try {
+        //     FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+        //     Parent root = loader.load();
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+        //     Stage stage = new Stage();
+        //     stage.setScene(new Scene(root));
+        //     stage.show();
 
-            } catch (IOException e) {
-                System.out.println(e);
-            }
+        //     } catch (IOException e) {
+        //         System.out.println(e);
+        //     }
 		}
 		
 

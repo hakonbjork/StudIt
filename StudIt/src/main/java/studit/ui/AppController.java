@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -44,7 +45,11 @@ public class AppController implements ChangeListener<String> {
     public static Chatbot chatbot = null;
     ObservableList<String> list = FXCollections.observableArrayList();
     App app = new App();
+    public Scene mainScene;
 
+    public void setSecondScene(Scene scene) {
+        mainScene = scene;
+    }
 
     /**
     * Function to initialize AppController
@@ -183,17 +188,20 @@ public class AppController implements ChangeListener<String> {
 			@Override
 			public void handle(MouseEvent arg0) {
 				String name = coursesList.getSelectionModel().getSelectedItem();	
-                    try {
+                    // try {
+
+                        Stage primaryStage = (Stage)((Node)arg0.getSource()).getScene().getWindow();
+                        primaryStage.setScene(mainScene);
                         
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
-                        Parent root = loader.load();
-                        Scene newScene = new Scene(root);
-                        Stage currentStage = (Stage) rootPane.getScene().getWindow();
-                                // currentStage.getScene().setRoot(root);
-                        CourseController courseController = loader.getController();
-                        courseController.setLabel(name);
-                        currentStage.setScene(new Scene(courseController.rootPane));
-                        currentStage.show();
+                        // FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
+                        // Parent root = loader.load();
+                        // Scene newScene = new Scene(root);
+                        // Stage currentStage = (Stage) rootPane.getScene().getWindow();
+                        //         // currentStage.getScene().setRoot(root);
+                        // CourseController courseController = loader.getController();
+                        // courseController.setLabel(name);
+                        // currentStage.setScene(new Scene(courseController.rootPane));
+                        // currentStage.show();
 
                         // Stage stage2 = new Stage();
                         // stage2.setScene(new Scene(root));
@@ -205,12 +213,12 @@ public class AppController implements ChangeListener<String> {
             
                         
 
-                        } catch (IOException e) {
-                            System.out.println(e);
-                        }
-			}
+                        // } catch (IOException e) {
+                        //     System.out.println(e);
+                        // }
+			
 		});
-	}
+        }
 
 
    
@@ -233,10 +241,9 @@ public class AppController implements ChangeListener<String> {
     }
 
 
-    @Override
-    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-        // TODO Auto-generated method stub
+    // public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+    //     // TODO Auto-generated method stub
 
-    }
-
+    // }
+    
 }
