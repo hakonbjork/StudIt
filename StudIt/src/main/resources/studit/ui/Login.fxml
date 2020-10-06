@@ -34,7 +34,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <Label prefHeight="94.0" prefWidth="273.0" style="-fx-background-color: white;" text="Logg inn" textAlignment="CENTER" textFill="#06349c">
+                  <Label alignment="CENTER" prefHeight="94.0" prefWidth="400.0" style="-fx-background-color: white;" text="Logg inn" textFill="#06349c">
                      <font>
                         <Font name="Avenir Next Bold" size="64.0" />
                      </font>
@@ -76,7 +76,7 @@
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
             </PasswordField>
-            <Button fx:id="login_btn" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="40.0" prefWidth="300.0" text="Logg inn" textFill="#ffffff">
+            <Button fx:id="login_btn" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="40.0" prefWidth="300.0" text="Logg inn" textFill="#06349c">
                <VBox.margin>
                   <Insets bottom="10.0" top="30.0" />
                </VBox.margin>
