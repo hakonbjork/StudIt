@@ -33,6 +33,7 @@ public class App extends Application {
         // injecting second scene into the controller of the first scene
         AppController appController = (AppController) mainLoader.getController();
         courseController.setLabel(appController.getLabel());
+        System.out.println(appController.getLabel());
         appController.setSecondScene(courseScene);
         
 

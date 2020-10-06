@@ -73,6 +73,8 @@ public class CourseController implements Initializable {
     * @param label1 the label to set
     * @return none
     */
+
+    @FXML
    public void setLabel(String label) {
        this.label.setText(label);
    }

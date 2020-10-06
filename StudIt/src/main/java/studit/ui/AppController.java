@@ -196,12 +196,15 @@ public class AppController implements ChangeListener<String> {
     public void mouseClicked(){
 		//Detecting mouse clicked
 		coursesList.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            private String label;
+            // private String label;
 			@Override
 			public void handle(MouseEvent arg0) {
-                //super.label = coursesList.getSelectionModel().getSelectedItem();	
-                
+                    System.out.println((coursesList.getSelectionModel().getSelectedItem()));
+                    setLabel(coursesList.getSelectionModel().getSelectedItem());
+
                 try {
+
+
                     // FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
                     // CourseController courseController = (CourseController) loader.getController();
                     // courseController.setLabel(label);
