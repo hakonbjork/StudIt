@@ -52,7 +52,6 @@ public class CourseController implements Initializable {
     @FXML private TextArea courseText;
 
 
-    App app = new App();
     Course course = new Course();
     public static Chatbot chatbot = null;
     private Scene mainScene;
