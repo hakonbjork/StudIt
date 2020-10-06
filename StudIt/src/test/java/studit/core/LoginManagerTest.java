@@ -13,5 +13,4 @@ public class LoginManagerTest{
         assertTrue(LoginManager.match("user", "password"));
     }
 
-
 }
