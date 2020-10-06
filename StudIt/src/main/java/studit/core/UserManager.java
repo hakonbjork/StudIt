@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class UserManager {
 
   public static void startStuff() {
-    // clearDB();
     User user = new User("John Appleseed", "user", "user@studit.com", "password");
     User admin = new User("Mark Brownie", "admin", "admin@studit.com", "password1");
     addUser(user);
@@ -117,13 +116,6 @@ public class UserManager {
       return null;
     }
 
-  }
-
-  /**
-   * Should clear the user database, making it empty
-   */
-  private static void clearDB() {
-    addUsersToDB(null);
   }
 
   public static void main2(String[] args) {

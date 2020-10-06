@@ -2,7 +2,6 @@ package studit.ui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,7 +21,7 @@ public class LoginController implements Initializable {
   @FXML
   TextField usernameField;
   @FXML
-  Button login_btn;
+  Button loginButton;
   @FXML
   VBox vBox;
   @FXML
@@ -34,7 +33,7 @@ public class LoginController implements Initializable {
   }
 
   /**
-   * Initializes the UserManager database with usernames and passwords
+   * Initializes the UserManager database with usernames and passwords.
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -42,7 +41,7 @@ public class LoginController implements Initializable {
   }
 
   /**
-   * Method to register new user
+   * Method to register new user.
    * 
    */
   public void registerUser() {
