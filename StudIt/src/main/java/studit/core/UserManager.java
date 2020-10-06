@@ -28,7 +28,8 @@ public class UserManager {
 
       return true;
     } else {
-      System.out.println("Username already in use");
+      //System.out.println("Username already in use");
+      //todo Error message in app
     }
     return false;
   }
@@ -118,20 +119,4 @@ public class UserManager {
 
   }
 
-  public static void main2(String[] args) {
-    User user = new User("x", "x", "x", "x");
-    User user2 = new User("y", "y", "y", "y");
-    ArrayList<User> users = new ArrayList<>();
-    users.add(user);
-    users.add(user2);
-    addUsersToDB(users);
-    ArrayList<User> users2 = getUsersFromDB();
-    for (User u : users2) {
-      System.out.println(u.getName() + " + " + u.getUsername());
-    }
-  }
-
-  public static void main(String[] args) {
-    startStuff();
-  }
 }

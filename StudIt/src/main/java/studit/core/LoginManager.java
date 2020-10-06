@@ -6,13 +6,6 @@ public class LoginManager {
   }
 
   /**
-   * Sets a database with username and passwords
-   */
-  public static void initialize() {
-    UserManager.startStuff();
-  }
-
-  /*
    * Checks if the username and password exists together in the database
    * 
    * @param username - The username to be checked
