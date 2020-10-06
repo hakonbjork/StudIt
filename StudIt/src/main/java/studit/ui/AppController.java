@@ -2,7 +2,6 @@ package studit.ui;
 
 import java.io.IOException;
 
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -31,7 +30,7 @@ public class AppController implements ChangeListener<String> {
     @FXML private Button openChatBot;
     @FXML private Button ntnuAction;
     @FXML private Button logoutAction;
-    @FXML private BorderPane rootPane;
+    @FXML BorderPane rootPane;
     @FXML private AnchorPane mainPane;
     @FXML private TextField searchField;
 
@@ -51,13 +50,12 @@ public class AppController implements ChangeListener<String> {
         mainScene = scene;
     }
 
+    public void setLabel(String label){
+        this.label = label;
+    }
 
     public String getLabel(){
         return this.label;
-    }
-
-    public void setLabel(String label){
-        this.label = label;
     }
 
     

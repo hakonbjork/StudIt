@@ -60,8 +60,6 @@ public class CourseController implements Initializable {
         mainScene = scene;
     }
 
-
-
    	@Override
     public void initialize(URL location, ResourceBundle resources) {
         courseText.setEditable(false);
@@ -69,7 +67,7 @@ public class CourseController implements Initializable {
 
    /** 
     * Function to set the label - the name of the subject on the top of the page
-    * @param label1 the label to set
+    * @param label the label to set
     * @return none
     */
 

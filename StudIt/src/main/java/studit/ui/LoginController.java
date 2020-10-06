@@ -15,7 +15,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import studit.core.LoginManager;
 
 public class LoginController implements Initializable {
 
@@ -32,15 +31,17 @@ public class LoginController implements Initializable {
     @FXML
     Text forgotPassword;
 
+    public static App app1 = new App();
+
     public LoginController() {
     }
 
-    /*
-     * Initializes the LoginManager with usernames and passwords
+    /**
+     * Initializes the UserManager database with usernames and passwords
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        studit.core.LoginManager.initialize();
+        studit.core.UserManager.startStuff();
     }
 
     /**
@@ -48,7 +49,15 @@ public class LoginController implements Initializable {
      * 
      */
     public void registerUser() {
-        // Code
+        try {
+            BorderPane pane = FXMLLoader.load(getClass().getResource("NewUser.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(pane);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Coud not open NewUser.fxml");
+        }
     }
 
     /*
@@ -58,11 +67,11 @@ public class LoginController implements Initializable {
         // code
     }
 
-    /*
+    /**
      * Checks if login credentials are correct, logs in if it is. Else produces an
      * error message in the application
      */
-    public void loginButtonAction() throws IOException {
+    public void loginButtonAction() throws Exception {
         String username = usernameField.getText();
         String password = passwordField.getText();
         if (studit.core.LoginManager.match(username, password)) {
@@ -71,11 +80,10 @@ public class LoginController implements Initializable {
             // scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
             // The line above works in gitpod, but not in IDEA
             Stage stage = new Stage();
+            app1.start(stage);
             stage.setScene(scene);
             stage.setTitle("Hello World");
-            stage.show();
-            LoginManager.writeToFile(password, "keys.txt");
-            // Some way to close te initial window, or load new window instead.
+            //stage.show();
         } else {
             System.out.print("Failure, " + username + ", " + password + " ");
             // todo: Error message instead on application

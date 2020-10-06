@@ -1,5 +1,7 @@
 # Directories
 StudIt/target/
+StudIt/target/classes
+target/
 bin/
 .settings/
 
