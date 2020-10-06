@@ -2,22 +2,20 @@ package studit.core.chatbot;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ChatbotTest {
+  
+  private ChatbotManager chatbotManager;
 
-  @Test
-  public void testChatbot() {
-    fail("Not yet implemented");
-  }
-
-  @Test
-  public void testShow() {
-    fail("Not yet implemented");
+  @BeforeEach
+  public void init() {
+    chatbotManager = new ChatbotManager();
   }
 
   @Test
   public void testManageInput() {
-    fail("Not yet implemented");
+    assertEquals(chatbotManager.manageInput("Hei!"), "Hei! ");
   }
 
 }
