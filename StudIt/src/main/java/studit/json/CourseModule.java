@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 
-
 @SuppressWarnings("serial")
 public class CourseModule extends SimpleModule {
 

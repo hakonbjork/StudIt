@@ -31,96 +31,85 @@
 
 // public class AppTest extends ApplicationTest {
 
-//     private AppController appController;
-//     private App app;
-//     private Course course;
-//     private ObservableList<String> list = FXCollections.observableArrayList();
-//     private ListView<String> listView = new ListView<>();
+// private AppController appController;
+// private App app;
+// private Course course;
+// private ObservableList<String> list = FXCollections.observableArrayList();
+// private ListView<String> listView = new ListView<>();
 
-//     @Override
-//         public void start(final Stage stage) throws Exception {
-//             final FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
-//             final Parent root = loader.load();
-//             this.appController = loader.getController();
-//             this.list =  this.appController.getData();
-//             stage.setScene(new Scene(root));
-//             stage.show();
-//     }
+// @Override
+// public void start(final Stage stage) throws Exception {
+// final FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+// final Parent root = loader.load();
+// this.appController = loader.getController();
+// this.list = this.appController.getData();
+// stage.setScene(new Scene(root));
+// stage.show();
+// }
 
+// @BeforeEach
+// public void setup() throws Exception {
+// listView.setItems(list);
+// }
 
-//     @BeforeEach
-//     public void setup() throws Exception {
-//         listView.setItems(list);        
-//     }
+// @Test
+// public void hasChatBotButton() {
+// BorderPane rootNode = (BorderPane)
+// appController.rootPane.getScene().getRoot();
+// Button button = from(rootNode).lookup(".button").query();
+// assertEquals("Chatbot", button.getText());
+// }
 
-    
-//     @Test
-//     public void hasChatBotButton() {
-//         BorderPane rootNode = (BorderPane) appController.rootPane.getScene().getRoot();
-//         Button button = from(rootNode).lookup(".button").query();
-//         assertEquals("Chatbot", button.getText());
-//     }
+// @Test
+// public void hasMainPageButton() {
+// BorderPane rootNode = (BorderPane)
+// appController.rootPane.getScene().getRoot();
+// Button button = from(rootNode).lookup(".button").query();
+// assertEquals("Hjem", button.getText());
+// }
 
-//     @Test
-//     public void hasMainPageButton() {
-//         BorderPane rootNode = (BorderPane) appController.rootPane.getScene().getRoot();
-//         Button button = from(rootNode).lookup(".button").query();
-//         assertEquals("Hjem", button.getText());
-//     }
+// @Test
+// public void hasLogoutButton() {
+// BorderPane rootNode = (BorderPane)
+// appController.rootPane.getScene().getRoot();
+// Button button = from(rootNode).lookup(".button").query();
+// assertEquals("Logg ut", button.getText());
+// }
 
-//     @Test
-//     public void hasLogoutButton() {
-//         BorderPane rootNode = (BorderPane) appController.rootPane.getScene().getRoot();
-//         Button button = from(rootNode).lookup(".button").query();
-//         assertEquals("Logg ut", button.getText());
-//     }
+// @Test
+// public void testLogoutAction() {
+// FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
+// }
 
-//     @Test
-//     public void testLogoutAction() {
-//         FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
-//     }
-    
-//     @Test
-//     public void testOpenChatBot() {
-//         FxAssert.verifyThat(window("Chatbot"), WindowMatchers.isShowing());
-//     }
+// @Test
+// public void testOpenChatBot() {
+// FxAssert.verifyThat(window("Chatbot"), WindowMatchers.isShowing());
+// }
 
-    
-//     @Test 
-//     public void testClickOnCourse() {
-//         ListView<String> coursesList = find("#coursesList");
-//         clickOn(ListCell).type(text);
-        
-//     }
+// @Test
+// public void testClickOnCourse() {
+// ListView<String> coursesList = find("#coursesList");
+// clickOn(ListCell).type(text);
 
-//     // @Test
-//     // public void hasListCell() {
-//     //     verifyThat(listView).hasListCell("TDT4109");
-//     // }
+// }
 
-//     @Test
-//     public void hasExactlyNumItems() {
-//         int numberOfItems = listView.getItems().size();
-//         assertEquals(numberOfItems, 4);
-//     }
+// // @Test
+// // public void hasListCell() {
+// // verifyThat(listView).hasListCell("TDT4109");
+// // }
 
-//     @Test 
-//     public void testClickOnMainPage() {
-//         Button button = find("#mainPage_btn");
-//         clickOn(button);
-//         verify
-        
-//     }
+// @Test
+// public void hasExactlyNumItems() {
+// int numberOfItems = listView.getItems().size();
+// assertEquals(numberOfItems, 4);
+// }
 
- 
+// @Test
+// public void testClickOnMainPage() {
+// Button button = find("#mainPage_btn");
+// clickOn(button);
+// verify
 
-//     }
+// }
 
-
-
-
-
-
-
-
-
+// }

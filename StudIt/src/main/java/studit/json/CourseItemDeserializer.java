@@ -29,29 +29,28 @@ class CourseItemDeserializer extends JsonDeserializer<CourseItem> {
 
       JsonNode codeNode = objectNode.get("code");
       if (codeNode instanceof TextNode) {
-          item.setFagkode(((TextNode) codeNode).asText());
+        item.setFagkode(((TextNode) codeNode).asText());
       }
 
       JsonNode nameNode = objectNode.get("name");
       if (nameNode instanceof TextNode) {
-          item.setFagnavn(((TextNode) nameNode).asText());
+        item.setFagnavn(((TextNode) nameNode).asText());
       }
 
       JsonNode rateNode = objectNode.get("rate");
       if (rateNode instanceof TextNode) {
-          item.setScore(((TextNode) rateNode).asText());
+        item.setScore(((TextNode) rateNode).asText());
       }
 
       JsonNode kommentarNode = objectNode.get("kommentar");
       if (kommentarNode instanceof TextNode) {
-          item.setKommentar(((TextNode) kommentarNode).asText());
+        item.setKommentar(((TextNode) kommentarNode).asText());
       }
-
 
       return item;
 
     }
 
     return null;
-  }   
+  }
 }

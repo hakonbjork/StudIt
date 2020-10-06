@@ -28,7 +28,8 @@ public class ChatbotController implements Initializable {
 
   private Stage stage = null;
   private double xOffset = 0, yOffset = 0;
-  // This value is hardcoded as it is based on current font, size and more, hard to make dynamic.
+  // This value is hardcoded as it is based on current font, size and more, hard
+  // to make dynamic.
   public final static int lineBreakLength = 34;
 
   @Override
@@ -68,24 +69,22 @@ public class ChatbotController implements Initializable {
             setGraphic(null);
           } else {
             if (item.getUser().equals("chatbot")) {
-              lblTextLeft
-                  .setStyle("-fx-background-color: linear-gradient(to left, #ff512f, #dd2476);\r\n"
-                      + "    -fx-background-insets: -5 -18 -5 -5;\r\n"
-                      + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,0.5,0.5);\r\n"
-                      + "    -fx-shape: \"M 94.658379,129.18587 H 46.277427 c -3.545458,0.23354 -5.32763,-1.59167 -5.14193,-4.67449\r\n"
-                      + "    v -19.39913 c 0.405797,-3.73565 2.470637,-4.56641 5.14193,-4.90821 h 43.706464 c 2.572701,0.2361 4.604321,\r\n"
-                      + "    1.68288 4.674488,4.90821 v 19.39913 c 0.436089,3.14572 2.890695,3.57304 4.908212,4.67449 z\";");
+              lblTextLeft.setStyle("-fx-background-color: linear-gradient(to left, #ff512f, #dd2476);\r\n"
+                  + "    -fx-background-insets: -5 -18 -5 -5;\r\n"
+                  + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,0.5,0.5);\r\n"
+                  + "    -fx-shape: \"M 94.658379,129.18587 H 46.277427 c -3.545458,0.23354 -5.32763,-1.59167 -5.14193,-4.67449\r\n"
+                  + "    v -19.39913 c 0.405797,-3.73565 2.470637,-4.56641 5.14193,-4.90821 h 43.706464 c 2.572701,0.2361 4.604321,\r\n"
+                  + "    1.68288 4.674488,4.90821 v 19.39913 c 0.436089,3.14572 2.890695,3.57304 4.908212,4.67449 z\";");
               lblTextLeft.setText(item.getText());
               setGraphic(hBoxLeft);
             } else {
-              lblTextRight
-                  .setStyle("-fx-background-color: linear-gradient(to left, #4776e6, #8e54e9);\r\n"
-                      + "    -fx-background-insets: -5 -5 -5 -20;\r\n"
-                      + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,-0.5,-0.5);\r\n"
-                      + "    -fx-shape: \"m 46.030545,129.18592 h 48.380952 c 3.54546,0.23355 5.32763,-1.59167 5.14193,-4.67449\r\n"
-                      + "    V 105.1123 c -0.4058,-3.73565 -2.47064,-4.56641 -5.14193,-4.90821 H 50.705033\r\n"
-                      + "    c -2.572701,0.2361 -4.604321,1.68288 -4.674488,4.90821 v 19.39913\r\n"
-                      + "    c -0.436089,3.14572 -2.890695,3.57304 -4.908212,4.67449 z\";");
+              lblTextRight.setStyle("-fx-background-color: linear-gradient(to left, #4776e6, #8e54e9);\r\n"
+                  + "    -fx-background-insets: -5 -5 -5 -20;\r\n"
+                  + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,-0.5,-0.5);\r\n"
+                  + "    -fx-shape: \"m 46.030545,129.18592 h 48.380952 c 3.54546,0.23355 5.32763,-1.59167 5.14193,-4.67449\r\n"
+                  + "    V 105.1123 c -0.4058,-3.73565 -2.47064,-4.56641 -5.14193,-4.90821 H 50.705033\r\n"
+                  + "    c -2.572701,0.2361 -4.604321,1.68288 -4.674488,4.90821 v 19.39913\r\n"
+                  + "    c -0.436089,3.14572 -2.890695,3.57304 -4.908212,4.67449 z\";");
               lblTextRight.setText(item.getText());
               setGraphic(hBoxRight);
             }
@@ -98,14 +97,13 @@ public class ChatbotController implements Initializable {
     });
 
     list_chat.getItems()
-        .add(new Message(
-            "Hei! Jeg er din nye assistent, chatbotten Gunnar. Hva kan jeg hjelpe deg med?",
-            "chatbot"));
+        .add(new Message("Hei! Jeg er din nye assistent, chatbotten Gunnar. Hva kan jeg hjelpe deg med?", "chatbot"));
 
   }
 
   /**
-   * Checks if wee need to add a line break to the user input to avoid text out of bounds
+   * Checks if wee need to add a line break to the user input to avoid text out of
+   * bounds
    */
   private void checkForLineBreak() {
 
@@ -115,7 +113,8 @@ public class ChatbotController implements Initializable {
 
   }
 
-  // ----------------------------------Member Initialization-----------------------------------
+  // ----------------------------------Member
+  // Initialization-----------------------------------
 
   @FXML
   private BorderPane pane_chatbot;
@@ -132,7 +131,8 @@ public class ChatbotController implements Initializable {
   @FXML
   private TextArea txt_user_entry;
 
-  // ----------------------------------------Widget Logic-----------------------------------------
+  // ----------------------------------------Widget
+  // Logic-----------------------------------------
 
   @FXML
   void exitChatbot(ActionEvent event) {
@@ -162,7 +162,8 @@ public class ChatbotController implements Initializable {
   }
 
   /**
-   * Sets new cursor location (x & yOffset) so that we can drag our application by the toolbar
+   * Sets new cursor location (x & yOffset) so that we can drag our application by
+   * the toolbar
    */
   @FXML
   private void setOffset(MouseEvent event) {
@@ -176,7 +177,8 @@ public class ChatbotController implements Initializable {
   }
 
   /**
-   * When user presses enter key, send the input to the Chatbot to perform an action accordingly
+   * When user presses enter key, send the input to the Chatbot to perform an
+   * action accordingly
    */
   @FXML
   private void userEntry(KeyEvent event) {

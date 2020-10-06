@@ -14,7 +14,6 @@ import studit.core.mainpage.CourseList;
 
 import java.io.IOException;
 
-
 class CourseListDeserializer extends JsonDeserializer<CourseList> {
 
   private CourseItemDeserializer courseItemDeserializer = new CourseItemDeserializer();
@@ -41,5 +40,5 @@ class CourseListDeserializer extends JsonDeserializer<CourseList> {
       return list;
     }
     return null;
-  }   
+  }
 }

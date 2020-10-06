@@ -14,9 +14,9 @@ public class CourseList implements Iterable<CourseItem> {
   }
 
   /**
-   * Adds the provided CourseItem to this CourseList.
-   * If the CourseItem is not an instance of CourseListItem,
-   * its contents is copied in to a new CourseListItem and that is added instead.
+   * Adds the provided CourseItem to this CourseList. If the CourseItem is not an
+   * instance of CourseListItem, its contents is copied in to a new CourseListItem
+   * and that is added instead.
    *
    * @param item the CourseItem to add
    */
@@ -51,6 +51,5 @@ public class CourseList implements Iterable<CourseItem> {
   public Collection<CourseItem> getCourseItems() {
     return getCourseItems(null);
   }
-
 
 }

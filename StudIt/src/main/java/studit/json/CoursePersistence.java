@@ -6,7 +6,6 @@ import java.io.Writer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import studit.core.mainpage.CourseList;
-import studit.core.mainpage.CourseModel;
 
 public class CoursePersistence {
 
@@ -24,6 +23,5 @@ public class CoursePersistence {
   public void writeCourseList(CourseList courseList, Writer writer) throws IOException {
     mapper.writerWithDefaultPrettyPrinter().writeValue(writer, courseList);
   }
-
 
 }

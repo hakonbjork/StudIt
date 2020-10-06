@@ -8,9 +8,8 @@ public class CourseListItem extends CourseItem {
     this.courseList = courseList;
   }
 
-  public CourseList getCourseList(){
-      return this.courseList;
+  public CourseList getCourseList() {
+    return this.courseList;
   }
 
 }
-

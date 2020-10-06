@@ -16,14 +16,14 @@ public class CourseItemSerializer extends JsonSerializer<CourseItem> {
   public void serialize(CourseItem item, JsonGenerator jsonGen, SerializerProvider serializerProvider)
       throws IOException {
 
-        jsonGen.writeStartObject();
+    jsonGen.writeStartObject();
 
-        jsonGen.writeStringField("code", item.getFagkode());
-        jsonGen.writeStringField("name", item.getFagnavn());
-        jsonGen.writeStringField("rate", item.getScore());
-        jsonGen.writeStringField("kommentar", item.getKommentar());
-        
-        jsonGen.writeEndObject();
+    jsonGen.writeStringField("code", item.getFagkode());
+    jsonGen.writeStringField("name", item.getFagnavn());
+    jsonGen.writeStringField("rate", item.getScore());
+    jsonGen.writeStringField("kommentar", item.getKommentar());
+
+    jsonGen.writeEndObject();
 
   }
 }
