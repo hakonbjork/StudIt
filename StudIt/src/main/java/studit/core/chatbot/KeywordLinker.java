@@ -64,7 +64,6 @@ public class KeywordLinker {
 
     Keyword[] keywords = new Keyword[weightedKeywords.size()];
 
-
     int i = 0;
     for (String word : weightedKeywords.keySet()) {
 
@@ -169,8 +168,7 @@ public class KeywordLinker {
 
     @Override
     public int compareTo(Match o) {
-      if (o.precedence < this.precedence)
-        return 1;
+      if (o.precedence < this.precedence) return 1;
       return o.match < this.match ? -1 : 1;
     }
 
@@ -181,6 +179,4 @@ public class KeywordLinker {
 
   }
 
-
 }
-
