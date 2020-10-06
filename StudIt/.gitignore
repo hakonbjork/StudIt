@@ -9,5 +9,6 @@ bin/
 .classpath
 studit.iml
 /.idea/
+.class
 
 /target/
