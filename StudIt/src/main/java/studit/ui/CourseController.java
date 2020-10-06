@@ -38,12 +38,15 @@ public class CourseController implements Initializable {
     @FXML private TextArea comment1;
     @FXML private TextArea comment2;
     @FXML private TextArea comment3;
+    @FXML private TextArea comment4;
     @FXML private TextArea commentField;
     @FXML private TextField search;
 
     App app = new App();
     Course course = new Course();
     public static Chatbot chatbot = null;
+    private Scene mainScene;
+   
 
 
 
@@ -60,6 +63,15 @@ public class CourseController implements Initializable {
        this.label.setText(label);
    }
      
+
+
+   public void setMainScene(Scene scene) {
+        mainScene = scene;
+    }
+
+    
+
+
     /**
     * logs user out, and goes to login scene
     * closes the current window
@@ -92,19 +104,22 @@ public class CourseController implements Initializable {
     * @return none
     */
     @FXML
-    void handleMainPageAction() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
-            Parent root = loader.load();
+    void handleMainPageAction(ActionEvent actionEvent ) {
+        Stage primaryStage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setScene(mainScene);
+    }
+        // try {
+        //     FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+        //     Parent root = loader.load();
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+        //     Stage stage = new Stage();
+        //     stage.setScene(new Scene(root));
+        //     stage.show();
 
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-		}
+        //     } catch (IOException e) {
+        //         System.out.println(e);
+        //     }
+		// }
 		
 
     /**
@@ -138,7 +153,7 @@ public class CourseController implements Initializable {
      void handleAddCommentAction(ActionEvent event) {
           String comment = commentField.getText();
 
-          if(comment1.getText().equals("") || (! comment1.getText().equals("")) && (! comment2.getText().equals("")) && (! comment3.getText().equals(""))){
+          if(comment1.getText().equals("") || (! comment1.getText().equals("")) && (! comment2.getText().equals("")) && (! comment3.getText().equals("")) || (! comment4.getText().equals(""))){
                 comment1.setText(comment);
           }
           else if((! comment1.getText().equals("")) && (comment2.getText().equals(""))){
@@ -146,6 +161,9 @@ public class CourseController implements Initializable {
           }
           else if((! comment1.getText().equals("")) && (! comment2.getText().equals(""))){
               comment3.setText(comment);
+          }
+          else if((! comment1.getText().equals("")) && (! comment2.getText().equals("") && (! comment3.getText().equals("")))){
+              comment4.setText(comment);
           }
    }
 

@@ -47,10 +47,9 @@ public class AppController {
     @FXML private Button logout_btn;
 
     public static Chatbot chatbot = null;
-
     private CourseList courseList = new CourseList();
-
     private CoursePersistence coursePersistence = new CoursePersistence();
+    public Scene mainScene;
 
     // makes class more testable
     CourseList getCourseList() {
@@ -133,6 +132,9 @@ public class AppController {
     }
 
 
+    public void setSecondScene(Scene scene) {
+        mainScene = scene;
+    }
 
     /**
     * Function to search for subjects. The listview will then only show subjects with 
@@ -239,22 +241,28 @@ public class AppController {
                     System.out.println(name);	
                     		
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
-                        Parent root = loader.load();
+                        Stage primaryStage = (Stage)((Node)arg0.getSource()).getScene().getWindow();
+                        primaryStage.setScene(mainScene);
+
+
+                        // FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
+                        // Parent root = loader.load();
    
                     
-                        CourseController courseController = loader.getController();
-                        courseController.setLabel(name);
+                        // CourseController courseController = loader.getController();
+                        // courseController.setLabel(name);
    
-                        Stage stage = new Stage();
-                        stage.setScene(new Scene(root));
-                        stage.show();
+                        // Stage stage = new Stage();
+                        // stage.setScene(new Scene(root));
+                        // stage.show();
    
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             System.out.println(e);
                         }
-			}
-		});
+                    }
+                
+                    
+        });
 	}
 
 
