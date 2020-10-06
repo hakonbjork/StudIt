@@ -1,48 +1,39 @@
 package studit.core.chatbot;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
+import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class KeywordLinkTest {
-
-  @Test
-  public void testKeywordLink() {
-    fail("Not yet implemented");
+  
+  private KeywordLink link;
+  
+  @BeforeEach
+  public void init() {
+    link = new KeywordLink("hils", Map.of("hei", 1.0f, "hallo", 0.8f), 1);
   }
 
   @Test
   public void testGetCommand() {
-    fail("Not yet implemented");
-  }
-
-  @Test
-  public void testSetCommand() {
-    fail("Not yet implemented");
+    assertEquals("hils", link.getCommand());
   }
 
   @Test
   public void testGetKeywords() {
-    fail("Not yet implemented");
-  }
-
-  @Test
-  public void testSetKeywords() {
-    fail("Not yet implemented");
+    assertEquals(Map.of("hei", 1.0f, "hallo", 0.8f), link.getKeywords());
   }
 
   @Test
   public void testGetWords() {
-    fail("Not yet implemented");
+    assertTrue(List.of("hei", "hallo").containsAll(link.getWords()));
   }
 
   @Test
   public void testGetPrecedence() {
-    fail("Not yet implemented");
-  }
-
-  @Test
-  public void testSetPrecedence() {
-    fail("Not yet implemented");
+    assertEquals(1, link.getPrecedence());
   }
 
 }
