@@ -11,12 +11,6 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>gruppe60.studit</groupId>
-            <artifactId>fxui</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
