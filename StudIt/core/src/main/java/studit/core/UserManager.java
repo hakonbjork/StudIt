@@ -107,7 +107,7 @@ public class UserManager {
       // But, when using mvn javafx:run from cd Studit, the path should start with
       // "src/..."
       List<User> usersList = Arrays
-          .asList(mapper.readValue(Paths.get("src/main/resources/studit/db/userDB.json").toFile(), User[].class));
+          .asList(mapper.readValue(Paths.get("../core/src/main/resources/studit/db/userDB.json").toFile(), User[].class));
 
       return new ArrayList<User>(usersList);
 

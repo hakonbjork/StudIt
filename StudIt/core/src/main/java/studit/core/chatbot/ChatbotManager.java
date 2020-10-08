@@ -65,7 +65,7 @@ public class ChatbotManager {
 
     ObjectMapper mapper = new ObjectMapper();
     try {
-      mapper.writeValue(Paths.get("src/main/resources/studit/db/keywordLinks.json").toFile(), links);
+      mapper.writeValue(Paths.get(".../core/src/main/resources/studit/db/keywordLinks.json").toFile(), links);
     } catch (IOException e) {
       System.out.println("Error occured while printing dummy json to file");
       e.printStackTrace();
@@ -80,7 +80,7 @@ public class ChatbotManager {
    * @return ArrayList containing our keyword links
    */
   private List<KeywordLink> loadJson(String filename) {
-    String path = "src/main/resources/studit/db/" + filename;
+    String path = "../core/src/main/resources/studit/db/" + filename;
 
     ObjectMapper mapper = new ObjectMapper();
     try {
