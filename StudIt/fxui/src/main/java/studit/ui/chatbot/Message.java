@@ -1,4 +1,4 @@
-package studit.core.chatbot;
+package studit.ui.chatbot;
 
 import studit.ui.ChatbotController;
 

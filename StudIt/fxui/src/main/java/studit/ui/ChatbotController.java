@@ -22,7 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import studit.core.chatbot.Message;
+import studit.ui.chatbot.Message;
 
 public class ChatbotController implements Initializable {
 
