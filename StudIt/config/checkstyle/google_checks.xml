@@ -13,6 +13,8 @@
     To completely disable a check, just comment it out or delete it from the file.
 
     Authors: Max Vetrenko, Ruslan Diachenko, Roman Ivanov.
+    
+    MemberName has been removed from the checkstyle as we use our own format for FXML variables.
  -->
 
 <module name = "Checker">
