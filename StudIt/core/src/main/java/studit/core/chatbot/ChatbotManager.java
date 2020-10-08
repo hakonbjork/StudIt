@@ -3,14 +3,11 @@ package studit.core.chatbot;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import studit.core.chatbot.KeywordLinker.Match;
 
 public class ChatbotManager {
 
@@ -33,27 +30,25 @@ public class ChatbotManager {
     // Splitting string by spaces, and removing all newline chars
     String[] command = input.replaceAll("[^a-zA-Z0-9 ]", "").toLowerCase().split(" ");
 
-
-    String response = "";
+    StringBuffer response = new StringBuffer();
 
     List<Match> matches = linker.matchCommand(command);
     int nextPrecedence = 1;
 
     for (Match match : matches) {
       if (match.precedence == nextPrecedence) {
-        if (match.match > 0.5) {
-          response += cmg.executeCommand(match.command);
+        if (match.match >= 1.0) {
+          response.append(cmg.executeCommand(match.command));
         }
         nextPrecedence += 1;
       }
       System.out.println(match);
     }
 
-
-    if (response.equals("")) {
-      response += "Jeg beklager, men det forstod jeg ikke helt. Kanskje du mente...?";
+    if (response.length() == 0) {
+      response.append("Jeg beklager, men det forstod jeg ikke helt. Kanskje du mente...?");
     }
-    return response;
+    return response.toString();
 
   }
 
@@ -64,17 +59,13 @@ public class ChatbotManager {
 
     List<KeywordLink> links = new ArrayList<>();
 
-
-    links.add(new KeywordLink("hils",
-        Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f), 1));
+    links.add(new KeywordLink("hils", Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f), 1));
     links.add(new KeywordLink("foo1", Map.of("more", 0.8f, "random", 0.4f, "stuff", 0.6f), 2));
-    links.add(
-        new KeywordLink("foo2", Map.of("you", 0.8f, "get", 0.4f, "the", 0.6f, "picture", 0.1f), 2));
+    links.add(new KeywordLink("foo2", Map.of("you", 0.8f, "get", 0.4f, "the", 0.6f, "picture", 0.1f), 2));
 
     ObjectMapper mapper = new ObjectMapper();
     try {
-      mapper.writeValue(Paths.get("src/main/resources/studit/db/keywordLinks.json").toFile(),
-          links);
+      mapper.writeValue(Paths.get("src/main/resources/studit/db/keywordLinks.json").toFile(), links);
     } catch (IOException e) {
       System.out.println("Error occured while printing dummy json to file");
       e.printStackTrace();
@@ -93,8 +84,8 @@ public class ChatbotManager {
 
     ObjectMapper mapper = new ObjectMapper();
     try {
-      List<KeywordLink> links =
-          mapper.readValue(Paths.get(path).toFile(), new TypeReference<List<KeywordLink>>() {});
+      List<KeywordLink> links = mapper.readValue(Paths.get(path).toFile(), new TypeReference<List<KeywordLink>>() {
+      });
       return links;
     } catch (IOException e) {
       System.out.println("Error occured while reading json '" + filename + "'.");

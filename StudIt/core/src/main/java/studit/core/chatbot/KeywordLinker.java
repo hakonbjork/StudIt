@@ -3,7 +3,6 @@ package studit.core.chatbot;
 import static studit.core.Commons.contains;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -65,9 +64,9 @@ public class KeywordLinker {
     Keyword[] keywords = new Keyword[weightedKeywords.size()];
 
     int i = 0;
-    for (String word : weightedKeywords.keySet()) {
+    for (Map.Entry<String, Float> entry : weightedKeywords.entrySet()) {
 
-      keywords[i] = new Keyword(word, weightedKeywords.get(word));
+      keywords[i] = new Keyword(entry.getKey(), entry.getValue());
       i += 1;
     }
 
@@ -89,12 +88,12 @@ public class KeywordLinker {
     int matchID = -1;
     float matchPct = 0.0f;
 
-    for (Integer key : recognizedWords.keySet()) {
+    for (Map.Entry<Integer, String> entry : recognizedWords.entrySet()) {
       int unions = 0, complements = 0;
       for (int i = 0; i < word.length(); i++) {
         char c = word.charAt(i);
 
-        if (recognizedWords.get(key).indexOf(c) >= 0) {
+        if (entry.getValue().indexOf(c) >= 0) {
           unions++;
         } else {
           complements++;
@@ -103,7 +102,7 @@ public class KeywordLinker {
 
       float pct = (float) (unions - complements) / (unions + complements);
       if (pct >= 0.65f && pct > matchPct) {
-        matchID = key;
+        matchID = entry.getKey();
         matchPct = pct;
       }
     }
@@ -123,19 +122,29 @@ public class KeywordLinker {
 
     List<Match> matches = new ArrayList<>();
 
-    for (String key : commandIDs.keySet()) {
+    for (Map.Entry<String, Keyword[]> entry : commandIDs.entrySet()) {
       float match = 0.0f;
-      for (Keyword keyword : commandIDs.get(key)) {
+      for (Keyword keyword : entry.getValue()) {
         if (contains(matchIDs, keyword.ID)) {
           match += keyword.weight;
         }
       }
 
-      matches.add(new Match(key, match, precedences.get(key)));
+      matches.add(new Match(entry.getKey(), match, precedences.get(entry.getKey())));
 
     }
 
-    Collections.sort(matches);
+     matches.sort((left, right) -> {
+      if (left.precedence > right.precedence) {
+        return 1;
+      } else if (left.precedence == right.precedence) {
+        return left.match > right.match ? -1 : 1;
+      } else {
+        return -1;
+      }
+      
+    });
+
     return matches;
   }
 
@@ -152,31 +161,6 @@ public class KeywordLinker {
     public String toString() {
       return "Keyword [ID=" + ID + ", weight=" + weight + "]";
     }
-  }
-
-  class Match implements Comparable<Match> {
-    public float match;
-    public String command;
-    public int precedence;
-
-    public Match(String command, float match, int precedence) {
-      // super();
-      this.match = match;
-      this.command = command;
-      this.precedence = precedence;
-    }
-
-    @Override
-    public int compareTo(Match o) {
-      if (o.precedence < this.precedence) return 1;
-      return o.match < this.match ? -1 : 1;
-    }
-
-    @Override
-    public String toString() {
-      return "Match [match=" + match + ", command=" + command + ", precedence=" + precedence + "]";
-    }
-
   }
 
 }
