@@ -59,13 +59,19 @@ public class ChatbotManager {
 
     List<KeywordLink> links = new ArrayList<>();
 
-    links.add(new KeywordLink("hils", Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f), 1));
-    links.add(new KeywordLink("foo1", Map.of("more", 0.8f, "random", 0.4f, "stuff", 0.6f), 2));
-    links.add(new KeywordLink("foo2", Map.of("you", 0.8f, "get", 0.4f, "the", 0.6f, "picture", 0.1f), 2));
+    links.add(new KeywordLink("hils",
+        Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f), 1));
+    links.add(new KeywordLink("hade", Map.of("hade", 1.0f, "adjø", 1.0f, "vi", 0.2f, "snakkes",
+        0.8f, "takk", 0.1f, "for", 0.1f, "hjelpen", 0.8f, "praten", 0.8f, "samtalen", 0.8f), 1));
+    links.add(
+        new KeywordLink("høflig", Map.of("hvordan", 0.3f, "går", 0.3f, "det", 0.4f), 2));
+    links.add(
+        new KeywordLink("høflig1", Map.of("hva", 0.5f, "skjer", 0.5f), 2));
+
 
     ObjectMapper mapper = new ObjectMapper();
     try {
-      mapper.writeValue(Paths.get(".../core/src/main/resources/studit/db/keywordLinks.json").toFile(), links);
+      mapper.writeValue(Paths.get("../core/src/main/resources/studit/db/keywordLinks.json").toFile(), links);
     } catch (IOException e) {
       System.out.println("Error occured while printing dummy json to file");
       e.printStackTrace();

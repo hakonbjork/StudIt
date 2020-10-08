@@ -9,16 +9,21 @@ public class CommandManager {
   public String executeCommand(String match) {
     String response = "";
 
-    System.out.println(match);
-
     switch (match) {
       case "hils":
-        response += "Hei! ";
+        response = "Hei! ";
+        break;
+      case "hade":
+        response = "Jeg håper jeg kunne være til hjelp! Takk for samtalen.";
+        break;
+      case "høflig":
+        response = "Det går bra, takk, hvordan går det med deg?";
         break;
       default:
-        response += "Oops, internal error -> unrecognized command";
+        response = "Oops, internal error -> unrecognized command";
+        break;
     }
-    System.out.println("Response: " + response);
+    
     return response;
   }
 

@@ -8,7 +8,7 @@ public class Match {
     public Match(String command, float match, int precedence) {
       // super();
       this.match = match;
-      this.command = command;
+      this.command = command.replaceAll("[0-9]", "");
       this.precedence = precedence;
     }
 

@@ -30,7 +30,7 @@ public class ChatbotController implements Initializable {
   private double xOffset = 0, yOffset = 0;
   // This value is hardcoded as it is based on current font, size and more, hard
   // to make dynamic.
-  public final static int lineBreakLength = 34;
+  public final static int lineBreakLength = 48;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -70,7 +70,7 @@ public class ChatbotController implements Initializable {
           } else {
             if (item.getUser().equals("chatbot")) {
               lblTextLeft.setStyle("-fx-background-color: linear-gradient(to left, #ff512f, #dd2476);\r\n"
-                  + "    -fx-background-insets: -5 -18 -5 -5;\r\n"
+                  + "    -fx-background-insets: -5 -25 -5 -5;\r\n"
                   + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,0.5,0.5);\r\n"
                   + "    -fx-shape: \"M 94.658379,129.18587 H 46.277427 c -3.545458,0.23354 -5.32763,-1.59167 -5.14193,-4.67449\r\n"
                   + "    v -19.39913 c 0.405797,-3.73565 2.470637,-4.56641 5.14193,-4.90821 h 43.706464 c 2.572701,0.2361 4.604321,\r\n"
@@ -79,7 +79,7 @@ public class ChatbotController implements Initializable {
               setGraphic(hBoxLeft);
             } else {
               lblTextRight.setStyle("-fx-background-color: linear-gradient(to left, #4776e6, #8e54e9);\r\n"
-                  + "    -fx-background-insets: -5 -5 -5 -20;\r\n"
+                  + "    -fx-background-insets: -5 -5 -5 -34;\r\n"
                   + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,-0.5,-0.5);\r\n"
                   + "    -fx-shape: \"m 46.030545,129.18592 h 48.380952 c 3.54546,0.23355 5.32763,-1.59167 5.14193,-4.67449\r\n"
                   + "    V 105.1123 c -0.4058,-3.73565 -2.47064,-4.56641 -5.14193,-4.90821 H 50.705033\r\n"
