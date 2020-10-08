@@ -13,7 +13,7 @@ public class Message {
   }
 
   /**
-   * Returns formatted text with correct line breaks
+   * Returns formatted text with correct line breaks.
    * 
    * @return String ready to be printed to the screen
    */
@@ -21,7 +21,8 @@ public class Message {
 
     String[] words = text.replace("\n", "").split(" ");
 
-    String line = "", output = "";
+    String line = "";
+    String output = "";
 
     for (String word : words) {
       if (line.length() + word.length() > ChatbotController.lineBreakLength - 8) {

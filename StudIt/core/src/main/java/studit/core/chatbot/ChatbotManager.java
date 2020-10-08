@@ -1,13 +1,12 @@
 package studit.core.chatbot;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ChatbotManager {
 
@@ -53,7 +52,7 @@ public class ChatbotManager {
   }
 
   /**
-   * Writes a list of dummy keyword connections to our json database
+   * Writes a list of dummy keyword connections to our json database.
    */
   private void writeDummyCommandsToDb() {
 
@@ -63,15 +62,14 @@ public class ChatbotManager {
         Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f), 1));
     links.add(new KeywordLink("hade", Map.of("hade", 1.0f, "adjø", 1.0f, "vi", 0.2f, "snakkes",
         0.8f, "takk", 0.1f, "for", 0.1f, "hjelpen", 0.8f, "praten", 0.8f, "samtalen", 0.8f), 1));
-    links.add(
-        new KeywordLink("høflig", Map.of("hvordan", 0.3f, "går", 0.3f, "det", 0.4f), 2));
-    links.add(
-        new KeywordLink("høflig1", Map.of("hva", 0.5f, "skjer", 0.5f), 2));
+    links.add(new KeywordLink("høflig", Map.of("hvordan", 0.3f, "går", 0.3f, "det", 0.4f), 2));
+    links.add(new KeywordLink("høflig1", Map.of("hva", 0.5f, "skjer", 0.5f), 2));
 
 
     ObjectMapper mapper = new ObjectMapper();
     try {
-      mapper.writeValue(Paths.get("../core/src/main/resources/studit/db/keywordLinks.json").toFile(), links);
+      mapper.writeValue(
+          Paths.get("../core/src/main/resources/studit/db/keywordLinks.json").toFile(), links);
     } catch (IOException e) {
       System.out.println("Error occured while printing dummy json to file");
       e.printStackTrace();
@@ -80,7 +78,7 @@ public class ChatbotManager {
   }
 
   /**
-   * Reads Json file on the format List<KeywordLink> and returns the list
+   * Reads Json file from given filename and returns the list of Keyword Links.
    * 
    * @param filename - Filename under resources/studit/db. E.g "test.json"
    * @return ArrayList containing our keyword links
@@ -90,8 +88,8 @@ public class ChatbotManager {
 
     ObjectMapper mapper = new ObjectMapper();
     try {
-      List<KeywordLink> links = mapper.readValue(Paths.get(path).toFile(), new TypeReference<List<KeywordLink>>() {
-      });
+      List<KeywordLink> links =
+          mapper.readValue(Paths.get(path).toFile(), new TypeReference<List<KeywordLink>>() {});
       return links;
     } catch (IOException e) {
       System.out.println("Error occured while reading json '" + filename + "'.");
