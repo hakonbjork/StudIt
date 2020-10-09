@@ -1,22 +1,21 @@
 package studit.ui;
 
 import java.io.IOException;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -69,9 +68,7 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * Function to initialize AppController
-   * 
-   * @return none
+   * Function to initialize AppController.
    */
   public void initialize() {
     loadData();
@@ -106,9 +103,7 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * Opens chatbot
-   * 
-   * @return none
+   * Opens chatbot.
    */
   @FXML
   void openChatBot(ActionEvent event) {
@@ -120,19 +115,14 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * closes chatbot
-   * 
-   * @return none
+   * closes chatbot.
    */
   public static void closeChatbot() {
     chatbot = null;
   }
 
   /**
-   * Function to search for subjects. The listview will then only show subjects
-   * with the letters in the search field
-   * 
-   * @return none
+   * Function to search for subjects. The listview will then only show subjects with the letters in the search field.
    */
   @FXML
   public void handleSearchViewAction(String oldVal, String newVal) {
@@ -158,9 +148,7 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * Should give the option to go to the subjects web-page
-   * 
-   * @return none
+   * Should give the option to go to the subjects web-page.
    */
   @FXML
   void handleNtnuAction(ActionEvent event) {
@@ -171,7 +159,7 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * logs user out, and opens to login scene, closes current scene
+   * logs user out, and opens to login scene, closes current scene.
    */
   @FXML
   void handleLogoutAction(ActionEvent event) {
@@ -193,9 +181,7 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * redirects user to the main page
-   * 
-   * @return none
+   * redirects user to the main page.
    */
   @FXML
   void handleMainPageAction() {
@@ -205,8 +191,6 @@ public class AppController implements ChangeListener<String> {
 
   /**
    * A function that does something when a element in the listview is clicked on.
-   * 
-   * @return None
    */
   public void mouseClicked() {
     // Detecting mouse clicked
@@ -218,11 +202,6 @@ public class AppController implements ChangeListener<String> {
         setLabel(coursesList.getSelectionModel().getSelectedItem());
 
         try {
-
-          // FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
-          // CourseController courseController = (CourseController)
-          // loader.getController();
-          // courseController.setLabel(label);
 
           Stage primaryStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();
 
@@ -285,10 +264,7 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * This function should actually fetch data from a database. This will be
-   * implemented later.
-   * 
-   * @return None
+   * This function should actually fetch data from a database. This will be implemented later.
    */
   private void loadData() {
     String a = "TDT4109";
@@ -299,13 +275,16 @@ public class AppController implements ChangeListener<String> {
     coursesList.setItems(list);
   }
 
+  /**
+   * This function returns the list of subjects.
+   * @return list;
+   */
   public ObservableList<String> getData() {
     return (ObservableList<String>) list;
   }
 
   @Override
   public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-    // TODO Auto-generated method stub
 
   }
 }

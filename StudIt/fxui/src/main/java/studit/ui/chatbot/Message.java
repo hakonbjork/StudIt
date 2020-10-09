@@ -21,7 +21,8 @@ public class Message {
 
     String[] words = text.replace("\n", "").split(" ");
 
-    String line = "", output = "";
+    String line = "";
+    String output = "";
 
     for (String word : words) {
       if (line.length() + word.length() > ChatbotController.lineBreakLength - 8) {
