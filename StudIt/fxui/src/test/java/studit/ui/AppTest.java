@@ -114,16 +114,15 @@ public class AppTest extends ApplicationTest {
   }
 
 
-  // @Test
-  // public void comment(FxRobot robot){
-  //   String comment = "Jeg synes dette er et kjedelig fag";
-  //   TextField comment1 = (TextField) lookup("#comment1");
-  //   Button button = (Button) lookup("#comment_btn");
-  //   robot.clickOn(button);
-  //   courseController.handleAddCommentAction(button.onclick());
-  //   Assertions.verifyThat(comment1.hasText("Jeg synes dette er et kjedelig fag"));
-    
-  // }
+  @Test
+  public void comment(FxRobot robot){
+  String comment = "Jeg synes dette er et kjedelig fag";
+  TextField comment1 = (TextField) lookup("#comment1");
+  Button button = (Button) lookup("#comment_btn");
+  robot.clickOn(button);
+  courseController.handleAddCommentAction(button.onclick());
+  Assertions.verifyThat(comment1.hasText("Jeg synes dette er et kjedelig fag"));
+  }
 
   @Test
   public void testClickOnMainPage(FxRobot robot) {
