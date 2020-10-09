@@ -35,7 +35,7 @@ public class AppController implements ChangeListener<String> {
   @FXML
   private Button logoutAction;
   @FXML
-  BorderPane rootPane;
+  public BorderPane rootPane;
   @FXML
   private AnchorPane mainPane;
   @FXML
@@ -55,7 +55,7 @@ public class AppController implements ChangeListener<String> {
   private String label;
 
   public void setSecondScene(Scene scene) {
-    mainScene = scene;
+    this.mainScene = scene;
   }
 
   public void setLabel(String label) {

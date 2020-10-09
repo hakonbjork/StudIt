@@ -24,7 +24,6 @@ public class CourseController implements Initializable {
   private BorderPane rootPane;
   @FXML
   private FlowPane flowPane;
-
   @FXML
   private Button chatbot_btn;
   @FXML
@@ -35,14 +34,12 @@ public class CourseController implements Initializable {
   private Button addComment_btn;
   @FXML
   private Button mainPage_btn;
-
   @FXML
   private Label comments;
   @FXML
   private Label label;
   @FXML
   private Label rating;
-
   @FXML
   private TextArea comment1;
   @FXML
@@ -57,11 +54,11 @@ public class CourseController implements Initializable {
   private TextArea courseText;
 
   Course course = new Course();
-  public static Chatbot chatbot = null;
+  protected static Chatbot chatbot = null;
   private Scene mainScene;
 
   public void setMainScene(Scene scene) {
-    mainScene = scene;
+    this.mainScene = scene;
   }
 
   @Override
