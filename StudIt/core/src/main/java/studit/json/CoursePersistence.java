@@ -24,4 +24,6 @@ public class CoursePersistence {
     mapper.writerWithDefaultPrettyPrinter().writeValue(writer, courseList);
   }
 
+
+
 }

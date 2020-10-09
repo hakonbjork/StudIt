@@ -1,6 +1,10 @@
 package studit.ui;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collection;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,6 +25,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.chatbot.Chatbot;
+import studit.core.mainpage.CourseItem;
+import studit.core.mainpage.CourseList;
+import studit.json.CoursePersistence;
 
 public class AppController implements ChangeListener<String> {
 
@@ -53,6 +60,7 @@ public class AppController implements ChangeListener<String> {
   public Scene mainScene;
   private ObservableList<String> list = FXCollections.observableArrayList();
   private String label;
+  private CoursePersistence coursePersistence = new CoursePersistence();
 
   public void setSecondScene(Scene scene) {
     this.mainScene = scene;
@@ -87,18 +95,19 @@ public class AppController implements ChangeListener<String> {
 
   // public void filterCoursesList(String oldValue, String newValue) {
 
-  //   ObservableList<String> filteredList = FXCollections.observableArrayList();
-  //   if (searchField == null || (newValue.length() < oldValue.length()) || newValue == null) {
-  //     coursesList.setItems(list);
-  //   } else {
-  //     newValue = newValue.toUpperCase();
-  //     for (String course : coursesList.getItems()) {
-  //       if (course.toUpperCase().contains(newValue)) {
-  //         filteredList.add(course);
-  //       }
-  //     }
-  //     coursesList.setItems(filteredList);
-  //   }
+  // ObservableList<String> filteredList = FXCollections.observableArrayList();
+  // if (searchField == null || (newValue.length() < oldValue.length()) ||
+  // newValue == null) {
+  // coursesList.setItems(list);
+  // } else {
+  // newValue = newValue.toUpperCase();
+  // for (String course : coursesList.getItems()) {
+  // if (course.toUpperCase().contains(newValue)) {
+  // filteredList.add(course);
+  // }
+  // }
+  // coursesList.setItems(filteredList);
+  // }
   // }
 
   /**
@@ -121,7 +130,8 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * Function to search for subjects. The listview will then only show subjects with the letters in the search field.
+   * Function to search for subjects. The listview will then only show subjects
+   * with the letters in the search field.
    */
   @FXML
   public void handleSearchViewAction(String oldVal, String newVal) {
@@ -263,15 +273,35 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * This function should actually fetch data from a database. This will be implemented later.
+   * This function should actually fetch data from a database. This will be
+   * implemented later.
    */
   private void loadData() {
-    String a = "TDT4109";
-    String b = "TMA4145";
-    String c = "TTM4175";
-    String d = "IT1901";
-    list.addAll(a, b, c, d);
-    coursesList.setItems(list);
+
+    FileReader reader;
+    try {
+
+      //Klarer ikke hente fra db.json 
+      reader = new FileReader("src/main/resources/studit/db/db.json");
+      
+      CourseList li = coursePersistence.readCourseList(reader);
+
+      System.out.println(li.getCourseItems().size());
+
+      Collection<CourseItem> items = li.getCourseItems();
+
+      System.out.println(items.size());
+
+      for (CourseItem c : items) {
+        this.list.add(c.getFagnavn());
+      }
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    this.coursesList.setItems(this.list);
+
   }
 
   /**
