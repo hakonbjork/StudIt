@@ -41,7 +41,5 @@ public class LoginControllerTest extends ApplicationTest {
   //   FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
   // }
 
-  @Test
-  
 
 }
