@@ -10,11 +10,14 @@ public class CommandManager {
     String response = "";
 
     switch (match) {
+      case "hade":
+        response = "Jeg håper jeg kunne være til hjelp! Takk for samtalen.";
+        break;
       case "hils":
         response = "Hei! ";
         break;
-      case "hade":
-        response = "Jeg håper jeg kunne være til hjelp! Takk for samtalen.";
+      case "nei":
+        response = "Neivel. ";
         break;
       case "høflig":
         response = "Det går bra, takk, hvordan går det med deg?";
