@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.api.FxAssert;
-import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import javafx.collections.FXCollections;
@@ -16,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -85,13 +85,18 @@ public class AppTest extends ApplicationTest {
   public void testLogoutAction() {
     Button button = (Button) lookup("#logout_btn");
     clickOn(button);
-    FXAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
+    ObservableList<Window> windows = Window.getWindows();
+    Window login = appController.rootPane.getScene().getWindow();
+    Assertions.assertThat(windows.contains(login));
+    // FXAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
   }
 
   @Test
   public void testOpenChatBot() {
     Button button = (Button) lookup("#chatbot_btn");
     clickOn(button);
+    ObservableList<Window> windows = Window.getWindows();
+    Assertions.assertThat(windows.contains("Chatbot"));
     FxAssert.verifyThat(window("Chatbot"), WindowMatchers.isShowing());
   }
 
@@ -115,18 +120,17 @@ public class AppTest extends ApplicationTest {
 
 
   @Test
-  public void comment(FxRobot robot){
+  public void comment(){
   String comment = "Jeg synes dette er et kjedelig fag";
   TextField comment1 = (TextField) lookup("#comment1");
   Button button = (Button) lookup("#comment_btn");
-  robot.clickOn(button);
-  courseController.handleAddCommentAction(button.onclick());
-  Assertions.verifyThat(comment1.hasText("Jeg synes dette er et kjedelig fag"));
+  clickOn(button);
+  Assertions.verifyThat(comment1.getText().equals("Jeg synes dette er et kjedelig fag"));
   }
 
   @Test
-  public void testClickOnMainPage(FxRobot robot) {
+  public void testClickOnMainPage() {
     Button button = (Button) lookup("#mainPage_btn");
-    robot.clickOn(button);
+    clickOn(button);
   }
 }
