@@ -28,6 +28,8 @@ public class LoginController implements Initializable {
   Text registerUser;
   @FXML
   Text forgotPassword;
+  @FXML
+  BorderPane rootPane;
 
   public LoginController() {
   }
