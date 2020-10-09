@@ -7,18 +7,15 @@ import org.junit.jupiter.api.Test;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.matcher.base.WindowMatchers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 public class AppTest extends ApplicationTest {
@@ -57,6 +54,23 @@ public class AppTest extends ApplicationTest {
   }
 
   @Test
+  public void testAppController() {
+    assertNotNull(this.appController);
+  }
+
+  @Test
+  public void testCourseController() {
+    assertNotNull(this.courseController);
+  }
+
+  @Test
+  public void testListView() {
+    assertNotNull(this.listView);
+  }
+
+
+
+  @Test
   public void hasMainPageButton() {
     BorderPane rootNode = (BorderPane) appController.rootPane.getScene().getRoot();
     Button button = from(rootNode).lookup(".button").query();
@@ -92,7 +106,7 @@ public class AppTest extends ApplicationTest {
     clickOn(button);
     ObservableList<Window> windows = Window.getWindows();
     Window chatbot = appController.rootPane.getScene().getWindow();
-    Assertions.assertThat(windows.contains(chatbot));  
+    Assertions.assertThat(windows.contains(chatbot));
   }
 
   @SuppressWarnings("unchecked")
@@ -114,9 +128,10 @@ public class AppTest extends ApplicationTest {
 
   // @Test
   // public void comment() {
-  //   String comment = "Jeg synes dette er et kjedelig fag";
-  //   clickOn("#comment_btn");
-  //   Assertions.verifyThat(appController.comment1.getText().equals("Jeg synes dette er et kjedelig fag"));
+  // String comment = "Jeg synes dette er et kjedelig fag";
+  // clickOn("#comment_btn");
+  // Assertions.verifyThat(appController.comment1.getText().equals("Jeg synes
+  // dette er et kjedelig fag"));
   // }
 
   @Test
