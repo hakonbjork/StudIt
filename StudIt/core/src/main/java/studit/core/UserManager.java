@@ -84,7 +84,7 @@ public class UserManager {
       // Note: When running localy, we need start the path with "Studit/src/..."
       // But, when using mvn javafx:run from cd Studit, the path should start with
       // "src/..."
-      mapper.writeValue(Paths.get("src/main/resources/studit/db/userDB.json").toFile(), users);
+      mapper.writeValue(Paths.get("../core/src/main/resources/studit/db/userDB.json").toFile(), users);
 
     } catch (IOException e) {
       System.out.println("Error occured while saving users to json file");
