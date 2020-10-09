@@ -40,7 +40,6 @@ public class AppController implements ChangeListener<String> {
   private AnchorPane mainPane;
   @FXML
   private TextField searchField;
-
   @FXML
   private Button mainPage_btn;
   @FXML
@@ -86,21 +85,21 @@ public class AppController implements ChangeListener<String> {
     // });
   }
 
-  public void filterCoursesList(String oldValue, String newValue) {
+  // public void filterCoursesList(String oldValue, String newValue) {
 
-    ObservableList<String> filteredList = FXCollections.observableArrayList();
-    if (searchField == null || (newValue.length() < oldValue.length()) || newValue == null) {
-      coursesList.setItems(list);
-    } else {
-      newValue = newValue.toUpperCase();
-      for (String course : coursesList.getItems()) {
-        if (course.toUpperCase().contains(newValue)) {
-          filteredList.add(course);
-        }
-      }
-      coursesList.setItems(filteredList);
-    }
-  }
+  //   ObservableList<String> filteredList = FXCollections.observableArrayList();
+  //   if (searchField == null || (newValue.length() < oldValue.length()) || newValue == null) {
+  //     coursesList.setItems(list);
+  //   } else {
+  //     newValue = newValue.toUpperCase();
+  //     for (String course : coursesList.getItems()) {
+  //       if (course.toUpperCase().contains(newValue)) {
+  //         filteredList.add(course);
+  //       }
+  //     }
+  //     coursesList.setItems(filteredList);
+  //   }
+  // }
 
   /**
    * Opens chatbot.
