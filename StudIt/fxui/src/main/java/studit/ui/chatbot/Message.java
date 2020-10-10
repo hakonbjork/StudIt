@@ -1,14 +1,23 @@
 package studit.ui.chatbot;
 
+import java.util.List;
+import studit.core.chatbot.Response;
 import studit.ui.ChatbotController;
 
 public class Message {
 
   private String text;
   private String user;
+  private List<String[]> prompt = null;
 
-  public Message(String text, String user) {
-    this.text = text;
+  public Message(Response response, String user) {
+    this.text = response.response;
+    this.prompt = response.prompt;
+    this.user = user;
+  }
+  
+  public Message(String response, String user) {
+    this.text = response;
     this.user = user;
   }
 
@@ -49,5 +58,13 @@ public class Message {
 
   public void setUser(String user) {
     this.user = user;
+  }
+  
+  public void setPromt(List<String[]> prompt) {
+    this.prompt = prompt;
+  }
+  
+  public List<String[]> getPrompt() {
+    return this.prompt;
   }
 }

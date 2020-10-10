@@ -53,7 +53,7 @@ public class Chatbot {
    * 
    * @return chatbot response
    */
-  public String manageInput(String input) {
+  public Response manageInput(String input) {
     return chatbotManager.manageInput(input);
   }
 

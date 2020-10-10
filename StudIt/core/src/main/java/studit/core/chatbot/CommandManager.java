@@ -1,33 +1,39 @@
 package studit.core.chatbot;
 
+import java.util.List;
+
 public class CommandManager {
 
   public CommandManager() {
 
   }
 
-  public String executeCommand(String match) {
-    String response = "";
+  public void executeCommand(String match, Response response) {
+    String addition = "";
 
     switch (match) {
+      case "avslutt":
+        addition = "Er du sikker på at du vil avslutte samtalen?";
+        response.prompt = List.of(new String[] {"ja", "regret"}, new String[] {"nei", "exit"});
+        break;
       case "hade":
-        response = "Jeg håper jeg kunne være til hjelp! Takk for samtalen.";
+        addition = "Jeg håper jeg kunne være til hjelp! Takk for samtalen.";
         break;
       case "hils":
-        response = "Hei! ";
+        addition = "Hei! ";
         break;
       case "nei":
-        response = "Neivel. ";
+        addition = "Neivel. ";
         break;
       case "høflig":
-        response = "Det går bra, takk, hvordan går det med deg?";
+        addition = "Det går bra, takk, hvordan går det med deg?";
         break;
       default:
-        response = "Oops, internal error -> unrecognized command";
+        addition = "Oops, internal error -> unrecognized command";
         break;
     }
     
-    return response;
+    response.add(addition);
   }
 
 }

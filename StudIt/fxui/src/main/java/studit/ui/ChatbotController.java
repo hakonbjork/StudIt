@@ -21,9 +21,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import studit.core.chatbot.Response;
 import studit.ui.chatbot.Message;
 
 public class ChatbotController implements Initializable {
@@ -33,7 +35,7 @@ public class ChatbotController implements Initializable {
   private double yOffset = 0;
   // This value is hardcoded as it is based on current font, size and more, hard
   // to make dynamic.
-  public static final  int lineBreakLength = 48;
+  public static final int lineBreakLength = 48;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -47,9 +49,8 @@ public class ChatbotController implements Initializable {
 
       ListCell<Message> cell = new ListCell<Message>() {
         Label lblUserLeft = new Label();
-        // Label lblTextLeft = new Label();
-        TextFlow lblTextLeft = new TextFlow();
-        HBox hBoxLeft = new HBox(lblUserLeft, lblTextLeft);
+        TextFlow flowTextLeft = new TextFlow();
+        HBox hBoxLeft = new HBox(lblUserLeft, flowTextLeft);
 
         Label lblUserRight = new Label();
         Label lblTextRight = new Label();
@@ -57,32 +58,42 @@ public class ChatbotController implements Initializable {
 
         {
           hBoxLeft.setAlignment(Pos.CENTER_LEFT);
-          // hBoxLeft.setSpacing(5);
           hBoxRight.setAlignment(Pos.CENTER_RIGHT);
-          // hBoxRight.setSpacing(5);
           hBoxRight.setPadding(new Insets(5, 0, 5, 0));
           hBoxLeft.setPadding(new Insets(5, 0, 5, 0));
         }
 
         @Override
         protected void updateItem(Message item, boolean empty) {
-         super.updateItem(item, empty);
+          super.updateItem(item, empty);
 
           if (empty) {
             setText(null);
             setGraphic(null);
           } else {
             if (item.getUser().equals("chatbot")) {
-              lblTextLeft
+              flowTextLeft
                   .setStyle("-fx-background-color: linear-gradient(to left, #ff512f, #dd2476);\r\n"
                       + "    -fx-background-insets: -5 -25 -5 -5;\r\n"
                       + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,0.5,0.5);\r\n"
                       + "    -fx-shape: \"M 94.658379,129.18587 H 46.277427 c -3.545458,0.23354 -5.32763,-1.59167 -5.14193,-4.67449\r\n"
                       + "    v -19.39913 c 0.405797,-3.73565 2.470637,-4.56641 5.14193,-4.90821 h 43.706464 c 2.572701,0.2361 4.604321,\r\n"
                       + "    1.68288 4.674488,4.90821 v 19.39913 c 0.436089,3.14572 2.890695,3.57304 4.908212,4.67449 z\";");
-              //lblTextLeft.setText(item.getText());
-              lblTextLeft.getChildren().clear();
-              lblTextLeft.getChildren().addAll(new Text(item.getText()), new Hyperlink("Click here"));
+              flowTextLeft.getChildren().clear();
+
+              Text text = new Text(item.getText());
+              text.setFill(Color.WHITE);
+
+              if (item.getPrompt() != null) {
+                text.setText(text.getText() + "\n");
+                flowTextLeft.getChildren().add(text);
+
+                for (String[] option : item.getPrompt()) {
+                  flowTextLeft.getChildren().addAll(new Hyperlink(option[0]), new Text("  "));
+                }
+              } else {
+                flowTextLeft.getChildren().add(text);
+              }
               setGraphic(hBoxLeft);
             } else {
               lblTextRight
@@ -103,7 +114,7 @@ public class ChatbotController implements Initializable {
 
       return cell;
     });
-    
+
     list_chat.getItems()
         .add(new Message(
             "Hei! Jeg er din nye assistent, chatbotten Gunnar. Hva kan jeg hjelpe deg med?",
@@ -194,7 +205,7 @@ public class ChatbotController implements Initializable {
       list_chat.getItems().add(new Message(userInput, "user"));
       // Make sure that the caret is at first position for a new command!
       txt_user_entry.selectPositionCaret(0);
-      String response = AppController.chatbot.manageInput(userInput);
+      Response response = AppController.chatbot.manageInput(userInput);
       list_chat.getItems().add(new Message(response, "chatbot"));
 
     }

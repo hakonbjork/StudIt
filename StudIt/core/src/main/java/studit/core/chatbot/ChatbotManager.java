@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -26,32 +25,33 @@ public class ChatbotManager {
    * @param input - the user input to process
    * @return chatbot response
    */
-  public String manageInput(String input) {
+  public Response manageInput(String input) {
     // Splitting string by spaces, and removing all newline chars
     String[] command = input.replaceAll("[^a-zA-Z0-9 æøå]", "").toLowerCase().split(" ");
 
-    System.out.println("InPut:________________" + Arrays.toString(command));
-
-    StringBuffer response = new StringBuffer();
-
+    Response response = new Response();
     List<Match> matches = linker.matchCommand(command);
+    
     int nextPrecedence = 1;
 
     for (Match match : matches) {
       if (match.precedence == nextPrecedence) {
         if (match.match >= 1.0) {
-          response.append(cmg.executeCommand(match.command));
+          cmg.executeCommand(match.command, response);
         }
         nextPrecedence += 1;
       }
-      System.out.println(match);
+      // System.out.println(match);
     }
+    
+    System.out.println(response.prompt);
 
-    if (response.length() == 0) {
-      response.append(
-          "Jeg beklager, men det forstod jeg ikke helt. Prøv å formuler setningen på en annen måte");
+    if (response.response.length() == 0) {
+      response.add(
+          "Jeg beklager, men det forstod jeg ikke helt. Prøv å formulere setningen på en annen måte");
     }
-    return response.toString();
+    
+    return response;
 
   }
 
@@ -61,7 +61,8 @@ public class ChatbotManager {
   private void writeDummyCommandsToDb() {
 
     List<KeywordLink> links = new ArrayList<>();
-
+    
+    links.add(new KeywordLink("avslutt", Map.of("avslutt", 1.0f), 1));
     links.add(new KeywordLink("hils",
         Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f), 1));
     links.add(new KeywordLink("hade", Map.of("hade", 1.0f, "adjø", 1.0f, "vi", 0.2f, "snakkes",

@@ -88,15 +88,12 @@ public class KeywordLinker {
     int matchID = -1;
     float matchPct = 0.0f;
 
-    System.out.println("WORD------------" + word);
-    
     for (Map.Entry<Integer, String> entry : recognizedWords.entrySet()) {
       int unions = 0;
       int complements = 0;
       int lastLen = 0;
       String wordToCheck = entry.getValue();
-      
-      System.out.println(wordToCheck);
+
       for (int i = 0; i < wordToCheck.length(); i++) {
         char c = wordToCheck.charAt(i);
 
@@ -107,8 +104,9 @@ public class KeywordLinker {
         }
       }
 
-      float pct = (float) (unions - complements) / (unions + complements);
-      System.out.println(pct);
+      float pct = unions / (float) (unions + complements);
+      pct *= (word.length() - Math.abs(wordToCheck.length() - word.length())) / (float)  word.length();
+      
       if (pct >= 0.65f && pct >= matchPct && wordToCheck.length() > lastLen) {
         matchID = entry.getKey();
         matchPct = pct;
@@ -116,7 +114,6 @@ public class KeywordLinker {
       }
     }
 
-    System.out.println("MATCH-----------" + recognizedWords.get(matchID));
     return matchID;
 
   }
