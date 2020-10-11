@@ -31,4 +31,4 @@ is sufficiently robust.*
     * "Når er eksamen i Matte?"
 
 # Chatbot Structure
-![alt text](structure.png "Chatbot Structure")
+![alt text](architecture.png "Chatbot Structure")
