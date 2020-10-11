@@ -38,7 +38,7 @@ public class LoginControllerTest extends ApplicationTest {
   @Test
   public void testLoginButtonAction() {
     writeUserPassword();
-    clickOn("#loginButton");
+    clickOn("#login_btn");
     FxAssert.verifyThat(window("StudIt"), WindowMatchers.isShowing());
   }
 
