@@ -44,7 +44,7 @@ public class Prompt {
   }
 
   /**
-   * Handles event where user has selected one of the given chatbot options
+   * Handles event where user has selected one of the given chatbot options.
    * 
    * @param option user selected option
    */

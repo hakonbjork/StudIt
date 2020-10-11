@@ -25,7 +25,7 @@ public class CourseTest extends ApplicationTest {
     stage.show();
   }
 
-   @Test
+  @Test
   public void testCourseController() {
     assertNotNull(this.courseController);
   }
@@ -44,8 +44,8 @@ public class CourseTest extends ApplicationTest {
 
   // @Test
   // public void testClickOnMainPage() {
-  //   clickOn("#mainPage_btn");
-  //   FxAssert.verifyThat(window("StudIt"), WindowMatchers.isShowing());
+  // clickOn("#mainPage_btn");
+  // FxAssert.verifyThat(window("StudIt"), WindowMatchers.isShowing());
   // }
 
   @Test
@@ -54,5 +54,30 @@ public class CourseTest extends ApplicationTest {
     courseController.commentField.setText(comment);
     clickOn("#addComment_btn");
     Assertions.assertThat((courseController.comment1.getText()).equals("Jeg synes dette er et kjedelig fag"));
+  }
+
+  @Test
+  public void testSecondComment() {
+    String comment1 = "Jeg synes dette er et kjedelig fag";
+    courseController.commentField.setText(comment1);
+    clickOn("#addComment_btn");
+    String comment2 = "Jeg synes dette er et gøy fag";
+    courseController.commentField.setText(comment2);
+    clickOn("#addComment_btn");
+    Assertions.assertThat((courseController.comment2.getText()).equals("Jeg synes dette er et gøy fag"));
+  }
+
+  @Test
+  public void testThirdComment() {
+    String comment1 = "Jeg synes dette er et kjedelig fag";
+    courseController.commentField.setText(comment1);
+    clickOn("#addComment_btn");
+    String comment2 = "Jeg synes dette er et gøy fag";
+    courseController.commentField.setText(comment2);
+    clickOn("#addComment_btn");
+    String comment3 = "Her bør du lese mye gjennom semesteret";
+    courseController.commentField.setText(comment3);
+    clickOn("#addComment_btn");
+    Assertions.assertThat((courseController.comment2.getText()).equals("Her bør du lese mye gjennom semesteret"));
   }
 }

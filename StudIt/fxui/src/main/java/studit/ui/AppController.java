@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,8 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -187,7 +186,7 @@ public class AppController implements ChangeListener<String> {
 
       Stage stage2 = new Stage();
       stage2.setScene(new Scene(root));
-      stage2.setTitle("StudIt");
+      stage2.setTitle("Login");
       stage2.show();
 
       Stage stage = (Stage) rootPane.getScene().getWindow();
@@ -261,7 +260,7 @@ public class AppController implements ChangeListener<String> {
   private void loadData() {
 
     try (FileReader fr = new FileReader("src/main/resources/studit/db/db.json", StandardCharsets.UTF_8)) {
-      
+
       CourseList li = coursePersistence.readCourseList(fr);
 
       System.out.println(li.getCourseItems().size());
@@ -275,18 +274,18 @@ public class AppController implements ChangeListener<String> {
       }
 
       this.coursesList.setItems(this.list);
-    
+
     } catch (FileNotFoundException e) {
-        e.printStackTrace();
+      e.printStackTrace();
     } catch (IOException e) {
-        e.printStackTrace();
+      e.printStackTrace();
     }
 
   }
 
-  
   /**
    * This function returns the list of subjects.
+   * 
    * @return list;
    */
   public ObservableList<String> getData() {

@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-import studit.core.chatbot.Chatbot;
 
 public class CourseController implements Initializable {
 
@@ -43,9 +42,9 @@ public class CourseController implements Initializable {
   @FXML
   TextArea comment1;
   @FXML
-  private TextArea comment2;
+  TextArea comment2;
   @FXML
-  private TextArea comment3;
+  TextArea comment3;
   @FXML
   TextArea commentField;
   @FXML
@@ -66,6 +65,7 @@ public class CourseController implements Initializable {
 
   /**
    * Function to set the label - the name of the subject on the top of the page.
+   * 
    * @param label the label to set
    */
 
@@ -85,7 +85,7 @@ public class CourseController implements Initializable {
 
       Stage stage2 = new Stage();
       stage2.setScene(new Scene(root));
-      stage2.setTitle("StudIt");
+      stage2.setTitle("Login");
       stage2.show();
 
       Stage stage = (Stage) rootPane.getScene().getWindow();
@@ -148,10 +148,23 @@ public class CourseController implements Initializable {
     }
   }
 
+  /**
+   * Sets the rating of the subject.
+   * 
+   * @param rating
+   */
   @FXML
-  void setRating(double rating) {
+  public void setRating(double rating) {
     String r = String.valueOf(rating);
     this.rating.setText(r);
+  }
+
+  /**
+   * returns the rating of the subject.
+   */
+  @FXML
+  public double getRating() {
+    return Double.valueOf(this.rating.getText());
   }
 
 }
