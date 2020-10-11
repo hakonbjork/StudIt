@@ -53,7 +53,6 @@ public class CourseController implements Initializable {
   @FXML
   private TextArea courseText;
 
-  protected Chatbot chatbot = null;
   private Scene mainScene;
 
   public void setMainScene(Scene scene) {
@@ -123,10 +122,10 @@ public class CourseController implements Initializable {
    */
   @FXML
   void openChatBot(ActionEvent event) {
-    if (chatbot == null) {
-      chatbot = new Chatbot();
+    if (AppController.getChatbot() == null) {
+      AppController.newChatbot();
     } else {
-      chatbot.show();
+      AppController.getChatbot().show();
     }
   }
 
