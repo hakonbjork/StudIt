@@ -26,7 +26,6 @@ public class Chatbot {
     try {
       root = FXMLLoader.load(getClass().getResource("/studit/ui/Chatbot.fxml"));
       chatStage = new Stage();
-      chatStage.setTitle("Chatbot");
       Scene scene = new Scene(root);
 
       // Setting the background to be transparent, so we can create rounded corners in our css file
@@ -36,6 +35,7 @@ public class Chatbot {
       scene.getStylesheets()
           .setAll(getClass().getResource("/studit/ui/chatbot.css").toExternalForm());
       chatStage.setScene(scene);
+      chatStage.setTitle("Chatbot");
       chatStage.show();
     } catch (IOException e) {
       System.out.println("Error loading ChatbotController.FXML -> Is the file corrupt?");
