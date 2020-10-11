@@ -54,6 +54,7 @@ public class LoginController implements Initializable {
       Stage stage = new Stage();
       Scene scene = new Scene(pane);
       stage.setScene(scene);
+      stage.setTitle("New User");
       stage.show();
     } catch (Exception e) {
       System.out.println("Coud not open NewUser.fxml");

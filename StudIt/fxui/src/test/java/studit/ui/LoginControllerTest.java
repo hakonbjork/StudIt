@@ -1,45 +1,60 @@
 package studit.ui;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxAssert;
-import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
-
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class LoginControllerTest extends ApplicationTest {
 
-  private LoginController controller;
+  private LoginController loginController;
 
   @Override
   public void start(final Stage stage) throws Exception {
     final FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
     final Parent root = loader.load();
-    this.controller = loader.getController();
+    this.loginController = loader.getController();
     stage.setScene(new Scene(root));
     stage.show();
   }
 
   @Test
   public void testLoginController() {
-    assertNotNull(this.controller);
+    assertNotNull(this.loginController);
   }
 
-  // @Test
-  // public void testLogoutAction() {
-  //   clickOn("#registerUser_btn");
-  //   ObservableList<Window> windows = Window.getWindows();
-  //   Window login = controller.passwordField.getScene().getWindow();
-  //   Assertions.assertThat(windows.contains(login));
-  //   FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
-  // }
+  @Test
+  public void testUserPasswordFields() {
+    writeUserPassword();
+    assertTrue(loginController.usernameField.getText().equals("user"));
+  }
+
+  @Test
+  public void testLoginButtonAction() {
+    writeUserPassword();
+    clickOn("#loginButton");
+    FxAssert.verifyThat(window("StudIt"), WindowMatchers.isShowing());
+  }
+
+  @Test
+  public void testRegisterUserAction() {
+    clickOn("#registerUser_btn");
+    FxAssert.verifyThat(window("New User"), WindowMatchers.isShowing());
+  }
+
+  public void writeUserPassword() {
+    String u = "user";
+    String p = "password";
+    clickOn("#usernameField").write(u);
+    clickOn("#passwordField").write(p);
+  }
+
 
 
 }

@@ -1,12 +1,11 @@
 package studit.core;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserManager {
 
@@ -18,7 +17,8 @@ public class UserManager {
   }
 
   /**
-   * returns true if successfully adds user, returns false if username is taken
+   * Adds a user to the database.
+   * @return true if successfully adds user, returns false if username is taken
    */
   public static boolean addUser(User user) {
     if (!containsUser(user.getUsername())) {
@@ -27,15 +27,26 @@ public class UserManager {
       addUsersToDB(users);
 
       return true;
-    } else {
-      //System.out.println("Username already in use");
-      //todo Error message in app
     }
     return false;
   }
 
   /**
-   * Checks if the user exist in the database, to login
+   * Removes the user from the databse. No use in app yet, but for testing and
+   * future use.
+   * @param user - The user to be removed
+   */
+  public static void removeUser(User user) {
+    if (containsUser(user.getUsername())) {
+      ArrayList<User> users = getUsersFromDB();
+      users.remove(user);
+      addUsersToDB(users);
+    }
+    System.out.println("Error: User not in databse");
+  }
+
+  /**
+   * Checks if the user exist in the database, to login.
    * 
    * @param username Username of the user to be checked
    * @param password Password of the username to be checked
@@ -54,7 +65,7 @@ public class UserManager {
   }
 
   /**
-   * Checks if the user exist in the database, to login
+   * Checks if the user exist in the database, to login.
    * 
    * @param username Username of the user to be checked
    * @return true if the user exists
@@ -73,7 +84,7 @@ public class UserManager {
   }
 
   /**
-   * Saves the users to json file
+   * Saves the users to json file.
    * 
    * @param users - The users to be saved to the database (json file)
    */
@@ -94,7 +105,7 @@ public class UserManager {
   }
 
   /**
-   * Loads the users from database (the json file)
+   * Loads the users from database (the json file).
    * 
    * @return The List of users that is fetched from the file
    */
@@ -103,9 +114,6 @@ public class UserManager {
     ObjectMapper mapper = new ObjectMapper();
 
     try {
-      // Note: When running localy, we need start the path with "Studit/src/..."
-      // But, when using mvn javafx:run from cd Studit, the path should start with
-      // "src/..."
       List<User> usersList = Arrays
           .asList(mapper.readValue(Paths.get("../core/src/main/resources/studit/db/userDB.json").toFile(), User[].class));
 
