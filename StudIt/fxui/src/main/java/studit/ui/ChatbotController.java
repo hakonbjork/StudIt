@@ -11,7 +11,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -26,7 +25,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import studit.core.chatbot.Response;
+import studit.core.chatbot.prompt.PromptManager;
+import studit.ui.chatbot.Commands;
 import studit.ui.chatbot.Message;
+import studit.ui.chatbot.Prompt;
 
 public class ChatbotController implements Initializable {
 
@@ -36,15 +38,21 @@ public class ChatbotController implements Initializable {
   // This value is hardcoded as it is based on current font, size and more, hard
   // to make dynamic.
   public static final int lineBreakLength = 48;
+  public PromptManager responseManager;
+  private ChatbotController chatbotController;
+  public Commands commands;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
+    chatbotController = this;
+    commands = new Commands(chatbotController);
+    responseManager = new PromptManager();
     txt_user_entry.textProperty().addListener(l -> checkForLineBreak());
 
     ObservableList<Message> chatMessages = FXCollections.observableArrayList();
 
-    list_chat.setItems(chatMessages); // attach the observablelist to the listview
+    list_chat.setItems(chatMessages); // attach the observable list to the listview
     list_chat.setCellFactory(param -> {
 
       ListCell<Message> cell = new ListCell<Message>() {
@@ -84,13 +92,11 @@ public class ChatbotController implements Initializable {
               Text text = new Text(item.getText());
               text.setFill(Color.WHITE);
 
+              // We want the user to choose between a certain set of options
               if (item.getPrompt() != null) {
                 text.setText(text.getText() + "\n");
                 flowTextLeft.getChildren().add(text);
-
-                for (String[] option : item.getPrompt()) {
-                  flowTextLeft.getChildren().addAll(new Hyperlink(option[0]), new Text("  "));
-                }
+                new Prompt(item.getPrompt(), flowTextLeft, list_chat, item, chatbotController);
               } else {
                 flowTextLeft.getChildren().add(text);
               }
@@ -154,18 +160,24 @@ public class ChatbotController implements Initializable {
   // Logic-----------------------------------------
 
   @FXML
-  void exitChatbot(ActionEvent event) {
+  public void exitChatbot(ActionEvent event) {
     AppController.closeChatbot();
-    final Node source = (Node) event.getSource();
-    final Stage stage = (Stage) source.getScene().getWindow();
+    if (stage == null) {
+      final Node source = (Node) event.getSource();
+      stage = (Stage) source.getScene().getWindow();
+    }
     stage.close();
 
   }
 
   @FXML
   void minimizeChatbot(ActionEvent event) {
-    final Node source = (Node) event.getSource();
-    final Stage stage = (Stage) source.getScene().getWindow();
+
+    if (stage == null) {
+      final Node source = (Node) event.getSource();
+      stage = (Stage) source.getScene().getWindow();
+    }
+
     stage.setIconified(true);
   }
 
@@ -199,6 +211,12 @@ public class ChatbotController implements Initializable {
    */
   @FXML
   private void userEntry(KeyEvent event) {
+    
+    if (stage == null) {
+      final Node source = (Node) event.getSource();
+      stage = (Stage) source.getScene().getWindow();
+    }
+
     if (event.getCode() == KeyCode.ENTER) {
       String userInput = txt_user_entry.getText();
       txt_user_entry.setText("");
@@ -207,7 +225,6 @@ public class ChatbotController implements Initializable {
       txt_user_entry.selectPositionCaret(0);
       Response response = AppController.chatbot.manageInput(userInput);
       list_chat.getItems().add(new Message(response, "chatbot"));
-
     }
   }
 

@@ -1,21 +1,26 @@
 package studit.core.chatbot;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ChatbotTest {
   
-  private ChatbotManager chatbotManager;
+  private Chatbot chatbot;
 
   @BeforeEach
   public void init() {
-    chatbotManager = new ChatbotManager();
+    chatbot = new Chatbot();
+  }
+  
+  @Test
+  public void testDisplayWindow() {
+    
   }
 
   @Test
   public void testManageInput() {
-    assertEquals(chatbotManager.manageInput("Hei!").response, "Hei! ");
+    assertEquals(chatbot.manageInput("Hei!").response, "Hei! ");
   }
 
 }

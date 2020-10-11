@@ -9,11 +9,13 @@ public class Message {
   private String text;
   private String user;
   private List<String[]> prompt = null;
+  private boolean clicked;
 
   public Message(Response response, String user) {
     this.text = response.response;
     this.prompt = response.prompt;
     this.user = user;
+    this.clicked = false;
   }
   
   public Message(String response, String user) {
@@ -30,21 +32,22 @@ public class Message {
 
     String[] words = text.replace("\n", "").split(" ");
 
-    String line = "";
-    String output = "";
+    StringBuffer line = new StringBuffer();
+    StringBuffer output = new StringBuffer();
 
     for (String word : words) {
       if (line.length() + word.length() > ChatbotController.lineBreakLength - 8) {
-        output += line + '\n';
-        line = word + " ";
+        line.append('\n');
+        output.append(line);
+        line = new StringBuffer(word + " ");
       } else {
-        line += word + " ";
+        line.append(word + " ");
       }
     }
 
-    output += line;
+    output.append(line);
 
-    return output;
+    return output.toString();
 
   }
 
@@ -66,5 +69,13 @@ public class Message {
   
   public List<String[]> getPrompt() {
     return this.prompt;
+  }
+
+  public boolean isClicked() {
+    return clicked;
+  }
+
+  public void click() {
+    this.clicked = true;
   }
 }

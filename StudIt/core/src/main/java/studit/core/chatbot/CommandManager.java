@@ -14,7 +14,7 @@ public class CommandManager {
     switch (match) {
       case "avslutt":
         addition = "Er du sikker på at du vil avslutte samtalen?";
-        response.prompt = List.of(new String[] {"ja", "regret"}, new String[] {"nei", "exit"});
+        response.prompt = List.of(new String[] {"ja", "exit"}, new String[] {"nei", "regret"});
         break;
       case "hade":
         addition = "Jeg håper jeg kunne være til hjelp! Takk for samtalen.";
@@ -24,6 +24,12 @@ public class CommandManager {
         break;
       case "nei":
         addition = "Neivel. ";
+        break;
+      case "hyggelig":
+        addition = "Så bra da! Hva kan jeg hjelpe deg med?";
+        break;
+      case "uhyggelig":
+        addition = "Det var leit å høre... Hva kan jeg hjelpe deg med?";
         break;
       case "høflig":
         addition = "Det går bra, takk, hvordan går det med deg?";

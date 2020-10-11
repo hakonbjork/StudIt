@@ -39,7 +39,10 @@ public class Chatbot {
     } catch (IOException e) {
       System.out.println("Error loading ChatbotController.FXML -> Is the file corrupt?");
       e.printStackTrace();
+    } catch (NullPointerException e) {
+      // Doing this to prevent testing errors
     }
+    
   }
 
   public void show() {

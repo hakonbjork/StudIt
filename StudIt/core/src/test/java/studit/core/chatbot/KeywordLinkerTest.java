@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import studit.core.chatbot.KeywordLinker.Keyword;
 
 public class KeywordLinkerTest {
 
@@ -51,6 +52,12 @@ public class KeywordLinkerTest {
     assertEquals(match2.get(1).precedence, 2);
     assertEquals(match2.get(1).match, 0.8f);
     
+  }
+  
+  @Test
+  public void testKeyword() {
+    Keyword keyword = linker.new Keyword("hei", 0.5f);
+    assertEquals("Keyword [ID=2, weight=0.5]", keyword.toString());
   }
 
 }
