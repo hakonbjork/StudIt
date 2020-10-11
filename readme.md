@@ -30,7 +30,4 @@ Code coverage is found under *target/site/jacoco*
 - As a student I want to find information about different subjects at NTNU, so I can compare subjects I consider to choose
 - As a student I want to ask questions about a subject I am taking at NTNU, that I want to know the answer to immediately
 
-**Issues:**
-* [X] Enkelt brukergrensesnitt for selve applikasjonen
-* [X] Brukergrensesnitt innlogging
-* [X] Håndtdering av brukernavn / passord (midlertidlig)
+
