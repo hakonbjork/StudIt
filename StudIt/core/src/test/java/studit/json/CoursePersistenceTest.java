@@ -1,23 +1,17 @@
 package studit.json;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.util.Map;
-
+import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
-import studit.core.mainpage.CourseModel;
 
 public class CoursePersistenceTest {
 
@@ -26,6 +20,31 @@ public class CoursePersistenceTest {
   @BeforeAll
   public static void setUp() {
 
+
+  }
+
+  /**
+   * This function should fetch data from a database
+   */
+  private Collection<CourseItem> loadData() {
+
+    try (FileReader fr = new FileReader("src/main/resources/studit/db/maindbtest.json", StandardCharsets.UTF_8)) {
+      
+      CourseList li = coursePersistence.readCourseList(fr);
+
+      System.out.println(li.getCourseItems().size());
+
+      Collection<CourseItem> items = li.getCourseItems();
+
+      return items;
+    
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    return null;
 
   }
 
@@ -47,6 +66,26 @@ public class CoursePersistenceTest {
     item2.setKommentar("Kult fag");
     item2.setScore("8");
     list.addCourseItem(item2);
+
+    CourseList courseList = new CourseList();
+    courseList.addCourseItem(item1);
+    courseList.addCourseItem(item2);
+
+    Collection<CourseItem> items2 = loadData();
+
+    Collection<CourseItem> items1 = courseList.getCourseItems();
+
+    assertEquals(items1.iterator().hasNext(), items2.iterator().hasNext());
+    assertEquals(items1.iterator().next(), items2.iterator().next());
+
+    assertEquals(items1.iterator().hasNext(), items2.iterator().hasNext());
+    assertEquals(items1.iterator().next(), items2.iterator().next());
+
+    assertFalse(items1.iterator().hasNext());
+    assertFalse(items2.iterator().hasNext());
+
+    
+    
 
     
 
