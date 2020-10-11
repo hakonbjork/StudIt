@@ -23,7 +23,7 @@ public class Prompt {
 
     this.commands = new ArrayList<>();
     this.listChat = listChat;
-    this.responseManager = chatbotController.responseManager;
+    this.responseManager = chatbotController.promptManager;
     this.chatbotController = chatbotController;
 
     // Assign commands to each of the options

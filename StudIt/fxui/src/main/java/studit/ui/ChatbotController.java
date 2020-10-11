@@ -38,7 +38,7 @@ public class ChatbotController implements Initializable {
   // This value is hardcoded as it is based on current font, size and more, hard
   // to make dynamic.
   public static final int lineBreakLength = 48;
-  public PromptManager responseManager;
+  public PromptManager promptManager;
   private ChatbotController chatbotController;
   public Commands commands;
 
@@ -47,7 +47,7 @@ public class ChatbotController implements Initializable {
 
     chatbotController = this;
     commands = new Commands(chatbotController);
-    responseManager = new PromptManager();
+    promptManager = new PromptManager();
     txt_user_entry.textProperty().addListener(l -> checkForLineBreak());
 
     ObservableList<Message> chatMessages = FXCollections.observableArrayList();
