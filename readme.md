@@ -4,17 +4,21 @@
 
 
 ## Project structure
-Main code is under *Studit/src/main/..*  
-Testing is found under *Studit/src/test/..*  
-
+The project is seperated into two modules:
+* Application logic is under *studit/core/..*  
+* GUI implementations is under *studi/fxui/..*
 ---
-Application logic is under *studit/core/..*  
-GUI implementations is under *studi/ui/..*
+Main code for each module is found under *src/main/..*  
+Testing for each module is found under *src/test/..*  
 
 ## Installation and testing
+The project uses maven for building and running.
 
-To run the application, click the gitpod link and run: `mvn javafx:run`  
-For unit testing and code coverage, run `mvn test`  
+* To build the project, click the gitpod link and run: `mvn install` in the root folder, to run all the testes and quality checking.
+
+* To run the project, you have to use the fxmui-module and therefore run `mvn javafx:run -f fxui/pom.xml`
+
+* For unit testing and code coverage, run `mvn test`  
 
 To login once the application is started, enter *user* as username and *password* as password
 
