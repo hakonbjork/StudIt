@@ -57,7 +57,7 @@ public class AppController implements ChangeListener<String> {
   @FXML
   private Button logout_btn;
 
-  private static Chatbot chatbot = null;
+  static Chatbot chatbot = null;
   public Scene mainScene;
   private ObservableList<String> list = FXCollections.observableArrayList();
   private String label;
