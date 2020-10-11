@@ -1,19 +1,30 @@
 package studit.ui.chatbot;
 
+import java.util.List;
+import studit.core.chatbot.Response;
 import studit.ui.ChatbotController;
 
 public class Message {
 
   private String text;
   private String user;
+  private List<String[]> prompt = null;
+  private boolean clicked;
 
-  public Message(String text, String user) {
-    this.text = text;
+  public Message(Response response, String user) {
+    this.text = response.response;
+    this.prompt = response.prompt;
+    this.user = user;
+    this.clicked = false;
+  }
+  
+  public Message(String response, String user) {
+    this.text = response;
     this.user = user;
   }
 
   /**
-   * Returns formatted text with correct line breaks
+   * Returns formatted text with correct line breaks.
    * 
    * @return String ready to be printed to the screen
    */
@@ -21,21 +32,22 @@ public class Message {
 
     String[] words = text.replace("\n", "").split(" ");
 
-    String line = "";
-    String output = "";
+    StringBuffer line = new StringBuffer();
+    StringBuffer output = new StringBuffer();
 
     for (String word : words) {
       if (line.length() + word.length() > ChatbotController.lineBreakLength - 8) {
-        output += line + '\n';
-        line = word + " ";
+        line.append('\n');
+        output.append(line);
+        line = new StringBuffer(word + " ");
       } else {
-        line += word + " ";
+        line.append(word + " ");
       }
     }
 
-    output += line;
+    output.append(line);
 
-    return output;
+    return output.toString();
 
   }
 
@@ -49,5 +61,21 @@ public class Message {
 
   public void setUser(String user) {
     this.user = user;
+  }
+  
+  public void setPromt(List<String[]> prompt) {
+    this.prompt = prompt;
+  }
+  
+  public List<String[]> getPrompt() {
+    return this.prompt;
+  }
+
+  public boolean isClicked() {
+    return clicked;
+  }
+
+  public void click() {
+    this.clicked = true;
   }
 }
