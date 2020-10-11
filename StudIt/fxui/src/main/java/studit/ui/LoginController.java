@@ -82,8 +82,10 @@ public class LoginController implements Initializable {
       // The line above works in gitpod, but not in IDEA
       Stage stage = new Stage();
       stage.setScene(scene);
-      stage.setTitle("Hello World");
+      stage.setTitle("StudIt");
       stage.show();
+      Stage stage2 = (Stage) passwordField.getScene().getWindow();
+      stage2.hide();
     } else {
       System.out.print("Failure, " + username + ", " + password + " ");
       loginInfoText.setText("Wrong username or password");
