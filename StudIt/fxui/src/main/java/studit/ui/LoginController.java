@@ -28,6 +28,10 @@ public class LoginController implements Initializable {
   Text registerUser;
   @FXML
   Text forgotPassword;
+  @FXML
+  BorderPane rootPane;
+  @FXML
+  Text loginInfoText;
 
   public LoginController() {
   }
@@ -71,17 +75,20 @@ public class LoginController implements Initializable {
     String username = usernameField.getText();
     String password = passwordField.getText();
     if (studit.core.LoginManager.match(username, password)) {
+      loginInfoText.setText("");
       BorderPane pane = FXMLLoader.load(getClass().getResource("App.fxml"));
       Scene scene = new Scene(pane);
       // scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
       // The line above works in gitpod, but not in IDEA
       Stage stage = new Stage();
       stage.setScene(scene);
-      stage.setTitle("Hello World");
+      stage.setTitle("StudIt");
       stage.show();
+      Stage stage2 = (Stage) passwordField.getScene().getWindow();
+      stage2.hide();
     } else {
       System.out.print("Failure, " + username + ", " + password + " ");
-      // todo: Error message instead on application
+      loginInfoText.setText("Wrong username or password");
     }
   }
 
