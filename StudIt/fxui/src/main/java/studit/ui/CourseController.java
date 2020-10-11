@@ -53,8 +53,7 @@ public class CourseController implements Initializable {
   @FXML
   private TextArea courseText;
 
-  Course course = new Course();
-  protected static Chatbot chatbot = null;
+  protected Chatbot chatbot = null;
   private Scene mainScene;
 
   public void setMainScene(Scene scene) {

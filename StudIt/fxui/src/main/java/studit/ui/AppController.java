@@ -3,6 +3,7 @@ package studit.ui;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
 import javafx.beans.value.ChangeListener;
@@ -56,7 +57,7 @@ public class AppController implements ChangeListener<String> {
   @FXML
   private Button logout_btn;
 
-  public static Chatbot chatbot = null;
+  protected static Chatbot chatbot = null;
   public Scene mainScene;
   private ObservableList<String> list = FXCollections.observableArrayList();
   private String label;
@@ -278,13 +279,9 @@ public class AppController implements ChangeListener<String> {
    */
   private void loadData() {
 
-    FileReader reader;
-    try {
-
-      //Klarer ikke hente fra db.json 
-      reader = new FileReader("src/main/resources/studit/db/db.json");
+    try (FileReader fr = new FileReader("src/main/resources/studit/db/db.json", StandardCharsets.UTF_8)) {
       
-      CourseList li = coursePersistence.readCourseList(reader);
+      CourseList li = coursePersistence.readCourseList(fr);
 
       System.out.println(li.getCourseItems().size());
 
@@ -296,11 +293,13 @@ public class AppController implements ChangeListener<String> {
         this.list.add(c.getFagnavn());
       }
 
+      this.coursesList.setItems(this.list);
+    
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
     } catch (IOException e) {
-      e.printStackTrace();
+        e.printStackTrace();
     }
-
-    this.coursesList.setItems(this.list);
 
   }
 
