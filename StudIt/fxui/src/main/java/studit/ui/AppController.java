@@ -303,6 +303,7 @@ public class AppController implements ChangeListener<String> {
 
   }
 
+  
   /**
    * This function returns the list of subjects.
    * @return list;
