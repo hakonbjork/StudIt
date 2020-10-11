@@ -30,6 +30,8 @@ public class LoginController implements Initializable {
   Text forgotPassword;
   @FXML
   BorderPane rootPane;
+  @FXML
+  Text loginInfoText;
 
   public LoginController() {
   }
@@ -73,6 +75,7 @@ public class LoginController implements Initializable {
     String username = usernameField.getText();
     String password = passwordField.getText();
     if (studit.core.LoginManager.match(username, password)) {
+      loginInfoText.setText("");
       BorderPane pane = FXMLLoader.load(getClass().getResource("App.fxml"));
       Scene scene = new Scene(pane);
       // scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
@@ -83,7 +86,7 @@ public class LoginController implements Initializable {
       stage.show();
     } else {
       System.out.print("Failure, " + username + ", " + password + " ");
-      // todo: Error message instead on application
+      loginInfoText.setText("Wrong username or password");
     }
   }
 

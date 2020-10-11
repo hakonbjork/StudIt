@@ -84,6 +84,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Text fx:id="loginInfoText" strokeType="OUTSIDE" strokeWidth="0.0" />
             <VBox alignment="TOP_CENTER" prefHeight="84.0" prefWidth="560.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="44.0" prefWidth="598.0">
