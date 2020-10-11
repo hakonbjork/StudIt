@@ -41,13 +41,13 @@ public class CourseController implements Initializable {
   @FXML
   private Label rating;
   @FXML
-  private TextArea comment1;
+  TextArea comment1;
   @FXML
   private TextArea comment2;
   @FXML
   private TextArea comment3;
   @FXML
-  private TextArea commentField;
+  TextArea commentField;
   @FXML
   private TextField search;
   @FXML
