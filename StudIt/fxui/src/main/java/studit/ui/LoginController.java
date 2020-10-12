@@ -89,7 +89,7 @@ public class LoginController implements Initializable {
       stage2.hide();
     } else {
       System.out.print("Failure, " + username + ", " + password + " ");
-      loginInfoText.setText("Wrong username or password");
+      loginInfoText.setText("Feil brukernavn eller passord");
     }
   }
 
