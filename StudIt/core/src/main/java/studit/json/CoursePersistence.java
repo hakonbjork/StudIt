@@ -1,10 +1,9 @@
 package studit.json;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import studit.core.mainpage.CourseList;
 
 public class CoursePersistence {
@@ -19,7 +18,7 @@ public class CoursePersistence {
   /**
    * Returns a CourseList from the file provided in the argument.
    *
-   * @param Reader usually a FileReader to read from a file
+   * @param reader usually a FileReader to read from a file
    */
   public CourseList readCourseList(Reader reader) throws IOException {
     return mapper.readValue(reader, CourseList.class);

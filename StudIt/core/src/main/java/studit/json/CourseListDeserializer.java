@@ -8,11 +8,10 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
+import java.io.IOException;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 
-import java.io.IOException;
 
 class CourseListDeserializer extends JsonDeserializer<CourseList> {
 
@@ -21,10 +20,10 @@ class CourseListDeserializer extends JsonDeserializer<CourseList> {
    * format: { "items": [ ... ] }
    */
 
-   /**
-   * Derserialize a course list
-   *
-   */
+  /**
+  * Derserialize a course list.
+  *
+  */
   @Override
   public CourseList deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JsonProcessingException {

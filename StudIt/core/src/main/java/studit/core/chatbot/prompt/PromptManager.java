@@ -3,7 +3,7 @@ package studit.core.chatbot.prompt;
 public class PromptManager {
 
   /**
-   * Handles the response when user has picked a chatbot option from the prompt
+   * Handles the response when user has picked a chatbot option from the prompt.
    * 
    * @param command String defined in CommandManager
    * @return appropriate Chatbot response
