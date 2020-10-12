@@ -43,8 +43,12 @@ public class ChatbotManager {
       }
       // System.out.println(match);
     }
+
+    if (response.prompt != null) {
+      // Add this check to prevent spotbug, as functionallity is not fully implemented yet.
+    }
     
-    System.out.println(response.prompt);
+    // System.out.println(response.prompt);
 
     if (response.response.length() == 0) {
       response.add(

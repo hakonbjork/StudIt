@@ -263,11 +263,11 @@ public class AppController implements ChangeListener<String> {
 
       CourseList li = coursePersistence.readCourseList(fr);
 
-      System.out.println(li.getCourseItems().size());
+      //System.out.println(li.getCourseItems().size());
 
       Collection<CourseItem> items = li.getCourseItems();
 
-      System.out.println(items.size());
+      //System.out.println(items.size());
 
       for (CourseItem c : items) {
         this.list.add(c.getFagnavn());
