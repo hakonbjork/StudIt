@@ -38,8 +38,8 @@
     font-size: 25;
     -fx-font-size: 25;
 
-    font-family: "Avenir next";
-    -fx-font-family: "Avenir next";
+    font-family: Consolas;
+    -fx-font-family: Consolas;
 
     padding: 4px;
     -fx-padding: 4px;
@@ -47,6 +47,11 @@
     margin: 4px;
     -fx-margin: 4px;
 
+}
+
+.list-cell > * {
+    -fx-font-family: Consolas;
+    -fx-font-size: 25;
 }
 
 .list-cell:odd{
@@ -65,8 +70,8 @@
     font-size: 25;
     -fx-font-size: 25;
 
-    font-family: "Avenir next";
-    -fx-font-family: "Avenir next";
+    font-family: Consolas;
+    -fx-font-family: Consolas;
 
     padding: 4px;
     -fx-padding: 4px;

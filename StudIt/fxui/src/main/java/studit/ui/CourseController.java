@@ -61,6 +61,7 @@ public class CourseController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     courseText.setEditable(false);
+    courseText.setWrapText(true);
   }
 
   /**
@@ -165,6 +166,11 @@ public class CourseController implements Initializable {
   @FXML
   public double getRating() {
     return Double.valueOf(this.rating.getText());
+  }
+
+  @FXML
+  public void setCourseText(String text) {
+    this.courseText.setText(text.toString());
   }
 
 }

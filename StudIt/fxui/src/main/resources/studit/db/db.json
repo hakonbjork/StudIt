@@ -1,48 +1,38 @@
 {
   "items" : [ {
     "code" : "TDT4109",
-    "name" : "Informasjonsteknologi grunnkurs",
+    "name" : "TDT4109                 Informasjonsteknologi Grunnkurs",
     "rate" : "10",
-    "kommentar" : "Schpa og lærerrikt"
+    "kommentar" : "Emnet består at to deler: IKT-teori (1/3) og grunnleggende prosedyreorientert programmering i Python (2/3). IKT-teori: Grunnleggende om datamaskiners oppbygging og virkemåte. Digital representasjon av informasjon. Nettverk og kommunikasjon. Prosedyreorientert programmering: Variabler og datatyper. Input og output. Kontrollstrukturer: Sekvens, valg, og repetisjon. Strukturering og oppdeling av programmer; funksjoner og moduler. Datastrukturer: Lister, tabeller, tekststrenger, mengder, tupler og poster (dictionary). Filbehandling, persistent lagring av informasjon, og unntak (exception). Representasjon av tall, enkel prosessering og visualisering av måledata og iterativ løsning av enkle ligninger. Python som programmeringsomgivelse."
   }, {
-    "code" : "TDT4110",
-    "name" : "Informasjonsteknologi grunnkurs",
+    "code" : "IT1901",
+    "name" : "IT1901                    Informatikk Prosjektarbeid 1",
     "rate" : "8",
-    "kommentar" : "TDT4109 anbefales"
+    "kommentar" : "Emnet gir kunnskap og ferdigheter i smidig applikasjonsutvikling i team. Applikasjonen vil bruke en klientserverarkitektur, strukturert i moduler og konfigurert med et byggesystem. Gruppene vil bruke et system for sporing av utviklingsoppgaver, kildekodeadministrasjon og kodevurdering. Fokuset er mer på kodekvalitet og testing, enn på funksjonalitet."
   }, {
-    "code" : "IIT1901",
-    "name" : "Informatikk prosjektarbeid",
-    "rate" : "10",
-    "kommentar" : "Mye arbeid, men veldig lærerrikt."
+    "code" : "TFE4101",
+    "name" : "TFE4101                 Krets- og Digitalteknikk",
+    "rate" : "6.8",
+    "kommentar" : "Emnet gir en introduksjon til analyse av analoge egenskaper i elementære elektriske og elektroniske kretser samt egenskaper i digitale kretselementer og systemer. Det skal gi grunnlag for å forstå og konstruere enkle kretser og systemer bygget opp ved hjelp av analoge og digitale elektroniske kretselementer.\nGjennom eksempler og laboratorieøvinger skal studentene tilegne seg ferdigheter i bruk av grunnleggende laboratorieutrustning og samtidig øving i laboratoriearbeid med journalføring og rapportskriving.\nTemaer er: Krets-elementer og konvensjoner, Ohms lov, Kirchhoffs lover, analysemetoder for lineære resistive kretser, superposisjon, kapasitans, induktans, egenrespons og tvungen respons for RC- og RL-kretser. Forenklede egenskaper, funksjon og bruk av diode og MOSFET-transistor. Tallsystemer og binær aritmetikk. Boolsk algebra, logiske porter og forenklingsmetoder. Kombinatoriske kretser og enkle minnekomponenter, vipper, tellere, skiftregistre, og enkle aritmetikkretser. Tidsforsinkelse, ytelse, areal og effektforbruk for enkle digitale kretser."
   }, {
-    "code" : "TDT4245",
-    "name" : "Fugleskikking",
-    "rate" : "10",
-    "kommentar" : "Gratis studiepoeng"
+    "code" : "TTK4250",
+    "name" : "TTK4250                 Sensorfusjon",
+    "rate" : "6.5",
+    "kommentar" : "Eksempler på sensorfusjon. Stokastiske variabler og sannsynlighetsfordelinger. Konsepter i estimering: ML, MAP, MMSE estimator, totalsannsynlighetsteoremet, Bayes og ortogonalitetsprinsipp. Den multivariate Gaussfordelingen og produktidentiteten. Kalmanfilteret. Stokastiske prosesser drevet av hvit støy. Utvidet Kalmanfilter (EKF). Partikkelfiltere. Gaussiske miksturer. Hybride systemer og IMM-algoritmen. Dataassosiasjon i følging av ett og flere mål. PDAF og JPDA. Metoder for deteksjon og initiering av nye spor. Glatting. Multi-hypotese målfølging, heltallsprogrammering og PMBM. Løst koblet treghetsnavigasjonssystem (INS). Feilmodeller for INS. Feiltilstandsformulert Kalmanfilter for estimering av orientering. Ulineære navigasjonsmetoder. Standardmodellen for landemerke-basert SLAM og løsning via EKF. Dataassosiasjon for SLAM. Rao-Blackwellisering for SLAM. Informasjonsfilter. Grafiske SLAM-metoder. Praktisk implementasjon av metoder for målfølging, treghetsnavigasjon og SLAM."
   }, {
-    "code" : "TMA4145",
-    "name" : "Statistikk",
-    "rate" : "10",
-    "kommentar" : "schpa"
+    "code" : "TMM4115",
+    "name" : "TMM4115                Produktmodellering",
+    "rate" : "7.3",
+    "kommentar" : "Beskrivelse av tekniske systemer og produkter. Modellering som verktøy i produktutvikling og produksjon. Bruk av CAD/CAM-programvare for 3D-modellering av maskindeler og sammenstillinger, teknisk tegning, simulering av mekanismer, elementmetodeberegning og CNC-programmering. Geometriske toleranser og analyse av måledata. Programmering for mekatronikk-systemer. 3D-printing."
   }, {
-    "code" : "TMA4145",
-    "name" : "Statistikk",
-    "rate" : "10",
-    "kommentar" : "schpa"
+    "code" : "TDT4173",
+    "name" : "TDT4173                 Maskinlæring",
+    "rate" : "9.3",
+    "kommentar" : "Emnet behandler prinsipper og metoder for hvordan datasystemer selv kan oppdatere sin kunnskap og problemløsningsevne. Klassiske metoder for maskinell læring basert på observerte data, samt læring som også utnytter eksisterende kunnskap gjennomgås og analyseres. Hovedvekten legges på symbolprosesserende metoder, der eksplisitte begreper og sammenhenger læres. Andre metoder som omhandles er bl.a. statistiske generaliseringer, ensemble metoder, og dyp læring. Det legges vekt på de enkelte læringsmetoders sterke og svake sider, relatert til ulike mål for læringen.\nI case-basert resonnering integreres læring og problemløsning ved at konkrete problemer som løses tas vare på og gjenbrukes ved løsning av nye problemer, jfr. CBR-syklusen. Numeriske og kognitive modeller for similaritetsvurdering gjennomgås, og ulike systemarkitekturer diskuteres. Videre behandles metoder der både case-spesifikk og generell kunnskap integreres i lærings- og problemløsningsfasene."
   }, {
-    "code" : "tdt4245",
-    "name" : "Informasjonsteknologi grunnkurs",
-    "rate" : "10",
-    "kommentar" : "schpa"
-  }, {
-    "code" : "TMA4145",
-    "name" : "Statistikk",
-    "rate" : "10",
-    "kommentar" : "schpa"
-  }, {
-    "code" : "TMA4145",
-    "name" : "Statistikk",
-    "rate" : "10",
-    "kommentar" : "schpa"
+    "code" : "TMA4140",
+    "name" : "TMA4140                Diskret Matematikk",
+    "rate" : "2.1",
+    "kommentar" : "Emnet gir en innføring i matematisk logikk og mengdelære, og elementær tallteori med modulær aritmetikk. Andre sentrale tema er: Følger, rekurrensrelasjoner, matematisk induksjon og kombinatoriske tellemetoder med anvendelser. I tillegg gis en innføring i teorien for relasjoner, grafer og trær, samt formelle språk, grammatikker og endelige automater."
   } ]
 }

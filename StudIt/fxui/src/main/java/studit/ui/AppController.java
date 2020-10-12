@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.List;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -59,6 +61,7 @@ public class AppController implements ChangeListener<String> {
   static Chatbot chatbot = null;
   public Scene mainScene;
   private ObservableList<String> list = FXCollections.observableArrayList();
+  private List<CourseItem> courseList;
   private String label;
   private CoursePersistence coursePersistence = new CoursePersistence();
 
@@ -215,7 +218,7 @@ public class AppController implements ChangeListener<String> {
       // private String label;
       @Override
       public void handle(MouseEvent arg0) {
-        System.out.println((coursesList.getSelectionModel().getSelectedItem()));
+        // System.out.println((coursesList.getSelectionModel().getSelectedItem()));
         setLabel(coursesList.getSelectionModel().getSelectedItem());
 
         try {
@@ -237,7 +240,9 @@ public class AppController implements ChangeListener<String> {
 
           // injecting second scene into the controller of the first scene
           AppController appController = (AppController) mainLoader.getController();
-          courseController.setLabel(coursesList.getSelectionModel().getSelectedItem());
+          CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
+          courseController.setCourseText(courseItem.getKommentar());
+          courseController.setLabel(coursesList.getSelectionModel().getSelectedItem().substring(0, 8));
           appController.setSecondScene(courseScene);
 
           primaryStage.setScene(courseScene);
@@ -253,6 +258,15 @@ public class AppController implements ChangeListener<String> {
     });
   }
 
+  private CourseItem findCourseItem(String name) {
+    for (CourseItem courseItem : this.courseList) {
+      if (courseItem.getFagnavn().equals(name)) {
+        return courseItem;
+      }
+    }
+    return null;
+  }
+
   /**
    * This function should actually fetch data from a database. This will be
    * implemented later.
@@ -266,6 +280,7 @@ public class AppController implements ChangeListener<String> {
       //System.out.println(li.getCourseItems().size());
 
       Collection<CourseItem> items = li.getCourseItems();
+      this.courseList = (List<CourseItem>) items;
 
       //System.out.println(items.size());
 
