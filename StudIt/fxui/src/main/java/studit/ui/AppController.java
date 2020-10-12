@@ -59,15 +59,10 @@ public class AppController implements ChangeListener<String> {
   private Button logout_btn;
 
   static Chatbot chatbot = null;
-  public Scene mainScene;
   private ObservableList<String> list = FXCollections.observableArrayList();
   private List<CourseItem> courseList;
   private String label;
   private CoursePersistence coursePersistence = new CoursePersistence();
-
-  public void setSecondScene(Scene scene) {
-    this.mainScene = scene;
-  }
 
   public void setLabel(String label) {
     this.label = label;
@@ -239,11 +234,9 @@ public class AppController implements ChangeListener<String> {
           courseController.setMainScene(mainScene);
 
           // injecting second scene into the controller of the first scene
-          AppController appController = (AppController) mainLoader.getController();
           CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
           courseController.setCourseText(courseItem.getKommentar());
           courseController.setLabel(coursesList.getSelectionModel().getSelectedItem().substring(0, 8));
-          appController.setSecondScene(courseScene);
 
           primaryStage.setScene(courseScene);
           primaryStage.setTitle("StudIt");
