@@ -2,6 +2,8 @@ package studit.core.chatbot;
 
 import static studit.core.Commons.contains;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 
 public class KeywordLinker {
 
@@ -26,7 +26,7 @@ public class KeywordLinker {
   }
 
   /**
-   * Initializes recognizedWords and commandIDs
+   * Initializes recognizedWords and commandIDs.
    */
   private void extractKeywords() {
     recognizedWords = HashBiMap.create();
@@ -48,18 +48,18 @@ public class KeywordLinker {
     }
 
     for (KeywordLink link : links) {
-      commandIDs.put(link.getCommand(), getIDArray(link.getKeywords()));
+      commandIDs.put(link.getCommand(), getIdArray(link.getKeywords()));
     }
 
   }
 
   /**
-   * Finds the word id's in a string array
+   * Finds the word id's in a string array.
    * 
    * @param weightedKeywords HashMap containing our words and weights
    * @return Keyword[] of weights and IDs
    */
-  private Keyword[] getIDArray(Map<String, Float> weightedKeywords) {
+  private Keyword[] getIdArray(Map<String, Float> weightedKeywords) {
 
     Keyword[] keywords = new Keyword[weightedKeywords.size()];
 
@@ -78,7 +78,7 @@ public class KeywordLinker {
   }
 
   /**
-   * Iterates over recognized words in our vocabulary and finds the closest match
+   * Iterates over recognized words in our vocabulary and finds the closest match.
    * 
    * @param word the word we want to match
    * @return id if match is over 65% confident, -1 if no match found
@@ -89,25 +89,31 @@ public class KeywordLinker {
     float matchPct = 0.0f;
 
     for (Map.Entry<Integer, String> entry : recognizedWords.entrySet()) {
-      int unions = 0, complements = 0;
-      for (int i = 0; i < word.length(); i++) {
-        char c = word.charAt(i);
+      int unions = 0;
+      int complements = 0;
+      int lastLen = 0;
+      String wordToCheck = entry.getValue();
 
-        if (entry.getValue().indexOf(c) >= 0) {
+      for (int i = 0; i < wordToCheck.length(); i++) {
+        char c = wordToCheck.charAt(i);
+
+        if (word.indexOf(c) >= 0) {
           unions++;
         } else {
           complements++;
         }
       }
 
-      float pct = (float) (unions - complements) / (unions + complements);
-      if (pct >= 0.65f && pct > matchPct) {
+      float pct = unions / (float) (unions + complements);
+      pct *= (word.length() - Math.abs(wordToCheck.length() - word.length())) / (float)  word.length();
+      
+      if (pct >= 0.65f && pct >= matchPct && wordToCheck.length() > lastLen) {
         matchID = entry.getKey();
         matchPct = pct;
+        lastLen = wordToCheck.length();
       }
     }
 
-    // System.out.println(recognizedWords.get(matchID));
     return matchID;
 
   }
@@ -134,7 +140,7 @@ public class KeywordLinker {
 
     }
 
-     matches.sort((left, right) -> {
+    matches.sort((left, right) -> {
       if (left.precedence > right.precedence) {
         return 1;
       } else if (left.precedence == right.precedence) {
@@ -142,7 +148,7 @@ public class KeywordLinker {
       } else {
         return -1;
       }
-      
+
     });
 
     return matches;

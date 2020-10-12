@@ -8,7 +8,10 @@ public class CommonsTest {
 
   @Test
   public void testContains() {
-    Integer[] test1 = new Integer[] {1, 4, 5, 6, 8};
+    
+    new Commons();
+    
+    Integer[] test1 = new Integer[] {1, 4, 5, 6, 8, null};
     String[] test2 = new String[] {"hei", "foo", "foo"};
     Float[] test3 = new Float[] {};
     
@@ -22,6 +25,7 @@ public class CommonsTest {
     Foo[] test4 = new Foo[] {foo, new Foo()};
     
     assertTrue(contains(test1, 4));
+    assertTrue(contains(test1, null));
     assertFalse(contains(test1, 2));
     
     assertTrue(contains(test2, "hei"));
@@ -32,7 +36,6 @@ public class CommonsTest {
     
     assertTrue(contains(test4, foo));
     assertFalse(contains(test4, new Foo()));
-    
     
   }
 

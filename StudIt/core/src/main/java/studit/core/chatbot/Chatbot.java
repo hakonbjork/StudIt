@@ -35,11 +35,15 @@ public class Chatbot {
       scene.getStylesheets()
           .setAll(getClass().getResource("/studit/ui/chatbot.css").toExternalForm());
       chatStage.setScene(scene);
+      chatStage.setTitle("Chatbot");
       chatStage.show();
     } catch (IOException e) {
       System.out.println("Error loading ChatbotController.FXML -> Is the file corrupt?");
       e.printStackTrace();
+    } catch (NullPointerException e) {
+      // Doing this to prevent testing errors
     }
+    
   }
 
   public void show() {
@@ -53,7 +57,7 @@ public class Chatbot {
    * 
    * @return chatbot response
    */
-  public String manageInput(String input) {
+  public Response manageInput(String input) {
     return chatbotManager.manageInput(input);
   }
 

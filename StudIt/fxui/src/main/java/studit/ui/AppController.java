@@ -1,27 +1,33 @@
 package studit.ui;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-
+import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.chatbot.Chatbot;
+import studit.core.mainpage.CourseItem;
+import studit.core.mainpage.CourseList;
+import studit.json.CoursePersistence;
 
 public class AppController implements ChangeListener<String> {
 
@@ -36,12 +42,11 @@ public class AppController implements ChangeListener<String> {
   @FXML
   private Button logoutAction;
   @FXML
-  BorderPane rootPane;
+  public BorderPane rootPane;
   @FXML
   private AnchorPane mainPane;
   @FXML
   private TextField searchField;
-
   @FXML
   private Button mainPage_btn;
   @FXML
@@ -51,13 +56,14 @@ public class AppController implements ChangeListener<String> {
   @FXML
   private Button logout_btn;
 
-  public static Chatbot chatbot = null;
+  static Chatbot chatbot = null;
   public Scene mainScene;
   private ObservableList<String> list = FXCollections.observableArrayList();
   private String label;
+  private CoursePersistence coursePersistence = new CoursePersistence();
 
   public void setSecondScene(Scene scene) {
-    mainScene = scene;
+    this.mainScene = scene;
   }
 
   public void setLabel(String label) {
@@ -68,10 +74,16 @@ public class AppController implements ChangeListener<String> {
     return this.label;
   }
 
+  public static Chatbot getChatbot() {
+    return chatbot;
+  }
+
+  public static void newChatbot() {
+    chatbot = new Chatbot();
+  }
+
   /**
-   * Function to initialize AppController
-   * 
-   * @return none
+   * Function to initialize AppController.
    */
   public void initialize() {
     loadData();
@@ -89,26 +101,25 @@ public class AppController implements ChangeListener<String> {
     // });
   }
 
-  public void filterCoursesList(String oldValue, String newValue) {
+  // public void filterCoursesList(String oldValue, String newValue) {
 
-    ObservableList<String> filteredList = FXCollections.observableArrayList();
-    if (searchField == null || (newValue.length() < oldValue.length()) || newValue == null) {
-      coursesList.setItems(list);
-    } else {
-      newValue = newValue.toUpperCase();
-      for (String course : coursesList.getItems()) {
-        if (course.toUpperCase().contains(newValue)) {
-          filteredList.add(course);
-        }
-      }
-      coursesList.setItems(filteredList);
-    }
-  }
+  // ObservableList<String> filteredList = FXCollections.observableArrayList();
+  // if (searchField == null || (newValue.length() < oldValue.length()) ||
+  // newValue == null) {
+  // coursesList.setItems(list);
+  // } else {
+  // newValue = newValue.toUpperCase();
+  // for (String course : coursesList.getItems()) {
+  // if (course.toUpperCase().contains(newValue)) {
+  // filteredList.add(course);
+  // }
+  // }
+  // coursesList.setItems(filteredList);
+  // }
+  // }
 
   /**
-   * Opens chatbot
-   * 
-   * @return none
+   * Opens chatbot.
    */
   @FXML
   void openChatBot(ActionEvent event) {
@@ -120,9 +131,7 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * closes chatbot
-   * 
-   * @return none
+   * closes chatbot.
    */
   public static void closeChatbot() {
     chatbot = null;
@@ -130,9 +139,7 @@ public class AppController implements ChangeListener<String> {
 
   /**
    * Function to search for subjects. The listview will then only show subjects
-   * with the letters in the search field
-   * 
-   * @return none
+   * with the letters in the search field.
    */
   @FXML
   public void handleSearchViewAction(String oldVal, String newVal) {
@@ -158,9 +165,7 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * Should give the option to go to the subjects web-page
-   * 
-   * @return none
+   * Should give the option to go to the subjects web-page.
    */
   @FXML
   void handleNtnuAction(ActionEvent event) {
@@ -171,7 +176,7 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * logs user out, and opens to login scene, closes current scene
+   * logs user out, and opens to login scene, closes current scene.
    */
   @FXML
   void handleLogoutAction(ActionEvent event) {
@@ -181,7 +186,7 @@ public class AppController implements ChangeListener<String> {
 
       Stage stage2 = new Stage();
       stage2.setScene(new Scene(root));
-      stage2.setTitle("StudIt");
+      stage2.setTitle("Login");
       stage2.show();
 
       Stage stage = (Stage) rootPane.getScene().getWindow();
@@ -193,9 +198,7 @@ public class AppController implements ChangeListener<String> {
   }
 
   /**
-   * redirects user to the main page
-   * 
-   * @return none
+   * redirects user to the main page.
    */
   @FXML
   void handleMainPageAction() {
@@ -205,8 +208,6 @@ public class AppController implements ChangeListener<String> {
 
   /**
    * A function that does something when a element in the listview is clicked on.
-   * 
-   * @return None
    */
   public void mouseClicked() {
     // Detecting mouse clicked
@@ -218,11 +219,6 @@ public class AppController implements ChangeListener<String> {
         setLabel(coursesList.getSelectionModel().getSelectedItem());
 
         try {
-
-          // FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
-          // CourseController courseController = (CourseController)
-          // loader.getController();
-          // courseController.setLabel(label);
 
           Stage primaryStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();
 
@@ -257,55 +253,47 @@ public class AppController implements ChangeListener<String> {
     });
   }
 
-  private void start(Stage primaryStage) throws Exception {
-    // getting loader and a pane for the first scene.
-    // loader will then give a possibility to get related controller
-    FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
-    Parent mainPane = mainLoader.load();
-    Scene mainScene = new Scene(mainPane);
-
-    // getting loader and a pane for the second scene.
-    FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
-    Parent coursePane = courseLoader.load();
-    Scene courseScene = new Scene(coursePane);
-
-    // injecting first scene into the controller of the second scene
-    CourseController courseController = (CourseController) courseLoader.getController();
-    courseController.setMainScene(mainScene);
-
-    // injecting second scene into the controller of the first scene
-    AppController appController = (AppController) mainLoader.getController();
-    courseController.setLabel(appController.getLabel());
-    appController.setSecondScene(courseScene);
-
-    primaryStage.setScene(mainScene);
-    primaryStage.setTitle("StudIt");
-    primaryStage.show();
-    System.out.println(appController.getLabel());
-  }
-
   /**
    * This function should actually fetch data from a database. This will be
    * implemented later.
-   * 
-   * @return None
    */
   private void loadData() {
-    String a = "TDT4109";
-    String b = "TMA4145";
-    String c = "TTM4175";
-    String d = "IT1901";
-    list.addAll(a, b, c, d);
-    coursesList.setItems(list);
+
+    try (FileReader fr = new FileReader("src/main/resources/studit/db/db.json", StandardCharsets.UTF_8)) {
+
+      CourseList li = coursePersistence.readCourseList(fr);
+
+      System.out.println(li.getCourseItems().size());
+
+      Collection<CourseItem> items = li.getCourseItems();
+
+      System.out.println(items.size());
+
+      for (CourseItem c : items) {
+        this.list.add(c.getFagnavn());
+      }
+
+      this.coursesList.setItems(this.list);
+
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
   }
 
+  /**
+   * This function returns the list of subjects.
+   * 
+   * @return list;
+   */
   public ObservableList<String> getData() {
     return (ObservableList<String>) list;
   }
 
   @Override
   public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-    // TODO Auto-generated method stub
 
   }
 }

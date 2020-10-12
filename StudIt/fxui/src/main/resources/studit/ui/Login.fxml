@@ -76,7 +76,7 @@
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
             </PasswordField>
-            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="40.0" prefWidth="300.0" text="Logg inn" textFill="#06349c">
+            <Button fx:id="login_btn" id="login_btn" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="40.0" prefWidth="300.0" text="Logg inn" textFill="#06349c">
                <VBox.margin>
                   <Insets bottom="10.0" top="30.0" />
                </VBox.margin>
@@ -84,6 +84,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Text fx:id="loginInfoText" strokeType="OUTSIDE" strokeWidth="0.0" />
             <VBox alignment="TOP_CENTER" prefHeight="84.0" prefWidth="560.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="44.0" prefWidth="598.0">
@@ -106,7 +107,7 @@
                         <Insets />
                      </VBox.margin>
                   </HBox>
-                  <Text fx:id="forgotPassword" fill="#06349c" onMouseClicked="#registerUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Glemt passord?" textAlignment="CENTER" wrappingWidth="201.50399780273438">
+                  <Text fx:id="forgotPassword" fill="#06349c" onMouseClicked="#forgotPassword" strokeType="OUTSIDE" strokeWidth="0.0" text="Glemt passord?" textAlignment="CENTER" wrappingWidth="201.50399780273438">
                      <font>
                         <Font name="Avenir Book" size="14.0" />
                      </font>

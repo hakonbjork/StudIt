@@ -21,17 +21,17 @@ public class CourseList implements Iterable<CourseItem> {
    * @param item the CourseItem to add
    */
   public void addCourseItem(CourseItem item) {
-    CourseListItem CourseListItem = null;
+    CourseListItem courseListItem = null;
     if (item instanceof CourseListItem) {
-      CourseListItem = (CourseListItem) item;
+      courseListItem = (CourseListItem) item;
     } else {
-      CourseListItem = new CourseListItem(this);
-      CourseListItem.setFagkode(item.getFagkode());
-      CourseListItem.setFagnavn(item.getFagnavn());
-      CourseListItem.setKommentar(item.getKommentar());
-      CourseListItem.setScore(item.getScore());
+      courseListItem = new CourseListItem(this);
+      courseListItem.setFagkode(item.getFagkode());
+      courseListItem.setFagnavn(item.getFagnavn());
+      courseListItem.setKommentar(item.getKommentar());
+      courseListItem.setScore(item.getScore());
     }
-    items.add(CourseListItem);
+    items.add(courseListItem);
   }
 
   public void removeCourseItem(CourseItem item) {
@@ -43,13 +43,10 @@ public class CourseList implements Iterable<CourseItem> {
     return items.iterator();
   }
 
-  private Collection<CourseItem> getCourseItems(Boolean checked) {
-    Collection<CourseItem> result = new ArrayList<>(items.size());
-    return result;
+  public Collection<CourseItem> getCourseItems() {
+    return items;
   }
 
-  public Collection<CourseItem> getCourseItems() {
-    return getCourseItems(null);
-  }
+
 
 }

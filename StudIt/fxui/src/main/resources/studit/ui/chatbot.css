@@ -66,8 +66,9 @@
 }
 
 .list-cell:filled:hover {
+	/* 
     -fx-background-color: #0093ff;
-    -fx-text-fill: white;
+    -fx-text-fill: white; */
 }
 
 .text-area .content {

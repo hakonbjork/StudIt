@@ -6,7 +6,7 @@ public class LoginManager {
   }
 
   /**
-   * Checks if the username and password exists together in the database
+   * Checks if the username and password exists together in the database.
    * 
    * @param username - The username to be checked
    * 
