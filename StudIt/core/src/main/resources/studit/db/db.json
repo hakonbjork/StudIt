@@ -1,32 +1,32 @@
 {
   "items" : [ {
-    "code" : "tdt4109",
+    "code" : "TDT4109",
     "name" : "Informasjonsteknologi grunnkurs",
     "rate" : "10",
-    "kommentar" : "schpa"
+    "kommentar" : "Schpa og lærerrikt"
   }, {
-    "code" : "tdt4110",
-    "name" : "Informasjonsteknologi grunnkurs for tullinger",
-    "rate" : "2",
-    "kommentar" : "drit lø"
+    "code" : "TDT4110",
+    "name" : "Informasjonsteknologi grunnkurs",
+    "rate" : "8",
+    "kommentar" : "TDT4109 anbefales"
   }, {
     "code" : "IIT1901",
     "name" : "Informatikk prosjektarbeid",
-    "rate" : "0",
-    "kommentar" : "schpa"
+    "rate" : "10",
+    "kommentar" : "Mye arbeid, men veldig lærerrikt."
   }, {
     "code" : "TDT4245",
-    "name" : "fUGLESKIKKING",
+    "name" : "Fugleskikking",
+    "rate" : "10",
+    "kommentar" : "Gratis studiepoeng"
+  }, {
+    "code" : "TMA4145",
+    "name" : "Statistikk",
     "rate" : "10",
     "kommentar" : "schpa"
   }, {
-    "code" : "Tma4145",
-    "name" : "Informasjonsteknologi grunnkurs",
-    "rate" : "10",
-    "kommentar" : "schpa"
-  }, {
-    "code" : "tma4100",
-    "name" : "Informasjonsteknologi grunnkurs",
+    "code" : "TMA4145",
+    "name" : "Statistikk",
     "rate" : "10",
     "kommentar" : "schpa"
   }, {
@@ -35,13 +35,13 @@
     "rate" : "10",
     "kommentar" : "schpa"
   }, {
-    "code" : "IT02342",
-    "name" : "Informasjonsteknologi grunnkurs",
+    "code" : "TMA4145",
+    "name" : "Statistikk",
     "rate" : "10",
     "kommentar" : "schpa"
   }, {
-    "code" : "TTM4100",
-    "name" : "Informasjonsteknologi grunnkurs",
+    "code" : "TMA4145",
+    "name" : "Statistikk",
     "rate" : "10",
     "kommentar" : "schpa"
   } ]
