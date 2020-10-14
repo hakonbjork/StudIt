@@ -13,7 +13,7 @@ public class KeywordLinkTest {
   
   @BeforeEach
   public void init() {
-    link = new KeywordLink("hils", Map.of("hei", 1.0f, "hallo", 0.8f), 1);
+    link = new KeywordLink("hils", null, null, 1,List.of( Map.of("hei", 1.0f, "hallo", 0.8f)));
   }
 
   @Test
@@ -23,7 +23,7 @@ public class KeywordLinkTest {
 
   @Test
   public void testGetKeywords() {
-    assertEquals(Map.of("hei", 1.0f, "hallo", 0.8f), link.getKeywords());
+    assertEquals(List.of(Map.of("hei", 1.0f, "hallo", 0.8f)), link.getKeywords());
   }
 
   @Test

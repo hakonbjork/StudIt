@@ -4,6 +4,7 @@ import static studit.core.Commons.contains;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.common.primitives.Floats;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,7 +17,7 @@ public class KeywordLinker {
 
   private List<KeywordLink> links;
   private BiMap<Integer, String> recognizedWords;
-  private Map<String, Keyword[]> commandIDs;
+  private Map<String, List<Keyword[]>> commandIDs;
   private Map<String, Integer> precedences;
 
   public KeywordLinker(List<KeywordLink> links) {
@@ -48,29 +49,36 @@ public class KeywordLinker {
     }
 
     for (KeywordLink link : links) {
-      commandIDs.put(link.getCommand(), getIdArray(link.getKeywords()));
+      commandIDs.put(link.getCommand(), getKeywordArrayList(link.getKeywords()));
     }
 
   }
 
   /**
-   * Finds the word id's in a string array.
+   * Create a list of Keyword-arrays that contain word IDS and their respective match.
    * 
-   * @param weightedKeywords HashMap containing our words and weights
-   * @return Keyword[] of weights and IDs
+   * @param keywordLinks list of links obtained from the KeywordLink class
+   * @return list containing all of our keyword matches
    */
-  private Keyword[] getIdArray(Map<String, Float> weightedKeywords) {
+  private List<Keyword[]> getKeywordArrayList(List<Map<String, Float>> keywordLinks) {
 
-    Keyword[] keywords = new Keyword[weightedKeywords.size()];
+    List<Keyword[]> keywordArrayList = new ArrayList<>();
 
-    int i = 0;
-    for (Map.Entry<String, Float> entry : weightedKeywords.entrySet()) {
+    for (Map<String, Float> link : keywordLinks) {
+      Keyword[] keywords = new Keyword[link.size()];
 
-      keywords[i] = new Keyword(entry.getKey(), entry.getValue());
-      i += 1;
+      int i = 0;
+      for (Map.Entry<String, Float> entry : link.entrySet()) {
+
+        keywords[i] = new Keyword(entry.getKey(), entry.getValue());
+        i += 1;
+      }
+
+      keywordArrayList.add(keywords);
+
     }
 
-    return keywords;
+    return keywordArrayList;
   }
 
   public Map<Integer, String> getRecognizedWords() {
@@ -105,8 +113,9 @@ public class KeywordLinker {
       }
 
       float pct = unions / (float) (unions + complements);
-      pct *= (word.length() - Math.abs(wordToCheck.length() - word.length())) / (float)  word.length();
-      
+      pct *=
+          (word.length() - Math.abs(wordToCheck.length() - word.length())) / (float) word.length();
+
       if (pct >= 0.65f && pct >= matchPct && wordToCheck.length() > lastLen) {
         matchID = entry.getKey();
         matchPct = pct;
@@ -118,6 +127,14 @@ public class KeywordLinker {
 
   }
 
+  /**
+   * Reads the user input and tries to match the input to the most probable command.
+   * 
+   * @param words processed user input, where all special characters are removed and words are split
+   *        by spaces.
+   * @return Sorted list of Match objects, containing information about match percentage,
+   *         precedence, and the command key identifier
+   */
   public List<Match> matchCommand(String[] words) {
 
     Integer[] matchIDs = new Integer[words.length];
@@ -128,15 +145,23 @@ public class KeywordLinker {
 
     List<Match> matches = new ArrayList<>();
 
-    for (Map.Entry<String, Keyword[]> entry : commandIDs.entrySet()) {
-      float match = 0.0f;
-      for (Keyword keyword : entry.getValue()) {
-        if (contains(matchIDs, keyword.ID)) {
-          match += keyword.weight;
+    for (Map.Entry<String, List<Keyword[]>> entry : commandIDs.entrySet()) {
+
+      float[] matchWeights = new float[entry.getValue().size()];
+      int idx = 0;
+
+      for (Keyword[] keywords : entry.getValue()) {
+
+        for (Keyword keyword : keywords) {
+          if (contains(matchIDs, keyword.ID)) {
+            matchWeights[idx] += keyword.weight;
+          }
         }
+        idx++;
       }
 
-      matches.add(new Match(entry.getKey(), match, precedences.get(entry.getKey())));
+      matches.add(
+          new Match(entry.getKey(), Floats.max(matchWeights), precedences.get(entry.getKey())));
 
     }
 

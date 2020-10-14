@@ -14,7 +14,7 @@ public class ChatbotManager {
   private CommandManager cmg;
 
   public ChatbotManager() {
-    writeDummyCommandsToDb();
+    writeDefaultCommandsToDb();
     linker = new KeywordLinker(loadJson("keywordLinks.json"));
     cmg = new CommandManager();
   }
@@ -31,7 +31,7 @@ public class ChatbotManager {
 
     Response response = new Response();
     List<Match> matches = linker.matchCommand(command);
-    
+
     int nextPrecedence = 1;
 
     for (Match match : matches) {
@@ -47,14 +47,14 @@ public class ChatbotManager {
     if (response.prompt != null) {
       // Add this check to prevent spotbug, as functionallity is not fully implemented yet.
     }
-    
+
     // System.out.println(response.prompt);
 
     if (response.response.length() == 0) {
       response.add(
           "Jeg beklager, men det forstod jeg ikke helt. Prøv å formulere setningen på en annen måte");
     }
-    
+
     return response;
 
   }
@@ -62,24 +62,29 @@ public class ChatbotManager {
   /**
    * Writes a list of dummy keyword connections to our json database.
    */
-  private void writeDummyCommandsToDb() {
+  private void writeDefaultCommandsToDb() {
 
     List<KeywordLink> links = new ArrayList<>();
-    
-    links.add(new KeywordLink("avslutt", Map.of("avslutt", 1.0f), 1));
-    links.add(new KeywordLink("hils",
-        Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f), 1));
-    links.add(new KeywordLink("hade", Map.of("hade", 1.0f, "adjø", 1.0f, "vi", 0.2f, "snakkes",
-        0.8f, "takk", 0.1f, "for", 0.1f, "hjelpen", 0.8f, "praten", 0.8f, "samtalen", 0.8f), 1));
-    
-    links.add(new KeywordLink("høflig", Map.of("hvordan", 0.3f, "går", 0.3f, "det", 0.4f), 2));
-    links.add(new KeywordLink("høflig1", Map.of("hva", 0.5f, "skjer", 0.5f), 2));
-    
-    links.add(new KeywordLink("hyggelig", Map.of("det", 0.2f, "går", 0.2f, "bra", 0.6f, "greit", 0.6f, "strålende", 0.6f, "fantastisk", 0.6f, "ok", 0.6f), 1));
-    links.add(new KeywordLink("uhyggelig", Map.of("det", 0.2f, "går", 0.2f, "dårlig", 0.6f, "ikke", 0.4f, "så", 0.05f, "bra", 0.05f), 1));
 
+    links.add(new KeywordLink("avslutt", null, null, 1, List.of(Map.of("avslutt", 1.0f),
+        Map.of("kan", 0.2f, "du", 0.2f, "lukke", 0.2f, "lukk", 0.6f, "chatboten", 0.4f))));
+
+    links.add(new KeywordLink("hils", null, null, 1,
+        List.of(Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f))));
+
+    links.add(new KeywordLink("hade", null, null, 1,
+        List.of(Map.of("hade", 1.0f, "adjø", 1.0f, "vi", 0.2f, "snakkes", 0.8f, "takk", 0.1f, "for",
+            0.1f, "hjelpen", 0.8f, "praten", 0.8f, "samtalen", 0.8f))));
+
+    links.add(new KeywordLink("høflig", null, null, 2, List.of(
+        Map.of("hvordan", 0.3f, "går", 0.3f, "det", 0.4f), Map.of("hva", 0.5f, "skjer", 0.5f))));
+
+    links.add(new KeywordLink("hyggelig", null, null, 1, List.of(Map.of("det", 0.2f, "går", 0.2f,
+        "bra", 0.6f, "greit", 0.6f, "strålende", 0.6f, "fantastisk", 0.6f, "ok", 0.6f))));
     
-    links.add(new KeywordLink("nei", Map.of("nei", 1.0f, "nope", 1.0f, "niks", 1.0f), 1));
+    links.add(new KeywordLink("uhyggelig", null, null, 1, List.of(Map.of("det", 0.2f, "går", 0.2f, "dårlig", 0.6f, "ikke", 0.4f, "så", 0.05f, "bra", 0.05f))));
+
+    links.add(new KeywordLink("uhyggelig", null, null, 1, List.of(Map.of("nei", 1.0f, "nope", 1.0f, "niks", 1.0f))));
 
 
     ObjectMapper mapper = new ObjectMapper();

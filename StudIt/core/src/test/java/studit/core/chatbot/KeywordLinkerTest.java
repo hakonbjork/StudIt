@@ -19,8 +19,8 @@ public class KeywordLinkerTest {
 
     dummyLinks = new ArrayList<>();
 
-    dummyLinks.add(new KeywordLink("hils", Map.of("hei", 1.0f, "hallo", 1.0f), 1));
-    dummyLinks.add(new KeywordLink("hade", Map.of("hade", 0.8f), 2));
+    dummyLinks.add(new KeywordLink("hils", null, null, 1,List.of( Map.of("hei", 1.0f, "hallo", 0.8f))));
+    dummyLinks.add(new KeywordLink("hade", null, null, 2,List.of( Map.of("hade", 0.8f, "adios", 0.2f))));
 
     linker = new KeywordLinker(dummyLinks);
   }
@@ -28,7 +28,7 @@ public class KeywordLinkerTest {
   @Test
   public void testGetRecognizedWords() {
     Map<Integer, String> words = linker.getRecognizedWords();
-    List<String> recognizedWords = List.of("hei", "hallo", "hade");
+    List<String> recognizedWords = List.of("hei", "hallo", "hade", "adios");
   
     
     for (String word : words.values()) {
