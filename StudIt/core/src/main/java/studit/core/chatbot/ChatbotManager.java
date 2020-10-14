@@ -66,25 +66,23 @@ public class ChatbotManager {
 
     List<KeywordLink> links = new ArrayList<>();
 
-    links.add(new KeywordLink("avslutt", null, null, 1, List.of(Map.of("avslutt", 1.0f),
+    links.add(new KeywordLink("avslutt", null, 1, List.of(Map.of("avslutt", 1.0f),
         Map.of("kan", 0.2f, "du", 0.2f, "lukke", 0.2f, "lukk", 0.6f, "chatboten", 0.4f))));
 
-    links.add(new KeywordLink("hils", null, null, 1,
-        List.of(Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f))));
+    links.add(new KeywordLink("hils", null, 1, List.of(Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f))));
 
-    links.add(new KeywordLink("hade", null, null, 1,
-        List.of(Map.of("hade", 1.0f, "adjø", 1.0f, "vi", 0.2f, "snakkes", 0.8f, "takk", 0.1f, "for",
-            0.1f, "hjelpen", 0.8f, "praten", 0.8f, "samtalen", 0.8f))));
+    links.add(new KeywordLink("hade", null, 1, List.of(Map.of("hade", 1.0f, "adjø", 1.0f, "vi", 0.2f, "snakkes", 0.8f, "takk", 0.1f, "for",
+        0.1f, "hjelpen", 0.8f, "praten", 0.8f, "samtalen", 0.8f))));
 
-    links.add(new KeywordLink("høflig", null, null, 2, List.of(
+    links.add(new KeywordLink("høflig", null, 2, List.of(
         Map.of("hvordan", 0.3f, "går", 0.3f, "det", 0.4f), Map.of("hva", 0.5f, "skjer", 0.5f))));
 
-    links.add(new KeywordLink("hyggelig", null, null, 1, List.of(Map.of("det", 0.2f, "går", 0.2f,
+    links.add(new KeywordLink("hyggelig", null, 1, List.of(Map.of("det", 0.2f, "går", 0.2f,
         "bra", 0.6f, "greit", 0.6f, "strålende", 0.6f, "fantastisk", 0.6f, "ok", 0.6f))));
     
-    links.add(new KeywordLink("uhyggelig", null, null, 1, List.of(Map.of("det", 0.2f, "går", 0.2f, "dårlig", 0.6f, "ikke", 0.4f, "så", 0.05f, "bra", 0.05f))));
+    links.add(new KeywordLink("uhyggelig", null, 1, List.of(Map.of("det", 0.2f, "går", 0.2f, "dårlig", 0.6f, "ikke", 0.4f, "så", 0.05f, "bra", 0.05f))));
 
-    links.add(new KeywordLink("uhyggelig", null, null, 1, List.of(Map.of("nei", 1.0f, "nope", 1.0f, "niks", 1.0f))));
+    links.add(new KeywordLink("uhyggelig", null, 1, List.of(Map.of("nei", 1.0f, "nope", 1.0f, "niks", 1.0f))));
 
 
     ObjectMapper mapper = new ObjectMapper();

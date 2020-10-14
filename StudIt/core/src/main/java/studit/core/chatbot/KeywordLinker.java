@@ -19,6 +19,7 @@ public class KeywordLinker {
   private BiMap<Integer, String> recognizedWords;
   private Map<String, List<Keyword[]>> commandIDs;
   private Map<String, Integer> precedences;
+  private Map<String, String> dataMatches;
 
   public KeywordLinker(List<KeywordLink> links) {
     this.links = links;
@@ -33,12 +34,14 @@ public class KeywordLinker {
     recognizedWords = HashBiMap.create();
     commandIDs = new HashMap<>();
     precedences = new HashMap<>();
+    dataMatches = new HashMap<>();
 
     Set<String> uniqueWords = new HashSet<>();
 
     for (KeywordLink link : links) {
       uniqueWords.addAll(link.getWords());
       precedences.put(link.getCommand(), link.getPrecedence());
+      dataMatches.put(link.getCommand(), link.getDataMatch());
     }
 
     int id = 0;
@@ -161,7 +164,7 @@ public class KeywordLinker {
       }
 
       matches.add(
-          new Match(entry.getKey(), Floats.max(matchWeights), precedences.get(entry.getKey())));
+          new Match(entry.getKey(), Floats.max(matchWeights), precedences.get(entry.getKey()), ""));
 
     }
 

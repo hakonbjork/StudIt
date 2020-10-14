@@ -13,7 +13,7 @@ public class KeywordLinkTest {
   
   @BeforeEach
   public void init() {
-    link = new KeywordLink("hils", null, null, 1,List.of( Map.of("hei", 1.0f, "hallo", 0.8f)));
+    link = new KeywordLink("hils", null, 1, List.of( Map.of("hei", 1.0f, "hallo", 0.8f)));
   }
 
   @Test

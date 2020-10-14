@@ -19,8 +19,8 @@ public class KeywordLinkerTest {
 
     dummyLinks = new ArrayList<>();
 
-    dummyLinks.add(new KeywordLink("hils", null, null, 1,List.of( Map.of("hei", 1.0f, "hallo", 0.8f))));
-    dummyLinks.add(new KeywordLink("hade", null, null, 2,List.of( Map.of("hade", 0.8f, "adios", 0.2f))));
+    dummyLinks.add(new KeywordLink("hils", null, 1, List.of( Map.of("hei", 1.0f, "hallo", 0.8f))));
+    dummyLinks.add(new KeywordLink("hade", null, 2, List.of( Map.of("hade", 0.8f, "adios", 0.2f))));
 
     linker = new KeywordLinker(dummyLinks);
   }

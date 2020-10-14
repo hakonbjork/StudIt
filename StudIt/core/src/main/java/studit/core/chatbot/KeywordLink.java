@@ -9,23 +9,17 @@ public class KeywordLink {
   private String command;
   private List<Map<String, Float>> keywordLinksList;
   private int precedence;
-  private List<String> commandParent;
   private String dataMatch;
-  private boolean parent;
 
   public KeywordLink() {
 
   }
 
-  public KeywordLink(String command, List<String> commandParent, String dataMatch, int precedence,
-      List<Map<String, Float>> keywordLinksList) {
+  public KeywordLink(String command, String dataMatch, int precedence, List<Map<String, Float>> keywordLinksList) {
     this.command = command;
-    this.commandParent = commandParent;
     this.dataMatch = dataMatch;
     this.keywordLinksList = keywordLinksList;
     this.setPrecedence(precedence);
-    
-    this.parent = commandParent != null;
   }
 
   public String getCommand() {
@@ -61,14 +55,6 @@ public class KeywordLink {
     this.precedence = precedence;
   }
 
-  public List<String> getCommandParent() {
-    return commandParent;
-  }
-
-  public void setCommandParent(ArrayList<String> commandParent) {
-    this.commandParent = commandParent;
-  }
-
   public String getDataMatch() {
     return dataMatch;
   }
@@ -77,8 +63,5 @@ public class KeywordLink {
     this.dataMatch = dataMatch;
   }
 
-  public boolean hasParent() {
-    return parent;
-  }
 
 }
