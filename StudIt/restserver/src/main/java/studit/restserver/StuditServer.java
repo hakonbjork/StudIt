@@ -12,16 +12,24 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import studit.restapi.StuditService;
 
-
 public class StuditServer {
-    private static URI BASE_URI = URI.create("http://localhost:8080/");
+  private static URI BASE_URI = URI.create("http://localhost:8080/");
 
-    public static void main(final String[] args, int awaitPeriodSeconds) {
-
+  public static void main(final String[] args, int awaitPeriodSeconds) {
+    try {
+      final HttpServer server = startServer(args, -1);
+      Runtime.getRuntime().addShutdownHook(new Thread(server::shutdownNow));
+      Thread.currentThread().join();
+    } catch (final InterruptedException ex) {
+      Logger.getLogger(StuditServer.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IOException e) {
+      Logger.getLogger(StuditServer.class.getName()).log(Level.SEVERE, null, e);
+      System.out.println("IOException occured starting the server, see log for more details.");
     }
 
-    public static HttpServer startServer(final String[] args, int waitSecondsForServer)
-      throws IOException {
+  }
+
+  public static HttpServer startServer(final String[] args, int waitSecondsForServer) throws IOException {
     URI baseUri = (args.length >= 1 ? URI.create(args[0]) : BASE_URI);
     ResourceConfig resourceConfig = new StuditConfig();
     HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(baseUri, resourceConfig);
@@ -51,5 +59,14 @@ public class StuditServer {
     return null;
   }
 
+  /**
+   * Stops the server.
+   *
+   * @param server the server to stop
+   * @throws IOException if server shutdown fails
+   */
+  public static void stopServer(final HttpServer server) throws IOException {
+    server.shutdown();
+  }
 
 }
