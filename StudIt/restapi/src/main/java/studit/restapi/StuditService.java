@@ -1,4 +1,6 @@
-package studit.restserver;
+package studit.restapi;
+
+import studit.core.StuditModel;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -11,10 +13,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 public class StuditService {
 
-   public static final String STUDIT_SERVICE_PATH = "studit";
+  public static final String STUDIT_SERVICE_PATH = "studit";
+  private static final Logger LOG = LoggerFactory.getLogger(StuditService.class);
 
-   
-  
+  @Inject
+  private StuditModel studitModel;
+
 }

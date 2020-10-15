@@ -47,6 +47,4 @@ public class CourseList implements Iterable<CourseItem> {
     return items;
   }
 
-
-
 }

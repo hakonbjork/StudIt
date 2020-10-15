@@ -9,6 +9,11 @@
 
     <artifactId>restapi</artifactId>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <slf4jVersion>1.7.25</slf4jVersion>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>gruppe60.studit</groupId>
@@ -48,12 +53,11 @@
             <artifactId>mockito-core</artifactId>
             <version>2.28.2</version>
         </dependency>
-
-
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1.1</version>
+        
+         <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>2.1.5</version>
         </dependency>
 
         <dependency>
@@ -61,12 +65,14 @@
             <artifactId>javax.inject</artifactId>
             <version>1</version>
         </dependency>
+
+        <!-- Logging med slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4jVersion}</version>
+        </dependency>
     </dependencies>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
 
     <build>
         <plugins>
