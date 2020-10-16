@@ -37,7 +37,7 @@ public class StuditConfig extends ResourceConfig {
   }
 
   public static StuditModel createDefaultStuditModel() {
-    return null;
+    return new StuditModel();
   }
 
 
