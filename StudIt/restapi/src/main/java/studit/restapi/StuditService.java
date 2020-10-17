@@ -25,6 +25,10 @@ public class StuditService {
   @Inject
   private StuditModel studitModel;
 
+  /**
+   * API base endpoint
+   * @return active StuditModel object
+   */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public StuditModel getStuditModel() {

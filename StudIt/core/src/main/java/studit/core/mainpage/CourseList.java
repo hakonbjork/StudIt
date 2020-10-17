@@ -28,8 +28,16 @@ public class CourseList implements Iterable<CourseItem> {
       courseListItem = new CourseListItem(this);
       courseListItem.setFagkode(item.getFagkode());
       courseListItem.setFagnavn(item.getFagnavn());
-      courseListItem.setKommentar(item.getKommentar());
-      courseListItem.setScore(item.getScore());
+      courseListItem.setInformasjon(item.getInformasjon());
+      courseListItem.setPensumlitteratur(item.getPensumlitteratur());
+      courseListItem.setAnbefaltLitteratur(item.getAnbefaltLitteratur());
+      courseListItem.setTips(item.getTips());
+      courseListItem.setEksamensdato(item.getEksamensdato());
+      courseListItem.setVurderingsform(item.getVurderingsform());
+      courseListItem.setHjelpemidler(item.getHjelpemidler());
+      courseListItem.setVurderinger(item.getVurderinger());
+      courseListItem.setAverageVurdering();
+      System.out.println("Debug from CourseList.java: " + courseListItem.getAverageVurdering());
     }
     items.add(courseListItem);
   }

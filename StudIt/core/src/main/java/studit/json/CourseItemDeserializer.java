@@ -6,15 +6,19 @@ import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import studit.core.mainpage.CourseItem;
 
 public class CourseItemDeserializer extends JsonDeserializer<CourseItem> {
 
   /**
-   * Deserialiezes a CourseItem. 
+   * Deserialiezes a CourseItem.
    *
    */
   @Override
@@ -29,25 +33,61 @@ public class CourseItemDeserializer extends JsonDeserializer<CourseItem> {
       ObjectNode objectNode = (ObjectNode) jsonNode;
       CourseItem item = new CourseItem();
 
-      JsonNode codeNode = objectNode.get("code");
-      if (codeNode instanceof TextNode) {
-        item.setFagkode(((TextNode) codeNode).asText());
+      JsonNode fagkodeNode = objectNode.get("fagkode");
+      if (fagkodeNode instanceof TextNode) {
+        item.setFagkode(((TextNode) fagkodeNode).asText());
       }
 
-      JsonNode nameNode = objectNode.get("name");
+      JsonNode nameNode = objectNode.get("navn");
       if (nameNode instanceof TextNode) {
         item.setFagnavn(((TextNode) nameNode).asText());
       }
 
-      JsonNode rateNode = objectNode.get("rate");
-      if (rateNode instanceof TextNode) {
-        item.setScore(((TextNode) rateNode).asText());
+      JsonNode infoNode = objectNode.get("informasjon");
+      if (infoNode instanceof TextNode) {
+        item.setInformasjon(((TextNode) infoNode).asText());
       }
 
-      JsonNode kommentarNode = objectNode.get("kommentar");
-      if (kommentarNode instanceof TextNode) {
-        item.setKommentar(((TextNode) kommentarNode).asText());
+      JsonNode pensumNode = objectNode.get("pensumlitteratur");
+      if (pensumNode instanceof TextNode) {
+        item.setInformasjon(((TextNode) pensumNode).asText());
       }
+
+      JsonNode anbefaltNode = objectNode.get("anbefaltLitteratur");
+      if (anbefaltNode instanceof TextNode) {
+        item.setInformasjon(((TextNode) anbefaltNode).asText());
+      }
+
+      JsonNode tipsNode = objectNode.get("tips");
+      if (tipsNode instanceof TextNode) {
+        item.setTips(((TextNode) tipsNode).asText());
+      }
+
+      JsonNode eksamensNode = objectNode.get("eksamensdato");
+      if (eksamensNode instanceof TextNode) {
+        item.setTips(((TextNode) eksamensNode).asText());
+      }
+
+      JsonNode vurderingsNode = objectNode.get("vurderingsform");
+      if (vurderingsNode instanceof TextNode) {
+        item.setTips(((TextNode) vurderingsNode).asText());
+      }
+
+      JsonNode hjelpemidlerNode = objectNode.get("hjelpemidler");
+      if (hjelpemidlerNode instanceof TextNode) {
+        item.setTips(((TextNode) hjelpemidlerNode).asText());
+      }
+
+      JsonNode vurderingerNode = objectNode.get("vurderinger");
+      List<Float> vurderinger = new ArrayList<>();
+      if (vurderingerNode instanceof ArrayNode) {
+        for (JsonNode vurdering : vurderingerNode) {
+          vurderinger.add((float) vurdering.asDouble());
+        }
+        item.setVurderinger(vurderinger);
+      }
+      
+      item.setAverageVurdering();
 
       return item;
 

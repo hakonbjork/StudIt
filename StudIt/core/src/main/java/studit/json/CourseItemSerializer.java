@@ -20,11 +20,20 @@ public class CourseItemSerializer extends JsonSerializer<CourseItem> {
 
     jsonGen.writeStartObject();
 
-    jsonGen.writeStringField("code", item.getFagkode());
-    jsonGen.writeStringField("name", item.getFagnavn());
-    jsonGen.writeStringField("rate", item.getScore());
-    jsonGen.writeStringField("kommentar", item.getKommentar());
-
+    jsonGen.writeStringField("fagkode", item.getFagkode());
+    jsonGen.writeStringField("fagnavn", item.getFagnavn());
+    jsonGen.writeStringField("informasjon", item.getInformasjon());
+    jsonGen.writeStringField("pensumlitteratur", item.getPensumlitteratur());
+    jsonGen.writeStringField("anbefaltLitteratur", item.getAnbefaltLitteratur());
+    jsonGen.writeStringField("tips", item.getTips());
+    jsonGen.writeStringField("eksamensdato", item.getEksamensdato());
+    jsonGen.writeStringField("vurderingsform", item.getVurderingsform());
+    jsonGen.writeStringField("hjelpemidler", item.getHjelpemidler());
+    jsonGen.writeStartArray("vurderinger");
+    for (Float vurdering : item.getVurderinger()) {
+      jsonGen.writeString(String.valueOf(vurdering));
+    }
+    jsonGen.writeEndArray();
     jsonGen.writeEndObject();
 
   }
