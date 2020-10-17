@@ -1,5 +1,6 @@
 package studit.core.mainpage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
 
@@ -15,10 +16,10 @@ public class CourseItem {
   private String vurderingsform;
   private String hjelpemidler;
   private float averageVurdering;
-  private List<Float> vurderinger;
+  private List<Integer> vurderinger;
 
   public CourseItem() {
-    setAverageVurdering();
+    vurderinger = new ArrayList<>();
   }
 
   public void setFagnavn(String fagnavn) {
@@ -93,16 +94,16 @@ public class CourseItem {
     this.hjelpemidler = hjelpemidler;
   }
 
-  public List<Float> getVurderinger() {
+  public List<Integer> getVurderinger() {
     return vurderinger;
   }
 
-  public void setVurderinger(List<Float> vurderinger) {
+  public void setVurderinger(List<Integer> vurderinger) {
     this.vurderinger = vurderinger;
     setAverageVurdering();
   }
 
-  public void addVurdering(Float vurdering) {
+  public void addVurdering(Integer vurdering) {
     vurderinger.add(vurdering);
   }
 
@@ -112,7 +113,7 @@ public class CourseItem {
    */
   public void setAverageVurdering() {
      OptionalDouble average = vurderinger.stream() 
-    .mapToDouble(i -> i) 
+    .mapToInt(i -> i) 
     .average();
 
     averageVurdering = average.isPresent() ? (float) average.getAsDouble() : 0; 

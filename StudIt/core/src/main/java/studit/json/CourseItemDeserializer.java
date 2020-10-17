@@ -79,10 +79,10 @@ public class CourseItemDeserializer extends JsonDeserializer<CourseItem> {
       }
 
       JsonNode vurderingerNode = objectNode.get("vurderinger");
-      List<Float> vurderinger = new ArrayList<>();
+      List<Integer> vurderinger = new ArrayList<>();
       if (vurderingerNode instanceof ArrayNode) {
         for (JsonNode vurdering : vurderingerNode) {
-          vurderinger.add((float) vurdering.asDouble());
+          vurderinger.add(vurdering.asInt());
         }
         item.setVurderinger(vurderinger);
       }
