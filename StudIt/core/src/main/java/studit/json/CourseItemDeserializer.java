@@ -38,7 +38,7 @@ public class CourseItemDeserializer extends JsonDeserializer<CourseItem> {
         item.setFagkode(((TextNode) fagkodeNode).asText());
       }
 
-      JsonNode nameNode = objectNode.get("navn");
+      JsonNode nameNode = objectNode.get("fagnavn");
       if (nameNode instanceof TextNode) {
         item.setFagnavn(((TextNode) nameNode).asText());
       }
