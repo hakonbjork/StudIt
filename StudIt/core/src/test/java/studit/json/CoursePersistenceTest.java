@@ -57,15 +57,13 @@ public class CoursePersistenceTest {
     CourseItem item1 = new CourseItem();
     item1.setFagkode("TDT4109");
     item1.setFagnavn("ITGK for grovinger");
-    item1.setKommentar("Schpa fag");
-    item1.setScore("10");
+    item1.setInformasjon("Schpa fag");
     list.addCourseItem(item1);
 
     CourseItem item2 = new CourseItem();
     item2.setFagkode("TMA4125");
     item2.setFagnavn("Statistikk");
-    item2.setKommentar("Kult fag");
-    item2.setScore("8");
+    item2.setInformasjon("Kult fag");
     list.addCourseItem(item2);
 
     CourseList courseList = new CourseList();
