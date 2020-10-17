@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+@Path(StuditService.STUDIT_SERVICE_PATH)
 public class StuditService {
 
   public static final String STUDIT_SERVICE_PATH = "studit";
@@ -23,5 +24,11 @@ public class StuditService {
 
   @Inject
   private StuditModel studitModel;
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public StuditModel getStuditModel() {
+    return studitModel;
+  }
 
 }
