@@ -19,18 +19,31 @@ public class DefaultGenerator {
   public static void testSerializers() {
     CourseItem testItem = new CourseItem();
     testItem.setFagkode("TMA4140");
-    testItem.setFagnavn("bruh");
+    testItem.setFagnavn("Diskret Matematikk 1");
     testItem.setInformasjon("Info");
-    testItem.setPensumlitteratur("bok");
-    testItem.setAnbefaltLitteratur("bok2");
-    testItem.setTips("Dette var lurt");
-    testItem.setEksamensdato("03/12/2002");
-    testItem.setVurderingsform("hjemmeEKsamen");
+    testItem.setPensumlitteratur("Mathematics for dummies and retards");
+    testItem.setAnbefaltLitteratur("Kompendium Diskmat");
+    testItem.setTips("Ikke kok");
+    testItem.setEksamensdato("03/12/2020");
+    testItem.setVurderingsform("Hjemmeksamen");
     testItem.setHjelpemidler("alle");
+    testItem.setVurderinger(List.of(3, 5, 9, 8));
+
+    CourseItem testItem2 = new CourseItem();
+    testItem.setFagkode("TDT4120");
+    testItem.setFagnavn("Informasjonsteknologi - Avansert kurs");
+    testItem.setInformasjon("Masse informasjon her");
+    testItem.setPensumlitteratur("Informatics for dummies and retards");
+    testItem.setAnbefaltLitteratur("Kompendium IT");
+    testItem.setTips("Ikke kok. Spis grønnsaker");
+    testItem.setEksamensdato("05/12/2020");
+    testItem.setVurderingsform("Muntlig eksamen");
+    testItem.setHjelpemidler("Mamma på telefon");
     testItem.setVurderinger(List.of(3, 5, 9, 8));
 
     CourseList courseList = new CourseList();
     courseList.addCourseItem(testItem);
+    courseList.addCourseItem(testItem2);
 
     StuditModel model = new StuditModel();
     model.setCourseList(courseList);
