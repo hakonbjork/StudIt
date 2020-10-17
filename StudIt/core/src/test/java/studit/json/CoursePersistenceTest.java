@@ -1,5 +1,6 @@
 package studit.json;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,9 +10,11 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 
@@ -27,7 +30,7 @@ public class CoursePersistenceTest {
   /**
    * This function should fetch data from a database
    */
-  private Collection<CourseItem> loadData() {
+  private List<CourseItem> loadData() {
 
     try (FileReader fr = new FileReader("src/main/resources/studit/db/maindbtest.json", StandardCharsets.UTF_8)) {
 
@@ -35,7 +38,7 @@ public class CoursePersistenceTest {
 
       System.out.println(li.getCourseItems().size());
 
-      Collection<CourseItem> items = li.getCourseItems();
+      List<CourseItem> items = li.getCourseItems();
 
       return items;
 
@@ -78,20 +81,17 @@ public class CoursePersistenceTest {
 
     } catch (FileNotFoundException e1) {
       e1.printStackTrace();
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
 
-    
-
-    Collection<CourseItem> items2 = loadData();
-
-    Collection<CourseItem> items1 = courseList.getCourseItems();
+    List<CourseItem> items2 = loadData();
+    List<CourseItem> items1 = courseList.getCourseItems();
+    System.out.println("Hello: " + items2.get(0).getFagnavn());
 
     assertEquals(items1.iterator().hasNext(), items2.iterator().hasNext());
     assertEquals(items1.iterator().next().getFagnavn(), items2.iterator().next().getFagnavn());
-    
+
     assertEquals(items1.iterator().hasNext(), items2.iterator().hasNext());
     assertEquals(items1.iterator().next().getFagnavn(), items2.iterator().next().getFagnavn());
 

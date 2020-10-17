@@ -29,7 +29,8 @@ public class CourseItemSerializer extends JsonSerializer<CourseItem> {
     jsonGen.writeStringField("eksamensdato", item.getEksamensdato());
     jsonGen.writeStringField("vurderingsform", item.getVurderingsform());
     jsonGen.writeStringField("hjelpemidler", item.getHjelpemidler());
-    jsonGen.writeStartArray("vurderinger");
+    jsonGen.writeFieldName("vurderinger");
+    jsonGen.writeStartArray();
     for (Integer vurdering : item.getVurderinger()) {
       jsonGen.writeString(String.valueOf(vurdering));
     }

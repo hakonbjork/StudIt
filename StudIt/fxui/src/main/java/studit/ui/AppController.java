@@ -234,7 +234,7 @@ public class AppController implements ChangeListener<String> {
 
           // injecting second scene into the controller of the first scene
           CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
-          courseController.setCourseText(courseItem.getKommentar());
+          courseController.setCourseText(courseItem.getInformasjon());
           courseController.setLabel(coursesList.getSelectionModel().getSelectedItem().substring(0, 8));
 
           primaryStage.setScene(courseScene);

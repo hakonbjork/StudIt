@@ -37,6 +37,7 @@ public class StuditConfig extends ResourceConfig {
         bind(StuditConfig.this.studitModel);
       }
     });
+    DefaultGenerator.testSerializers();
   }
 
   public StuditConfig() {
