@@ -28,7 +28,7 @@ public class CommentDeserializer extends JsonDeserializer<Comment> {
     return deserialize((JsonNode) treeNode);
   }
 
-  private Comment deserialize(JsonNode jsonNode) {
+  public Comment deserialize(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) jsonNode;
       Comment comment = new Comment();

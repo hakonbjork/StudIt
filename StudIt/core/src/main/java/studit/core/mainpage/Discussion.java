@@ -7,6 +7,7 @@ public class Discussion {
   private Map<Integer, Comment> comments;
   private int prevAssignedID = -1;
 
+  
   public Map<Integer, Comment> getComments() {
     return comments;
   }
@@ -59,6 +60,14 @@ public class Discussion {
   public boolean removeComment(int ID) {
     Comment comment = comments.remove(ID); 
     return comment == null ? false : true; 
+  }
+
+  public int getPrevAssignedID() {
+    return prevAssignedID;
+  }
+
+  public void setPrevAssignedID(int prevAssignedID) {
+    this.prevAssignedID = prevAssignedID;
   }
 
 }

@@ -28,7 +28,7 @@ public class CourseItemDeserializer extends JsonDeserializer<CourseItem> {
     return deserialize((JsonNode) treeNode);
   }
 
-  CourseItem deserialize(JsonNode jsonNode) {
+  public CourseItem deserialize(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) jsonNode;
       CourseItem item = new CourseItem();
