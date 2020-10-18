@@ -2,7 +2,6 @@ package studit.json;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;

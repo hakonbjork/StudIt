@@ -1,24 +1,23 @@
 package studit.json;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-
+import java.io.IOException;
 import studit.core.mainpage.Comment;
 
 public class CommentSerializer extends JsonSerializer<Comment> {
-  
+
   /**
-   * Serializes a Comment object
-   * @param comment Comment object to serialize
-   * @param jsonGen JsonGenerator instance
+   * Serializes a Comment object.
+   * 
+   * @param comment     Comment object to serialize
+   * @param jsonGen     JsonGenerator instance
    * @param serializers SerializerProvider instance
    */
   @Override
   public void serialize(Comment comment, JsonGenerator jsonGen, SerializerProvider serializers) throws IOException {
-    
+
     jsonGen.writeStartObject();
 
     jsonGen.writeStringField("brukernavn", comment.getBrukernavn());

@@ -1,7 +1,5 @@
 package studit.json;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -10,13 +8,13 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-
+import java.io.IOException;
 import studit.core.mainpage.Comment;
 
 public class CommentDeserializer extends JsonDeserializer<Comment> {
 
   /**
-   * Deserializes Comment object
+   * Deserializes Comment object.
    * 
    * @param parser JsonParser instance
    * @param ctxt   DeserializationContext instance
@@ -58,9 +56,9 @@ public class CommentDeserializer extends JsonDeserializer<Comment> {
         comment.setDownvotes(((TextNode) downvotesNode).asInt());
       }
 
-      JsonNode IDNode = objectNode.get("uniqueID");
-      if (IDNode instanceof TextNode) {
-        comment.setUniqueID(((TextNode) IDNode).asInt());
+      JsonNode idNode = objectNode.get("uniqueID");
+      if (idNode instanceof TextNode) {
+        comment.setUniqueID(((TextNode) idNode).asInt());
       }
 
       return comment;

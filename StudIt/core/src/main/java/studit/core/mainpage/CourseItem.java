@@ -30,7 +30,7 @@ public class CourseItem {
   public void setFagkode(String fagkode) {
     this.fagkode = fagkode;
   }
-  
+
   public String getFagnavn() {
     return this.fagnavn;
   }
@@ -109,15 +109,12 @@ public class CourseItem {
   }
 
   /**
-   * Gets the average rating of the Course
-   * @return average if the list is populated else 0
+   * Calculates the average rating of a course.
    */
   public void setAverageVurdering() {
-     OptionalDouble average = vurderinger.stream() 
-    .mapToInt(i -> i) 
-    .average();
-
-    averageVurdering = average.isPresent() ? (float) average.getAsDouble() : 0; 
+    OptionalDouble average = vurderinger.stream().mapToInt(i -> i).average();
+    
+    averageVurdering = average.isPresent() ? (float) average.getAsDouble() : 0;
   }
 
   public float getAverageVurdering() {

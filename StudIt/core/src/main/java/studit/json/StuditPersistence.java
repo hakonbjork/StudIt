@@ -1,11 +1,9 @@
 package studit.json;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import studit.core.StuditModel;
 
 public class StuditPersistence {

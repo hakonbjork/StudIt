@@ -1,23 +1,20 @@
 package studit.json;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-
+import java.io.IOException;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.Discussion;
 
 public class DiscussionSerializer extends JsonSerializer<Discussion> {
 
   /**
-   * Serializes a Discussion object
+   * Serializes a Discussion object.
    * 
    * @param discussion  Discussion object to serialize
    * @param jsonGen     JsonGenerator instance
-   * @param serializers SerializerProvider instance
+   * @param serializer SerializerProvider instance
    */
   @Override
   public void serialize(Discussion discussion, JsonGenerator jsonGen, SerializerProvider serializer)
