@@ -9,7 +9,11 @@ public class Comment {
   private String dato;
   private int upvotes;
   private int downvotes;
-  private final int uniqueID;
+  private int uniqueID;
+
+  public Comment() {
+
+  }
 
   public Comment(String brukernavn, String kommentar, int uniqueID) {
     this.brukernavn = brukernavn;
@@ -58,6 +62,14 @@ public class Comment {
 
   public void setDownvotes(int downvotes) {
     this.downvotes = downvotes;
+  }
+
+  /**
+   * Sets the unique id for the comment.
+   * WARNING: This should only be called from the deserializer class and nothing else.
+   */
+  public void setUniqueID(int uniqueID) {
+    this.uniqueID = uniqueID;
   }
 
   public int getUniqueID() {
