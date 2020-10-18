@@ -41,7 +41,7 @@ public class LoginController implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    studit.core.UserManager.startStuff();
+    studit.core.users.UserManager.startStuff();
   }
 
   /**
@@ -75,7 +75,7 @@ public class LoginController implements Initializable {
   public void loginButtonAction() throws Exception {
     String username = usernameField.getText();
     String password = passwordField.getText();
-    if (studit.core.LoginManager.match(username, password)) {
+    if (studit.core.users.LoginManager.match(username, password)) {
       loginInfoText.setText("");
       BorderPane pane = FXMLLoader.load(getClass().getResource("App.fxml"));
       Scene scene = new Scene(pane);

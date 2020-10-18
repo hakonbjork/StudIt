@@ -21,6 +21,8 @@ import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 import studit.core.mainpage.Discussion;
+import studit.core.users.User;
+import studit.core.users.Users;
 
 public class StuditPercistenceTest {
 
@@ -84,7 +86,27 @@ public class StuditPercistenceTest {
         assertEquals(testComment.getDownvotes(), loadedComment.getDownvotes());
         assertEquals(testComment.getUniqueID(), loadedComment.getUniqueID());
       }
+    }
 
+    Users testUsers = testStuditModel.getUsers();
+    Users loadedUsers = loadedModel.getUsers();
+
+    assertNotNull(loadedUsers);
+    assertEquals(testUsers.getPrevAssignedID(), loadedUsers.getPrevAssignedID());
+
+    Map<Integer, User> testUsersMap = testUsers.getUsers();
+    Map<Integer, User> loadedUsersMap = loadedUsers.getUsers();
+
+    // Iterate two times, as we added 2 test users
+    for (int i = 0; i < 2; i++) {
+      User testUser = testUsersMap.get(i);
+      User loadedUser = testUsersMap.get(i);
+
+      assertEquals(testUser.getName(), loadedUser.getName());
+      assertEquals(testUser.getUsername(), loadedUser.getUsername());
+      assertEquals(testUser.getMail(), loadedUser.getMail());
+      assertEquals(testUser.getPassword(), loadedUser.getPassword());
+      assertEquals(testUser.getUniqueID(), loadedUser.getUniqueID());
     }
 
   }
@@ -153,6 +175,11 @@ public class StuditPercistenceTest {
 
     StuditModel model = new StuditModel();
     model.setCourseList(courseList);
+
+    Users users = new Users();
+    users.addUser("Berte bjernsen", "Berte92", "berte@bertebok.com", "kusma1992");
+    users.addUser("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com", "pomeranian123");
+    model.setUsers(users);
 
     return model;
   }

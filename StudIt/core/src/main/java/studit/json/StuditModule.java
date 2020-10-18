@@ -6,6 +6,8 @@ import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 import studit.core.mainpage.Discussion;
+import studit.core.users.User;
+import studit.core.users.Users;
 
 public class StuditModule extends SimpleModule {
   private static final long serialVersionUID = 1L;
@@ -23,5 +25,9 @@ public class StuditModule extends SimpleModule {
     addDeserializer(Comment.class, new CommentDeserializer());
     addDeserializer(Discussion.class, new DiscussionDeserializer());
 
+    addSerializer(User.class, new UserSerializer());
+    addSerializer(Users.class, new UsersSerializer());
+    addDeserializer(User.class, new UserDeserializer());
+    addDeserializer(Users.class, new UsersDeserializer());
   }
 }

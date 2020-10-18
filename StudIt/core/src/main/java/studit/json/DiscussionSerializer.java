@@ -20,12 +20,14 @@ public class DiscussionSerializer extends JsonSerializer<Discussion> {
   public void serialize(Discussion discussion, JsonGenerator jsonGen, SerializerProvider serializer)
       throws IOException {
     jsonGen.writeStartObject();
+    
     jsonGen.writeStringField("prevAssignedID", String.valueOf(discussion.getPrevAssignedID()));
     jsonGen.writeArrayFieldStart("comments");
     for (Comment comment : discussion.getComments().values()) {
       jsonGen.writeObject(comment);
     }
     jsonGen.writeEndArray();
+
     jsonGen.writeEndObject();
   }
 

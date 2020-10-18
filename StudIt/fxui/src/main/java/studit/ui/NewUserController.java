@@ -5,8 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import studit.core.User;
-import studit.core.UserManager;
+import studit.core.users.User;
+import studit.core.users.UserManager;
 
 public class NewUserController {
 

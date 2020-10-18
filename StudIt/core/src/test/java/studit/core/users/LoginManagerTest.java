@@ -1,4 +1,4 @@
-package studit.core;
+package studit.core.users;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

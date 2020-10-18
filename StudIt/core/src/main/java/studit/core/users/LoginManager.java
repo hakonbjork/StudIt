@@ -1,4 +1,4 @@
-package studit.core;
+package studit.core.users;
 
 public class LoginManager {
 

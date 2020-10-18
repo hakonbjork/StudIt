@@ -1,4 +1,4 @@
-package studit.core;
+package studit.core.users;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

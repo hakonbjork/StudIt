@@ -1,4 +1,4 @@
-package studit.core;
+package studit.core.users;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;

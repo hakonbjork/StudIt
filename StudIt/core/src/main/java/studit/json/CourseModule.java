@@ -8,6 +8,8 @@ import studit.core.mainpage.CourseList;
 @SuppressWarnings("serial")
 public class CourseModule extends SimpleModule {
 
+  // TODO: remove this class (deprecated)
+
   private static final String NAME = "CourseModule";
 
   /**

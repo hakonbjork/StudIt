@@ -13,6 +13,7 @@ import studit.core.StuditModel;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 import studit.core.mainpage.Discussion;
+import studit.core.users.Users;
 import studit.json.StuditPersistence;
 
 public class DefaultGenerator {
@@ -63,6 +64,12 @@ public class DefaultGenerator {
     StuditModel model = new StuditModel();
     model.setCourseList(courseList);
 
+    Users users = new Users();
+    users.addUser("Berte bjernsen", "Berte92", "berte@bertebok.com", "kusma1992");
+    users.addUser("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com", "pomeranian123");
+    model.setUsers(users);
+
+
     StuditPersistence studitPersistence = new StuditPersistence();
     try {
       Writer writer = new OutputStreamWriter(new FileOutputStream(DEFAULT_PATH), StandardCharsets.UTF_8);
@@ -76,7 +83,7 @@ public class DefaultGenerator {
     try {
       reader = new FileReader(DEFAULT_PATH, StandardCharsets.UTF_8);
       StuditModel loadedModel = studitPersistence.readStuditModel(reader);
-      System.out.println(loadedModel.getCourseList().getCourseItems().get(0).getDiskusjon());
+      System.out.println(loadedModel.getUsers().getUsers());
       //System.out.println(loadedModel.getCourseList().getCourseItems().get(0).getDiskusjon().getComments().get(0));
 
     } catch (IOException e) {

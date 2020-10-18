@@ -16,21 +16,21 @@
         "comments" : [ {
           "brukernavn" : "BobbyBigBoi",
           "kommentar" : "Bra saker!",
-          "dato" : "18-10-2020 10:02:46",
+          "dato" : "18-10-2020 06:14:37",
           "upvotes" : "1",
           "downvotes" : "1",
           "uniqueID" : "0"
         }, {
           "brukernavn" : "BobbyBigBoi",
           "kommentar" : "Ok saker :/",
-          "dato" : "18-10-2020 10:02:46",
+          "dato" : "18-10-2020 06:14:37",
           "upvotes" : "0",
           "downvotes" : "0",
           "uniqueID" : "1"
         }, {
           "brukernavn" : "BjarteBrorMor",
           "kommentar" : "Bobby er en idiot!",
-          "dato" : "18-10-2020 10:02:46",
+          "dato" : "18-10-2020 06:14:37",
           "upvotes" : "2",
           "downvotes" : "0",
           "uniqueID" : "2"
@@ -48,6 +48,22 @@
       "hjelpemidler" : "Mamma på telefon",
       "vurderinger" : [ "3", "5", "9", "8" ],
       "diskusjon" : null
+    } ]
+  },
+  "users" : {
+    "prevAssignedID" : "1",
+    "users" : [ {
+      "name" : "Berte bjernsen",
+      "username" : "Berte92",
+      "mail" : "berte@bertebok.com",
+      "password" : "kusma1992",
+      "uniqueID" : "0"
+    }, {
+      "name" : "Ida Idasen",
+      "username" : "IdaErBest",
+      "mail" : "IdaElskerHunder@flyskflysk.com",
+      "password" : "pomeranian123",
+      "uniqueID" : "1"
     } ]
   }
 }
