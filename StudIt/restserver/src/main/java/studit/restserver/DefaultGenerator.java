@@ -30,16 +30,16 @@ public class DefaultGenerator {
     testItem.setVurderinger(List.of(3, 5, 9, 8));
 
     CourseItem testItem2 = new CourseItem();
-    testItem.setFagkode("TDT4120");
-    testItem.setFagnavn("Informasjonsteknologi - Avansert kurs");
-    testItem.setInformasjon("Masse informasjon her");
-    testItem.setPensumlitteratur("Informatics for dummies and retards");
-    testItem.setAnbefaltLitteratur("Kompendium IT");
-    testItem.setTips("Ikke kok. Spis grønnsaker");
-    testItem.setEksamensdato("05/12/2020");
-    testItem.setVurderingsform("Muntlig eksamen");
-    testItem.setHjelpemidler("Mamma på telefon");
-    testItem.setVurderinger(List.of(3, 5, 9, 8));
+    testItem2.setFagkode("TDT4120");
+    testItem2.setFagnavn("Informasjonsteknologi - Avansert kurs");
+    testItem2.setInformasjon("Masse informasjon her");
+    testItem2.setPensumlitteratur("Informatics for dummies and retards");
+    testItem2.setAnbefaltLitteratur("Kompendium IT");
+    testItem2.setTips("Ikke kok. Spis grønnsaker");
+    testItem2.setEksamensdato("05/12/2020");
+    testItem2.setVurderingsform("Muntlig eksamen");
+    testItem2.setHjelpemidler("Mamma på telefon");
+    testItem2.setVurderinger(List.of(3, 5, 9, 8));
 
     CourseList courseList = new CourseList();
     courseList.addCourseItem(testItem);
