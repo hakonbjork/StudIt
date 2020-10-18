@@ -1,20 +1,16 @@
 package studit.restapi;
 
-import studit.core.StuditModel;
-
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import studit.core.StuditModel;
+import studit.core.mainpage.CourseList;
 
 @Path(StuditService.STUDIT_SERVICE_PATH)
 public class StuditService {
@@ -27,12 +23,24 @@ public class StuditService {
 
   /**
    * API base endpoint
+   * 
    * @return active StuditModel object
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public StuditModel getStuditModel() {
     return studitModel;
+  }
+
+  /**
+   * Returns a new CourseList resource for further processing of the
+   * studit/courses request
+   */
+  @Path("/courses")
+  public CourseListResource getCourseList() {
+    CourseList courseList = getStuditModel().getCourseList();
+    LOG.debug("Accessing courses base endpoint...");
+    return new CourseListResource(courseList);
   }
 
 }

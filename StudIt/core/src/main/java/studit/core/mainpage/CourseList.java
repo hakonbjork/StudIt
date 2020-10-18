@@ -54,4 +54,13 @@ public class CourseList implements Iterable<CourseItem> {
     return items;
   }
 
+  public CourseItem getCourseByFagkode(String fagkode) {
+    for (CourseItem item : items) {
+      if (item.getFagkode().equals(fagkode)) {
+        return item;
+      }
+    }
+    return null;
+  }
+
 }
