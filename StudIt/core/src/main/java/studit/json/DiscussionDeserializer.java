@@ -31,8 +31,13 @@ public class DiscussionDeserializer extends JsonDeserializer<Discussion> {
   public Discussion deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
     
     TreeNode treeNode = parser.getCodec().readTree(parser);
-    if (treeNode instanceof ObjectNode) {
-      ObjectNode objectNode = (ObjectNode) treeNode;
+    return deserialize((JsonNode) treeNode);
+    
+  }
+
+  public Discussion deserialize(JsonNode jsonNode) {
+    if (jsonNode instanceof ObjectNode) {
+      ObjectNode objectNode = (ObjectNode) jsonNode;
       Discussion discussion = new Discussion();
 
       JsonNode IDNode = objectNode.get("prevAssignedID");

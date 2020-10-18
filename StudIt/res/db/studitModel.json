@@ -1,5 +1,27 @@
 {
   "courseList" : {
-    "items" : [ ]
+    "items" : [ {
+      "fagkode" : "TMA4140",
+      "fagnavn" : "Diskret Matematikk 1",
+      "informasjon" : "Info",
+      "pensumlitteratur" : "Mathematics for dummies and retards",
+      "anbefaltLitteratur" : "Kompendium Diskmat",
+      "tips" : "Ikke kok",
+      "eksamensdato" : "03/12/2020",
+      "vurderingsform" : "Hjemmeksamen",
+      "hjelpemidler" : "alle",
+      "vurderinger" : [ "3", "5", "9", "8" ]
+    }, {
+      "fagkode" : "TDT4120",
+      "fagnavn" : "Informasjonsteknologi - Avansert kurs",
+      "informasjon" : "Masse informasjon her",
+      "pensumlitteratur" : "Informatics for dummies and retards",
+      "anbefaltLitteratur" : "Kompendium IT",
+      "tips" : "Ikke kok. Spis grønnsaker",
+      "eksamensdato" : "05/12/2020",
+      "vurderingsform" : "Muntlig eksamen",
+      "hjelpemidler" : "Mamma på telefon",
+      "vurderinger" : [ "3", "5", "9", "8" ]
+    } ]
   }
 }

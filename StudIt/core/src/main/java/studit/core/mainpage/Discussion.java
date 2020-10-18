@@ -1,10 +1,11 @@
 package studit.core.mainpage;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Discussion {
 
-  private Map<Integer, Comment> comments;
+  private Map<Integer, Comment> comments = new HashMap<>();
   private int prevAssignedID = -1;
 
   
@@ -21,10 +22,12 @@ public class Discussion {
    * @param brukernavn unique username that sendt the comment
    * @param kommentar written comment
    * @param dato date written
+   * @return HashMap key (ID) for the new Comment object
    */
-  public void addComment(String brukernavn, String kommentar) {
+  public int addComment(String brukernavn, String kommentar) {
     prevAssignedID += 1;
     comments.put(prevAssignedID, new Comment(brukernavn, kommentar, prevAssignedID));
+    return prevAssignedID;
   }
 
   /**

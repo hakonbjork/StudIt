@@ -34,6 +34,7 @@ public class CourseItemSerializer extends JsonSerializer<CourseItem> {
       jsonGen.writeString(String.valueOf(vurdering));
     }
     jsonGen.writeEndArray();
+    jsonGen.writeObjectField("diskusjon", item.getDiskusjon());
     jsonGen.writeEndObject();
 
   }

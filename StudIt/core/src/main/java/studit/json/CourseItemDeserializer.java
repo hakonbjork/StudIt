@@ -1,5 +1,9 @@
 package studit.json;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -9,13 +13,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import studit.core.mainpage.CourseItem;
+import studit.core.mainpage.Discussion;
 
 public class CourseItemDeserializer extends JsonDeserializer<CourseItem> {
+
+  private DiscussionDeserializer discussionDeserializer = new DiscussionDeserializer();
 
   /**
    * Deserialiezes a CourseItem.
@@ -86,7 +90,11 @@ public class CourseItemDeserializer extends JsonDeserializer<CourseItem> {
         }
         item.setVurderinger(vurderinger);
       }
-      
+
+      JsonNode discussionNode = objectNode.get("diskusjon");
+      Discussion discussion = discussionDeserializer.deserialize(discussionNode);
+      item.setDiskusjon(discussion);
+
       item.setAverageVurdering();
 
       return item;

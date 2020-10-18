@@ -37,7 +37,7 @@ public class StuditConfig extends ResourceConfig {
         bind(StuditConfig.this.studitModel);
       }
     });
-    DefaultGenerator.testSerializers();
+    DefaultGenerator.writeDefaultDataToDb();
   }
 
   public StuditConfig() {

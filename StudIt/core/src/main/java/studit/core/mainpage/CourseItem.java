@@ -17,6 +17,7 @@ public class CourseItem {
   private String hjelpemidler;
   private float averageVurdering;
   private List<Integer> vurderinger;
+  private Discussion diskusjon;
 
   public CourseItem() {
     vurderinger = new ArrayList<>();
@@ -121,6 +122,14 @@ public class CourseItem {
 
   public float getAverageVurdering() {
     return averageVurdering;
+  }
+
+  public Discussion getDiskusjon() {
+    return diskusjon;
+  }
+
+  public void setDiskusjon(Discussion diskusjon) {
+    this.diskusjon = diskusjon;
   }
 
 }

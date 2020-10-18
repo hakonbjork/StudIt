@@ -12,11 +12,14 @@ import java.util.List;
 import studit.core.StuditModel;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
+import studit.core.mainpage.Discussion;
 import studit.json.StuditPersistence;
 
 public class DefaultGenerator {
 
-  public static void testSerializers() {
+  private static final String DEFAULT_PATH = "res/db/default/defaultModel.json";
+
+  public static void writeDefaultDataToDb() {
     CourseItem testItem = new CourseItem();
     testItem.setFagkode("TMA4140");
     testItem.setFagnavn("Diskret Matematikk 1");
@@ -28,6 +31,18 @@ public class DefaultGenerator {
     testItem.setVurderingsform("Hjemmeksamen");
     testItem.setHjelpemidler("alle");
     testItem.setVurderinger(List.of(3, 5, 9, 8));
+
+    Discussion discussion = new Discussion();
+    int id1 = discussion.addComment("BobbyBigBoi", "Bra saker!");
+    discussion.addComment("BobbyBigBoi", "Ok saker :/");
+    int id3 = discussion.addComment("BjarteBrorMor", "Bobby er en idiot!");
+
+    discussion.upvote(id1);
+    discussion.downvote(id1);
+    discussion.upvote(id3);
+    discussion.upvote(id3);
+
+    testItem.setDiskusjon(discussion);
 
     CourseItem testItem2 = new CourseItem();
     testItem2.setFagkode("TDT4120");
@@ -50,7 +65,7 @@ public class DefaultGenerator {
 
     StuditPersistence studitPersistence = new StuditPersistence();
     try {
-      Writer writer = new OutputStreamWriter(new FileOutputStream("res/db/default/test.json"), StandardCharsets.UTF_8);
+      Writer writer = new OutputStreamWriter(new FileOutputStream(DEFAULT_PATH), StandardCharsets.UTF_8);
       studitPersistence.writeStuditModel(model, writer);
 
     } catch (IOException e) {
@@ -59,9 +74,11 @@ public class DefaultGenerator {
 
     Reader reader = null;
     try {
-      reader = new FileReader("res/db/default/test.json", StandardCharsets.UTF_8);
-      StuditModel model2 = studitPersistence.readStuditModel(reader);
-      System.out.println(model2.getCourseList().getCourseItems().get(0).getAverageVurdering());
+      reader = new FileReader(DEFAULT_PATH, StandardCharsets.UTF_8);
+      StuditModel loadedModel = studitPersistence.readStuditModel(reader);
+      System.out.println(loadedModel.getCourseList().getCourseItems().get(0).getDiskusjon());
+      //System.out.println(loadedModel.getCourseList().getCourseItems().get(0).getDiskusjon().getComments().get(0));
+
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
