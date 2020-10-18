@@ -50,12 +50,12 @@ public class CourseItemDeserializer extends JsonDeserializer<CourseItem> {
 
       JsonNode pensumNode = objectNode.get("pensumlitteratur");
       if (pensumNode instanceof TextNode) {
-        item.setInformasjon(((TextNode) pensumNode).asText());
+        item.setPensumlitteratur(((TextNode) pensumNode).asText());
       }
 
       JsonNode anbefaltNode = objectNode.get("anbefaltLitteratur");
       if (anbefaltNode instanceof TextNode) {
-        item.setInformasjon(((TextNode) anbefaltNode).asText());
+        item.setAnbefaltLitteratur(((TextNode) anbefaltNode).asText());
       }
 
       JsonNode tipsNode = objectNode.get("tips");
@@ -65,17 +65,17 @@ public class CourseItemDeserializer extends JsonDeserializer<CourseItem> {
 
       JsonNode eksamensNode = objectNode.get("eksamensdato");
       if (eksamensNode instanceof TextNode) {
-        item.setTips(((TextNode) eksamensNode).asText());
+        item.setEksamensdato(((TextNode) eksamensNode).asText());
       }
 
       JsonNode vurderingsNode = objectNode.get("vurderingsform");
       if (vurderingsNode instanceof TextNode) {
-        item.setTips(((TextNode) vurderingsNode).asText());
+        item.setVurderingsform(((TextNode) vurderingsNode).asText());
       }
 
       JsonNode hjelpemidlerNode = objectNode.get("hjelpemidler");
       if (hjelpemidlerNode instanceof TextNode) {
-        item.setTips(((TextNode) hjelpemidlerNode).asText());
+        item.setHjelpemidler(((TextNode) hjelpemidlerNode).asText());
       }
 
       JsonNode vurderingerNode = objectNode.get("vurderinger");
