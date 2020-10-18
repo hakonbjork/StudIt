@@ -33,7 +33,7 @@ public class CommentDeserializer extends JsonDeserializer<Comment> {
       ObjectNode objectNode = (ObjectNode) jsonNode;
       Comment comment = new Comment();
 
-      JsonNode brukerNode = objectNode.get("brukenavn");
+      JsonNode brukerNode = objectNode.get("brukernavn");
       if (brukerNode instanceof TextNode) {
         comment.setBrukernavn(((TextNode) brukerNode).asText());
       }

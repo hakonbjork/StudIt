@@ -37,7 +37,6 @@ public class CourseList implements Iterable<CourseItem> {
       courseListItem.setVurderinger(item.getVurderinger());
       courseListItem.setAverageVurdering();
       courseListItem.setDiskusjon(item.getDiskusjon());
-      System.out.println("Debug from CourseList.java: " + courseListItem.getAverageVurdering());
     }
     items.add(courseListItem);
   }

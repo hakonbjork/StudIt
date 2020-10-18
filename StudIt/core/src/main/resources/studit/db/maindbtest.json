@@ -9,7 +9,8 @@
     "eksamensdato" : null,
     "vurderingsform" : null,
     "hjelpemidler" : null,
-    "vurderinger" : [ ]
+    "vurderinger" : [ ],
+    "diskusjon" : null
   }, {
     "fagkode" : "TMA4125",
     "fagnavn" : "Statistikk",
@@ -20,6 +21,7 @@
     "eksamensdato" : null,
     "vurderingsform" : null,
     "hjelpemidler" : null,
-    "vurderinger" : [ ]
+    "vurderinger" : [ ],
+    "diskusjon" : null
   } ]
 }

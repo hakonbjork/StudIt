@@ -1,0 +1,63 @@
+{
+  "courseList" : {
+    "items" : [ {
+      "fagkode" : "TMA4140",
+      "fagnavn" : "Diskret Matematikk 1",
+      "informasjon" : "Info",
+      "pensumlitteratur" : "Mathematics for dummies and retards",
+      "anbefaltLitteratur" : "Kompendium Diskmat",
+      "tips" : "Ikke kok",
+      "eksamensdato" : "03/12/2020",
+      "vurderingsform" : "Hjemmeksamen",
+      "hjelpemidler" : "alle",
+      "vurderinger" : [ "3", "5", "9", "8" ],
+      "diskusjon" : {
+        "prevAssignedID" : "3",
+        "comments" : [ {
+          "brukernavn" : "BobbyBigBoi",
+          "kommentar" : "Bra saker!",
+          "dato" : "18-10-2020 10:54:21",
+          "upvotes" : "1",
+          "downvotes" : "1",
+          "uniqueID" : "0"
+        }, {
+          "brukernavn" : "BobbyBigBoi",
+          "kommentar" : "Ok saker :/",
+          "dato" : "18-10-2020 10:54:21",
+          "upvotes" : "0",
+          "downvotes" : "0",
+          "uniqueID" : "1"
+        }, {
+          "brukernavn" : "BjarteBrorMor",
+          "kommentar" : "Bobby er en idiot!",
+          "dato" : "18-10-2020 10:54:21",
+          "upvotes" : "2",
+          "downvotes" : "0",
+          "uniqueID" : "2"
+        }, {
+          "brukernavn" : "WhamMaster28",
+          "kommentar" : "Dinglepop!",
+          "dato" : "18-10-2020 10:54:21",
+          "upvotes" : "0",
+          "downvotes" : "0",
+          "uniqueID" : "3"
+        } ]
+      }
+    }, {
+      "fagkode" : "TDT4120",
+      "fagnavn" : "Informasjonsteknologi - Avansert kurs",
+      "informasjon" : "Masse informasjon her",
+      "pensumlitteratur" : "Informatics for dummies and retards",
+      "anbefaltLitteratur" : "Kompendium IT",
+      "tips" : "Ikke kok. Spis grønnsaker",
+      "eksamensdato" : "05/12/2020",
+      "vurderingsform" : "Muntlig eksamen",
+      "hjelpemidler" : "Mamma på telefon",
+      "vurderinger" : [ "3", "5", "9", "8" ],
+      "diskusjon" : {
+        "prevAssignedID" : "-1",
+        "comments" : [ ]
+      }
+    } ]
+  }
+}

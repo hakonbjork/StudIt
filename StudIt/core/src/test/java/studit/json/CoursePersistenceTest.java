@@ -34,9 +34,6 @@ public class CoursePersistenceTest {
     try (FileReader fr = new FileReader("src/main/resources/studit/db/maindbtest.json", StandardCharsets.UTF_8)) {
 
       CourseList li = coursePersistence.readCourseList(fr);
-
-      System.out.println(li.getCourseItems().size());
-
       List<CourseItem> items = li.getCourseItems();
 
       return items;
@@ -86,7 +83,6 @@ public class CoursePersistenceTest {
 
     List<CourseItem> items2 = loadData();
     List<CourseItem> items1 = courseList.getCourseItems();
-    System.out.println("Hello: " + items2.get(0).getFagnavn());
 
     assertEquals(items1.iterator().hasNext(), items2.iterator().hasNext());
     assertEquals(items1.iterator().next().getFagnavn(), items2.iterator().next().getFagnavn());
