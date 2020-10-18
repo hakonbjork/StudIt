@@ -1,4 +1,4 @@
-package studit.json;
+package studit.json.deserializers;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -45,7 +45,7 @@ public class UserDeserializer extends JsonDeserializer<User> {
         user.setMail(((TextNode) mailNode).asText());
       }
 
-      JsonNode passwordNode = objectNode.get("mail");
+      JsonNode passwordNode = objectNode.get("password");
       if (passwordNode instanceof TextNode) {
         user.setPassword(((TextNode) passwordNode).asText());
       }

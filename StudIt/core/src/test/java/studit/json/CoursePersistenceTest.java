@@ -19,6 +19,8 @@ import studit.core.mainpage.CourseList;
 
 public class CoursePersistenceTest {
 
+  // TODO: This class is deprecated, and must be removed in future releases
+
   private CoursePersistence coursePersistence = new CoursePersistence();
 
   @BeforeAll

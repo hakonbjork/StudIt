@@ -1,4 +1,4 @@
-package studit.json;
+package studit.json.deserializers;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,8 +12,7 @@ import java.io.IOException;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 
-
-class CourseListDeserializer extends JsonDeserializer<CourseList> {
+public class CourseListDeserializer extends JsonDeserializer<CourseList> {
 
   private CourseItemDeserializer courseItemDeserializer = new CourseItemDeserializer();
   /*

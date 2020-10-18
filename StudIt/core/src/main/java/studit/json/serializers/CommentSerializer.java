@@ -1,4 +1,4 @@
-package studit.json;
+package studit.json.serializers;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

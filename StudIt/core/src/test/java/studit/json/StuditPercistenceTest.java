@@ -100,7 +100,7 @@ public class StuditPercistenceTest {
     // Iterate two times, as we added 2 test users
     for (int i = 0; i < 2; i++) {
       User testUser = testUsersMap.get(i);
-      User loadedUser = testUsersMap.get(i);
+      User loadedUser = loadedUsersMap.get(i);
 
       assertEquals(testUser.getName(), loadedUser.getName());
       assertEquals(testUser.getUsername(), loadedUser.getUsername());

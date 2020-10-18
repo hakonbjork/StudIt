@@ -1,4 +1,4 @@
-package studit.json;
+package studit.json.deserializers;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
