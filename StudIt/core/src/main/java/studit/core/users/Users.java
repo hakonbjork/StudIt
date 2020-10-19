@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 public class Users {
   private Map<Integer, User> users = new HashMap<>();
   private int prevAssignedID = -1;
@@ -37,9 +40,13 @@ public class Users {
    */
   public String[] addUser(String name, String username, String mail, String password) {
     if (name == null || username == null || mail == null || password == null) {
-      return new String[]{null, "Missing fields, expected name, username, mail and password"};
+      return new String[] { null, "Missing fields, expected name, username, mail and password" };
     }
     if (isUnique(username)) {
+      if (!isValidEmailAddress(mail)) {
+        return new String[] { null, "'" + mail + "'" + " is not a valid email address" };
+      }
+
       String[] passwordHash = Hashing.hashPassword(password);
       // Invalid password
       if (passwordHash[0] == null) {
@@ -74,6 +81,7 @@ public class Users {
 
   /**
    * Returns User object by id
+   * 
    * @param id uniqueID for the user
    * @return User if found, else null
    */
@@ -110,4 +118,77 @@ public class Users {
     }
     return Hashing.unhashPassword(users.get(uniqueID).getPassword(), password) ? true : false;
   }
+
+  /**
+   * Change the username of a user
+   * 
+   * @param id          unique id
+   * @param newUsername requested new username
+   * @return null if successfull, otherwise error description
+   */
+  public String changeUsername(int id, String newUsername) {
+    User userToModify = getUserByID(id);
+    if (userToModify == null) {
+      return "User with the id '" + id + "does not exist";
+    }
+
+    if (!isUnique(newUsername)) {
+      return "'" + newUsername + "' is not unique";
+    }
+
+    userToModify.setName(newUsername);
+    return null;
+  }
+
+  /**
+   * Change the password of a user
+   * 
+   * @param id          unique id
+   * @param newPassword requested new password
+   * @return null if successfull, otherwise error description
+   */
+  public String changePassword(int id, String newPassword) {
+    User userToModify = getUserByID(id);
+    if (userToModify == null) {
+      return "User with the id '" + id + "does not exist";
+    }
+
+    String[] passwordHash = Hashing.hashPassword(newPassword);
+    if (passwordHash[0] == null) {
+      return passwordHash[1];
+    }
+    userToModify.setPassword(passwordHash[0]);
+    return null;
+  }
+
+  /**
+   * Change the email of a user
+   * 
+   * @param id      unique id
+   * @param newMail requested new password
+   * @return null if successfull, otherwise error description
+   */
+  public String changeMail(int id, String newMail) {
+    User userToModify = getUserByID(id);
+    if (userToModify == null) {
+      return "User with the id '" + id + "does not exist";
+    }
+    if (!isValidEmailAddress(newMail)) {
+      return "'" + newMail + "' is not a valid email!";
+    }
+    userToModify.setMail(newMail);
+    return null;
+  }
+
+  public static boolean isValidEmailAddress(String email) {
+    boolean result = true;
+    try {
+      InternetAddress mail = new InternetAddress(email);
+      mail.validate();
+    } catch (AddressException e) {
+      result = false;
+    }
+    return result;
+  }
+
 }

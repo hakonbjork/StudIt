@@ -3,15 +3,19 @@ package studit.restapi;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import studit.core.users.Hashing;
 import studit.core.users.User;
 import studit.core.users.Users;
 
@@ -50,6 +54,7 @@ public class UsersResource {
 
   /**
    * Returns User json object if found
+   * 
    * @param id unique id of user
    * @return Response with User json if found, otherwise 404 not found response.
    */
@@ -103,5 +108,84 @@ public class UsersResource {
     }
     LOG.debug("Successfully added new user to database");
     return Response.accepted(result[0]).build();
+  }
+
+  /**
+   * Process user login request
+   * 
+   * @param username
+   * @param password
+   * @return
+   */
+  @POST
+  @Path("/authenticate")
+  public Response authenticateLogin(@QueryParam("username") String username, @QueryParam("password") String password) {
+    if (username == null || password == null) {
+      return Response.status(Status.BAD_REQUEST).entity("Request must include username and password parameters")
+          .build();
+    }
+
+    boolean success = users.authenticateLogin(username, password);
+
+    if (!success) {
+      LOG.debug(
+          "Rejected following login: username: '" + username + "', password: '" + Hashing.hashPassword(password)[0] + "'");
+      return Response.status(Response.Status.UNAUTHORIZED).entity("invalid login").build();
+    }
+
+    LOG.debug(
+        "Accepted following login: username: '" + username + "', password: '" + Hashing.hashPassword(password)[0] + "'");
+    return Response.ok().build();
+  }
+
+  /**
+   * Modifies the fields of a user.
+   * 
+   * @param id          unique user id
+   * @param newMail     requested new mail
+   * @param newPassword requested new password
+   * @param newUsername requested new username
+   * @return Response object containing success or error message
+   */
+  @PUT
+  @Path("/modify/{id}")
+  public Response changeUserField(@PathParam("{id}") int id, @QueryParam("newMail") String newMail,
+      @QueryParam("newPassword") String newPassword, @QueryParam("newUsername") String newUsername) {
+
+    if (newMail != null && newPassword != null || newPassword != null && newUsername != null) {
+      return Response.serverError().entity("Error, you can only change one field at a time").build();
+    }
+
+    String successMessage = "";
+
+    if (newMail != null) {
+      String mailResponse = users.changeMail(id, newMail);
+      if (mailResponse != null) {
+        LOG.debug("modify request failed with following error: " + mailResponse);
+        return Response.serverError().entity(mailResponse).build();
+      }
+      successMessage = "Successfully changed mail to '" + newMail + "'";
+    }
+
+    if (newPassword != null) {
+      String passwordResponse = users.changePassword(id, newPassword);
+      if (passwordResponse != null) {
+        LOG.debug("modify request failed with following error: " + passwordResponse);
+        return Response.serverError().entity(passwordResponse).build();
+      }
+      successMessage = "Successfully changed password";
+    }
+
+    if (newUsername != null) {
+      String usernameResponse = users.changeUsername(id, newUsername);
+      if (usernameResponse != null) {
+        LOG.debug("modify request failed with following error: " + usernameResponse);
+        return Response.serverError().entity(usernameResponse).build();
+      }
+      successMessage = "Successfully changed username to '" + newUsername + "'";
+    }
+
+    LOG.debug("modify request succeeded with message: " + successMessage);
+    return Response.ok().entity(successMessage).build();
   }
 }
