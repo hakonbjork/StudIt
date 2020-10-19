@@ -1,7 +1,9 @@
 package studit.core.mainpage;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Comment {
   private String brukernavn;
@@ -10,6 +12,8 @@ public class Comment {
   private int upvotes;
   private int downvotes;
   private int uniqueID;
+  private List<String> upvoters;
+  private List<String> downvoters;
 
   public Comment() {
 
@@ -22,6 +26,9 @@ public class Comment {
     this.uniqueID = uniqueID;
     this.upvotes = 0;
     this.downvotes = 0;
+    this.upvoters = new ArrayList<>();
+    this.downvoters = new ArrayList<>();
+
   }
 
   public String getBrukernavn() {
@@ -65,8 +72,8 @@ public class Comment {
   }
 
   /**
-   * Sets the unique id for the comment.
-   * WARNING: This should only be called from the deserializer class and nothing else.
+   * Sets the unique id for the comment. WARNING: This should only be called from
+   * the deserializer class and nothing else.
    */
   public void setUniqueID(int uniqueID) {
     this.uniqueID = uniqueID;
@@ -76,12 +83,38 @@ public class Comment {
     return uniqueID;
   }
 
-  public void upvote() {
-    upvotes++;
+  public boolean upvote(String username) {
+    if (!upvoters.contains(username)) {
+      upvoters.add(username);
+      upvotes++;
+      return true;
+    }
+    return false;
   }
 
-  public void downvote() {
-    downvotes++;
+  public boolean downvote(String username) {
+    if (!downvoters.contains(username)) {
+      downvoters.add(username);
+      downvotes++;
+      return true;
+    }
+    return false;
+  }
+
+  public List<String> getUpvoters() {
+    return upvoters;
+  }
+
+  public void setUpvoters(List<String> upvoters) {
+    this.upvoters = upvoters;
+  }
+
+  public List<String> getDownvoters() {
+    return downvoters;
+  }
+
+  public void setDownvoters(List<String> downvoters) {
+    this.downvoters = downvoters;
   }
 
 }

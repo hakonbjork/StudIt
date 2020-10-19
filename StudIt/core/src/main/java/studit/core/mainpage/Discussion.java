@@ -32,19 +32,21 @@ public class Discussion {
   /**
    * Upvotes a comment in the discussion.
    * 
+   * @param username  username that wishes to upvote
    * @param commentID Unique identifier for the comment (comments key)
    */
-  public void upvote(int commentID) {
-    comments.get(commentID).upvote();
+  public void upvote(String username, int commentID) {
+    comments.get(commentID).upvote(username);
   }
 
   /**
    * Downvotes a comment in the discussion.
    * 
+   * @param username  username that wishes to downvote
    * @param commentID Unique identifier for the comment (comments key)
    */
-  public void downvote(int commentID) {
-    comments.get(commentID).downvote();
+  public void downvote(String username, int commentID) {
+    comments.get(commentID).downvote(username);
   }
 
   /**

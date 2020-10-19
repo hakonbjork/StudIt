@@ -27,6 +27,18 @@ public class CommentSerializer extends JsonSerializer<Comment> {
     jsonGen.writeStringField("downvotes", String.valueOf(comment.getDownvotes()));
     jsonGen.writeStringField("uniqueID", String.valueOf(comment.getUniqueID()));
 
+    jsonGen.writeArrayFieldStart("upvoters");
+    for (String upvoter : comment.getUpvoters()) {
+      jsonGen.writeObject(upvoter);
+    }
+    jsonGen.writeEndArray();
+
+    jsonGen.writeArrayFieldStart("downvoters");
+    for (String downvoter : comment.getDownvoters()) {
+      jsonGen.writeObject(downvoter);
+    }
+    jsonGen.writeEndArray();
+
     jsonGen.writeEndObject();
 
   }

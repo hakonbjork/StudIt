@@ -3,6 +3,7 @@ package studit.restapi;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -59,6 +60,11 @@ public class DiscussionResource {
     return Response.ok(discussion.addComment(username, comment), MediaType.APPLICATION_JSON).build();
   }
 
+  /**
+   * Deletes a comment from the database
+   * @param id unique comment id
+   * @return 404 if invalid id, otherwise 204
+   */
   @DELETE
   @Path("/remove/{id}")
   public Response removeComment(@PathParam("{id}") int id) {
@@ -69,5 +75,11 @@ public class DiscussionResource {
     }
     LOG.debug("Succesfully to removed comment with id '" + id + "'");
     return Response.noContent().build();
+  }
+
+  @PUT
+  @Path("/updove/{id}")
+  public Response upvoteComment() {
+    return null;
   }
 }

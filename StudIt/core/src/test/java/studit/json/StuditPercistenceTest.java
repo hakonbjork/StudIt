@@ -86,6 +86,9 @@ public class StuditPercistenceTest {
         assertEquals(testComment.getUpvotes(), loadedComment.getUpvotes());
         assertEquals(testComment.getDownvotes(), loadedComment.getDownvotes());
         assertEquals(testComment.getUniqueID(), loadedComment.getUniqueID());
+        assertTrue(testComment.getUpvoters().equals(testComment.getUpvoters()));
+        assertTrue(testComment.getDownvoters().equals(testComment.getDownvoters()));
+
       }
     }
 
@@ -147,10 +150,11 @@ public class StuditPercistenceTest {
     discussion.addComment("BobbyBigBoi", "Ok saker :/");
     int id3 = discussion.addComment("BjarteBrorMor", "Bobby er en idiot!");
 
-    discussion.upvote(id1);
-    discussion.downvote(id1);
-    discussion.upvote(id3);
-    discussion.upvote(id3);
+    discussion.upvote("BobbyBigBoi", id1);
+    discussion.upvote("BobbyBigBoi", id1);
+    discussion.downvote("BjarteBrorMor", id1);
+    discussion.upvote("BjarteBrorMor", id3);
+    discussion.upvote("BobbyBigBoi", id3);
 
     testItem.setDiskusjon(discussion);
 
