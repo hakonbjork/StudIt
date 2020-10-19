@@ -36,7 +36,7 @@ public class DiscussionResource {
   }
 
   /**
-   * Gets the active CourseList
+   * Gets the active CourseList.
    * 
    * @return the active CourseList
    */
@@ -48,6 +48,13 @@ public class DiscussionResource {
     return this.discussion;
   }
 
+  /**
+   * Adds a comment to the Discussion
+   * 
+   * @param username username of the person who wrote the comment
+   * @param comment  comment
+   * @return 500 internal server error if failed, 200 OK if successful
+   */
   @POST
   @Path("/add")
   @Produces(MediaType.APPLICATION_JSON)
@@ -61,7 +68,8 @@ public class DiscussionResource {
   }
 
   /**
-   * Deletes a comment from the database
+   * Deletes a comment from the database.
+   * 
    * @param id unique comment id
    * @return 404 if invalid id, otherwise 204
    */
@@ -77,9 +85,59 @@ public class DiscussionResource {
     return Response.noContent().build();
   }
 
+  /**
+   * Tries to upvote a given comment.
+   * 
+   * @param id       unique comment id
+   * @param username userame of user trying to upvote
+   * @return internal server error with message if failed, otherwise 204 no
+   *         content.
+   */
   @PUT
-  @Path("/updove/{id}")
-  public Response upvoteComment() {
-    return null;
+  @Path("/upvote/{id}")
+  public Response upvoteComment(@PathParam("id") int id, @QueryParam("username") String username) {
+    if (username == null) {
+      LOG.debug("Missing username param for upvote request, rejecting");
+      return Response.serverError().entity("username must be specified to upvote a comment").build();
+    }
+    int result = discussion.upvote(username, id);
+    if (result == -1) {
+      LOG.debug("Requested comment with id '" + id + "' does not exist, rejecting");
+      return Response.serverError().entity("Comment with id '" + id + "' does not exist").build();
+    }
+
+    if (result == 0) {
+      return Response.serverError().entity("'" + username + "' already upvoted, rejected.").build();
+    }
+
+    return Response.noContent().build();
+  }
+
+  /**
+   * Tries to downvote a given comment.
+   * 
+   * @param id       unique comment id
+   * @param username userame of user trying to downvote
+   * @return internal server error with message if failed, otherwise 204 no
+   *         content.
+   */
+  @PUT
+  @Path("/downvote/{id}")
+  public Response downvoteComment(@PathParam("id") int id, @QueryParam("username") String username) {
+    if (username == null) {
+      LOG.debug("Missing username param for downvote request, rejecting");
+      return Response.serverError().entity("username must be specified to downvote a comment").build();
+    }
+    int result = discussion.downvote(username, id);
+    if (result == -1) {
+      LOG.debug("Requested comment with id '" + id + "' does not exist, rejecting");
+      return Response.serverError().entity("Comment with id '" + id + "' does not exist").build();
+    }
+
+    if (result == 0) {
+      return Response.serverError().entity("'" + username + "' already downvoted, rejected.").build();
+    }
+
+    return Response.noContent().build();
   }
 }

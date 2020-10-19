@@ -34,9 +34,14 @@ public class Discussion {
    * 
    * @param username  username that wishes to upvote
    * @param commentID Unique identifier for the comment (comments key)
+   * @return -1 if comment not found, 0 if comment already upvoted, 1 if successful
    */
-  public void upvote(String username, int commentID) {
-    comments.get(commentID).upvote(username);
+  public int upvote(String username, int commentID) {
+    Comment comment = comments.get(commentID);
+    if (comment == null) {
+      return -1;
+    }
+    return comment.upvote(username) ? 1 : 0;
   }
 
   /**
@@ -44,9 +49,14 @@ public class Discussion {
    * 
    * @param username  username that wishes to downvote
    * @param commentID Unique identifier for the comment (comments key)
+   * @return -1 if comment not found, 0 if comment already downvoted, 1 if successful
    */
-  public void downvote(String username, int commentID) {
-    comments.get(commentID).downvote(username);
+  public int downvote(String username, int commentID) {
+    Comment comment = comments.get(commentID);
+    if (comment == null) {
+      return -1;
+    }
+    return comment.downvote(username) ? 1 : 0;
   }
 
   /**
