@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import studit.core.StuditModel;
 import studit.core.mainpage.CourseList;
+import studit.core.users.Users;
 
 @Path(StuditService.STUDIT_SERVICE_PATH)
 public class StuditService {
@@ -39,8 +40,19 @@ public class StuditService {
   @Path("/courses")
   public CourseListResource getCourseList() {
     CourseList courseList = getStuditModel().getCourseList();
-    LOG.debug("Accessing courses base endpoint...");
+    LOG.debug("Accessing '/courses' base endpoint...");
     return new CourseListResource(courseList);
+  }
+
+   /**
+   * Returns a new CourseList resource for further processing of the
+   * studit/courses request
+   */
+  @Path("/users")
+  public UsersResource getUsers() {
+    Users users = getStuditModel().getUsers();
+    LOG.debug("Accessing '/users' base endpoint...");
+    return new UsersResource(users);
   }
 
 }
