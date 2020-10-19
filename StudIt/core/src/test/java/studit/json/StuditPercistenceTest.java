@@ -2,6 +2,7 @@ package studit.json;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -179,6 +180,10 @@ public class StuditPercistenceTest {
     Users users = new Users();
     users.addUser("Berte bjernsen", "Berte92", "berte@bertebok.com", "kusma1992");
     users.addUser("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com", "pomeranian123");
+
+    // The passwords will be hashed and uhashed, check that this logic works.
+    assertTrue(users.authenticateLogin("Berte92", "kusma1992"));
+    assertTrue(users.authenticateLogin("IdaErBest", "pomeranian123"));
     model.setUsers(users);
 
     return model;

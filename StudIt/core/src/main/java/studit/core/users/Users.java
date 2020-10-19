@@ -31,16 +31,22 @@ public class Users {
    * @param username unique username
    * @param mail     mail adress
    * @param password password (unencrypted)
-   * @return HashMap key (ID) for the new User object if username is unique, else
-   *         -1
+   * @return String[0] contains the new ID for the user if all checks were passed,
+   *         otherwise null. String[1] contains the error message if something
+   *         went wrong, null otherwise
    */
-  public int addUser(String name, String username, String mail, String password) {
+  public String[] addUser(String name, String username, String mail, String password) {
     if (isUnique(username)) {
+      String[] passwordHash = Hashing.hashPassword(password);
+      // Invalid password
+      if (passwordHash[0] == null) {
+        return new String[] { null, passwordHash[1] };
+      }
       prevAssignedID += 1;
-      users.put(prevAssignedID, new User(name, username, mail, password, prevAssignedID));
-      return prevAssignedID;
+      users.put(prevAssignedID, new User(name, username, mail, passwordHash[0], prevAssignedID));
+      return new String[] { String.valueOf(prevAssignedID), null };
     }
-    return -1;
+    return new String[] { null, "'" + username + "' is not a unique username" };
   }
 
   private boolean isUnique(String username) {
@@ -65,6 +71,7 @@ public class Users {
 
   /**
    * Get the ID of a user by username.
+   * 
    * @param username unique username
    * @return uniqueID if username in database, otherwise -1
    */
@@ -75,10 +82,11 @@ public class Users {
       }
     }
     return -1;
-  } 
+  }
 
   /**
    * Authenticate login request.
+   * 
    * @param username unique username of User
    * @param password password to check
    * @return true if valid login, false otherwise
@@ -88,6 +96,6 @@ public class Users {
     if (uniqueID == -1) {
       return false;
     }
-    return users.get(uniqueID).getPassword().equals(password) ? true : false;
+    return Hashing.unhashPassword(users.get(uniqueID).getPassword(), password) ? true : false;
   }
 }
