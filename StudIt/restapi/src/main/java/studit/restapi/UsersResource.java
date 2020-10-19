@@ -11,10 +11,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import studit.core.users.Hashing;
 import studit.core.users.User;
 import studit.core.users.Users;
@@ -128,13 +126,13 @@ public class UsersResource {
     boolean success = users.authenticateLogin(username, password);
 
     if (!success) {
-      LOG.debug(
-          "Rejected following login: username: '" + username + "', password: '" + Hashing.hashPassword(password)[0] + "'");
+      LOG.debug("Rejected following login: username: '" + username + "', password: '"
+          + Hashing.hashPassword(password)[0] + "'");
       return Response.status(Response.Status.UNAUTHORIZED).entity("invalid login").build();
     }
 
-    LOG.debug(
-        "Accepted following login: username: '" + username + "', password: '" + Hashing.hashPassword(password)[0] + "'");
+    LOG.debug("Accepted following login: username: '" + username + "', password: '" + Hashing.hashPassword(password)[0]
+        + "'");
     return Response.ok().build();
   }
 
