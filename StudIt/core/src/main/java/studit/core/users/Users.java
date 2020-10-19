@@ -36,6 +36,9 @@ public class Users {
    *         went wrong, null otherwise
    */
   public String[] addUser(String name, String username, String mail, String password) {
+    if (name == null || username == null || mail == null || password == null) {
+      return new String[]{null, "Missing fields, expected name, username, mail and password"};
+    }
     if (isUnique(username)) {
       String[] passwordHash = Hashing.hashPassword(password);
       // Invalid password
@@ -67,6 +70,15 @@ public class Users {
   public boolean removeUser(int uniqueID) {
     User removedUser = users.remove(uniqueID);
     return removedUser == null ? false : true;
+  }
+
+  /**
+   * Returns User object by id
+   * @param id uniqueID for the user
+   * @return User if found, else null
+   */
+  public User getUserByID(int id) {
+    return users.get(id);
   }
 
   /**

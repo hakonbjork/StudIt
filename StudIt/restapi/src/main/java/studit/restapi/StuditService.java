@@ -5,10 +5,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import studit.core.StuditModel;
 import studit.core.mainpage.CourseList;
 import studit.core.users.Users;
@@ -17,7 +13,6 @@ import studit.core.users.Users;
 public class StuditService {
 
   public static final String STUDIT_SERVICE_PATH = "studit";
-  private static final Logger LOG = LoggerFactory.getLogger(StuditService.class);
 
   @Inject
   private StuditModel studitModel;
@@ -40,7 +35,6 @@ public class StuditService {
   @Path("/courses")
   public CourseListResource getCourseList() {
     CourseList courseList = getStuditModel().getCourseList();
-    LOG.debug("Accessing '/courses' base endpoint...");
     return new CourseListResource(courseList);
   }
 
@@ -51,7 +45,6 @@ public class StuditService {
   @Path("/users")
   public UsersResource getUsers() {
     Users users = getStuditModel().getUsers();
-    LOG.debug("Accessing '/users' base endpoint...");
     return new UsersResource(users);
   }
 
