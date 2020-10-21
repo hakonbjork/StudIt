@@ -65,18 +65,16 @@ public class RemoteStuditModelAccess {
     }
   }
 
-  private HttpResponse<String> getResponse(HttpRequest request) {
+  private HttpResponse<String> getResponse(HttpRequest request) throws ApiCallException {
     try {
       final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
           HttpResponse.BodyHandlers.ofString());
       return response;
     } catch (ConnectException e) {
-      System.out.println("Could not establish connection to server");
-      // TODO: update gui and tell that we've lost connection to the server.
+      throw new ApiCallException("Could not establish connection to server");
     } catch (IOException | InterruptedException e1) {
       throw new RuntimeException(e1);
     }
-    return null;
   }
 
   private HttpResponse<String> newGetRequest(Map<String, String> params, String... paths) throws ApiCallException {
@@ -94,7 +92,8 @@ public class RemoteStuditModelAccess {
     }
   }
 
-  private HttpResponse<String> newPostRequest(String json, Map<String, String> params, String... paths) {
+  private HttpResponse<String> newPostRequest(String json, Map<String, String> params, String... paths)
+      throws ApiCallException {
     URI uri = buildUri(params, paths);
     HttpRequest request = HttpRequest.newBuilder(uri).header("Accept", "application/json")
         .POST(json != null ? BodyPublishers.ofString(json) : BodyPublishers.noBody()).build();
@@ -102,7 +101,8 @@ public class RemoteStuditModelAccess {
     return getResponse(request);
   }
 
-  private HttpResponse<String> newPutRequest(String json, Map<String, String> params, String... paths) {
+  private HttpResponse<String> newPutRequest(String json, Map<String, String> params, String... paths)
+      throws ApiCallException {
     URI uri = buildUri(params, paths);
     HttpRequest request = HttpRequest.newBuilder(uri).header("Accept", "application/json")
         .PUT(json != null ? BodyPublishers.ofString(json) : BodyPublishers.noBody()).build();
@@ -110,7 +110,7 @@ public class RemoteStuditModelAccess {
     return getResponse(request);
   }
 
-  private HttpResponse<String> newDeleteRequest(Map<String, String> params, String... paths) {
+  private HttpResponse<String> newDeleteRequest(Map<String, String> params, String... paths) throws ApiCallException {
     URI uri = buildUri(params, paths);
     HttpRequest request = HttpRequest.newBuilder(uri).header("Accept", "application/json").DELETE().build();
 
