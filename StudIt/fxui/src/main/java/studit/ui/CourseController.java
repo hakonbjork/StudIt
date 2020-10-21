@@ -131,26 +131,7 @@ public class CourseController implements Initializable {
       AppController.getChatbot().show();
     }
   }
-
-  /**
-   * Posts the comment written in the field to the empty comment section.
-   */
-  @FXML
-  void handleAddCommentAction(ActionEvent event) {
-    String comment = commentField.getText();
-
-    if (comment1.getText().equals("")
-        || (!comment1.getText().equals("")) && (!comment2.getText().equals("")) && (!comment3.getText().equals(""))) {
-      comment1.setText(comment);
-    } else if ((!comment1.getText().equals("")) && (comment2.getText().equals(""))) {
-      comment2.setText(comment);
-    } else if ((!comment1.getText().equals("")) && (!comment2.getText().equals(""))) {
-      comment3.setText(comment);
-    } else if ((!comment1.getText().equals("")) && (!comment2.getText().equals(""))) {
-      comment3.setText(comment);
-    }
-  }
-
+  
   /**
    * Sets the rating of the subject.
    * @param rating represents the value of the rating to be set 
