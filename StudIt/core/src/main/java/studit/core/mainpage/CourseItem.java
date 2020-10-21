@@ -129,4 +129,5 @@ public class CourseItem {
     this.diskusjon = diskusjon;
   }
 
+
 }

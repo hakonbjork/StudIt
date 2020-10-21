@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,22 +18,26 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import studit.core.chatbot.Chatbot;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 import studit.json.CoursePersistence;
 
-public class AppController implements ChangeListener<String> {
+public class AppController {
 
   @FXML
-  private ListView<String> coursesList;
+  private ListView<CourseItem> coursesList;
   @FXML
   private Button mainPageAction;
   @FXML
@@ -58,7 +62,7 @@ public class AppController implements ChangeListener<String> {
   private Button logout_btn;
 
   static Chatbot chatbot = null;
-  private ObservableList<String> list = FXCollections.observableArrayList();
+  private ObservableList<CourseItem> list = FXCollections.observableArrayList();
   private List<CourseItem> courseList;
   private String label;
   private CoursePersistence coursePersistence = new CoursePersistence();
@@ -98,22 +102,62 @@ public class AppController implements ChangeListener<String> {
     // });
   }
 
-  // public void filterCoursesList(String oldValue, String newValue) {
+  /**
+   * Function to search for subjects. The listview will then only show subjects
+   * with the letters in the search field.
+   */
+  @FXML
+  public void handleSearchViewAction() {
+    // Wrap the ObservableList in a FilteredList (initially display all data).
+    FilteredList<CourseItem> filteredData = new FilteredList<>(getData(), p -> true);
 
-  // ObservableList<String> filteredList = FXCollections.observableArrayList();
-  // if (searchField == null || (newValue.length() < oldValue.length()) ||
-  // newValue == null) {
-  // coursesList.setItems(list);
-  // } else {
-  // newValue = newValue.toUpperCase();
-  // for (String course : coursesList.getItems()) {
-  // if (course.toUpperCase().contains(newValue)) {
-  // filteredList.add(course);
-  // }
-  // }
-  // coursesList.setItems(filteredList);
-  // }
-  // }
+    // Set the filter Predicate whenever the filter changes.
+    searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+      filteredData.setPredicate(courseItem -> {
+        // If filter text is empty, display all persons.
+        if (newValue == null || newValue.isEmpty()) {
+          return true;
+        }
+
+        // Compare course name and course code of every CourseItem with the filter text.
+        String lowerCaseFilter = newValue.toLowerCase();
+
+        if (courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter)) {
+          return true; // filter matches course name
+        } else if (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter)) {
+          return true; // filter matches course code
+        }
+        return false; // Does not match
+      });
+    });
+
+    // Wrap the FilteredList in a SortedList.
+    SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
+
+    // put the sorted list into the listview
+    coursesList.setItems(sortedData);
+
+    coursesList.setCellFactory(new Callback<ListView<CourseItem>, ListCell<CourseItem>>() {
+      @Override
+      public ListCell<CourseItem> call(ListView<CourseItem> param) {
+        final Label leadLbl = new Label();
+        final Tooltip tooltip = new Tooltip();
+        final ListCell<CourseItem> cell = new ListCell<CourseItem>() {
+          @Override
+          public void updateItem(CourseItem item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item != null) {
+              leadLbl.setText(item.getFagkode());
+              setText(item.getFagnavn() + " " + item.getFagnavn());
+              tooltip.setText(item.getFagkode());
+              setTooltip(tooltip);
+            }
+          }
+        };
+        return cell;
+      }
+    });
+  }
 
   /**
    * Opens chatbot.
@@ -132,33 +176,6 @@ public class AppController implements ChangeListener<String> {
    */
   public static void closeChatbot() {
     chatbot = null;
-  }
-
-  /**
-   * Function to search for subjects. The listview will then only show subjects
-   * with the letters in the search field.
-   */
-  @FXML
-  public void handleSearchViewAction(String oldVal, String newVal) {
-    if (oldVal != null && (newVal.length() < oldVal.length())) {
-      coursesList.setItems(list);
-    }
-
-    String value = newVal.toUpperCase();
-
-    ObservableList<String> subentries = FXCollections.observableArrayList();
-    for (Object entry : coursesList.getItems()) {
-      boolean match = true;
-      String entryText = (String) entry;
-      if (!entryText.toUpperCase().contains(value)) {
-        match = false;
-        break;
-      }
-      if (match) {
-        subentries.add(entryText);
-      }
-    }
-    coursesList.setItems(subentries);
   }
 
   /**
@@ -213,7 +230,7 @@ public class AppController implements ChangeListener<String> {
       @Override
       public void handle(MouseEvent arg0) {
         // System.out.println((coursesList.getSelectionModel().getSelectedItem()));
-        setLabel(coursesList.getSelectionModel().getSelectedItem());
+        setLabel(coursesList.getSelectionModel().getSelectedItem().getFagnavn());
 
         try {
           Stage primaryStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();
@@ -226,20 +243,20 @@ public class AppController implements ChangeListener<String> {
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
           Parent coursePane = courseLoader.load();
           Scene courseScene = new Scene(coursePane);
+          
           // injecting first scene into the controller of the second scene
           CourseController courseController = (CourseController) courseLoader.getController();
           courseController.setMainScene(mainScene);
 
           // injecting second scene into the controller of the first scene
-          CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
+          CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem().getFagnavn());
           courseController.setCourseText(courseItem.getInformasjon());
-          courseController.setLabel(coursesList.getSelectionModel().getSelectedItem().substring(0, 8));
+          courseController.setLabel(coursesList.getSelectionModel().getSelectedItem().getFagnavn().substring(0, 8));
 
           primaryStage.setScene(courseScene);
           primaryStage.setTitle("StudIt");
           primaryStage.show();
 
-          //
 
         } catch (Exception e) {
           System.out.println(e);
@@ -275,7 +292,7 @@ public class AppController implements ChangeListener<String> {
       // System.out.println(items.size());
 
       for (CourseItem c : items) {
-        this.list.add(c.getFagnavn());
+        this.list.add(c);
       }
 
       this.coursesList.setItems(this.list);
@@ -293,12 +310,8 @@ public class AppController implements ChangeListener<String> {
    * 
    * @return list;
    */
-  public ObservableList<String> getData() {
-    return (ObservableList<String>) list;
+  public ObservableList<CourseItem> getData() {
+    return (ObservableList<CourseItem>) list;
   }
 
-  @Override
-  public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
-  }
 }
