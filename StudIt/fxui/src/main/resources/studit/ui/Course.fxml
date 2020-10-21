@@ -41,7 +41,7 @@
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="77.0" prefWidth="793.0">
                                              <children>
-                                                <Button id="information_btn" fx:id="information_btn" minHeight="-Infinity" mnemonicParsing="false" prefHeight="58.0" prefWidth="383.0" style="-fx-background-color: #80ccff#80ccff #80ccff#80ccff;" text="Informasjon" textAlignment="CENTER" textFill="#242424db">
+                                                <Button id="information_btn" minHeight="-Infinity" mnemonicParsing="false" prefHeight="58.0" prefWidth="383.0" style="-fx-background-color: #80ccff#80ccff #80ccff#80ccff;" text="Informasjon" textAlignment="CENTER" textFill="#242424db">
                                                    <font>
                                                       <Font name="Avenir Next Bold" size="24.0" />
                                                    </font>

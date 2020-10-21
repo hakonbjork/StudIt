@@ -20,66 +20,56 @@ import javafx.stage.Stage;
 public class CourseController implements Initializable {
 
 
-  @FXML
-  private Label fagkode;
+    @FXML
+    private BorderPane rootPane;
 
-  @FXML
-  private Label fagnavn;
+    @FXML
+    private Button information_btn;
 
-  @FXML
-  private TextArea courseInformation;
+    @FXML
+    private Button discussion_btn;
 
-  @FXML
-  private TextArea litterature;
+    @FXML
+    private Label fagkode;
 
-  @FXML
-  private TextArea tips_tricks;
+    @FXML
+    private Label fagnavn;
 
-  @FXML
-  private Button mainPageAction;
+    @FXML
+    private Label rating;
 
-  @FXML
-  private Button logoutAction;
+    @FXML
+    private TextArea courseInformation;
 
-  @FXML
-  private TextField eksamensdato;
+    @FXML
+    private TextArea litterature;
 
-  @FXML
-  private TextField vurderingsform;
+    @FXML
+    private TextArea tips_tricks;
 
-  @FXML
-  private TextField hjelpemidler;
+    @FXML
+    private Button mainPageAction;
+
+    @FXML
+    private Button chatbot_btn;
+
+    @FXML
+    private Button logoutAction;
+
+    @FXML
+    private TextField eksamensdato;
+
+    @FXML
+    private TextField vurderingsform;
+
+    @FXML
+    private TextField hjelpemidler;
+
+    @FXML
+    private TextArea commentField;
 
   @FXML
   private Button addCommentAction;
-
-  @FXML
-  private BorderPane rootPane;
-  @FXML
-  private FlowPane flowPane;
-  @FXML
-  private Button chatbot_btn;
-  @FXML
-  private Button ntnu_btn;
-  @FXML
-  private Button logout_btn;
-  @FXML
-  private Button addComment_btn;
-  @FXML
-  private Button mainPage_btn;
-  @FXML
-  private Button discussion_btn;
-  @FXML
-  private Label comments;
-  @FXML
-  private Label label;
-  @FXML
-  private Label rating;
-    
-  @FXML
-  private TextField search;
-  @FXML
-  private TextArea courseText;
 
   private Scene mainScene;
 
@@ -89,8 +79,7 @@ public class CourseController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    courseText.setEditable(false);
-    courseText.setWrapText(true);
+   
   }
 
   /**
@@ -99,10 +88,10 @@ public class CourseController implements Initializable {
    * @param label the label to set
    */
 
-  @FXML
-  public void setLabel(String label) {
-    this.label.setText(label);
-  }
+  //@FXML
+  //public void setLabel(String label) {
+  //  this.label.setText(label);
+  //}
 
   /**
    * logs user out, and goes to login scene closes the current window.
@@ -177,10 +166,10 @@ public class CourseController implements Initializable {
     return Double.valueOf(this.rating.getText());
   }
 
-  @FXML
-  public void setCourseText(String text) {
-    this.courseText.setText(text.toString());
-  }
+  //@FXML
+  //public void setCourseText(String text) {
+  //  this.courseText.setText(text.toString());
+  //}
 
   @FXML
   void openDiscussion(ActionEvent event){

@@ -252,10 +252,12 @@ public class AppController {
           CourseController courseController = (CourseController) courseLoader.getController();
           courseController.setMainScene(mainScene);
 
+          //TODO fikse undermetoden slik at det blir riktig med ny oppdatering
+  
           // injecting second scene into the controller of the first scene
-          CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem().getFagnavn());
-          courseController.setCourseText(courseItem.getInformasjon());
-          courseController.setLabel(coursesList.getSelectionModel().getSelectedItem().getFagnavn().substring(0, 8));
+          //CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem().getFagnavn());
+          //courseController.setCourseText(courseItem.getInformasjon());
+          //courseController.setLabel(coursesList.getSelectionModel().getSelectedItem().getFagnavn().substring(0, 8));
 
           primaryStage.setScene(courseScene);
           primaryStage.setTitle("StudIt");
