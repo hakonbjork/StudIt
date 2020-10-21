@@ -1,6 +1,7 @@
 package studit.ui.remote;
 
-import java.io.IOException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.ConnectException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -8,13 +9,10 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import java.io.IOException;
 import studit.core.StuditModel;
 import studit.core.mainpage.CourseList;
 import studit.core.mainpage.Discussion;
@@ -29,7 +27,7 @@ public class RemoteStuditModelAccess {
   private ObjectMapper objectMapper;
 
   public static void main(String[] args) throws ApiCallException {
-
+    // TODO: Remove when proper testing is added
     RemoteStuditModelAccess r = new RemoteStuditModelAccess();
     System.out.println(r.changeMail(2, "bruh@name.com")[1]);
 
@@ -59,8 +57,8 @@ public class RemoteStuditModelAccess {
     }
 
     try {
-      URI finalURI = new URI(uri.toString());
-      return finalURI;
+      URI finalUri = new URI(uri.toString());
+      return finalUri;
     } catch (URISyntaxException e) {
       e.printStackTrace();
       return null;
@@ -123,7 +121,7 @@ public class RemoteStuditModelAccess {
    * Gets the entire StuditModel object of the server database.
    * 
    * @return StuditModel if server is configured properly, else null
-   * @throws ApiCallException
+   * @throws ApiCallException if server is configured improperly
    */
   public StuditModel getStuditModel() throws ApiCallException {
     HttpResponse<String> response = newGetRequest(null, "");
@@ -139,7 +137,7 @@ public class RemoteStuditModelAccess {
    * Gets the CourseList object.
    * 
    * @return Courselist object if server is configured properly, othwerise null
-   * @throws ApiCallException
+   * @throws ApiCallException if server is configured imporperly
    */
   public CourseList getCourseList() throws ApiCallException {
     HttpResponse<String> response = newGetRequest(null, "courses");
@@ -152,10 +150,10 @@ public class RemoteStuditModelAccess {
   }
 
   /**
-   * Gets the Users object from the server
+   * Gets the Users object from the server.
    * 
    * @return Users object if server is configured properly, othwerise null
-   * @throws ApiCallException
+   * @throws ApiCallException if server is configured improperly
    */
   public Users getUsers() throws ApiCallException {
     HttpResponse<String> response = newGetRequest(null, "users");
@@ -168,11 +166,11 @@ public class RemoteStuditModelAccess {
   }
 
   /**
-   * Gets User object by given ID
+   * Gets User object by given ID.
    * 
    * @param id unique user ID
    * @return User object if user with id exists, else ApiCallException is thrown
-   * @throws ApiCallException
+   * @throws ApiCallException if user with the id does not exist.
    */
   public User getUserByID(int id) throws ApiCallException {
     HttpResponse<String> response = newGetRequest(null, "users", String.valueOf(id));
@@ -188,12 +186,12 @@ public class RemoteStuditModelAccess {
   }
 
   /**
-   * Removes user from server database
+   * Removes user from server database.
    * 
    * @param id unique user ID
    * @return true if user was removed, false if unknown response from server,
    *         ApiCallException if user not found
-   * @throws ApiCallException
+   * @throws ApiCallException if user with the given id does not exist
    */
   public boolean removeUserByID(int id) throws ApiCallException {
     HttpResponse<String> response = newDeleteRequest(null, "users", "remove", String.valueOf(id));
@@ -209,7 +207,7 @@ public class RemoteStuditModelAccess {
   }
 
   /**
-   * Adds a new user to the server database
+   * Adds a new user to the server database.
    * 
    * @param name     full name
    * @param username unique username
@@ -220,7 +218,7 @@ public class RemoteStuditModelAccess {
    *         not unique, -3 = password is not valid / not strong enough. String[1]
    *         contains the error message as to why the request failed, e.g "the
    *         password is too short". Null if new user was succesfully added
-   * @throws ApiCallException
+   * @throws ApiCallException Unknown cause
    */
   public String[] addUser(String name, String username, String mail, String password) throws ApiCallException {
     HttpResponse<String> response = newPostRequest(null,
@@ -245,7 +243,7 @@ public class RemoteStuditModelAccess {
    * @param username username to check
    * @param password password to check
    * @return true if valid login, else false.
-   * @throws ApiCallException
+   * @throws ApiCallException Unknown cause.
    */
   public boolean authenticateLogin(String username, String password) throws ApiCallException {
     HttpResponse<String> response = newPostRequest(null, Map.of("username", username, "password", password), "users",
@@ -262,13 +260,13 @@ public class RemoteStuditModelAccess {
   }
 
   /**
-   * Change password of the user
+   * Change password of the user.
    * 
    * @param id          unique user id
    * @param newPassword new password
    * @return String[] containg result. String[0] is null if request was
    *         succesfull, -1 otherwise. String[1] contains error/success message
-   * @throws ApiCallException
+   * @throws ApiCallException unknown cause.
    */
   public String[] changePassword(int id, String newPassword) throws ApiCallException {
     HttpResponse<String> response = newPutRequest(null, Map.of("newPassword", newPassword), "users", "modify",
@@ -286,13 +284,13 @@ public class RemoteStuditModelAccess {
   }
 
   /**
-   * Change username of user
+   * Change username of user.
    * 
    * @param id          unique user id
    * @param newUsername new username
    * @return String[] containg result. String[0] is null if request was
    *         succesfull, -1 otherwise. String[1] contains error/success message
-   * @throws ApiCallException
+   * @throws ApiCallException unknown cause
    */
   public String[] changeUsername(int id, String newUsername) throws ApiCallException {
     HttpResponse<String> response = newPutRequest(null, Map.of("newUsername", newUsername), "users", "modify",
@@ -309,13 +307,13 @@ public class RemoteStuditModelAccess {
   }
 
   /**
-   * Change mail of user
+   * Change mail of user.
    * 
-   * @param id          unique user id
-   * @param newUsername new username
+   * @param id      unique user id
+   * @param newMail new mail
    * @return String[] containg result. String[0] is null if request was
    *         succesfull, -1 otherwise. String[1] contains error/success message
-   * @throws ApiCallException
+   * @throws ApiCallException unkown cause
    */
   public String[] changeMail(int id, String newMail) throws ApiCallException {
     HttpResponse<String> response = newPutRequest(null, Map.of("newMail", newMail), "users", "modify",
@@ -333,12 +331,12 @@ public class RemoteStuditModelAccess {
   }
 
   /**
-   * Get the Course object with the requested fagkode
+   * Get the Course object with the requested fagkode.
    * 
    * @param fagkode fagkode of the course
    * @return Course if a course with the fagkode exists, otherwise throws
    *         ApiCallException.
-   * @throws ApiCallException
+   * @throws ApiCallException if the course with the fagkode does not exist
    */
   public Course getCourseByFagkode(String fagkode) throws ApiCallException {
     HttpResponse<String> response = newGetRequest(null, "courses", fagkode);
@@ -361,7 +359,7 @@ public class RemoteStuditModelAccess {
    * @param fagkode fagkode of the requested course
    * @return Discussion if fagkode exits, otherwise null or ApiCallException is
    *         thrown
-   * @throws ApiCallException
+   * @throws ApiCallException if the course with the fagkode does not exist
    */
   public Discussion getDiscussion(String fagkode) throws ApiCallException {
     HttpResponse<String> response = newGetRequest(null, "courses", fagkode, "discussion");
@@ -375,32 +373,32 @@ public class RemoteStuditModelAccess {
   }
 
   /**
-   * Add a comment to a discussion
+   * Add a comment to a discussion.
    * 
    * @param fagkode  fagkode of the course
    * @param username username who wrote the comment (stored locally)
    * @param comment  comment to send
    * @return unique id of the new comment if request is successfull, otherwise
    *         throws ApiCallException
-   * @throws ApiCallException
+   * @throws ApiCallException unknown cause.
    */
   public int addCommentToDiscussion(String fagkode, String username, String comment) throws ApiCallException {
     HttpResponse<String> response = newPostRequest(null, Map.of("username", username, "comment", comment), "courses",
         fagkode, "discussion");
 
     if (response.statusCode() == Status.SERVER_ERROR.get()) {
-      throw new ApiCallException("Invalid parameters passed, username and comment must not be null");
+      throw new ApiCallException(response.body());
     }
     return Integer.parseInt(response.body());
   }
 
   /**
-   * Delete a comment from a discussion
+   * Delete a comment from a discussion.
    * 
    * @param fagkode fagkode of the requested discussion
    * @param id      unique id of the comment to delete
    * @return true if successful, throws ApiCallException if id does not exist
-   * @throws ApiCallException
+   * @throws ApiCallException if the comment with the id does not exist.
    */
   public boolean deleteCommentByID(String fagkode, int id) throws ApiCallException {
     HttpResponse<String> response = newDeleteRequest(null, "courses", fagkode, "discussion", "remove",
@@ -419,7 +417,8 @@ public class RemoteStuditModelAccess {
    * @param id       unique id of the comment the user wants to upvote
    * @return true if successful, otherwise throws ApiCallException (also thrown if
    *         the user has upvoted the comment before)
-   * @throws ApiCallException
+   * @throws ApiCallException if the comment does not exist, or it has been
+   *                          upvoted before.
    */
   public boolean upvoteCommentByID(String fagkode, String username, int id) throws ApiCallException {
     HttpResponse<String> response = newPutRequest(null, Map.of("username", username), "courses", fagkode, "discussion",
@@ -440,7 +439,8 @@ public class RemoteStuditModelAccess {
    * @param id       unique id of the comment the user wants to downvote
    * @return true if successful, otherwise throws ApiCallException (also thrown if
    *         the user has downvoted the comment before)
-   * @throws ApiCallException
+   * @throws ApiCallException if the comment does not exist, or it has been
+   *                          downvoted before.
    */
   public boolean downvoteCommentByID(String fagkode, String username, int id) throws ApiCallException {
     HttpResponse<String> response = newPutRequest(null, Map.of("username", username), "courses", fagkode, "discussion",

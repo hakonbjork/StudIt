@@ -23,7 +23,8 @@ public class StuditConfig extends ResourceConfig {
   private static final String DBPATH = "res/db/studitModel.json";
 
   /**
-   * Initialize StuditConfig and register appropriate classes
+   * Initialize StuditConfig and register appropriate classes.
+   * 
    * @param studitModel conists of our database object with functionallity
    */
   public StuditConfig(StuditModel studitModel) {

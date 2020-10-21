@@ -18,7 +18,7 @@ public class StuditService {
   private StuditModel studitModel;
 
   /**
-   * API base endpoint
+   * API base endpoint.
    * 
    * @return active StuditModel object
    */
@@ -30,7 +30,7 @@ public class StuditService {
 
   /**
    * Returns a new CourseList resource for further processing of the
-   * studit/courses request
+   * studit/courses request.
    */
   @Path("/courses")
   public CourseListResource getCourseList() {
@@ -38,9 +38,9 @@ public class StuditService {
     return new CourseListResource(courseList);
   }
 
-   /**
+  /**
    * Returns a new CourseList resource for further processing of the
-   * studit/courses request
+   * studit/courses request.
    */
   @Path("/users")
   public UsersResource getUsers() {

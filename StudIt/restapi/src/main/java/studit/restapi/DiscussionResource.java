@@ -21,9 +21,9 @@ public class DiscussionResource {
   private static final Logger LOG = LoggerFactory.getLogger(CourseListResource.class);
 
   /**
-   * Initalizes this DiscussionResource with the requested discussion
+   * Initalizes this DiscussionResource with the requested discussion.
    * 
-   * @param dicussion Discussion object obtained from the requested course
+   * @param discussion Discussion object obtained from the requested course
    */
   public DiscussionResource(Discussion discussion) {
     this.discussion = discussion;
@@ -49,7 +49,7 @@ public class DiscussionResource {
   }
 
   /**
-   * Adds a comment to the Discussion
+   * Adds a comment to the Discussion.
    * 
    * @param username username of the person who wrote the comment
    * @param comment  comment

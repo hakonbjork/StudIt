@@ -3,7 +3,6 @@ package studit.core.users;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -82,7 +81,7 @@ public class Users {
   }
 
   /**
-   * Returns User object by id
+   * Returns User object by id.
    * 
    * @param id uniqueID for the user
    * @return User if found, else null
@@ -122,7 +121,7 @@ public class Users {
   }
 
   /**
-   * Change the username of a user
+   * Change the username of a user.
    * 
    * @param id          unique id
    * @param newUsername requested new username
@@ -143,7 +142,7 @@ public class Users {
   }
 
   /**
-   * Change the password of a user
+   * Change the password of a user.
    * 
    * @param id          unique id
    * @param newPassword requested new password
@@ -164,7 +163,7 @@ public class Users {
   }
 
   /**
-   * Change the email of a user
+   * Change the email of a user.
    * 
    * @param id      unique id
    * @param newMail requested new password

@@ -7,10 +7,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 
@@ -20,7 +18,7 @@ public class CourseListResource {
   private static final Logger LOG = LoggerFactory.getLogger(CourseListResource.class);
 
   /**
-   * Initalizes this CourseListResource with the main CourseList
+   * Initalizes this CourseListResource with the main CourseList.
    * 
    * @param courseList CourseList object obtained from StuditModel
    */
@@ -35,7 +33,7 @@ public class CourseListResource {
   }
 
   /**
-   * Gets the active CourseList
+   * Gets the active CourseList.
    * 
    * @return the active CourseList
    */
@@ -48,9 +46,11 @@ public class CourseListResource {
   }
 
   /**
-   * Gets a course by given fagkode
+   * Gets a course by given fagkode.
+   * 
    * @param fagkode fagkode of the requested subject.
-   * @return response object with CourseItem if fagkode is valid, otherwise 404 not found.
+   * @return response object with CourseItem if fagkode is valid, otherwise 404
+   *         not found.
    */
   @GET
   @Path("/{fagkode}")
@@ -65,9 +65,10 @@ public class CourseListResource {
     LOG.debug("getCourseItem({})", fagkode);
     return Response.ok(item, MediaType.APPLICATION_JSON).build();
   }
-  
+
   /**
    * Handles discussion request, and pass it over to the DiscussionResource class
+   * 
    * @param fagkode fagkode of the requested discussion
    * @return DiscussionResource if fagkode exists, otherwise null;
    */

@@ -23,7 +23,7 @@ public class UsersResource {
   private static final Logger LOG = LoggerFactory.getLogger(UsersResource.class);
 
   /**
-   * Initalizes this UserResource with the main Users object
+   * Initalizes this UserResource with the main Users object.
    * 
    * @param users Users object obtained from StuditModel
    */
@@ -38,7 +38,7 @@ public class UsersResource {
   }
 
   /**
-   * Gets the active Users object
+   * Gets the active Users object.
    * 
    * @return the active Users object
    */
@@ -51,7 +51,7 @@ public class UsersResource {
   }
 
   /**
-   * Returns User json object if found
+   * Returns User json object if found.
    * 
    * @param id unique id of user
    * @return Response with User json if found, otherwise 404 not found response.
@@ -82,7 +82,7 @@ public class UsersResource {
   }
 
   /**
-   * Adds a new user to the database
+   * Adds a new user to the database.
    * 
    * @param name     Full name of user
    * @param username username
@@ -109,10 +109,10 @@ public class UsersResource {
   }
 
   /**
-   * Process user login request
+   * Process user login request.
    * 
-   * @param username
-   * @param password
+   * @param username requested username
+   * @param password corresponding password
    * @return
    */
   @POST

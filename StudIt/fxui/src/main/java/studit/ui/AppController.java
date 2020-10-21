@@ -216,7 +216,6 @@ public class AppController implements ChangeListener<String> {
         setLabel(coursesList.getSelectionModel().getSelectedItem());
 
         try {
-
           Stage primaryStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();
 
           FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
@@ -227,7 +226,6 @@ public class AppController implements ChangeListener<String> {
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
           Parent coursePane = courseLoader.load();
           Scene courseScene = new Scene(coursePane);
-
           // injecting first scene into the controller of the second scene
           CourseController courseController = (CourseController) courseLoader.getController();
           courseController.setMainScene(mainScene);
@@ -269,12 +267,12 @@ public class AppController implements ChangeListener<String> {
 
       CourseList li = coursePersistence.readCourseList(fr);
 
-      //System.out.println(li.getCourseItems().size());
+      // System.out.println(li.getCourseItems().size());
 
       Collection<CourseItem> items = li.getCourseItems();
       this.courseList = (List<CourseItem>) items;
 
-      //System.out.println(items.size());
+      // System.out.println(items.size());
 
       for (CourseItem c : items) {
         this.list.add(c.getFagnavn());
