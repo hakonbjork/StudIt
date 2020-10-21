@@ -36,15 +36,17 @@ public class Users {
    * @param password password (unencrypted)
    * @return String[0] contains the new ID for the user if all checks were passed,
    *         otherwise null. String[1] contains the error message if something
-   *         went wrong, null otherwise
+   *         went wrong, null otherwise, String[2] contains the error code. 0 =
+   *         new user created, -1 = missing fields, -2 = invalid username, -3 =
+   *         invalid password
    */
   public String[] addUser(String name, String username, String mail, String password) {
     if (name == null || username == null || mail == null || password == null) {
-      return new String[] { null, "Missing fields, expected name, username, mail and password" };
+      return new String[] { null, "Missing fields, expected name, username, mail and password", "-1" };
     }
     if (isUnique(username)) {
       if (!isValidEmailAddress(mail)) {
-        return new String[] { null, "'" + mail + "'" + " is not a valid email address" };
+        return new String[] { null, "'" + mail + "'" + " is not a valid email address", "-3" };
       }
 
       String[] passwordHash = Hashing.hashPassword(password);
@@ -54,9 +56,9 @@ public class Users {
       }
       prevAssignedID += 1;
       users.put(prevAssignedID, new User(name, username, mail, passwordHash[0], prevAssignedID));
-      return new String[] { String.valueOf(prevAssignedID), null };
+      return new String[] { String.valueOf(prevAssignedID), null, "0" };
     }
-    return new String[] { null, "'" + username + "' is not a unique username" };
+    return new String[] { null, "'" + username + "' is not a unique username", "-2" };
   }
 
   private boolean isUnique(String username) {

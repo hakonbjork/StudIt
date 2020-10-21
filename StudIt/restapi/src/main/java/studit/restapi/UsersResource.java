@@ -102,10 +102,10 @@ public class UsersResource {
 
     if (result[0] == null) {
       LOG.debug("Request failed with following error: " + result[1]);
-      return Response.serverError().entity(result[1]).build();
+      return Response.serverError().entity(result).build();
     }
     LOG.debug("Successfully added new user to database");
-    return Response.accepted(result[0]).build();
+    return Response.accepted(result).build();
   }
 
   /**
@@ -143,7 +143,9 @@ public class UsersResource {
    * @param newMail     requested new mail
    * @param newPassword requested new password
    * @param newUsername requested new username
-   * @return Response object containing success or error message
+   * @return 400, Bad Request if more than one param is passed, 500, internal
+   *         server error if the new field is invalid. 200 ok response containing
+   *         sucess message
    */
   @PUT
   @Path("/modify/{id}")
@@ -151,7 +153,7 @@ public class UsersResource {
       @QueryParam("newPassword") String newPassword, @QueryParam("newUsername") String newUsername) {
 
     if (newMail != null && newPassword != null || newPassword != null && newUsername != null) {
-      return Response.serverError().entity("Error, you can only change one field at a time").build();
+      return Response.status(Status.BAD_REQUEST).entity("Error, you can only change one field at a time").build();
     }
 
     String successMessage = "";
