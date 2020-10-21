@@ -46,7 +46,7 @@
                                                       <Font name="Avenir Next Bold" size="24.0" />
                                                    </font>
                                                 </Button>
-                                                <Button id="discussion_btn" fx:id="forum_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openDiscussion" prefHeight="58.0" prefWidth="379.0" style="-fx-background-color: #e6faff#e6faff #e6faff#e6faff #e6faff#e6faff #e6faff#e6faff;" text="Diskusjon" textAlignment="CENTER" textFill="#242424ed">
+                                                <Button id="discussion_btn" fx:id="discussion_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openDiscussion" prefHeight="58.0" prefWidth="379.0" style="-fx-background-color: #e6faff#e6faff #e6faff#e6faff #e6faff#e6faff #e6faff#e6faff;" text="Diskusjon" textAlignment="CENTER" textFill="#242424ed">
                                                    <font>
                                                       <Font name="Avenir Next Bold" size="24.0" />
                                                    </font>

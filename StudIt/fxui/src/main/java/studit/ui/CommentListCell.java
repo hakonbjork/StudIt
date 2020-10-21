@@ -8,13 +8,13 @@ import studit.core.mainpage.Comment;
 
 public class CommentListCell extends ListCell<Comment> {
 
-  HBox hbox = new HBox();
+ // HBox hbox = new HBox();
 
-  Button upBtn = new Button("UpVote");
+ // Button upBtn = new Button("UpVote");
 
-  Button downBtn = new Button("DownVote");
+ // Button downBtn = new Button("DownVote");
 
-  Label textView  = new Label("textView");
+ // Label textView  = new Label("textView");
 
   @Override
   protected void updateItem(Comment item, boolean empty) {

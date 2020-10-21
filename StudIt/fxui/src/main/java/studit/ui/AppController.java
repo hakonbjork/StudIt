@@ -61,6 +61,9 @@ public class AppController {
   @FXML
   private Button logout_btn;
 
+  @FXML 
+  private Button discussion_btn;
+
   static Chatbot chatbot = null;
   private ObservableList<CourseItem> list = FXCollections.observableArrayList();
   private List<CourseItem> courseList;
@@ -243,7 +246,8 @@ public class AppController {
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
           Parent coursePane = courseLoader.load();
           Scene courseScene = new Scene(coursePane);
-          
+  
+
           // injecting first scene into the controller of the second scene
           CourseController courseController = (CourseController) courseLoader.getController();
           courseController.setMainScene(mainScene);
@@ -264,6 +268,7 @@ public class AppController {
       }
     });
   }
+
 
   private CourseItem findCourseItem(String name) {
     for (CourseItem courseItem : this.courseList) {

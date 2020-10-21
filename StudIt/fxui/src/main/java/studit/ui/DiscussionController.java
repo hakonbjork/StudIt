@@ -61,7 +61,7 @@ public class DiscussionController {
 
     commentList.setItems(listView);
 
-    commentList.setCellFactory(param -> new CommentListCell());
+    //commentList.setCellFactory(param -> new CommentListCell());
 
   }
 

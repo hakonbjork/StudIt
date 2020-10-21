@@ -19,6 +19,40 @@ import javafx.stage.Stage;
 
 public class CourseController implements Initializable {
 
+
+  @FXML
+  private Label fagkode;
+
+  @FXML
+  private Label fagnavn;
+
+  @FXML
+  private TextArea courseInformation;
+
+  @FXML
+  private TextArea litterature;
+
+  @FXML
+  private TextArea tips_tricks;
+
+  @FXML
+  private Button mainPageAction;
+
+  @FXML
+  private Button logoutAction;
+
+  @FXML
+  private TextField eksamensdato;
+
+  @FXML
+  private TextField vurderingsform;
+
+  @FXML
+  private TextField hjelpemidler;
+
+  @FXML
+  private Button addCommentAction;
+
   @FXML
   private BorderPane rootPane;
   @FXML
@@ -41,14 +75,7 @@ public class CourseController implements Initializable {
   private Label label;
   @FXML
   private Label rating;
-  @FXML
-  TextArea comment1;
-  @FXML
-  TextArea comment2;
-  @FXML
-  TextArea comment3;
-  @FXML
-  TextArea commentField;
+    
   @FXML
   private TextField search;
   @FXML
@@ -153,6 +180,34 @@ public class CourseController implements Initializable {
   @FXML
   public void setCourseText(String text) {
     this.courseText.setText(text.toString());
+  }
+
+  @FXML
+  void openDiscussion(ActionEvent event){
+
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Discussion.fxml"));
+      Parent root = loader.load();
+
+      Stage stage2 = new Stage();
+      stage2.setScene(new Scene(root));
+      stage2.setTitle("Discussion");
+      stage2.show();
+
+      Stage stage = (Stage) rootPane.getScene().getWindow();
+      stage.hide();
+
+    } catch (IOException e) {
+      System.out.println(e);
+    }
+
+
+  }
+
+  @FXML
+  void handleAddCommentAction(ActionEvent event){
+    //TODO fikse metoden her. 
+    System.out.println("Adda en tilbakemelding");
   }
 
 }
