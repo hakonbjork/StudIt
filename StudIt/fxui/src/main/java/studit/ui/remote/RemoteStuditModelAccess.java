@@ -334,16 +334,19 @@ public class RemoteStuditModelAccess {
 
   /**
    * Get the Course object with the requested fagkode
+   * 
    * @param fagkode fagkode of the course
-   * @return Course if a course with the fagkode exists, otherwise throws ApiCallException.
+   * @return Course if a course with the fagkode exists, otherwise throws
+   *         ApiCallException.
    * @throws ApiCallException
    */
   public Course getCourseByFagkode(String fagkode) throws ApiCallException {
-    HttpResponse<String> response = newGetRequest(null, "users", fagkode);
+    HttpResponse<String> response = newGetRequest(null, "courses", fagkode);
 
     if (response.statusCode() == Status.NOT_FOUND.get()) {
       throw new ApiCallException(response.body());
     }
+
     try {
       return objectMapper.readValue(response.body(), Course.class);
     } catch (JsonProcessingException e) {
@@ -352,8 +355,102 @@ public class RemoteStuditModelAccess {
     }
   }
 
+  /**
+   * Get Discussion object by given fagkode.
+   * 
+   * @param fagkode fagkode of the requested course
+   * @return Discussion if fagkode exits, otherwise null or ApiCallException is
+   *         thrown
+   * @throws ApiCallException
+   */
   public Discussion getDiscussion(String fagkode) throws ApiCallException {
-    return null;
+    HttpResponse<String> response = newGetRequest(null, "courses", fagkode, "discussion");
+
+    try {
+      return objectMapper.readValue(response.body(), Discussion.class);
+    } catch (JsonProcessingException e) {
+      throw new ApiCallException("There does not exist a course with fagkode" + fagkode);
+    }
+
+  }
+
+  /**
+   * Add a comment to a discussion
+   * 
+   * @param fagkode  fagkode of the course
+   * @param username username who wrote the comment (stored locally)
+   * @param comment  comment to send
+   * @return unique id of the new comment if request is successfull, otherwise
+   *         throws ApiCallException
+   * @throws ApiCallException
+   */
+  public int addCommentToDiscussion(String fagkode, String username, String comment) throws ApiCallException {
+    HttpResponse<String> response = newPostRequest(null, Map.of("username", username, "comment", comment), "courses",
+        fagkode, "discussion");
+
+    if (response.statusCode() == Status.SERVER_ERROR.get()) {
+      throw new ApiCallException("Invalid parameters passed, username and comment must not be null");
+    }
+    return Integer.parseInt(response.body());
+  }
+
+  /**
+   * Delete a comment from a discussion
+   * 
+   * @param fagkode fagkode of the requested discussion
+   * @param id      unique id of the comment to delete
+   * @return true if successful, throws ApiCallException if id does not exist
+   * @throws ApiCallException
+   */
+  public boolean deleteCommentByID(String fagkode, int id) throws ApiCallException {
+    HttpResponse<String> response = newDeleteRequest(null, "courses", fagkode, "discussion", "remove",
+        String.valueOf(id));
+    if (response.statusCode() == Status.NOT_FOUND.get()) {
+      throw new ApiCallException(response.body());
+    }
+    return true;
+  }
+
+  /**
+   * Upvotes the given comment.
+   * 
+   * @param fagkode  fagkode of the requested discsussion
+   * @param username username that wants to upvote
+   * @param id       unique id of the comment the user wants to upvote
+   * @return true if successful, otherwise throws ApiCallException (also thrown if
+   *         the user has upvoted the comment before)
+   * @throws ApiCallException
+   */
+  public boolean upvoteCommentByID(String fagkode, String username, int id) throws ApiCallException {
+    HttpResponse<String> response = newPutRequest(null, Map.of("username", username), "courses", fagkode, "discussion",
+        "upvote", String.valueOf(id));
+
+    if (response.statusCode() == Status.SERVER_ERROR.get()) {
+      throw new ApiCallException(response.body());
+    }
+
+    return true;
+  }
+
+  /**
+   * Upvotes the given comment.
+   * 
+   * @param fagkode  fagkode of the requested discsussion
+   * @param username username that wants to downvote
+   * @param id       unique id of the comment the user wants to downvote
+   * @return true if successful, otherwise throws ApiCallException (also thrown if
+   *         the user has downvoted the comment before)
+   * @throws ApiCallException
+   */
+  public boolean downvoteCommentByID(String fagkode, String username, int id) throws ApiCallException {
+    HttpResponse<String> response = newPutRequest(null, Map.of("username", username), "courses", fagkode, "discussion",
+        "downvote", String.valueOf(id));
+
+    if (response.statusCode() == Status.SERVER_ERROR.get()) {
+      throw new ApiCallException(response.body());
+    }
+
+    return true;
   }
 
 }
