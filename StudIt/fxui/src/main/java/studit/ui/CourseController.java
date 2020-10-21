@@ -34,6 +34,8 @@ public class CourseController implements Initializable {
   @FXML
   private Button mainPage_btn;
   @FXML
+  private Button discussion_btn;
+  @FXML
   private Label comments;
   @FXML
   private Label label;
