@@ -13,8 +13,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import studit.ui.remote.RemoteStuditModelAccess;
 
-public class LoginController implements Initializable {
+public class LoginController {
 
   @FXML
   PasswordField passwordField;
@@ -33,15 +34,9 @@ public class LoginController implements Initializable {
   @FXML
   Text loginInfoText;
 
-  public LoginController() {
-  }
+  private RemoteStuditModelAccess remote;
 
-  /**
-   * Initializes the UserManager database with usernames and passwords.
-   */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    studit.core.users.UserManager.startStuff();
+  public LoginController() {
   }
 
   /**
@@ -65,7 +60,7 @@ public class LoginController implements Initializable {
    * Checks if email is registered, sends password to user if it is
    */
   public void forgotPassword() {
-    // code
+    //TODO: This.
   }
 
   /**
