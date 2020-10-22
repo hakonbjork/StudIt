@@ -37,7 +37,7 @@ import studit.json.CoursePersistence;
 public class AppController {
 
   @FXML
-  private ListView<CourseItem> coursesList;
+  private ListView<String> coursesList;
   @FXML
   private Button mainPageAction;
   @FXML
@@ -65,7 +65,7 @@ public class AppController {
   private Button discussion_btn;
 
   static Chatbot chatbot = null;
-  private ObservableList<CourseItem> list = FXCollections.observableArrayList();
+  private ObservableList<String> list = FXCollections.observableArrayList();
   private List<CourseItem> courseList;
   private String label;
   private CoursePersistence coursePersistence = new CoursePersistence();
@@ -105,62 +105,62 @@ public class AppController {
     // });
   }
 
-  /**
-   * Function to search for subjects. The listview will then only show subjects
-   * with the letters in the search field.
-   */
-  @FXML
-  public void handleSearchViewAction() {
-    // Wrap the ObservableList in a FilteredList (initially display all data).
-    FilteredList<CourseItem> filteredData = new FilteredList<>(getData(), p -> true);
+  // /**
+  //  * Function to search for subjects. The listview will then only show subjects
+  //  * with the letters in the search field.
+  //  */
+  // @FXML
+  // public void handleSearchViewAction() {
+  //   // Wrap the ObservableList in a FilteredList (initially display all data).
+  //   FilteredList<CourseItem> filteredData = new FilteredList<>(getData(), p -> true);
 
-    // Set the filter Predicate whenever the filter changes.
-    searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-      filteredData.setPredicate(courseItem -> {
-        // If filter text is empty, display all persons.
-        if (newValue == null || newValue.isEmpty()) {
-          return true;
-        }
+  //   // Set the filter Predicate whenever the filter changes.
+  //   searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+  //     filteredData.setPredicate(courseItem -> {
+  //       // If filter text is empty, display all persons.
+  //       if (newValue == null || newValue.isEmpty()) {
+  //         return true;
+  //       }
 
-        // Compare course name and course code of every CourseItem with the filter text.
-        String lowerCaseFilter = newValue.toLowerCase();
+  //       // Compare course name and course code of every CourseItem with the filter text.
+  //       String lowerCaseFilter = newValue.toLowerCase();
 
-        if (courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter)) {
-          return true; // filter matches course name
-        } else if (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter)) {
-          return true; // filter matches course code
-        }
-        return false; // Does not match
-      });
-    });
+  //       if (courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter)) {
+  //         return true; // filter matches course name
+  //       } else if (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter)) {
+  //         return true; // filter matches course code
+  //       }
+  //       return false; // Does not match
+  //     });
+  //   });
 
-    // Wrap the FilteredList in a SortedList.
-    SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
+  //   // Wrap the FilteredList in a SortedList.
+  //   SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
 
-    // put the sorted list into the listview
-    coursesList.setItems(sortedData);
+  //   // put the sorted list into the listview
+  //   coursesList.setItems(sortedData);
 
-    coursesList.setCellFactory(new Callback<ListView<CourseItem>, ListCell<CourseItem>>() {
-      @Override
-      public ListCell<CourseItem> call(ListView<CourseItem> param) {
-        final Label leadLbl = new Label();
-        final Tooltip tooltip = new Tooltip();
-        final ListCell<CourseItem> cell = new ListCell<CourseItem>() {
-          @Override
-          public void updateItem(CourseItem item, boolean empty) {
-            super.updateItem(item, empty);
-            if (item != null) {
-              leadLbl.setText(item.getFagkode());
-              setText(item.getFagnavn() + " " + item.getFagnavn());
-              tooltip.setText(item.getFagkode());
-              setTooltip(tooltip);
-            }
-          }
-        };
-        return cell;
-      }
-    });
-  }
+  //   coursesList.setCellFactory(new Callback<ListView<CourseItem>, ListCell<CourseItem>>() {
+  //     @Override
+  //     public ListCell<CourseItem> call(ListView<CourseItem> param) {
+  //       final Label leadLbl = new Label();
+  //       final Tooltip tooltip = new Tooltip();
+  //       final ListCell<CourseItem> cell = new ListCell<CourseItem>() {
+  //         @Override
+  //         public void updateItem(CourseItem item, boolean empty) {
+  //           super.updateItem(item, empty);
+  //           if (item != null) {
+  //             leadLbl.setText(item.getFagkode());
+  //             setText(item.getFagnavn() + " " + item.getFagnavn());
+  //             tooltip.setText(item.getFagkode());
+  //             setTooltip(tooltip);
+  //           }
+  //         }
+  //       };
+  //       return cell;
+  //     }
+  //   });
+  // }
 
   /**
    * Opens chatbot.
@@ -233,7 +233,7 @@ public class AppController {
       @Override
       public void handle(MouseEvent arg0) {
         // System.out.println((coursesList.getSelectionModel().getSelectedItem()));
-        setLabel(coursesList.getSelectionModel().getSelectedItem().getFagnavn());
+        setLabel(coursesList.getSelectionModel().getSelectedItem());
 
         try {
           Stage primaryStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();
@@ -252,12 +252,11 @@ public class AppController {
           CourseController courseController = (CourseController) courseLoader.getController();
           courseController.setMainScene(mainScene);
 
-          //TODO fikse undermetoden slik at det blir riktig med ny oppdatering
   
           // injecting second scene into the controller of the first scene
-          //CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem().getFagnavn());
-          //courseController.setCourseText(courseItem.getInformasjon());
-          //courseController.setLabel(coursesList.getSelectionModel().getSelectedItem().getFagnavn().substring(0, 8));
+          CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
+          courseController.setCourseInformation(courseItem.getInformasjon());
+          courseController.setFagnavn(coursesList.getSelectionModel().getSelectedItem().substring(0, 8));
 
           primaryStage.setScene(courseScene);
           primaryStage.setTitle("StudIt");
@@ -299,7 +298,7 @@ public class AppController {
       // System.out.println(items.size());
 
       for (CourseItem c : items) {
-        this.list.add(c);
+        this.list.add(c.getFagnavn());
       }
 
       this.coursesList.setItems(this.list);
@@ -317,8 +316,8 @@ public class AppController {
    * 
    * @return list;
    */
-  public ObservableList<CourseItem> getData() {
-    return (ObservableList<CourseItem>) list;
+  public ObservableList<String> getData() {
+    return (ObservableList<String>) list;
   }
 
 }

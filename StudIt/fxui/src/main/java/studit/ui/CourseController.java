@@ -14,59 +14,57 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 public class CourseController implements Initializable {
 
+  @FXML
+  private BorderPane rootPane;
 
-    @FXML
-    private BorderPane rootPane;
+  @FXML
+  private Button information_btn;
 
-    @FXML
-    private Button information_btn;
+  @FXML
+  private Button discussion_btn;
 
-    @FXML
-    private Button discussion_btn;
+  @FXML
+  private Label fagkode;
 
-    @FXML
-    private Label fagkode;
+  @FXML
+  private Label fagnavn;
 
-    @FXML
-    private Label fagnavn;
+  @FXML
+  private Label rating;
 
-    @FXML
-    private Label rating;
+  @FXML
+  private TextArea courseInformation;
 
-    @FXML
-    private TextArea courseInformation;
+  @FXML
+  private TextArea litterature;
 
-    @FXML
-    private TextArea litterature;
+  @FXML
+  private TextArea tips_tricks;
 
-    @FXML
-    private TextArea tips_tricks;
+  @FXML
+  private Button mainPageAction;
 
-    @FXML
-    private Button mainPageAction;
+  @FXML
+  private Button chatbot_btn;
 
-    @FXML
-    private Button chatbot_btn;
+  @FXML
+  private Button logoutAction;
 
-    @FXML
-    private Button logoutAction;
+  @FXML
+  private TextField eksamensdato;
 
-    @FXML
-    private TextField eksamensdato;
+  @FXML
+  private TextField vurderingsform;
 
-    @FXML
-    private TextField vurderingsform;
+  @FXML
+  private TextField hjelpemidler;
 
-    @FXML
-    private TextField hjelpemidler;
-
-    @FXML
-    private TextArea commentField;
+  @FXML
+  private TextArea commentField;
 
   @FXML
   private Button addCommentAction;
@@ -79,7 +77,7 @@ public class CourseController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-   
+
   }
 
   /**
@@ -88,10 +86,11 @@ public class CourseController implements Initializable {
    * @param label the label to set
    */
 
-  //@FXML
-  //public void setLabel(String label) {
-  //  this.label.setText(label);
-  //}
+  @FXML
+  public void setFagnavn(String fagnavn) {
+    this.fagnavn.setText(fagnavn);
+  }
+
 
   /**
    * logs user out, and goes to login scene closes the current window.
@@ -129,14 +128,6 @@ public class CourseController implements Initializable {
   }
 
   /**
-   * Gives the user a choice to open NTNU homepage in web-browser.
-   */
-  @FXML
-  void handleNtnuAction(ActionEvent event) {
-    System.out.println("NTNU");
-  }
-
-  /**
    * Opens Chatbot.
    */
   @FXML
@@ -147,10 +138,11 @@ public class CourseController implements Initializable {
       AppController.getChatbot().show();
     }
   }
-  
+
   /**
    * Sets the rating of the subject.
-   * @param rating represents the value of the rating to be set 
+   * 
+   * @param rating represents the value of the rating to be set
    */
   @FXML
   public void setRating(double rating) {
@@ -166,13 +158,13 @@ public class CourseController implements Initializable {
     return Double.valueOf(this.rating.getText());
   }
 
-  //@FXML
-  //public void setCourseText(String text) {
-  //  this.courseText.setText(text.toString());
-  //}
+  @FXML
+  public void setCourseInformation(String information) {
+    this.courseInformation.setText(information.toString());
+  }
 
   @FXML
-  void openDiscussion(ActionEvent event){
+  void openDiscussion(ActionEvent event) {
 
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("Discussion.fxml"));
@@ -190,12 +182,11 @@ public class CourseController implements Initializable {
       System.out.println(e);
     }
 
-
   }
 
   @FXML
-  void handleAddCommentAction(ActionEvent event){
-    //TODO fikse metoden her. 
+  void handleAddCommentAction(ActionEvent event) {
+    // TODO fikse metoden her.
     System.out.println("Adda en tilbakemelding");
   }
 
