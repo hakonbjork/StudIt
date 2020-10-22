@@ -1,16 +1,21 @@
 package studit.ui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.Discussion;
 import studit.ui.remote.ApiCallException;
@@ -62,6 +67,7 @@ public class DiscussionController {
     // Henter en liste med ForumPoster fra CourseController som har data fra DB om
     // det spesifike kurset.
 
+    //TODO fikse riktig course, så må få info fra courseController elns
     Discussion discussion = remoteStuditModelAccess.getDiscussion("TDT4109");
     
     discussion.getComments();
@@ -72,10 +78,17 @@ public class DiscussionController {
     
     }
 
+    ////**FO-data */
+    Comment comment1 = new Comment();
+    comment1.setBrukernavn("Mithu");
+    comment1.setKommentar("kommentar");
+    listView.add(comment1);
+    /////////////////////////////////
+
     forumList.setItems(listView);
 
     forumList.setCellFactory(param -> new CommentListCell());
-    
+
   }
 
   @FXML
@@ -90,9 +103,26 @@ public class DiscussionController {
     
   }
 
+ /**
+   * logs user out, and goes to login scene closes the current window.
+   */
   @FXML
   void handleLogoutAction(ActionEvent event) {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+      Parent root = loader.load();
 
+      Stage stage2 = new Stage();
+      stage2.setScene(new Scene(root));
+      stage2.setTitle("Login");
+      stage2.show();
+
+      Stage stage = (Stage) rootPane.getScene().getWindow();
+      stage.hide();
+
+    } catch (IOException e) {
+      System.out.println(e);
+    }
   }
 
   @FXML
@@ -112,7 +142,21 @@ public class DiscussionController {
 
   @FXML
   void openInformationTab(ActionEvent event){
-    //TODO
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
+      Parent root = loader.load();
+
+      Stage stage2 = new Stage();
+      stage2.setScene(new Scene(root));
+      stage2.setTitle("Course");
+      stage2.show();
+
+      Stage stage = (Stage) rootPane.getScene().getWindow();
+      stage.hide();
+
+    } catch (IOException e) {
+      System.out.println(e);
+    }
   }
 
   @FXML
