@@ -12,8 +12,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import studit.core.mainpage.Comment;
+import studit.core.mainpage.Discussion;
+import studit.ui.remote.ApiCallException;
+import studit.ui.remote.RemoteStuditModelAccess;
 
 public class DiscussionController {
+
+  RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
   @FXML
   private BorderPane rootPane;
@@ -46,23 +51,31 @@ public class DiscussionController {
   private Button handleAddNewPost;
 
   @FXML
-  private ListView<Comment> commentList;
+  private ListView<Comment> forumList;
 
   private ObservableList<Comment> listView = FXCollections.observableArrayList();
 
   // add some Students
 
-  public void initialize(URL location, ResourceBundle resources) {
+  public void initialize(URL location, ResourceBundle resources) throws ApiCallException {
 
     // Henter en liste med ForumPoster fra CourseController som har data fra DB om
     // det spesifike kurset.
 
-    // this.listView.addAll(new Comment("hei", 0, 0), new Comment("nei", 0, 0), new Comment("ja", 0, 0));
+    Discussion discussion = remoteStuditModelAccess.getDiscussion("TDT4109");
+    
+    discussion.getComments();
 
-    commentList.setItems(listView);
+    for (Comment comment : discussion.getComments().values()) {
 
-    //commentList.setCellFactory(param -> new CommentListCell());
+      listView.add(comment);
+    
+    }
 
+    forumList.setItems(listView);
+
+    forumList.setCellFactory(param -> new CommentListCell());
+    
   }
 
   @FXML
@@ -98,8 +111,14 @@ public class DiscussionController {
   }
 
   @FXML
-  void openInformationTab(){
+  void openInformationTab(ActionEvent event){
     //TODO
   }
 
+  @FXML
+  void addNewPost(ActionEvent event) {
+
+} 
 }
+
+

@@ -33,8 +33,12 @@ import studit.core.chatbot.Chatbot;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 import studit.json.CoursePersistence;
+import studit.ui.remote.ApiCallException;
+import studit.ui.remote.RemoteStuditModelAccess;
 
 public class AppController {
+
+  private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
   @FXML
   private ListView<String> coursesList;
@@ -61,7 +65,7 @@ public class AppController {
   @FXML
   private Button logout_btn;
 
-  @FXML 
+  @FXML
   private Button discussion_btn;
 
   static Chatbot chatbot = null;
@@ -88,8 +92,10 @@ public class AppController {
 
   /**
    * Function to initialize AppController.
+   * 
+   * @throws ApiCallException
    */
-  public void initialize() {
+  public void initialize() throws ApiCallException {
     loadData();
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     // Actions on clicked list item
@@ -106,60 +112,63 @@ public class AppController {
   }
 
   // /**
-  //  * Function to search for subjects. The listview will then only show subjects
-  //  * with the letters in the search field.
-  //  */
+  // * Function to search for subjects. The listview will then only show subjects
+  // * with the letters in the search field.
+  // */
   // @FXML
   // public void handleSearchViewAction() {
-  //   // Wrap the ObservableList in a FilteredList (initially display all data).
-  //   FilteredList<CourseItem> filteredData = new FilteredList<>(getData(), p -> true);
+  // // Wrap the ObservableList in a FilteredList (initially display all data).
+  // FilteredList<CourseItem> filteredData = new FilteredList<>(getData(), p ->
+  // true);
 
-  //   // Set the filter Predicate whenever the filter changes.
-  //   searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-  //     filteredData.setPredicate(courseItem -> {
-  //       // If filter text is empty, display all persons.
-  //       if (newValue == null || newValue.isEmpty()) {
-  //         return true;
-  //       }
+  // // Set the filter Predicate whenever the filter changes.
+  // searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+  // filteredData.setPredicate(courseItem -> {
+  // // If filter text is empty, display all persons.
+  // if (newValue == null || newValue.isEmpty()) {
+  // return true;
+  // }
 
-  //       // Compare course name and course code of every CourseItem with the filter text.
-  //       String lowerCaseFilter = newValue.toLowerCase();
+  // // Compare course name and course code of every CourseItem with the filter
+  // text.
+  // String lowerCaseFilter = newValue.toLowerCase();
 
-  //       if (courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter)) {
-  //         return true; // filter matches course name
-  //       } else if (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter)) {
-  //         return true; // filter matches course code
-  //       }
-  //       return false; // Does not match
-  //     });
-  //   });
+  // if (courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter)) {
+  // return true; // filter matches course name
+  // } else if (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter)) {
+  // return true; // filter matches course code
+  // }
+  // return false; // Does not match
+  // });
+  // });
 
-  //   // Wrap the FilteredList in a SortedList.
-  //   SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
+  // // Wrap the FilteredList in a SortedList.
+  // SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
 
-  //   // put the sorted list into the listview
-  //   coursesList.setItems(sortedData);
+  // // put the sorted list into the listview
+  // coursesList.setItems(sortedData);
 
-  //   coursesList.setCellFactory(new Callback<ListView<CourseItem>, ListCell<CourseItem>>() {
-  //     @Override
-  //     public ListCell<CourseItem> call(ListView<CourseItem> param) {
-  //       final Label leadLbl = new Label();
-  //       final Tooltip tooltip = new Tooltip();
-  //       final ListCell<CourseItem> cell = new ListCell<CourseItem>() {
-  //         @Override
-  //         public void updateItem(CourseItem item, boolean empty) {
-  //           super.updateItem(item, empty);
-  //           if (item != null) {
-  //             leadLbl.setText(item.getFagkode());
-  //             setText(item.getFagnavn() + " " + item.getFagnavn());
-  //             tooltip.setText(item.getFagkode());
-  //             setTooltip(tooltip);
-  //           }
-  //         }
-  //       };
-  //       return cell;
-  //     }
-  //   });
+  // coursesList.setCellFactory(new Callback<ListView<CourseItem>,
+  // ListCell<CourseItem>>() {
+  // @Override
+  // public ListCell<CourseItem> call(ListView<CourseItem> param) {
+  // final Label leadLbl = new Label();
+  // final Tooltip tooltip = new Tooltip();
+  // final ListCell<CourseItem> cell = new ListCell<CourseItem>() {
+  // @Override
+  // public void updateItem(CourseItem item, boolean empty) {
+  // super.updateItem(item, empty);
+  // if (item != null) {
+  // leadLbl.setText(item.getFagkode());
+  // setText(item.getFagnavn() + " " + item.getFagnavn());
+  // tooltip.setText(item.getFagkode());
+  // setTooltip(tooltip);
+  // }
+  // }
+  // };
+  // return cell;
+  // }
+  // });
   // }
 
   /**
@@ -246,13 +255,11 @@ public class AppController {
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
           Parent coursePane = courseLoader.load();
           Scene courseScene = new Scene(coursePane);
-  
 
           // injecting first scene into the controller of the second scene
           CourseController courseController = (CourseController) courseLoader.getController();
           courseController.setMainScene(mainScene);
 
-  
           // injecting second scene into the controller of the first scene
           CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
           courseController.setCourseInformation(courseItem.getInformasjon());
@@ -262,14 +269,12 @@ public class AppController {
           primaryStage.setTitle("StudIt");
           primaryStage.show();
 
-
         } catch (Exception e) {
           System.out.println(e);
         }
       }
     });
   }
-
 
   private CourseItem findCourseItem(String name) {
     for (CourseItem courseItem : this.courseList) {
@@ -283,12 +288,12 @@ public class AppController {
   /**
    * This function should actually fetch data from a database. This will be
    * implemented later.
+   * 
+   * @throws ApiCallException
    */
-  private void loadData() {
+  private void loadData() throws ApiCallException {
 
-    try (FileReader fr = new FileReader("src/main/resources/studit/db/db.json", StandardCharsets.UTF_8)) {
-
-      CourseList li = coursePersistence.readCourseList(fr);
+      CourseList li = remoteStuditModelAccess.getCourseList();
 
       // System.out.println(li.getCourseItems().size());
 
@@ -302,12 +307,6 @@ public class AppController {
       }
 
       this.coursesList.setItems(this.list);
-
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
 
   }
 

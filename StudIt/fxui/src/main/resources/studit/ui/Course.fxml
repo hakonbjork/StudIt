@@ -218,7 +218,7 @@
                         <Font name="Avenir Next Bold" size="18.0" />
                      </font>
                   </Text>
-                  <TextField id="hjelpemidler" fx:id="hjelpemidler" prefHeight="55.0" prefWidth="238.0" style="-fx-background-color: transparenttransparent;" />
+                  <TextField id="hjelpemidler" fx:id="hjelpemidler" prefHeight="55.0" prefWidth="238.0" style="-fx-background-color: transparent;" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
