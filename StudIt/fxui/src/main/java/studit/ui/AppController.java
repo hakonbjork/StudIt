@@ -72,7 +72,6 @@ public class AppController {
   private ObservableList<String> list = FXCollections.observableArrayList();
   private List<CourseItem> courseList;
   private String label;
-  private CoursePersistence coursePersistence = new CoursePersistence();
 
   public void setLabel(String label) {
     this.label = label;
@@ -263,7 +262,16 @@ public class AppController {
           // injecting second scene into the controller of the first scene
           CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
           courseController.setCourseInformation(courseItem.getInformasjon());
-          courseController.setFagnavn(coursesList.getSelectionModel().getSelectedItem().substring(0, 8));
+          courseController.setFagkode(courseItem.getFagkode());
+
+          //TODO mithu fjerna substring greia for linjen under
+          courseController.setFagnavn(coursesList.getSelectionModel().getSelectedItem());
+          courseController.setEksamensdato(courseItem.getEksamensdato());
+          courseController.setHjelpemidler(courseItem.getHjelpemidler());
+          courseController.setLitterature(courseItem.getAnbefaltLitteratur());
+          courseController.setRating(courseItem.getAverageVurdering());
+          courseController.setTips(courseItem.getTips());
+          courseController.setVurderingsForm(courseItem.getVurderingsform());
 
           primaryStage.setScene(courseScene);
           primaryStage.setTitle("StudIt");
@@ -294,8 +302,6 @@ public class AppController {
   private void loadData() throws ApiCallException {
 
       CourseList li = remoteStuditModelAccess.getCourseList();
-
-      // System.out.println(li.getCourseItems().size());
 
       Collection<CourseItem> items = li.getCourseItems();
       this.courseList = (List<CourseItem>) items;

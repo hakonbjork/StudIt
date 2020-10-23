@@ -60,18 +60,19 @@ public class DiscussionController {
 
   private ObservableList<Comment> listView = FXCollections.observableArrayList();
 
-  // add some Students
+  private String courseName;
+
+  public void addCourse(String name){
+    this.courseName = name;
+  }
 
   public void initialize(URL location, ResourceBundle resources) throws ApiCallException {
 
-    // Henter en liste med ForumPoster fra CourseController som har data fra DB om
-    // det spesifike kurset.
+    this.fagnavn.setText(this.courseName);
 
     //TODO fikse riktig course, så må få info fra courseController elns
-    Discussion discussion = remoteStuditModelAccess.getDiscussion("TDT4109");
+    Discussion discussion = remoteStuditModelAccess.getDiscussion(this.courseName);
     
-    discussion.getComments();
-
     for (Comment comment : discussion.getComments().values()) {
 
       listView.add(comment);
@@ -162,7 +163,9 @@ public class DiscussionController {
   @FXML
   void addNewPost(ActionEvent event) {
 
-} 
+}
+
+
 }
 
 

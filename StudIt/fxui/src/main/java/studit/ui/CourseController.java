@@ -15,8 +15,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import studit.ui.remote.RemoteStuditModelAccess;
 
 public class CourseController implements Initializable {
+
+  RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
   @FXML
   private BorderPane rootPane;
@@ -71,9 +74,38 @@ public class CourseController implements Initializable {
 
   private Scene mainScene;
 
+  public void setHjelpemidler(String hjelpemidler){
+    this.hjelpemidler.setText(hjelpemidler);
+  }
+
+  public void setVurderingsForm(String vurderingsform){
+    this.vurderingsform.setText(vurderingsform);
+  }
+
+  public void setEksamensdato(String eksamensdato){
+    this.eksamensdato.setText(eksamensdato);
+  }
+
+  public void setTips(String tips){
+    this.tips_tricks.setText(tips);
+  }
+
+  public void setLitterature(String litteratur){
+    this.litterature.setText(litteratur);
+  }
+
+  public void setRating(Float rating){
+    this.rating.setText(rating.toString());
+  }
+
   public void setMainScene(Scene scene) {
     this.mainScene = scene;
   }
+
+  public void setFagkode(String fagkode){
+    this.fagkode.setText(fagkode);
+  }
+  
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -120,6 +152,9 @@ public class CourseController implements Initializable {
   @FXML
   void handleMainPageAction(ActionEvent actionEvent) {
     try {
+
+      //TODO funker ikke
+      
       Stage primaryStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
       primaryStage.setScene(mainScene);
     } catch (Exception e) {
@@ -169,6 +204,9 @@ public class CourseController implements Initializable {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("Discussion.fxml"));
       Parent root = loader.load();
+      DiscussionController discussionController = (DiscussionController) loader.getController();
+      discussionController.addCourse(fagnavn.getText());
+
 
       Stage stage2 = new Stage();
       stage2.setScene(new Scene(root));
@@ -186,7 +224,7 @@ public class CourseController implements Initializable {
 
   @FXML
   void handleAddCommentAction(ActionEvent event) {
-    // TODO fikse metoden her.
+    //TODO fikse metoden her? 
     System.out.println("Adda en tilbakemelding");
   }
 
