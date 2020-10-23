@@ -15,6 +15,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import studit.core.mainpage.CourseItem;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class CourseController implements Initializable {
@@ -74,6 +75,12 @@ public class CourseController implements Initializable {
 
   private Scene mainScene;
 
+  private CourseItem courseItem;
+
+  public void setCourseItem(CourseItem courseItem){
+    this.courseItem = courseItem;
+  }
+
   public void setHjelpemidler(String hjelpemidler){
     this.hjelpemidler.setText(hjelpemidler);
   }
@@ -106,12 +113,6 @@ public class CourseController implements Initializable {
     this.fagkode.setText(fagkode);
   }
   
-
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-
-  }
-
   /**
    * Function to set the label - the name of the subject on the top of the page.
    * 
@@ -152,12 +153,18 @@ public class CourseController implements Initializable {
   @FXML
   void handleMainPageAction(ActionEvent actionEvent) {
     try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+      Parent root = loader.load();
 
-      //TODO funker ikke
-      
-      Stage primaryStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-      primaryStage.setScene(mainScene);
-    } catch (Exception e) {
+      Stage stage2 = new Stage();
+      stage2.setScene(new Scene(root));
+      stage2.setTitle("App");
+      stage2.show();
+
+      Stage stage = (Stage) rootPane.getScene().getWindow();
+      stage.hide();
+
+    } catch (IOException e) {
       System.out.println(e);
     }
   }
@@ -201,12 +208,17 @@ public class CourseController implements Initializable {
   @FXML
   void openDiscussion(ActionEvent event) {
 
-    try {
+    if(this.courseItem!= null) {
+
+      try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("Discussion.fxml"));
       Parent root = loader.load();
       DiscussionController discussionController = (DiscussionController) loader.getController();
-      discussionController.addCourse(fagnavn.getText());
 
+      //TODO sjekke om den nede funker? Virker som det ikke gjør det.
+      if(this.courseItem!=null){
+      discussionController.addCourse(this.courseItem);
+      }
 
       Stage stage2 = new Stage();
       stage2.setScene(new Scene(root));
@@ -220,12 +232,42 @@ public class CourseController implements Initializable {
       System.out.println(e);
     }
 
+    } else {
+
+      System.out.println("Kunne ikke printe course.fxml med riktig informasjon");
+
+      System.out.println(this.courseItem);
+
+      System.out.println(this.courseItem.getFagnavn() + " hvis det til venstre er null ble ikke courseItem overført riktig fra appController til courseController");
+
+    }
+
+    
+
   }
 
   @FXML
   void handleAddCommentAction(ActionEvent event) {
     //TODO fikse metoden her? 
     System.out.println("Adda en tilbakemelding");
+  }
+
+  //TODO funker ikke :()
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    if(this.courseItem!= null) {
+    this.fagnavn.setText(courseItem.getFagnavn());
+    this.fagkode.setText(courseItem.getFagkode());
+    this.hjelpemidler.setText(courseItem.getHjelpemidler());
+    this.litterature.setText(courseItem.getPensumlitteratur());
+    this.rating.setText(String.valueOf(courseItem.getAverageVurdering()));
+    this.vurderingsform.setText(courseItem.getVurderingsform());
+    this.tips_tricks.setText(courseItem.getTips());
+    this.courseInformation.setText(courseItem.getInformasjon());
+
+    }
+
+
   }
 
 }

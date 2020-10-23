@@ -261,17 +261,7 @@ public class AppController {
 
           // injecting second scene into the controller of the first scene
           CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
-          courseController.setCourseInformation(courseItem.getInformasjon());
-          courseController.setFagkode(courseItem.getFagkode());
-
-          //TODO mithu fjerna substring greia for linjen under
-          courseController.setFagnavn(coursesList.getSelectionModel().getSelectedItem());
-          courseController.setEksamensdato(courseItem.getEksamensdato());
-          courseController.setHjelpemidler(courseItem.getHjelpemidler());
-          courseController.setLitterature(courseItem.getAnbefaltLitteratur());
-          courseController.setRating(courseItem.getAverageVurdering());
-          courseController.setTips(courseItem.getTips());
-          courseController.setVurderingsForm(courseItem.getVurderingsform());
+          courseController.setCourseItem(courseItem);
 
           primaryStage.setScene(courseScene);
           primaryStage.setTitle("StudIt");

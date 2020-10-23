@@ -2,7 +2,6 @@ package studit.ui;
 
 import java.io.IOException;
 import java.lang.System.Logger;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -12,15 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import studit.core.mainpage.Comment;
 
-//public class CommentListCell extends ListCell<Comment> {
-
- // HBox hbox = new HBox();
-
- // Button upBtn = new Button("UpVote");
-
- // Button downBtn = new Button("DownVote");
-
- // Label textView  = new Label("textView");
 
  public class CommentListCell extends ListCell<Comment> { 
 
