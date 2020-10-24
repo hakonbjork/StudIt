@@ -16,11 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.mainpage.CourseItem;
-import studit.ui.remote.RemoteStuditModelAccess;
 
 public class CourseController implements Initializable {
-
-  RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
   @FXML
   private BorderPane rootPane;
@@ -73,7 +70,7 @@ public class CourseController implements Initializable {
   @FXML
   private Button addCommentAction;
 
-  private Scene mainScene;
+  //private Scene mainScene;
 
   private CourseItem courseItem;
 
@@ -105,9 +102,9 @@ public class CourseController implements Initializable {
     this.rating.setText(rating.toString());
   }
 
-  public void setMainScene(Scene scene) {
-    this.mainScene = scene;
-  }
+  //public void setMainScene(Scene scene) {
+  //  this.mainScene = scene;
+  //}
 
   public void setFagkode(String fagkode){
     this.fagkode.setText(fagkode);
@@ -218,6 +215,7 @@ public class CourseController implements Initializable {
       //TODO sjekke om den nede funker? Virker som det ikke gjør det.
       if(this.courseItem!=null){
       discussionController.addCourse(this.courseItem);
+      discussionController.updateView();
       }
 
       Stage stage2 = new Stage();
@@ -235,11 +233,7 @@ public class CourseController implements Initializable {
     } else {
 
       System.out.println("Kunne ikke printe course.fxml med riktig informasjon");
-
-      System.out.println(this.courseItem);
-
-      System.out.println(this.courseItem.getFagnavn() + " hvis det til venstre er null ble ikke courseItem overført riktig fra appController til courseController");
-
+  
     }
 
     
@@ -255,6 +249,10 @@ public class CourseController implements Initializable {
   //TODO funker ikke :()
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    
+  }
+  
+  public void updateView(){
     if(this.courseItem!= null) {
     this.fagnavn.setText(courseItem.getFagnavn());
     this.fagkode.setText(courseItem.getFagkode());
@@ -266,8 +264,9 @@ public class CourseController implements Initializable {
     this.courseInformation.setText(courseItem.getInformasjon());
 
     }
-
-
   }
 
 }
+
+
+

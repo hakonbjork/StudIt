@@ -20,12 +20,9 @@ import javafx.stage.Stage;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.Discussion;
-import studit.ui.remote.ApiCallException;
-import studit.ui.remote.RemoteStuditModelAccess;
 
 public class DiscussionController implements Initializable {
 
-  RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
   @FXML
   private BorderPane rootPane;
@@ -151,6 +148,7 @@ public class DiscussionController implements Initializable {
       Parent root = loader.load();
       CourseController courseController = (CourseController) loader.getController();
       courseController.setCourseItem(this.courseItem);
+      courseController.updateView();
 
 
       Stage stage2 = new Stage();
@@ -175,14 +173,18 @@ public class DiscussionController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
+  }
+
+  public void updateView(){
+
     if(this.courseItem!= null){
 
       this.fagnavn.setText(this.courseItem.getFagnavn());
 
-    this.fagkode.setText(this.courseItem.getFagkode());
+      this.fagkode.setText(this.courseItem.getFagkode());
 
      try {
-      discussion = remoteStuditModelAccess.getDiscussion(this.courseItem.getFagnavn());
+      discussion = this.courseItem.getDiskusjon();
 
        for (Comment comment : discussion.getComments().values()) {
 
@@ -193,7 +195,7 @@ public class DiscussionController implements Initializable {
 
     forumList.setCellFactory(param -> new CommentListCell());
 
-    } catch (ApiCallException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
 
@@ -204,8 +206,6 @@ public class DiscussionController implements Initializable {
       System.out.println(this.courseItem + " hvis det printes null til venstre er det noe feil med passing av infomrasjon mellom scener");
 
     }
-    
-    
 
   }
 

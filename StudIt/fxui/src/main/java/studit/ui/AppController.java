@@ -246,9 +246,9 @@ public class AppController {
         try {
           Stage primaryStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();
 
-          FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
-          Parent mainPane = mainLoader.load();
-          Scene mainScene = new Scene(mainPane);
+          //FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
+          //Parent mainPane = mainLoader.load();
+          //Scene mainScene = new Scene(mainPane);
 
           // getting loader and a pane for the second scene.
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
@@ -257,11 +257,12 @@ public class AppController {
 
           // injecting first scene into the controller of the second scene
           CourseController courseController = (CourseController) courseLoader.getController();
-          courseController.setMainScene(mainScene);
+          //courseController.setMainScene(mainScene);
 
           // injecting second scene into the controller of the first scene
           CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
           courseController.setCourseItem(courseItem);
+          courseController.updateView();
 
           primaryStage.setScene(courseScene);
           primaryStage.setTitle("StudIt");
