@@ -1,6 +1,7 @@
 package studit.ui;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import studit.core.users.User;
+import studit.core.users.Users;
+import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class LoginController {
@@ -60,7 +64,22 @@ public class LoginController {
    * Checks if email is registered, sends password to user if it is
    */
   public void forgotPassword() {
-    //TODO: This.
+    // TODO: This.
+  }
+
+  private boolean containsUser(String username, String password) throws ApiCallException {
+    Users users = remote.getUsers();
+    Map<Integer, User> user_map = users.getUsers();
+    for (User user : user_map.values()) {
+      if (user.getUsername().equals(username)) {
+        if (user.getPassword().equals(password)) {
+          System.out.println(" containsUser = true");
+          return true;
+        }
+      }
+    }
+    System.out.println(" containsUser = true");
+    return false;
   }
 
   /**
@@ -70,7 +89,7 @@ public class LoginController {
   public void loginButtonAction() throws Exception {
     String username = usernameField.getText();
     String password = passwordField.getText();
-    if (studit.core.users.LoginManager.match(username, password)) {
+    if (containsUser(username, password)) {
       loginInfoText.setText("");
       BorderPane pane = FXMLLoader.load(getClass().getResource("App.fxml"));
       Scene scene = new Scene(pane);
