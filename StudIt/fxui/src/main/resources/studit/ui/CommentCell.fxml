@@ -1,21 +1,15 @@
-<AnchorPane id="AnchorPane" 
-        xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-  <HBox alignment="CENTER_LEFT">
-     <children>
-        <HBox HBox.hgrow="ALWAYS">
-           <children>
-              <VBox HBox.hgrow="ALWAYS">
-                 <children>
-                    <Label fx:id="lbTitle" text=" Livingston 19:45 Falkirk" />
-                    <Label fx:id="lbDescription"  text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at turpis nisl. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum laoreet elementum velit. Curabitur tincidunt finibus malesuada. Aliquam dapibus semper scelerisque. Sed tristique tellus eget sem ornare cursus." />
-                 </children></VBox>
-           </children>
-           <HBox.margin>
-              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-           </HBox.margin>
+<fx:root type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <graphic>
+        <HBox>
+            <children>
+                <Label fx:id="titleLabel" />
+                <VBox>
+                    <children>
+                        <Label fx:id="commentLabel" />
+                        <Label fx:id="descriptionLabel"/>
+                    </children>
+                </VBox>
+            </children>
         </HBox>
-       </children>
-      </HBox>
-      </children>
-    </AnchorPane>
+    </graphic>
+</fx:root>
