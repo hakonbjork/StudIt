@@ -19,9 +19,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
-import studit.core.mainpage.Discussion;
+import studit.core.users.User;
+import studit.ui.remote.RemoteStuditModelAccess;
 
 public class DiscussionController implements Initializable {
+
+  RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
 
   @FXML
@@ -61,22 +64,29 @@ public class DiscussionController implements Initializable {
 
   private CourseItem courseItem;
 
-  private Discussion discussion;
-
   public void addCourse(CourseItem name){
     this.courseItem = name;
   }
 
   @FXML
   void handleAddNewPost(ActionEvent event) {
-    //TODO hent brukernavn fra innlogget bruker
-    String username = "user";
+    
     Comment comment = new Comment();
+    User user = new User();
+    String input = newPostInputField.getText();
+    comment.setBrukernavn(user.getName());
+    comment.setDato("25-10-2020");
+    //TODO fikse
+
+
     publishPost(comment);
+
   }
 
   public void publishPost(Comment comment){
-    
+
+    //TODO må fikses i API
+    //remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), comment.getBrukernavn(), comment);
   }
 
  /**
@@ -177,35 +187,38 @@ public class DiscussionController implements Initializable {
 
   public void updateView(){
 
-    if(this.courseItem!= null){
+    if(this.courseItem.getDiskusjon() != null){
 
       this.fagnavn.setText(this.courseItem.getFagnavn());
 
       this.fagkode.setText(this.courseItem.getFagkode());
 
-     try {
-      discussion = this.courseItem.getDiskusjon();
-
-       for (Comment comment : discussion.getComments().values()) {
+      for (Comment comment : this.courseItem.getDiskusjon().getComments().values()) {
 
       listView.add(comment);
     
-    }
-    forumList.setItems(listView);
+      }
 
-    forumList.setCellFactory(param -> new CommentListCell());
+      if (!listView.isEmpty()) {
 
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+          forumList.setItems(listView);
 
+          forumList.setCellFactory(param -> new CommentListCell());
+
+      }
+  
     } else{
 
       System.out.println("Kunne ikke loade discussion.fxml med informasjon");
 
       System.out.println(this.courseItem + " hvis det printes null til venstre er det noe feil med passing av infomrasjon mellom scener");
 
+      Comment comment = new Comment();
+
+      listView.add(comment);
+      forumList.setItems(listView);
     }
+  
 
   }
 

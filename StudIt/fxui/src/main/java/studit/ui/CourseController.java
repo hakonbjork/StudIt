@@ -215,6 +215,7 @@ public class CourseController implements Initializable {
       //TODO sjekke om den nede funker? Virker som det ikke gjør det.
       if(this.courseItem!=null){
       discussionController.addCourse(this.courseItem);
+      System.out.println("addet courseItem");
       discussionController.updateView();
       }
 

@@ -1,19 +1,14 @@
-<AnchorPane id="AnchorPane" styleClass="backPane" 
-       stylesheets="@../css/mainwindow.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" 
+        xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-  <HBox alignment="CENTER_LEFT" styleClass="backPane">
+  <HBox alignment="CENTER_LEFT">
      <children>
-        <HBox styleClass="card" HBox.hgrow="ALWAYS">
+        <HBox HBox.hgrow="ALWAYS">
            <children>
-              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                 <image>
-                    <Image url="@../images/picture_placeholder.png" />
-                 </image>
-              </ImageView>
               <VBox HBox.hgrow="ALWAYS">
                  <children>
-                    <Label fx:id="lbTitle" styleClass="fixture-title" stylesheets="@../css/mainwindow.css" text=" Livingston 19:45 Falkirk" />
-                    <Label fx:id="lbDescription" styleClass="fixture-description" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at turpis nisl. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum laoreet elementum velit. Curabitur tincidunt finibus malesuada. Aliquam dapibus semper scelerisque. Sed tristique tellus eget sem ornare cursus." />
+                    <Label fx:id="lbTitle" text=" Livingston 19:45 Falkirk" />
+                    <Label fx:id="lbDescription"  text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at turpis nisl. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum laoreet elementum velit. Curabitur tincidunt finibus malesuada. Aliquam dapibus semper scelerisque. Sed tristique tellus eget sem ornare cursus." />
                  </children></VBox>
            </children>
            <HBox.margin>

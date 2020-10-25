@@ -25,7 +25,7 @@ import studit.core.mainpage.Comment;
 
     private FXMLLoader mLLoader;
 
- 
+
     @Override
     public void updateItem(Comment pos,boolean empty){
     super.updateItem(pos, empty);
@@ -45,8 +45,10 @@ import studit.core.mainpage.Comment;
             }
       } 
 
+      if(pos!= null) {
       this.lbTitle.setText(pos.getBrukernavn());
       this.lbDescription.setText(pos.getKommentar());
+      }
 
      setText("kommentar");
      setGraphic(anchorPane);
