@@ -12,7 +12,6 @@ import java.net.http.HttpResponse;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.io.IOException;
 import studit.core.StuditModel;
 import studit.core.mainpage.CourseList;
 import studit.core.mainpage.Discussion;
@@ -29,7 +28,8 @@ public class RemoteStuditModelAccess {
   public static void main(String[] args) throws ApiCallException {
     // TODO: Remove when proper testing is added
     RemoteStuditModelAccess r = new RemoteStuditModelAccess();
-    System.out.println(r.changeMail(2, "bruh@name.com")[1]);
+    System.out.println(r.ping());
+    //System.out.println(r.changeMail(2, "bruh@name.com")[1]);
 
   }
 
@@ -115,6 +115,22 @@ public class RemoteStuditModelAccess {
     HttpRequest request = HttpRequest.newBuilder(uri).header("Accept", "application/json").DELETE().build();
 
     return getResponse(request);
+  }
+  /**
+   * Ping the server
+   * @return true if succesful connection, false otherwise
+   */
+  public boolean ping() {
+    try {
+      HttpResponse<String> response = newGetRequest(null, "ping");
+      if (response.statusCode() != Status.OK.get()) {
+        return false;
+      }
+      return true;
+    } catch (ApiCallException e) {
+      return false;
+    }
+
   }
 
   /**

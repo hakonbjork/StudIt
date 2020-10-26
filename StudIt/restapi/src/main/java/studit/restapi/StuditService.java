@@ -5,6 +5,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import studit.core.StuditModel;
 import studit.core.mainpage.CourseList;
 import studit.core.users.Users;
@@ -46,6 +48,12 @@ public class StuditService {
   public UsersResource getUsers() {
     Users users = getStuditModel().getUsers();
     return new UsersResource(users);
+  }
+
+  @GET
+  @Path("/ping")
+  public Response ping() {
+    return Response.ok().build();
   }
 
 }
