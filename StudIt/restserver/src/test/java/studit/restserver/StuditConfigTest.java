@@ -13,7 +13,6 @@ public class StuditConfigTest {
   private static final String DBPATH = "src/test/resources/studit/restserver/testdb.json";
   // This is a simple test class checking that model initalization is handled
   // correctly.
-  // Extensive testing of functionallity is checked under restapi
 
   /**
    * Check that the config correctly loads and reads studitmodel.
@@ -30,14 +29,9 @@ public class StuditConfigTest {
 
   }
 
-  /**
-   * Check that default StuditModel is not null.
-   */
   @Test
-  public void testCreateDefaultStuditModel() {
-    StuditPersistence studitPersistence = new StuditPersistence();
-    StuditModel model = StuditConfig.createDefaultStuditModel(studitPersistence, DBPATH);
+  public void testLoadModel() {
+    StuditModel model = StuditConfig.loadModel("foofoofoo/fooo/foo");
     assertNotNull(model);
   }
-
 }

@@ -74,7 +74,7 @@ public class DefaultGenerator {
       studitPersistence.writeStuditModel(model, writer);
 
     } catch (IOException e) {
-      e.printStackTrace();
+      return new StuditModel();
     }
 
     return model;

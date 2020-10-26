@@ -1,12 +1,8 @@
 package studit.restserver;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.Reader;
-import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -71,22 +67,7 @@ public class StuditConfig extends ResourceConfig {
     } catch (IOException e) {
       System.out.println("Couldn't read studitModel.json --> Creating empty object(" + e + ")");
     }
-    return model == null ? createDefaultStuditModel(studitPersistence, path) : model;
-  }
-
-  public static StuditModel createDefaultStuditModel(StuditPersistence studitPersistence, String path) {
-    StuditModel model = new StuditModel();
-    try {
-      Writer writer = new OutputStreamWriter(new FileOutputStream(path), StandardCharsets.UTF_8);
-      studitPersistence.writeStuditModel(model, writer);
-    } catch (FileNotFoundException e) {
-      System.out.println("Error -> Packaging structure has changed, please update StuditConfig resource path");
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    return model;
+    return model == null ? DefaultGenerator.writeDefaultDataToDb(path) : model;
   }
 
 }
