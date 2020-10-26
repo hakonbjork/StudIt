@@ -73,7 +73,7 @@ public class CommentDeserializer extends JsonDeserializer<Comment> {
       }
       comment.setUpvoters(upvoters);
 
-      JsonNode downvotersNode = objectNode.get("downvotersNode");
+      JsonNode downvotersNode = objectNode.get("downvoters");
       List<String> downvoters = new ArrayList<>();
       if (downvotersNode instanceof ArrayNode) {
         for (JsonNode downvoter : ((ArrayNode) downvotersNode)) {
