@@ -31,20 +31,18 @@ import studit.core.mainpage.Discussion;
 import studit.core.users.User;
 import studit.core.users.Users;
 import studit.restapi.StuditService;
-import studit.ui.remote.RemoteStuditModelAccess;
 
 public class StuditServiceTest extends JerseyTest {
 
   protected final boolean DEBUG = false;
   protected final String PATH = StuditService.STUDIT_SERVICE_PATH;
   protected ObjectMapper mapper;
-  protected RemoteStuditModelAccess remote = new RemoteStuditModelAccess();
   protected StuditModel defaultModel = DefaultGenerator
-      .writeDefaultDataToDb("src/main/resources/studit/defaultdb.json");
+      .writeDefaultDataToDb("src/test/resources/studit/restserver/defaultdb.json");
 
   @Override
   protected StuditConfig configure() {
-    final StuditConfig config = new StuditConfig("src/main/resources/studit/testdb.json");
+    final StuditConfig config = new StuditConfig("src/test/resources/studit/restserver/defaultdb.json");
     if (DEBUG) {
       enable(TestProperties.LOG_TRAFFIC);
       enable(TestProperties.DUMP_ENTITY);
@@ -302,8 +300,9 @@ public class StuditServiceTest extends JerseyTest {
 
     List<String> downvoters1 = comment1.getDownvoters();
     List<String> downvoters2 = comment2.getDownvoters();
-
+    
     assertEquals(downvoters1.size(), downvoters2.size());
+
     for (int i = 0; i < downvoters1.size(); i++) {
       assertEquals(downvoters1.get(i), downvoters2.get(i));
     }
