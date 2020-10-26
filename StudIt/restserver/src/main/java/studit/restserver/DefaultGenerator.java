@@ -20,7 +20,7 @@ public class DefaultGenerator {
 
   private static final String DEFAULT_PATH = "res/db/default/defaultModel.json";
 
-  public static void writeDefaultDataToDb() {
+  public static StuditModel writeDefaultDataToDb(String path) {
     CourseItem testItem = new CourseItem();
     testItem.setFagkode("TMA4140");
     testItem.setFagnavn("Diskret Matematikk 1");
@@ -70,34 +70,19 @@ public class DefaultGenerator {
     users.addUser("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com", "pomeranian123");
     model.setUsers(users);
 
-
     StuditPersistence studitPersistence = new StuditPersistence();
     try {
-      Writer writer = new OutputStreamWriter(new FileOutputStream(DEFAULT_PATH), StandardCharsets.UTF_8);
+      Writer writer = new OutputStreamWriter(new FileOutputStream(path), StandardCharsets.UTF_8);
       studitPersistence.writeStuditModel(model, writer);
 
     } catch (IOException e) {
       e.printStackTrace();
     }
 
-    Reader reader = null;
-    try {
-      reader = new FileReader(DEFAULT_PATH, StandardCharsets.UTF_8);
-      StuditModel loadedModel = studitPersistence.readStuditModel(reader);
-      System.out.println(loadedModel.getUsers().getUsers());
-      //System.out.println(loadedModel.getCourseList().getCourseItems().get(0).getDiskusjon().getComments().get(0));
+    return model;
+  }
 
-    } catch (IOException e) {
-      e.printStackTrace();
-    } finally {
-      if (reader != null) {
-        try {
-          reader.close();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    }
-
+  public static StuditModel writeDefaultDataToDb() {
+    return writeDefaultDataToDb(DEFAULT_PATH);
   }
 }

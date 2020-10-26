@@ -28,7 +28,7 @@ public class StuditConfig extends ResourceConfig {
    * @param studitModel conists of our database object with functionallity
    */
   public StuditConfig(StuditModel studitModel) {
-    setTodoModel(studitModel);
+    setStuditModel(studitModel);
     register(StuditService.class);
     register(StuditModuleObjectMapperProvider.class);
     register(JacksonFeature.class);
@@ -38,38 +38,46 @@ public class StuditConfig extends ResourceConfig {
         bind(StuditConfig.this.studitModel);
       }
     });
-    DefaultGenerator.writeDefaultDataToDb();
+    //DefaultGenerator.writeDefaultDataToDb();
   }
 
   public StuditConfig() {
-    this(loadModel());
+    this(loadModel(DBPATH));
   }
 
-  public StuditModel getTodoModel() {
+  /**
+   * This is used exclusively for testing and initializing a default model
+   * @param path test path
+   */
+  public StuditConfig(String path) {
+    this(DefaultGenerator.writeDefaultDataToDb(path));
+  }
+
+  public StuditModel getStuditModel() {
     return studitModel;
   }
 
-  public void setTodoModel(StuditModel studitModel) {
+  public void setStuditModel(StuditModel studitModel) {
     this.studitModel = studitModel;
   }
 
-  public static StuditModel loadModel() {
+  public static StuditModel loadModel(String path) {
 
     StuditPersistence studitPersistence = new StuditPersistence();
     StuditModel model = null;
 
-    try (Reader reader = new FileReader(DBPATH, StandardCharsets.UTF_8)) {
+    try (Reader reader = new FileReader(path, StandardCharsets.UTF_8)) {
       model = studitPersistence.readStuditModel(reader);
     } catch (IOException e) {
       System.out.println("Couldn't read studitModel.json --> Creating empty object(" + e + ")");
     }
-    return model == null ? createDefaultStuditModel(studitPersistence) : model;
+    return model == null ? createDefaultStuditModel(studitPersistence, path) : model;
   }
 
-  public static StuditModel createDefaultStuditModel(StuditPersistence studitPersistence) {
+  public static StuditModel createDefaultStuditModel(StuditPersistence studitPersistence, String path) {
     StuditModel model = new StuditModel();
     try {
-      Writer writer = new OutputStreamWriter(new FileOutputStream(DBPATH), StandardCharsets.UTF_8);
+      Writer writer = new OutputStreamWriter(new FileOutputStream(path), StandardCharsets.UTF_8);
       studitPersistence.writeStuditModel(model, writer);
     } catch (FileNotFoundException e) {
       System.out.println("Error -> Packaging structure has changed, please update StuditConfig resource path");

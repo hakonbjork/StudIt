@@ -18,7 +18,7 @@
     </properties>
 
     <dependencies>
-         <dependency>
+        <dependency>
             <groupId>gruppe60.studit</groupId>
             <artifactId>core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
@@ -27,6 +27,12 @@
         <dependency>
             <groupId>gruppe60.studit</groupId>
             <artifactId>restapi</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>gruppe60.studit</groupId>
+            <artifactId>fxui</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

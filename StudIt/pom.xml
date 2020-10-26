@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <groupId>gruppe60.studit</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
@@ -146,9 +146,9 @@
     </build>
     <modules>
         <module>core</module>
+        <module>fxui</module>
         <module>restserver</module>
         <module>restapi</module>
-        <module>fxui</module>
         <module>servlet</module>
     </modules>
 
