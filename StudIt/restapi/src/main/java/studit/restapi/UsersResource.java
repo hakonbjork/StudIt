@@ -89,7 +89,7 @@ public class UsersResource {
    * @param mail     email
    * @param password password (will be hashed)
    * @return Response object containing user ID if succesfull, otherwise throws
-   *         response code 500: internal server error
+   *         400 bad request with error.
    */
   @POST
   @Path("/add")
@@ -102,7 +102,7 @@ public class UsersResource {
 
     if (result[0] == null) {
       LOG.debug("Request failed with following error: " + result[1]);
-      return Response.serverError().entity(result).build();
+      return Response.status(Status.BAD_REQUEST).entity(result).build();
     }
     LOG.debug("Successfully added new user to database");
     return Response.accepted(result).build();

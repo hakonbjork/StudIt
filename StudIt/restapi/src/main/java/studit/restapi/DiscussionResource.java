@@ -53,7 +53,7 @@ public class DiscussionResource {
    * 
    * @param username username of the person who wrote the comment
    * @param comment  comment
-   * @return 500 internal server error if failed, 200 OK if successful
+   * @return 400 bad request if failed, 200 OK if successful
    */
   @POST
   @Path("/add")
@@ -61,7 +61,7 @@ public class DiscussionResource {
   public Response addComment(@QueryParam("username") String username, @QueryParam("comment") String comment) {
     if (username == null || comment == null) {
       LOG.debug("Failed to execute /add request on discussion - missing params");
-      return Response.serverError().entity("Error -> both username and comment must be passed as params").build();
+      return Response.status(Status.BAD_REQUEST).entity("Error -> both username and comment must be passed as params").build();
     }
     LOG.debug("Adding new comment to discussion");
     return Response.ok(discussion.addComment(username, comment), MediaType.APPLICATION_JSON).build();
@@ -91,24 +91,24 @@ public class DiscussionResource {
    * 
    * @param id       unique comment id
    * @param username userame of user trying to upvote
-   * @return internal server error with message if failed, otherwise 204 no
-   *         content.
+   * @return 404 not found if invalid id. 400 bad request error with message
+   *         if failed, otherwise 204 no content.
    */
   @PUT
   @Path("/upvote/{id}")
   public Response upvoteComment(@PathParam("id") int id, @QueryParam("username") String username) {
     if (username == null) {
       LOG.debug("Missing username param for upvote request, rejecting");
-      return Response.serverError().entity("username must be specified to upvote a comment").build();
+      return Response.status(Status.BAD_REQUEST).entity("username must be specified to upvote a comment").build();
     }
     int result = discussion.upvote(username, id);
     if (result == -1) {
       LOG.debug("Requested comment with id '" + id + "' does not exist, rejecting");
-      return Response.serverError().entity("Comment with id '" + id + "' does not exist").build();
+      return Response.status(Status.NOT_FOUND).entity("Comment with id '" + id + "' does not exist").build();
     }
 
     if (result == 0) {
-      return Response.serverError().entity("'" + username + "' already upvoted, rejected.").build();
+      return Response.status(Status.BAD_REQUEST).entity("'" + username + "' already upvoted, rejected.").build();
     }
 
     return Response.noContent().build();
@@ -119,7 +119,7 @@ public class DiscussionResource {
    * 
    * @param id       unique comment id
    * @param username userame of user trying to downvote
-   * @return internal server error with message if failed, otherwise 204 no
+   * @return 400 bad request with message if failed, otherwise 204 no
    *         content.
    */
   @PUT
@@ -127,16 +127,16 @@ public class DiscussionResource {
   public Response downvoteComment(@PathParam("id") int id, @QueryParam("username") String username) {
     if (username == null) {
       LOG.debug("Missing username param for downvote request, rejecting");
-      return Response.serverError().entity("username must be specified to downvote a comment").build();
+      return Response.status(Status.BAD_REQUEST).entity("username must be specified to downvote a comment").build();
     }
     int result = discussion.downvote(username, id);
     if (result == -1) {
       LOG.debug("Requested comment with id '" + id + "' does not exist, rejecting");
-      return Response.serverError().entity("Comment with id '" + id + "' does not exist").build();
+      return Response.status(Status.BAD_REQUEST).entity("Comment with id '" + id + "' does not exist").build();
     }
 
     if (result == 0) {
-      return Response.serverError().entity("'" + username + "' already downvoted, rejected.").build();
+      return Response.status(Status.BAD_REQUEST).entity("'" + username + "' already downvoted, rejected.").build();
     }
 
     return Response.noContent().build();
