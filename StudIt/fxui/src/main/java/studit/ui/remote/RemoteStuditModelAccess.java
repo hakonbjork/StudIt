@@ -243,7 +243,7 @@ public class RemoteStuditModelAccess {
     String[] result;
     try {
       result = objectMapper.readValue(response.body(), String[].class);
-      if (response.statusCode() == Status.SERVER_ERROR.get()) {
+      if (response.statusCode() == Status.BAD_REQUEST.get()) {
         return new String[] { result[2], result[1] };
       }
       return new String[] { result[2], null };
@@ -402,7 +402,7 @@ public class RemoteStuditModelAccess {
     HttpResponse<String> response = newPostRequest(null, Map.of("username", username, "comment", comment), "courses",
         fagkode, "discussion");
 
-    if (response.statusCode() == Status.SERVER_ERROR.get()) {
+    if (response.statusCode() == Status.BAD_REQUEST.get()) {
       throw new ApiCallException(response.body());
     }
     return Integer.parseInt(response.body());
@@ -440,7 +440,7 @@ public class RemoteStuditModelAccess {
     HttpResponse<String> response = newPutRequest(null, Map.of("username", username), "courses", fagkode, "discussion",
         "upvote", String.valueOf(id));
 
-    if (response.statusCode() == Status.SERVER_ERROR.get()) {
+    if (response.statusCode() == Status.BAD_REQUEST.get()) {
       throw new ApiCallException(response.body());
     }
 
@@ -462,7 +462,7 @@ public class RemoteStuditModelAccess {
     HttpResponse<String> response = newPutRequest(null, Map.of("username", username), "courses", fagkode, "discussion",
         "downvote", String.valueOf(id));
 
-    if (response.statusCode() == Status.SERVER_ERROR.get()) {
+    if (response.statusCode() == Status.BAD_REQUEST.get()) {
       throw new ApiCallException(response.body());
     }
 
