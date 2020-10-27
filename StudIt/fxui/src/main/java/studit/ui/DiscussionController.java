@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -20,12 +21,12 @@ import javafx.stage.Stage;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
+import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class DiscussionController implements Initializable {
 
   RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
-
 
   @FXML
   private BorderPane rootPane;
@@ -64,29 +65,42 @@ public class DiscussionController implements Initializable {
 
   private CourseItem courseItem;
 
-  public void addCourse(CourseItem name){
+  public void addCourse(CourseItem name) {
     this.courseItem = name;
   }
 
-  @FXML
-  void handleAddNewPost(ActionEvent event) {
+  //TODO Vi må fikse at brukeren er en variabel som er tilgjengelig i alle controllers slik at kind of er en global variabel.
+  //Pluss se på API i forhold til add comment.
+
+  //@FXML
+  //void addNewPost(ActionEvent event) {
+  //  User user = new User();
+  //  String input = newPostInputField.getText();
+  //  try {
+  //    remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), user.getName(), input);
+  //    updateView();
+  //    newPostInputField.clear();
+  //  } catch (ApiCallException e) {
+  //    e.printStackTrace();
+  //  }
+  //
+  //
+  //}
+
+  public void updateView(){
     
-    Comment comment = new Comment();
-    User user = new User();
-    String input = newPostInputField.getText();
-    comment.setBrukernavn(user.getName());
-    comment.setDato("25-10-2020");
-    //TODO fikse
+    try {
+      courseItem = remoteStuditModelAccess.getCourseByFagkode(this.courseItem.getFagkode());
 
+      loadView();
 
-    publishPost(comment);
+    } catch (ApiCallException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
-  }
+    
 
-  public void publishPost(Comment comment){
-
-    //TODO må fikses i API
-    //remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), comment.getBrukernavn(), comment);
   }
 
  /**
@@ -174,10 +188,6 @@ public class DiscussionController implements Initializable {
     }
   }
 
-  @FXML
-  void addNewPost(ActionEvent event) {
-
-  }
 
   //TODO funker ikke :()
   @Override
@@ -185,7 +195,7 @@ public class DiscussionController implements Initializable {
 
   }
 
-  public void updateView(){
+  public void loadView(){
 
     if(this.courseItem.getDiskusjon() != null){
 
@@ -203,7 +213,33 @@ public class DiscussionController implements Initializable {
 
           forumList.setItems(listView);
 
-          forumList.setCellFactory(param -> new CommentListCell());
+          forumList.setCellFactory(lv -> new ListCell<Comment>() {
+            //brukernavn
+
+            //dato
+
+            //kommentar
+            private final Label label = new Label();
+
+            //upVotes
+
+            //downVotes
+            
+            @Override
+            protected void updateItem(Comment item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    label.setText(item.getKommentar());
+                    setGraphic(label);
+                }
+            }
+        });
+
+      } else {
+
+        System.out.println("faile med listcell");
 
       }
   

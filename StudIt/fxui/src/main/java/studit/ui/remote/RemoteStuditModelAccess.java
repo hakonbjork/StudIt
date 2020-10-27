@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.io.IOException;
 import studit.core.StuditModel;
+import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 import studit.core.mainpage.Discussion;
 import studit.core.users.User;
@@ -338,7 +339,7 @@ public class RemoteStuditModelAccess {
    *         ApiCallException.
    * @throws ApiCallException if the course with the fagkode does not exist
    */
-  public Course getCourseByFagkode(String fagkode) throws ApiCallException {
+  public CourseItem getCourseByFagkode(String fagkode) throws ApiCallException {
     HttpResponse<String> response = newGetRequest(null, "courses", fagkode);
 
     if (response.statusCode() == Status.NOT_FOUND.get()) {
@@ -346,7 +347,7 @@ public class RemoteStuditModelAccess {
     }
 
     try {
-      return objectMapper.readValue(response.body(), Course.class);
+      return objectMapper.readValue(response.body(), CourseItem.class);
     } catch (JsonProcessingException e) {
       e.printStackTrace();
       return null;
