@@ -75,13 +75,14 @@ public class DiscussionResource {
    */
   @DELETE
   @Path("/remove/{id}")
-  public Response removeComment(@PathParam("{id}") int id) {
+  public Response removeComment(@PathParam("id") int id) {
+    LOG.debug(String.valueOf(id));
     boolean removed = discussion.removeComment(id);
     if (!removed) {
       LOG.debug("Failed to remove comment with id '" + id + "'. Comment does not exist");
       return Response.status(Status.NOT_FOUND).entity("comment with id '" + id + "' does not exist").build();
     }
-    LOG.debug("Succesfully to removed comment with id '" + id + "'");
+    LOG.debug("Succesfully removed comment with id '" + id + "'");
     return Response.noContent().build();
   }
 
