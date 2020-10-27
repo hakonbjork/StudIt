@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.List;
 import java.util.Map.Entry;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -34,7 +35,7 @@ import studit.restapi.StuditService;
 
 public class StuditServiceTest extends JerseyTest {
 
-  protected final boolean DEBUG = false;
+  protected final boolean DEBUG = true;
   protected final String PATH = StuditService.STUDIT_SERVICE_PATH;
   protected ObjectMapper mapper;
   protected StuditModel defaultModel = DefaultGenerator
@@ -118,7 +119,7 @@ public class StuditServiceTest extends JerseyTest {
   }
 
   @Test
-  public void getCourseByFagkode() {
+  public void testGetCourseByFagkode() {
     Response getResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140")
         .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
     assertEquals(200, getResponse.getStatus());
@@ -133,6 +134,81 @@ public class StuditServiceTest extends JerseyTest {
     Response getResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA3")
         .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
     assertEquals(404, getResponse2.getStatus());
+
+  }
+
+  @Test
+  public void testGetDiscussion() {
+    Response getResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
+    assertEquals(200, getResponse.getStatus());
+
+    try {
+      Discussion discussion = mapper.readValue(getResponse.readEntity(String.class), Discussion.class);
+      compareDiscussion(discussion, defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon());
+    } catch (JsonProcessingException e) {
+      fail(e);
+    }
+
+    Response getResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA3/discussion")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
+    assertEquals("", getResponse2.readEntity(String.class));
+
+  }
+
+  @Test
+  public void testAddComment() {
+    Response postResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/add")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").post(null);
+    assertEquals(500, postResponse.getStatus());
+
+    Response postResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/add")
+        .queryParam("username", "test").queryParam("comment", "test2").request().post(Entity.json(""));
+    assertEquals(200, postResponse2.getStatus());
+
+    Response getResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
+    assertEquals(200, getResponse.getStatus());
+
+    try {
+      Discussion discussion = mapper.readValue(getResponse.readEntity(String.class), Discussion.class);
+
+      Discussion testDiscussion = defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon();
+      testDiscussion.addComment("test", "test2");
+
+      compareDiscussion(testDiscussion, discussion);
+
+    } catch (JsonProcessingException e) {
+      fail(e);
+    }
+
+  }
+
+  @Test
+  public void testDeleteComment() {
+
+    Response deleteResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/remove/6")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").delete();
+    assertEquals(404, deleteResponse.getStatus());
+
+    Response deleteResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/remove/1")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").delete();
+    assertEquals(204, deleteResponse2.getStatus());
+
+    Response getResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
+    assertEquals(200, getResponse.getStatus());
+
+    try {
+      Discussion discussion = mapper.readValue(getResponse.readEntity(String.class), Discussion.class);
+
+      Discussion testDiscussion = defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon();
+      testDiscussion.removeComment(1);
+      compareDiscussion(testDiscussion, discussion);
+
+    } catch (JsonProcessingException e) {
+      fail(e);
+    }
 
   }
 
@@ -300,7 +376,7 @@ public class StuditServiceTest extends JerseyTest {
 
     List<String> downvoters1 = comment1.getDownvoters();
     List<String> downvoters2 = comment2.getDownvoters();
-    
+
     assertEquals(downvoters1.size(), downvoters2.size());
 
     for (int i = 0; i < downvoters1.size(); i++) {
