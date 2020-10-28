@@ -22,18 +22,15 @@ import studit.ui.Course;
 
 public class RemoteStuditModelAccess {
 
-  private static final String ENDPOINT_PATH = "http://localhost:8080/studit";
+  private static String ENDPOINT_PATH;
   private ObjectMapper objectMapper;
 
-  public static void main(String[] args) throws ApiCallException {
-    // TODO: Remove when proper testing is added
-    RemoteStuditModelAccess r = new RemoteStuditModelAccess();
-    System.out.println(r.ping());
-    //System.out.println(r.changeMail(2, "bruh@name.com")[1]);
-
+  public RemoteStuditModelAccess() {
+    this(false);
   }
 
-  public RemoteStuditModelAccess() {
+  public RemoteStuditModelAccess(boolean test) {
+    ENDPOINT_PATH = !test ? "http://localhost:8080/studit" : "studit";
     this.objectMapper = new ObjectMapper().registerModule(new StuditModule());
   }
 
@@ -116,18 +113,23 @@ public class RemoteStuditModelAccess {
 
     return getResponse(request);
   }
+
   /**
-   * Ping the server
+   * Ping the server.
+   * 
    * @return true if succesful connection, false otherwise
    */
   public boolean ping() {
     try {
       HttpResponse<String> response = newGetRequest(null, "ping");
       if (response.statusCode() != Status.OK.get()) {
+        System.out.println("Failed with status code: " + response.statusCode());
         return false;
       }
       return true;
     } catch (ApiCallException e) {
+      e.printStackTrace();
+      ;
       return false;
     }
 
