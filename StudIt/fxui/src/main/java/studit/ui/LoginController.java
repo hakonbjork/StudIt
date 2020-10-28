@@ -41,6 +41,7 @@ public class LoginController {
   private RemoteStuditModelAccess remote;
 
   public LoginController() {
+    this.remote = new RemoteStuditModelAccess();
   }
 
   /**
@@ -67,6 +68,7 @@ public class LoginController {
     // TODO: This.
   }
 
+  //Mulig denne kan tas bort
   private boolean containsUser(String username, String password) throws ApiCallException {
     Users users = remote.getUsers();
     Map<Integer, User> user_map = users.getUsers();
@@ -89,7 +91,7 @@ public class LoginController {
   public void loginButtonAction() throws Exception {
     String username = usernameField.getText();
     String password = passwordField.getText();
-    if (containsUser(username, password)) {
+    if (remote.authenticateLogin(username, password)) {
       loginInfoText.setText("");
       BorderPane pane = FXMLLoader.load(getClass().getResource("App.fxml"));
       Scene scene = new Scene(pane);

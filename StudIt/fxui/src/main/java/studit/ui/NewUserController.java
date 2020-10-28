@@ -7,8 +7,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import studit.core.users.User;
 import studit.core.users.UserManager;
+import studit.ui.remote.ApiCallException;
+import studit.ui.remote.RemoteStuditModelAccess;
 
 public class NewUserController {
+
+private RemoteStuditModelAccess remote;
+
+public NewUserController() {
+  this.remote = new RemoteStuditModelAccess();
+}
 
   @FXML
   TextField nameField;
@@ -32,14 +40,19 @@ public class NewUserController {
    * @else: Saves the user in the hashmap /database. Closes the window.
    */
   @FXML
-  public void saveNewUserAction() {
-    User user = new User();
-    user.setName(nameField.getText());
-    user.setUsername(usernameField.getText());
-    user.setMail(mailField.getText());
-    user.setPassword(userPasswordField.getText());
+  public void saveNewUserAction() throws ApiCallException{
+    String name = nameField.getText();
+    String username = usernameField.getText();
+    String mail = mailField.getText();
+    String password = userPasswordField.getText();
 
-    boolean successfullyAdded = UserManager.addUser(user);
+    String[] wut = remote.addUser(name, username, mail, password);
+    for (String wat : wut){
+      System.out.println(wat);
+    }
+
+    //Må finne en måte å sette denne til true hvis brukeren faktisk ble addet
+    boolean successfullyAdded = true;
 
     Stage stage = (Stage) saveNewUserButton.getScene().getWindow();
     if (successfullyAdded) {
