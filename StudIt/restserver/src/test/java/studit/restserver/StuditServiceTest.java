@@ -35,7 +35,7 @@ import studit.restapi.StuditService;
 
 public class StuditServiceTest extends JerseyTest {
 
-  protected final boolean DEBUG = true;
+  protected final boolean DEBUG = false;
   protected final String PATH = StuditService.STUDIT_SERVICE_PATH;
   protected ObjectMapper mapper;
   protected StuditModel defaultModel = DefaultGenerator
@@ -160,10 +160,13 @@ public class StuditServiceTest extends JerseyTest {
   public void testAddComment() {
     Response postResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/add")
         .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").post(null);
-    assertEquals(500, postResponse.getStatus());
+    assertEquals(400, postResponse.getStatus());
 
+    Discussion testDiscussion = defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon();
     Response postResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/add")
         .queryParam("username", "test").queryParam("comment", "test2").request().post(Entity.json(""));
+    testDiscussion.addComment("test", "test2");
+
     assertEquals(200, postResponse2.getStatus());
 
     Response getResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion")
@@ -172,12 +175,7 @@ public class StuditServiceTest extends JerseyTest {
 
     try {
       Discussion discussion = mapper.readValue(getResponse.readEntity(String.class), Discussion.class);
-
-      Discussion testDiscussion = defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon();
-      testDiscussion.addComment("test", "test2");
-
       compareDiscussion(testDiscussion, discussion);
-
     } catch (JsonProcessingException e) {
       fail(e);
     }
@@ -186,7 +184,6 @@ public class StuditServiceTest extends JerseyTest {
 
   @Test
   public void testDeleteComment() {
-
     Response deleteResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/remove/6")
         .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").delete();
     assertEquals(404, deleteResponse.getStatus());
@@ -210,6 +207,163 @@ public class StuditServiceTest extends JerseyTest {
       fail(e);
     }
 
+  }
+
+  @Test
+  public void testUpvoteDownvoteComment() {
+    Response putResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/uvpote/6")
+        .queryParam("username", "Bobby")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").put(Entity.json(""));
+    assertEquals(404, putResponse.getStatus());
+
+    Response putResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/downvote/6")
+        .queryParam("username", "Dingo")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").put(Entity.json(""));
+    assertEquals(404, putResponse2.getStatus());
+
+    Response putResponse3 = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/upvote/1")
+        .queryParam("username", "Bobby")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").put(Entity.json(""));
+    assertEquals(204, putResponse3.getStatus());
+
+    Response putResponse4 = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/downvote/0")
+        .queryParam("username", "Dingo")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").put(Entity.json(""));
+    assertEquals(204, putResponse4.getStatus());
+
+    Response getResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
+    assertEquals(200, getResponse.getStatus());
+
+    try {
+
+      Discussion testDiscussion = defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon();
+      testDiscussion.upvote("Bobby", 1);
+      testDiscussion.downvote("Dingo", 0);
+
+      Discussion discussion = mapper.readValue(getResponse.readEntity(String.class), Discussion.class);
+      compareDiscussion(testDiscussion, discussion);
+
+    } catch (JsonProcessingException e) {
+      fail(e);
+    }
+
+  }
+
+  @Test
+  public void testRemoveUsers() {
+    Response deleteResponse = target(StuditService.STUDIT_SERVICE_PATH + "/users/remove/6")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").delete();
+    assertEquals(404, deleteResponse.getStatus());
+
+    Response deleteResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/users/remove/1")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").delete();
+    assertEquals(204, deleteResponse2.getStatus());
+
+    Response getResponse = target(StuditService.STUDIT_SERVICE_PATH + "/users")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
+    assertEquals(200, getResponse.getStatus());
+
+    try {
+
+      Users testUsers = defaultModel.getUsers();
+      testUsers.removeUser(1);
+
+      Users users = mapper.readValue(getResponse.readEntity(String.class), Users.class);
+      compareUsers(testUsers, users);
+
+    } catch (JsonProcessingException e) {
+      fail(e);
+    }
+
+  }
+
+  @Test
+  public void testAddUser() {
+    Response postResponse = target(StuditService.STUDIT_SERVICE_PATH + "/users/add")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").post(Entity.json(""));
+    assertEquals(400, postResponse.getStatus());
+
+    Response postResponse1 = target(StuditService.STUDIT_SERVICE_PATH + "/users/add").queryParam("username", "name1")
+        .queryParam("password", "1").queryParam("mail", "bruh").queryParam("name", "Janne")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").post(Entity.json(""));
+    assertEquals(400, postResponse1.getStatus());
+
+    Response postResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/users/add").queryParam("username", "name1")
+        .queryParam("password", "1").queryParam("mail", "bruh@mail.com").queryParam("name", "Janne")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").post(Entity.json(""));
+    assertEquals(400, postResponse2.getStatus());
+
+    Response postResponse3 = target(StuditService.STUDIT_SERVICE_PATH + "/users/add").queryParam("username", "name1")
+        .queryParam("password", "password123").queryParam("mail", "bruh@mail.com").queryParam("name", "Janne")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").post(Entity.json(""));
+    assertEquals(202, postResponse3.getStatus());
+
+    Response postResponse4 = target(StuditService.STUDIT_SERVICE_PATH + "/users/add").queryParam("username", "name1")
+        .queryParam("password", "password123").queryParam("mail", "bruh@mail.com").queryParam("name", "Janne")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").post(Entity.json(""));
+    assertEquals(400, postResponse4.getStatus());
+
+    Response getResponse = target(StuditService.STUDIT_SERVICE_PATH + "/users")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
+    assertEquals(200, getResponse.getStatus());
+
+    try {
+
+      Users testUsers = defaultModel.getUsers();
+      testUsers.addUser("Janne", "name1", "bruh@mail.com", "password123");
+
+      Users users = mapper.readValue(getResponse.readEntity(String.class), Users.class);
+      compareUsers(testUsers, users);
+
+    } catch (JsonProcessingException e) {
+      fail(e);
+    }
+  }
+
+  @Test
+  public void testAuthenticateLogin() {
+    Response postResponse = target(StuditService.STUDIT_SERVICE_PATH + "/users/authenticate")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").post(Entity.json(""));
+    assertEquals(400, postResponse.getStatus());
+
+    Response postResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/users/authenticate")
+        .queryParam("username", "foofoo").queryParam("password", "foofoo2")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").post(Entity.json(""));
+    assertEquals(401, postResponse2.getStatus());
+
+    Response postResponse3 = target(StuditService.STUDIT_SERVICE_PATH + "/users/authenticate")
+        .queryParam("username", "IdaErBest").queryParam("password", "pomeranian123")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").post(Entity.json(""));
+    assertEquals(200, postResponse3.getStatus());
+  }
+
+  @Test
+  public void testModifyUser() {
+    Response postResponse = target(StuditService.STUDIT_SERVICE_PATH + "/users/modify/1")
+        .queryParam("newUsername", "brother").queryParam("newPassword", "pass")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").put(Entity.json(""));
+    assertEquals(400, postResponse.getStatus());
+
+    Response postResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/users/modify/8")
+        .queryParam("newUsername", "brother")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").put(Entity.json(""));
+    assertEquals(500, postResponse2.getStatus());
+
+    Response postResponse3 = target(StuditService.STUDIT_SERVICE_PATH + "/users/modify/1")
+        .queryParam("newUsername", "Ida")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").put(Entity.json(""));
+    assertEquals(200, postResponse3.getStatus());
+
+    Response postResponse4 = target(StuditService.STUDIT_SERVICE_PATH + "/users/modify/1")
+        .queryParam("newPassword", "123")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").put(Entity.json(""));
+    assertEquals(500, postResponse4.getStatus());
+
+    Response postResponse5 = target(StuditService.STUDIT_SERVICE_PATH + "/users/modify/1")
+        .queryParam("newPassword", "123strongpassword")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").put(Entity.json(""));
+    assertEquals(200, postResponse5.getStatus());
   }
 
   /**
@@ -360,7 +514,6 @@ public class StuditServiceTest extends JerseyTest {
     }
 
     assertEquals(comment1.getBrukernavn(), comment2.getBrukernavn());
-    assertEquals(comment1.getDato(), comment2.getDato());
     assertEquals(comment1.getKommentar(), comment2.getKommentar());
     assertEquals(comment1.getUniqueID(), comment2.getUniqueID());
     assertEquals(comment1.getUpvotes(), comment2.getUpvotes());

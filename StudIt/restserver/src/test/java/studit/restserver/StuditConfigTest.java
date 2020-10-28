@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
 import studit.core.StuditModel;
-import studit.json.StuditPersistence;
 
 public class StuditConfigTest {
 
