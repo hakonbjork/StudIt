@@ -16,6 +16,12 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+         <dependency>
+            <groupId>gruppe60.studit</groupId>
+            <artifactId>restserver</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -74,6 +80,24 @@
             <groupId>org.testfx</groupId>
             <artifactId>testfx-junit5</artifactId>
             <version>4.0.16-alpha</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Support for testing with Jersey og Grizzly2 -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jerseyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-http</artifactId>
+            <version>${jerseyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+            <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+            <version>${jerseyVersion}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -146,10 +146,10 @@
     </build>
     <modules>
         <module>core</module>
-        <module>fxui</module>
         <module>restserver</module>
         <module>restapi</module>
         <module>servlet</module>
+        <module>fxui</module>
     </modules>
 
 </project>
