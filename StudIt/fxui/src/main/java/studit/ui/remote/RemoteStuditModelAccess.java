@@ -228,9 +228,9 @@ public class RemoteStuditModelAccess {
     try {
       result = objectMapper.readValue(response.body(), String[].class);
       if (response.statusCode() == Status.SERVER_ERROR.get()) {
-        return new String[] { result[2], result[1] };
+        return new String[] { result[1], result[0] };
       }
-      return new String[] { result[2], null };
+      return new String[] { result[1], null };
     } catch (JsonProcessingException e) {
       e.printStackTrace();
       throw new ApiCallException("Error reading response, check API code for errors");
