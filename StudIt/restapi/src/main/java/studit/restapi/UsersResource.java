@@ -69,6 +69,12 @@ public class UsersResource {
     return Response.ok(user, MediaType.APPLICATION_JSON).build();
   }
 
+  /**
+   * Removes a User from the database.
+   * 
+   * @param id unique User id
+   * @return 404 not found if invalid id, 204 no content it succesfull.
+   */
   @DELETE
   @Path("/remove/{id}")
   public Response removeUser(@PathParam("id") int id) {
@@ -88,8 +94,8 @@ public class UsersResource {
    * @param username username
    * @param mail     email
    * @param password password (will be hashed)
-   * @return Response object containing user ID if succesfull, otherwise throws
-   *         400 bad request with error.
+   * @return Response object containing user ID if succesfull (202 accepted),
+   *         otherwise throws 400 bad request with error.
    */
   @POST
   @Path("/add")
@@ -113,7 +119,8 @@ public class UsersResource {
    * 
    * @param username requested username
    * @param password corresponding password
-   * @return
+   * @return 400 bad request if missing params, 401 unauthorized if invalid login,
+   *         otherwise 200 ok.
    */
   @POST
   @Path("/authenticate")
@@ -149,7 +156,7 @@ public class UsersResource {
    */
   @PUT
   @Path("/modify/{id}")
-  public Response changeUserField(@PathParam("{id}") int id, @QueryParam("newMail") String newMail,
+  public Response changeUserField(@PathParam("id") int id, @QueryParam("newMail") String newMail,
       @QueryParam("newPassword") String newPassword, @QueryParam("newUsername") String newUsername) {
 
     if (newMail != null && newPassword != null || newPassword != null && newUsername != null) {

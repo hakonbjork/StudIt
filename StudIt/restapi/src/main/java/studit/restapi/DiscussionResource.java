@@ -61,7 +61,8 @@ public class DiscussionResource {
   public Response addComment(@QueryParam("username") String username, @QueryParam("comment") String comment) {
     if (username == null || comment == null) {
       LOG.debug("Failed to execute /add request on discussion - missing params");
-      return Response.status(Status.BAD_REQUEST).entity("Error -> both username and comment must be passed as params").build();
+      return Response.status(Status.BAD_REQUEST).entity("Error -> both username and comment must be passed as params")
+          .build();
     }
     LOG.debug("Adding new comment to discussion");
     return Response.ok(discussion.addComment(username, comment), MediaType.APPLICATION_JSON).build();
@@ -91,8 +92,8 @@ public class DiscussionResource {
    * 
    * @param id       unique comment id
    * @param username userame of user trying to upvote
-   * @return 404 not found if invalid id. 400 bad request error with message
-   *         if failed, otherwise 204 no content.
+   * @return 404 not found if invalid id. 400 bad request error with message if
+   *         failed, otherwise 204 no content.
    */
   @PUT
   @Path("/upvote/{id}")
@@ -119,8 +120,8 @@ public class DiscussionResource {
    * 
    * @param id       unique comment id
    * @param username userame of user trying to downvote
-   * @return 400 bad request with message if failed, otherwise 204 no
-   *         content.
+   * @return 400 bad request with message if failed, 404 not found if invalid id,
+   *         otherwise 204 no content.
    */
   @PUT
   @Path("/downvote/{id}")
@@ -132,7 +133,7 @@ public class DiscussionResource {
     int result = discussion.downvote(username, id);
     if (result == -1) {
       LOG.debug("Requested comment with id '" + id + "' does not exist, rejecting");
-      return Response.status(Status.BAD_REQUEST).entity("Comment with id '" + id + "' does not exist").build();
+      return Response.status(Status.NOT_FOUND).entity("Comment with id '" + id + "' does not exist").build();
     }
 
     if (result == 0) {
