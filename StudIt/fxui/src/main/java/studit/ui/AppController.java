@@ -148,16 +148,6 @@ public class AppController {
     chatbot = null;
   }
 
-  /**
-   * Should give the option to go to the subjects web-page.
-   */
-  @FXML
-  void handleNtnuAction(ActionEvent event) {
-
-    // go to NTNU homepage (question if you want to open web-browser)?
-    // or a new window with information about NTNU?
-
-  }
 
   /**
    * logs user out, and opens to login scene, closes current scene.
