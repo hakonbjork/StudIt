@@ -30,7 +30,7 @@ public class RemoteStuditModelAccess {
   }
 
   public RemoteStuditModelAccess(boolean test) {
-    ENDPOINT_PATH = !test ? "http://localhost:8080/studit" : "studit";
+    ENDPOINT_PATH = !test ? "http://localhost:8080/studit" : "http://localhost:9998/studit";
     this.objectMapper = new ObjectMapper().registerModule(new StuditModule());
   }
 
@@ -129,7 +129,6 @@ public class RemoteStuditModelAccess {
       return true;
     } catch (ApiCallException e) {
       e.printStackTrace();
-      ;
       return false;
     }
 

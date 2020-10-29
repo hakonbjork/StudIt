@@ -24,8 +24,8 @@ import studit.restserver.StuditModuleObjectMapperProvider;
 
 public class RemoteStuditModelAccesTest extends JerseyTest {
 
-  RemoteStuditModelAccess remoteModel = new RemoteStuditModelAccess();
-  protected final boolean DEBUG = true;
+  RemoteStuditModelAccess remoteModel = new RemoteStuditModelAccess(true);
+  protected final boolean DEBUG = false;
   protected ObjectMapper mapper;
   protected StuditModel defaultModel = DefaultGenerator
       .writeDefaultDataToDb("studit/fxui/defaultdb.json");
