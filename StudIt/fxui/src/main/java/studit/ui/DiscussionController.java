@@ -72,25 +72,27 @@ public class DiscussionController implements Initializable {
   //TODO Vi må fikse at brukeren er en variabel som er tilgjengelig i alle controllers slik at kind of er en global variabel.
   //Pluss se på API i forhold til add comment.
 
-  //@FXML
-  //void addNewPost(ActionEvent event) {
-  //  User user = new User();
-  //  String input = newPostInputField.getText();
-  //  try {
-  //    remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), user.getName(), input);
-  //    updateView();
-  //    newPostInputField.clear();
-  //  } catch (ApiCallException e) {
-  //    e.printStackTrace();
-  //  }
-  //
-  //
-  //}
+  @FXML
+  void addNewPost(ActionEvent event) {
+    User user = new User();
+    user.setName("Lasse");
+    String input = newPostInputField.getText();
+    try {
+      remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), user.getName(), input);
+      updateView();
+      newPostInputField.clear();
+    } catch (ApiCallException e) {
+      e.printStackTrace();
+    }
+  
+  
+  }
 
   public void updateView(){
     
     try {
-      courseItem = remoteStuditModelAccess.getCourseByFagkode(this.courseItem.getFagkode());
+
+      this.courseItem = remoteStuditModelAccess.getCourseByFagkode(this.courseItem.getFagkode());
 
       loadView();
 
@@ -214,25 +216,47 @@ public class DiscussionController implements Initializable {
           forumList.setItems(listView);
 
           forumList.setCellFactory(lv -> new ListCell<Comment>() {
+
+            //HBOX
+            private HBox hbox = new HBox();
+            private Pane pane = new Pane();
+
             //brukernavn
+            private final Label brukernavn = new Label();
 
             //dato
+            private final Label kommentar = new Label();
 
             //kommentar
-            private final Label label = new Label();
+            private final Label kommentar = new Label();
 
-            //upVotes
+            //upVote
+            private Button upVote = new Button();
 
-            //downVotes
             
             @Override
             protected void updateItem(Comment item, boolean empty) {
                 super.updateItem(item, empty);
+                hbox.getChildren().addAll(brukernavn, dato, kommentar, upVote);
+                HBox.setHgrow(pane, Priority.ALWAYS);
+
+                button.setOnAction(new EventHandler<ActionEvent>() {
+                  
+                @Override
+                public void handle(ActionEvent event) {
+                    System.out.println("upvota");
+                }
+                });
+
+
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    label.setText(item.getKommentar());
-                    setGraphic(label);
+                    kommentar.setText(item.getKommentar());
+                    brukernavn.setText("Lasse");
+                  
+                  
+                    setGraphic(hbox);
                 }
             }
         });
