@@ -13,6 +13,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import studit.core.mainpage.Comment;
 import studit.core.mainpage.Discussion;
 
 public class DiscussionResource {
@@ -36,16 +38,35 @@ public class DiscussionResource {
   }
 
   /**
-   * Gets the active CourseList.
+   * Gets the active Discussion.
    * 
-   * @return the active CourseList
+   * @return the active Discussion
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public Discussion getCourseList() {
+  public Discussion getDiscussion() {
     checkDiscussion();
     LOG.debug("returning Discussion");
     return this.discussion;
+  }
+
+  /**
+   * Get a comment with unique id.
+   * @param id unique comment id
+   * @return 200 ok with comment if it exists, otherwise 404 not found.
+   */
+  @GET
+  @Path("/comment/{id}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getCourseList(@PathParam("id") int id) {
+    Comment comment = discussion.getCommentByID(id);
+
+    if (comment == null) {
+      LOG.debug("Requested comment with id'" + id + "' does not exist");
+      return Response.status(Status.NOT_FOUND).entity("Comment with id '" + id +"' doesn't exist").build();
+    }
+
+    return Response.ok(comment, MediaType.APPLICATION_JSON).build();
   }
 
   /**

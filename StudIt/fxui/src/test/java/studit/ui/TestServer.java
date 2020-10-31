@@ -19,12 +19,12 @@ import studit.restserver.StuditModuleObjectMapperProvider;
 public class TestServer extends JerseyTest {
 
   private final boolean DEBUG = false;
-  protected StuditModel defaultModel = DefaultGenerator.writeDefaultDataToDb("studit/fxui/defaultdb.json");
+  protected StuditModel defaultModel = DefaultGenerator.writeDefaultDataToDb("src/test/resources/studit/fxui/defaultdb.json");
   protected ObjectMapper mapper;
 
   @Override
   protected StuditConfig configure() {
-    final StuditConfig config = new StuditConfig("studit/fxui/defaultdb.json");
+    final StuditConfig config = new StuditConfig("src/test/resources/studit/fxui/defaultdb.json");
     if (DEBUG) {
       enable(TestProperties.LOG_TRAFFIC);
       enable(TestProperties.DUMP_ENTITY);

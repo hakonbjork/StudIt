@@ -1,7 +1,6 @@
 package studit.ui.remote;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import java.net.ConnectException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -9,20 +8,25 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
-import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import studit.core.StuditModel;
+import studit.core.mainpage.Comment;
+import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 import studit.core.mainpage.Discussion;
 import studit.core.users.User;
 import studit.core.users.Users;
 import studit.json.StuditModule;
-import studit.ui.Course;
 
 public class RemoteStuditModelAccess {
 
-  private String ENDPOINT_PATH;
+  private String endpointPath;
+  private final String DEFAULT_PATH = "http://localhost:8080/studit";
   private ObjectMapper objectMapper;
   private boolean test = false;
 
@@ -31,13 +35,13 @@ public class RemoteStuditModelAccess {
   }
 
   public RemoteStuditModelAccess(boolean test) {
-    ENDPOINT_PATH = !test ? "http://localhost:8080/studit" : "http://localhost:9998/studit";
+    endpointPath = !test ? DEFAULT_PATH : "http://localhost:9998/studit";
     this.objectMapper = new ObjectMapper().registerModule(new StuditModule());
     this.test = test;
   }
 
   private URI buildUri(Map<String, String> params, String... paths) {
-    StringBuilder uri = new StringBuilder(ENDPOINT_PATH);
+    StringBuilder uri = new StringBuilder(endpointPath);
     for (String path : paths) {
       uri.append("/");
       uri.append(path);
@@ -56,7 +60,7 @@ public class RemoteStuditModelAccess {
     }
 
     try {
-      URI finalUri = new URI(uri.toString());
+      URI finalUri = new URI(uri.toString().replace(" ", "%20"));
       return finalUri;
     } catch (URISyntaxException e) {
       e.printStackTrace();
@@ -236,25 +240,30 @@ public class RemoteStuditModelAccess {
    * @param password password (will be hashed)
    * @return String[] of the result. String[0] contains the status code (can be
    *         safely cast to int). 0 = ok, -1 = missing fields, -2 = username is
-   *         not unique, -3 = password is not valid / not strong enough. String[1]
-   *         contains the error message as to why the request failed, e.g "the
-   *         password is too short". Null if new user was succesfully added
+   *         not unique, -3 = password is not valid / not strong enough. -4 if
+   *         invalid email. String[1] contains the error message as to why the
+   *         request failed, e.g "the password is too short". Null if new user was
+   *         succesfully added
    * @throws ApiCallException Unknown cause
    */
   public String[] addUser(String name, String username, String mail, String password) throws ApiCallException {
-    HttpResponse<String> response = newPostRequest(null,
-        Map.of("name", name, "username", username, "mail", mail, "password", password), "users", "add");
-
-    String[] result;
     try {
-      result = objectMapper.readValue(response.body(), String[].class);
-      if (response.statusCode() == Status.BAD_REQUEST.get()) {
-        return new String[] { result[2], result[1] };
+      HttpResponse<String> response = newPostRequest(null,
+          Map.of("name", name, "username", username, "mail", mail, "password", password), "users", "add");
+
+      String[] result;
+      try {
+        result = objectMapper.readValue(response.body(), String[].class);
+        if (response.statusCode() == Status.BAD_REQUEST.get()) {
+          return new String[] { result[2], result[1] };
+        }
+        return new String[] { result[2], null };
+      } catch (JsonProcessingException e) {
+        e.printStackTrace();
+        throw new ApiCallException("Error reading response, check API code for errors");
       }
-      return new String[] { result[2], null };
-    } catch (JsonProcessingException e) {
-      e.printStackTrace();
-      throw new ApiCallException("Error reading response, check API code for errors");
+    } catch (NullPointerException e) {
+      return new String[] { "-1", "Parameters passed must not be null" };
     }
   }
 
@@ -342,7 +351,6 @@ public class RemoteStuditModelAccess {
 
     int code = response.statusCode();
 
-    System.out.println(code);
     if (code == Status.BAD_REQUEST.get()) {
       throw new ApiCallException("Unknown api error occured");
     } else if (code == Status.SERVER_ERROR.get()) {
@@ -359,7 +367,7 @@ public class RemoteStuditModelAccess {
    *         ApiCallException.
    * @throws ApiCallException if the course with the fagkode does not exist
    */
-  public Course getCourseByFagkode(String fagkode) throws ApiCallException {
+  public CourseItem getCourseByFagkode(String fagkode) throws ApiCallException {
     HttpResponse<String> response = newGetRequest(null, "courses", fagkode);
 
     if (response.statusCode() == Status.NOT_FOUND.get()) {
@@ -367,7 +375,7 @@ public class RemoteStuditModelAccess {
     }
 
     try {
-      return objectMapper.readValue(response.body(), Course.class);
+      return objectMapper.readValue(response.body(), CourseItem.class);
     } catch (JsonProcessingException e) {
       e.printStackTrace();
       return null;
@@ -411,6 +419,29 @@ public class RemoteStuditModelAccess {
       throw new ApiCallException(response.body());
     }
     return Integer.parseInt(response.body());
+  }
+
+  /**
+   * Get comment by id and fagkode.
+   * 
+   * @param fagkode Course fagkode.
+   * @param id      unique id of comment.
+   * @return Comment if it exists, throws ApiCallException if not.
+   * @throws ApiCallException if comment does not exist, or there is a
+   *                          json-parsing error.
+   */
+  public Comment getCommentById(String fagkode, int id) throws ApiCallException {
+    HttpResponse<String> response = newGetRequest(null, "coures", "fagkode", "discussion", String.valueOf(id));
+
+    if (response.statusCode() == Status.NOT_FOUND.get()) {
+      throw new ApiCallException("Error -> comment with id '" + id + "' not found'");
+    }
+
+    try {
+      return objectMapper.readValue(response.body(), Comment.class);
+    } catch (JsonProcessingException e) {
+      throw new ApiCallException(e.getMessage());
+    }
   }
 
   /**
@@ -477,11 +508,25 @@ public class RemoteStuditModelAccess {
   /**
    * This method is used for testing purposes only, to test handling of requests
    * with invalid pathing, in case they should occur.
-   * 
-   * @param endpointPath path we want to test.
    */
-  public void setTestEndpointPath(String endpointPath) {
-    ENDPOINT_PATH = endpointPath;
+  public void setTestEndpointPath() {
+    this.endpointPath = "http://localhost:9998/studet";
+  }
+
+  /**
+   * This method is used for testing purposes only, to test handling of requests
+   * with invalid pathing, in case they should occur.
+   * 
+   */
+  public void resetPath() {
+    this.endpointPath = "http://localhost:9998/studit";
+  }
+
+  /**
+   * @param test set to true to disable error print.
+   */
+  public void setTest(boolean test) {
+    this.test = test;
   }
 
 }

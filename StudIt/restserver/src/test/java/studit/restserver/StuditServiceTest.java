@@ -183,6 +183,27 @@ public class StuditServiceTest extends JerseyTest {
   }
 
   @Test
+  public void testGetCommentById() {
+    Response getResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/comment/-1")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
+    assertEquals(404, getResponse.getStatus());
+
+    Response getResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/comment/0")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
+    assertEquals(200, getResponse2.getStatus());
+
+     try {
+      Comment comment = mapper.readValue(getResponse2.readEntity(String.class), Comment.class);
+
+      Comment testComment = defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().getCommentByID(0);
+      compareComment(comment, testComment);
+
+    } catch (JsonProcessingException e) {
+      fail(e);
+    }
+  }
+
+  @Test
   public void testDeleteComment() {
     Response deleteResponse = target(StuditService.STUDIT_SERVICE_PATH + "/courses/TMA4140/discussion/remove/6")
         .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").delete();
