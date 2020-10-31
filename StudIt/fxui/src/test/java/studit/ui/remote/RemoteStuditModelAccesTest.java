@@ -61,6 +61,11 @@ public class RemoteStuditModelAccesTest extends TestServer {
     testModifyFields();
     testGetCourseByFagkode();
     testGetDiscussionByFagkode();
+    testGetCommentById();
+    testAddCommentToDiscussion();
+    testDeleteCommentById();
+    testUpvoteCommentById();
+    testDownvoteCommentById();
   }
 
   public void testGetStuditModel() throws ApiCallException {
@@ -143,7 +148,48 @@ public class RemoteStuditModelAccesTest extends TestServer {
   public void testGetCommentById() throws ApiCallException {
     assertThrows(ApiCallException.class, () -> remoteModel.getCommentById("FOO", 0));
     assertThrows(ApiCallException.class, () -> remoteModel.getCommentById("TMA4140", -1));
-    assertEquals(defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().getCommentByID(0), remoteModel.getCommentById("TMA4140", 0));
+    compareComment(defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().getCommentByID(0),
+        remoteModel.getCommentById("TMA4140", 0));
+  }
+
+  public void testAddCommentToDiscussion() throws ApiCallException {
+    assertThrows(ApiCallException.class, () -> remoteModel.addCommentToDiscussion("FOO", null, null));
+    assertThrows(ApiCallException.class, () -> remoteModel.addCommentToDiscussion("TMA4140", null, null));
+    assertThrows(ApiCallException.class, () -> remoteModel.addCommentToDiscussion("FOO", "null", "null"));
+    defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().addComment("foo", "foo");
+    assertEquals(defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().getPrevAssignedID(),
+        remoteModel.addCommentToDiscussion("TMA4140", "foo", "foo"));
+    compareDiscussion(defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon(),
+        remoteModel.getDiscussion("TMA4140"));
+  }
+
+  public void testDeleteCommentById() throws ApiCallException {
+    assertThrows(ApiCallException.class, () -> remoteModel.deleteCommentByID("TMA4140", -1));
+    assertThrows(ApiCallException.class, () -> remoteModel.deleteCommentByID("FOO", 0));
+    defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().removeComment(3);
+    assertTrue(remoteModel.deleteCommentByID("TMA4140", 3));
+    compareDiscussion(defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon(),
+        remoteModel.getDiscussion("TMA4140"));
+  }
+
+  public void testUpvoteCommentById() throws ApiCallException {
+    assertThrows(ApiCallException.class, () -> remoteModel.upvoteCommentByID("TMA4140", "Bobby", -1));
+    assertThrows(ApiCallException.class, () -> remoteModel.upvoteCommentByID("FOO", "Bobby", 0));
+    defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().upvote("Bobby", 0);
+    assertTrue(remoteModel.upvoteCommentByID("TMA4140", "Bobby", 0));
+    assertThrows(ApiCallException.class, () -> remoteModel.upvoteCommentByID("TMA4140", "Bobby", 0));
+    compareDiscussion(defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon(),
+        remoteModel.getDiscussion("TMA4140"));
+  }
+
+    public void testDownvoteCommentById() throws ApiCallException {
+    assertThrows(ApiCallException.class, () -> remoteModel.downvoteCommentByID("TMA4140", "Bobby", -1));
+    assertThrows(ApiCallException.class, () -> remoteModel.downvoteCommentByID("FOO", "Bobby", 0));
+    defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().downvote("Bobby", 0);
+    assertTrue(remoteModel.downvoteCommentByID("TMA4140", "Bobby", 0));
+    assertThrows(ApiCallException.class, () -> remoteModel.downvoteCommentByID("TMA4140", "Bobby", 0));
+    compareDiscussion(defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon(),
+        remoteModel.getDiscussion("TMA4140"));
   }
 
   /**

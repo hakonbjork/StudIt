@@ -84,15 +84,7 @@ public class RemoteStuditModelAccess {
     URI uri = buildUri(params, paths);
     HttpRequest request = HttpRequest.newBuilder(uri).header("Accept", "application/json").GET().build();
 
-    try {
-      final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
-          HttpResponse.BodyHandlers.ofString());
-      return response;
-    } catch (ConnectException e) {
-      throw new ApiCallException("Could not establish connection to the server.");
-    } catch (IOException | InterruptedException e1) {
-      throw new RuntimeException(e1);
-    }
+    return getResponse(request);
   }
 
   private HttpResponse<String> newPostRequest(String json, Map<String, String> params, String... paths)
@@ -412,13 +404,20 @@ public class RemoteStuditModelAccess {
    * @throws ApiCallException unknown cause.
    */
   public int addCommentToDiscussion(String fagkode, String username, String comment) throws ApiCallException {
-    HttpResponse<String> response = newPostRequest(null, Map.of("username", username, "comment", comment), "courses",
-        fagkode, "discussion");
+    try {
+      HttpResponse<String> response = newPostRequest(null, Map.of("username", username, "comment", comment), "courses",
+          fagkode, "discussion", "add");
 
-    if (response.statusCode() == Status.BAD_REQUEST.get()) {
-      throw new ApiCallException(response.body());
+      if (response.statusCode() == Status.BAD_REQUEST.get()) {
+        throw new ApiCallException(response.body());
+      } else if (response.statusCode() == Status.FORBIDDEN.get() || response.statusCode() == Status.NOT_FOUND.get()) {
+        throw new ApiCallException("Course with fagkode '" + fagkode + "' does not exist'");
+      }
+
+      return Integer.parseInt(response.body());
+    } catch (NullPointerException e) {
+      throw new ApiCallException("One of the parameters passed was null");
     }
-    return Integer.parseInt(response.body());
   }
 
   /**
@@ -431,7 +430,7 @@ public class RemoteStuditModelAccess {
    *                          json-parsing error.
    */
   public Comment getCommentById(String fagkode, int id) throws ApiCallException {
-    HttpResponse<String> response = newGetRequest(null, "coures", "fagkode", "discussion", String.valueOf(id));
+    HttpResponse<String> response = newGetRequest(null, "courses", fagkode, "discussion", "comment", String.valueOf(id));
 
     if (response.statusCode() == Status.NOT_FOUND.get()) {
       throw new ApiCallException("Error -> comment with id '" + id + "' not found'");
@@ -476,7 +475,7 @@ public class RemoteStuditModelAccess {
     HttpResponse<String> response = newPutRequest(null, Map.of("username", username), "courses", fagkode, "discussion",
         "upvote", String.valueOf(id));
 
-    if (response.statusCode() == Status.BAD_REQUEST.get()) {
+    if (response.statusCode() == Status.BAD_REQUEST.get() || response.statusCode() == Status.NOT_FOUND.get()) {
       throw new ApiCallException(response.body());
     }
 
@@ -498,7 +497,7 @@ public class RemoteStuditModelAccess {
     HttpResponse<String> response = newPutRequest(null, Map.of("username", username), "courses", fagkode, "discussion",
         "downvote", String.valueOf(id));
 
-    if (response.statusCode() == Status.BAD_REQUEST.get()) {
+    if (response.statusCode() == Status.BAD_REQUEST.get() || response.statusCode() == Status.NOT_FOUND.get()) {
       throw new ApiCallException(response.body());
     }
 
@@ -532,7 +531,7 @@ public class RemoteStuditModelAccess {
 }
 
 enum Status {
-  OK(200), ACCEPTED(202), NO_CONTENT(204), BAD_REQUEST(400), UNAUTHORIZED(401), NOT_FOUND(404), SERVER_ERROR(500);
+  OK(200), ACCEPTED(202), NO_CONTENT(204), BAD_REQUEST(400), UNAUTHORIZED(401), NOT_FOUND(404), FORBIDDEN(405), SERVER_ERROR(500);
 
   private int code;
 
