@@ -23,6 +23,7 @@ import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
+import studit.ui.CommentListCell;
 
 public class DiscussionController implements Initializable {
 
@@ -191,7 +192,6 @@ public class DiscussionController implements Initializable {
   }
 
 
-  //TODO funker ikke :()
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
@@ -215,52 +215,23 @@ public class DiscussionController implements Initializable {
 
           forumList.setItems(listView);
 
-          forumList.setCellFactory(lv -> new ListCell<Comment>() {
+          forumList.setCellFactory(param -> new ListCell<Comment>() {
 
-            //HBOX
-            private HBox hbox = new HBox();
-            private Pane pane = new Pane();
-
-            //brukernavn
-            private final Label brukernavn = new Label();
-
-            //dato
-            private final Label kommentar = new Label();
-
-            //kommentar
-            private final Label kommentar = new Label();
-
-            //upVote
-            private Button upVote = new Button();
-
-            
-            @Override
-            protected void updateItem(Comment item, boolean empty) {
-                super.updateItem(item, empty);
-                hbox.getChildren().addAll(brukernavn, dato, kommentar, upVote);
-                HBox.setHgrow(pane, Priority.ALWAYS);
-
-                button.setOnAction(new EventHandler<ActionEvent>() {
-                  
-                @Override
-                public void handle(ActionEvent event) {
-                    System.out.println("upvota");
-                }
-                });
-
-
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    kommentar.setText(item.getKommentar());
-                    brukernavn.setText("Lasse");
-                  
-                  
-                    setGraphic(hbox);
-                }
-            }
+			    private CommentListCell commentListCell;
+			
+			    @Override
+			    public void updateItem(Comment comment, boolean empty) {
+				    super.updateItem(comment, empty);
+				    if(empty) {
+					    setText(null);
+					    setGraphic(null);
+					  return;
+				  }
+				    commentListCell = new CommentListCell(comment);
+				    setGraphic(commentListCell);
+			    }
         });
-
+        
       } else {
 
         System.out.println("faile med listcell");
@@ -269,19 +240,13 @@ public class DiscussionController implements Initializable {
   
     } else{
 
-      System.out.println("Kunne ikke loade discussion.fxml med informasjon");
-
-      System.out.println(this.courseItem + " hvis det printes null til venstre er det noe feil med passing av infomrasjon mellom scener");
-
-      Comment comment = new Comment();
-
-      listView.add(comment);
+      System.out.println("Dette fagets diskusjon har enda ingen kommentarer");
       forumList.setItems(listView);
     }
-  
-
-  }
+}
 
 }
+
+  
 
 

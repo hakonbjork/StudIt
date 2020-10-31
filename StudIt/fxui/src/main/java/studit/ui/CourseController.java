@@ -263,6 +263,7 @@ public class CourseController implements Initializable {
     this.vurderingsform.setText(courseItem.getVurderingsform());
     this.tips_tricks.setText(courseItem.getTips());
     this.courseInformation.setText(courseItem.getInformasjon());
+    this.eksamensdato.setText(courseItem.getEksamensdato());
 
     }
   }
