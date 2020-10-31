@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import studit.core.StuditModel;
@@ -20,15 +21,18 @@ import studit.core.mainpage.Discussion;
 import studit.core.users.User;
 import studit.core.users.Users;
 import studit.ui.TestServer;
+import studit.ui.TestServlet;
 
-public class RemoteStuditModelAccesTest extends TestServer {
-
+public class RemoteStuditModelAccesTest {
+  
   /**
    * To prevent multiple server restarts, we only use the @Test annotation when a
    * strict server restart is required (every time a new Test instance is created
    * the server is restarted)
    */
 
+  private TestServlet testServlet = new TestServlet();
+  private StuditModel defaultModel = testServlet.getDefaultModel();
   private RemoteStuditModelAccess remoteModel = new RemoteStuditModelAccess(true);
 
   @Test
@@ -36,7 +40,7 @@ public class RemoteStuditModelAccesTest extends TestServer {
     assertTrue(remoteModel.ping());
     remoteModel.setTestEndpointPath();
     assertFalse(remoteModel.ping());
-    super.tearDown();
+    testServlet.getJerseyTest().tearDown();
     assertFalse(remoteModel.ping());
 
     remoteModel = new RemoteStuditModelAccess();
