@@ -22,8 +22,9 @@ import studit.ui.Course;
 
 public class RemoteStuditModelAccess {
 
-  private static String ENDPOINT_PATH;
+  private String ENDPOINT_PATH;
   private ObjectMapper objectMapper;
+  private boolean test = false;
 
   public RemoteStuditModelAccess() {
     this(false);
@@ -32,6 +33,7 @@ public class RemoteStuditModelAccess {
   public RemoteStuditModelAccess(boolean test) {
     ENDPOINT_PATH = !test ? "http://localhost:8080/studit" : "http://localhost:9998/studit";
     this.objectMapper = new ObjectMapper().registerModule(new StuditModule());
+    this.test = test;
   }
 
   private URI buildUri(Map<String, String> params, String... paths) {
@@ -128,7 +130,9 @@ public class RemoteStuditModelAccess {
       }
       return true;
     } catch (ApiCallException e) {
-      e.printStackTrace();
+      if (!test) {
+        e.printStackTrace();
+      }
       return false;
     }
 
@@ -468,6 +472,16 @@ public class RemoteStuditModelAccess {
     }
 
     return true;
+  }
+
+  /**
+   * This method is used for testing purposes only, to test handling of requests
+   * with invalid pathing, in case they should occur.
+   * 
+   * @param endpointPath path we want to test.
+   */
+  public void setTestEndpointPath(String endpointPath) {
+    ENDPOINT_PATH = endpointPath;
   }
 
 }

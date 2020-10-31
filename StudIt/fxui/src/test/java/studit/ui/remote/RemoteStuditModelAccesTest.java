@@ -1,9 +1,7 @@
 package studit.ui.remote;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,45 +19,33 @@ import studit.core.StuditModel;
 import studit.restserver.DefaultGenerator;
 import studit.restserver.StuditConfig;
 import studit.restserver.StuditModuleObjectMapperProvider;
+import studit.ui.TestServer;
 
-public class RemoteStuditModelAccesTest extends JerseyTest {
+public class RemoteStuditModelAccesTest extends TestServer {
 
-  RemoteStuditModelAccess remoteModel = new RemoteStuditModelAccess(true);
-  protected final boolean DEBUG = false;
-  protected ObjectMapper mapper;
-  protected StuditModel defaultModel = DefaultGenerator
-      .writeDefaultDataToDb("studit/fxui/defaultdb.json");
+  /**
+   * To prevent multiple server restarts, we only use the @Test annotation when a
+   * strict server restart is required (every time a new Test instance is created
+   * the server is restarted)
+   */
 
-  @Override
-  protected StuditConfig configure() {
-    final StuditConfig config = new StuditConfig("studit/fxui/defaultdb.json");
-    if (DEBUG) {
-      enable(TestProperties.LOG_TRAFFIC);
-      enable(TestProperties.DUMP_ENTITY);
-      config.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, "WARNING");
-    }
-    return config;
-  }
+  private RemoteStuditModelAccess remoteModel = new RemoteStuditModelAccess(true);
 
-  @Override
-  protected TestContainerFactory getTestContainerFactory() throws TestContainerException {
-    return new GrizzlyTestContainerFactory();
-  }
+  /**
+   * The bulk of the functionallity will be tested here (prevents unnessecary server restartss)
+   * @throws Exception ignore.
+   */
+  @Test
+  public void tests() throws Exception {
 
-  @Override
-  @BeforeEach
-  public void setUp() throws Exception {
-    super.setUp();
-    mapper = new StuditModuleObjectMapperProvider().getContext(getClass());
-  }
-
-  @AfterEach
-  public void tearDown() throws Exception {
-    super.tearDown();
   }
 
   @Test
-  public void testPing() {
+  public void testPing() throws Exception {
     assertTrue(remoteModel.ping());
+    remoteModel.setTestEndpointPath("http://localhost:9998/studet");
+    assertFalse(remoteModel.ping());
+    super.tearDown();
+    assertFalse(remoteModel.ping());
   }
 }
