@@ -37,21 +37,21 @@ public class Users {
    *         otherwise null. String[1] contains the error message if something
    *         went wrong, null otherwise, String[2] contains the error code. 0 =
    *         new user created, -1 = missing fields, -2 = invalid username, -3 =
-   *         invalid password
+   *         invalid password, -4 = invalid email address
    */
   public String[] addUser(String name, String username, String mail, String password) {
     if (name == null || username == null || mail == null || password == null) {
       return new String[] { null, "Missing fields, expected name, username, mail and password", "-1" };
     }
-    if (isUnique(username)) {
+    if (isUnique(username) && !username.isBlank()) {
       if (!isValidEmailAddress(mail)) {
-        return new String[] { null, "'" + mail + "'" + " is not a valid email address", "-3" };
+        return new String[] { null, "'" + mail + "'" + " is not a valid email address", "-4" };
       }
 
       String[] passwordHash = Hashing.hashPassword(password);
       // Invalid password
       if (passwordHash[0] == null) {
-        return new String[] { null, passwordHash[1] };
+        return new String[] { null, passwordHash[1], "-3" };
       }
       prevAssignedID += 1;
       users.put(prevAssignedID, new User(name, username, mail, passwordHash[0], prevAssignedID));
