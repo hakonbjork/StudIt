@@ -16,8 +16,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.mainpage.CourseItem;
+import studit.core.users.User;
 
 public class CourseController implements Initializable {
+
+  private User currentUser;
 
   @FXML
   private BorderPane rootPane;
@@ -215,6 +218,7 @@ public class CourseController implements Initializable {
       //TODO sjekke om den nede funker? Virker som det ikke gjør det.
       if(this.courseItem!=null){
       discussionController.addCourse(this.courseItem);
+      discussionController.setCurrentUser(this.currentUser);
       System.out.println("addet courseItem");
       discussionController.updateView();
       }
@@ -266,6 +270,10 @@ public class CourseController implements Initializable {
     this.eksamensdato.setText(courseItem.getEksamensdato());
 
     }
+  }
+
+  public void setCurrentUser(User user){
+    this.currentUser = user;
   }
 
 }

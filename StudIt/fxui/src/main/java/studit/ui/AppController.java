@@ -41,12 +41,16 @@ import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 import studit.json.CoursePersistence;
 import studit.ui.remote.ApiCallException;
+import studit.core.users.User;
 import studit.ui.remote.RemoteStuditModelAccess;
+
 
 public class AppController {
 
   private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
+  private User user = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com", "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
+  
   @FXML
   private ListView<String> coursesList;
   @FXML
@@ -96,6 +100,10 @@ public class AppController {
     chatbot = new Chatbot();
   }
 
+  public void addUser(User user){
+    this.user = user;
+  }
+
   /**
    * Function to initialize AppController.
    * 
@@ -115,7 +123,6 @@ public class AppController {
     // filterCoursesList((String) oldValue, (String) newValue);
     // }
     // });
-
 
   }
 
@@ -211,6 +218,7 @@ public class AppController {
           // injecting second scene into the controller of the first scene
           CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
           courseController.setCourseItem(courseItem);
+          courseController.setCurrentUser(user);
           courseController.updateView();
 
           primaryStage.setScene(courseScene);

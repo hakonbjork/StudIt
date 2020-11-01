@@ -20,16 +20,17 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import studit.core.users.User;
+import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
-
+import studit.core.mainpage.CourseItem;
 import java.util.List;
 
  public class CommentListCell extends BorderPane {
 
-      //RemoteStuditModelAccess remote = new RemoteStuditModelAccess();
+      RemoteStuditModelAccess remote = new RemoteStuditModelAccess();
 
-      //TODO fikse en måte å hente user
-      User fakeUser = new User();
+      User currentUser;
+      CourseItem courseItem;
       private Comment comment;
       private Header header = new Header();
       private Body body = new Body();
@@ -41,9 +42,16 @@ import java.util.List;
 	    *
 	    * @param comment the comment for this particular cell.
 	    */
-	    public CommentListCell(Comment comment) {
-		    this.comment = comment;
-		    initialize();
+	    public CommentListCell(Comment comment, User currentUser, CourseItem courseItem) {
+        this.comment = comment;
+        this.courseItem = courseItem;
+        this.currentUser = currentUser;
+
+        try{
+		      initialize();
+        } catch(Exception e) {
+          System.out.println(e);
+        }
 	    	setCenter(contentWrapper);
         setMargin(contentWrapper, new Insets(0, 0, 0, 15));
       }
@@ -52,7 +60,7 @@ import java.util.List;
       /**
 	    * Initialize.
 	    */
-	    private void initialize() {
+	    private void initialize() throws ApiCallException {
 		  //this.getStyleClass().add("commentListCell");
         header.setTitle(this.comment.getBrukernavn());
 		    header.setDate(this.comment.getDato());
@@ -60,42 +68,50 @@ import java.util.List;
         body.setUpvotes(String.valueOf(comment.getUpvotes()));
 
         //TOOD Foo-method, må endre
-        this.fakeUser.setUsername("Mithu");
         body.button.setOnAction((event) -> {
         
         List<String> upVoters = this.comment.getUpvoters();
 
-        if(upVoters.contains(this.fakeUser.getUsername())){
+        if(upVoters.contains(this.currentUser.getUsername())){
 
-          //remote send slett denne brukeren fra listen
-          //hent kommentar tilbake og loadView() på nytt for denne cellen.
+          //Gi en visuell feedback
+          System.out.println("allerede upvota");
 
         } else {
 
-          //remote send legg til brukeren til listen
-          //hent kommentar tilbake og loadView på nytt for denne cellen.
+          try{
 
+          this.remote.upvoteCommentByID(this.courseItem.getFagkode(), this.currentUser.getUsername(),this.comment.getUniqueID());
+
+          int id = this.comment.getUniqueID();
+
+          this.comment = this.remote.getCommentById(this.courseItem.getFagkode(), id);
+
+          updateView();
+
+          } catch(Exception e){
+
+            System.out.println(e);
+
+          }
         }
 
         });
 
-        //updateView();
+      
       
       }
       
 
-      //**********************TODO - Når API er fikset kan denne unkommenteres *****************************'/
       /**
        * Updates the commentListCellView
        */
-      //public void updateView(){
-      //  Comment comment1 = remote.getCommentByUniqueId(this.comment.getUniqueID());
-      //  this.comment = comment1;
-      //  header.setTitle(this.comment.getBrukernavn());
-		  //  header.setDate(this.comment.getDato());
-      //  body.setComment(this.comment.getKommentar());
-      //  body.setUpvotes(String.valueOf(comment.getUpvotes()));
-      //}
+      public void updateView(){
+        header.setTitle(this.comment.getBrukernavn());
+		    header.setDate(this.comment.getDato());
+        body.setComment(this.comment.getKommentar());
+        body.setUpvotes(String.valueOf(this.comment.getUpvotes()));
+      }
 
 
 
@@ -156,6 +172,7 @@ import java.util.List;
       private Text comment = new Text();
       private Text upvotes = new Text();
       private Button button = new Button("Upvote");
+      private Button button2 = new Button("Downvote");
 
       /**
        * Instantiates a new body.
@@ -165,7 +182,7 @@ import java.util.List;
         //comment.getStyleClass().add("comment");
         
         VBox.setVgrow(this, Priority.ALWAYS);
-        getChildren().addAll(comment, upvotes, button);
+        getChildren().addAll(comment, upvotes, button, button2);
 
         
       }
