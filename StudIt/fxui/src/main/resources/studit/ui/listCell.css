@@ -1,0 +1,14 @@
+.list-cell {
+  display: inline-block;
+  -fx-min-width: 50px;
+  -fx-background-color: lightyellow;
+  -fx-background-radius: 30px;
+  -fx-border-radius: 20px;
+  -fx-border-width: 2px;
+  -fx-border-style: solid;
+  -fx-border-color: #666666;
+}
+.list-cell:empty {
+  -fx-background-color: transparent;
+  -fx-border-width: 0px;
+}

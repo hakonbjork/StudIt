@@ -45,7 +45,7 @@
                                                 <Font name="Avenir Next Bold" size="24.0" />
                                              </font>
                                           </Button>
-                                          <Button id="discussion_btn" fx:id="forum_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openDiscussion" prefHeight="58.0" prefWidth="379.0" style="-fx-background-color: #80ccff#80ccff;" text="Diskusjon" textAlignment="CENTER" textFill="#242424ee">
+                                          <Button id="discussion_btn" fx:id="forum_btn" minHeight="-Infinity" mnemonicParsing="false" prefHeight="58.0" prefWidth="379.0" style="-fx-background-color: #80ccff#80ccff;" text="Diskusjon" textAlignment="CENTER" textFill="#242424ee">
                                              <font>
                                                 <Font name="Avenir Next Bold" size="24.0" />
                                              </font>
@@ -57,7 +57,7 @@
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label id="fagkode" fx:id="fagkode" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="173.0" text="TDT4109">
+                                          <Label id="fagkode" fx:id="fagkode" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="173.0">
                                              <font>
                                                 <Font name="Avenir Next Bold" size="32.0" />
                                              </font>
@@ -65,7 +65,7 @@
                                                 <Insets left="5.0" right="5.0" />
                                              </padding>
                                           </Label>
-                                          <Label id="fagnavn" fx:id="fagnavn" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="901.0" text="Informasjonsteknologi grunnkurs">
+                                          <Label id="fagnavn" fx:id="fagnavn" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="901.0">
                                              <font>
                                                 <Font name="Avenir Next Bold" size="32.0" />
                                              </font>

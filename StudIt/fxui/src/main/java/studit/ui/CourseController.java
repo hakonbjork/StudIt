@@ -14,84 +14,113 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
+import studit.core.mainpage.CourseItem;
 
 public class CourseController implements Initializable {
 
+  @FXML
+  private BorderPane rootPane;
 
-    @FXML
-    private BorderPane rootPane;
+  @FXML
+  private Button information_btn;
 
-    @FXML
-    private Button information_btn;
+  @FXML
+  private Button discussion_btn;
 
-    @FXML
-    private Button discussion_btn;
+  @FXML
+  private Label fagkode;
 
-    @FXML
-    private Label fagkode;
+  @FXML
+  private Label fagnavn;
 
-    @FXML
-    private Label fagnavn;
+  @FXML
+  private Label rating;
 
-    @FXML
-    private Label rating;
+  @FXML
+  private TextArea courseInformation;
 
-    @FXML
-    private TextArea courseInformation;
+  @FXML
+  private TextArea litterature;
 
-    @FXML
-    private TextArea litterature;
+  @FXML
+  private TextArea tips_tricks;
 
-    @FXML
-    private TextArea tips_tricks;
+  @FXML
+  private Button mainPageAction;
 
-    @FXML
-    private Button mainPageAction;
+  @FXML
+  private Button chatbot_btn;
 
-    @FXML
-    private Button chatbot_btn;
+  @FXML
+  private Button logoutAction;
 
-    @FXML
-    private Button logoutAction;
+  @FXML
+  private TextField eksamensdato;
 
-    @FXML
-    private TextField eksamensdato;
+  @FXML
+  private TextField vurderingsform;
 
-    @FXML
-    private TextField vurderingsform;
+  @FXML
+  private TextField hjelpemidler;
 
-    @FXML
-    private TextField hjelpemidler;
-
-    @FXML
-    private TextArea commentField;
+  @FXML
+  private TextArea commentField;
 
   @FXML
   private Button addCommentAction;
 
-  private Scene mainScene;
+  //private Scene mainScene;
 
-  public void setMainScene(Scene scene) {
-    this.mainScene = scene;
+  private CourseItem courseItem;
+
+  public void setCourseItem(CourseItem courseItem){
+    this.courseItem = courseItem;
   }
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-   
+  public void setHjelpemidler(String hjelpemidler){
+    this.hjelpemidler.setText(hjelpemidler);
   }
 
+  public void setVurderingsForm(String vurderingsform){
+    this.vurderingsform.setText(vurderingsform);
+  }
+
+  public void setEksamensdato(String eksamensdato){
+    this.eksamensdato.setText(eksamensdato);
+  }
+
+  public void setTips(String tips){
+    this.tips_tricks.setText(tips);
+  }
+
+  public void setLitterature(String litteratur){
+    this.litterature.setText(litteratur);
+  }
+
+  public void setRating(Float rating){
+    this.rating.setText(rating.toString());
+  }
+
+  //public void setMainScene(Scene scene) {
+  //  this.mainScene = scene;
+  //}
+
+  public void setFagkode(String fagkode){
+    this.fagkode.setText(fagkode);
+  }
+  
   /**
    * Function to set the label - the name of the subject on the top of the page.
    * 
    * @param label the label to set
    */
 
-  //@FXML
-  //public void setLabel(String label) {
-  //  this.label.setText(label);
-  //}
+  @FXML
+  public void setFagnavn(String fagnavn) {
+    this.fagnavn.setText(fagnavn);
+  }
+
 
   /**
    * logs user out, and goes to login scene closes the current window.
@@ -121,19 +150,20 @@ public class CourseController implements Initializable {
   @FXML
   void handleMainPageAction(ActionEvent actionEvent) {
     try {
-      Stage primaryStage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-      primaryStage.setScene(mainScene);
-    } catch (Exception e) {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+      Parent root = loader.load();
+
+      Stage stage2 = new Stage();
+      stage2.setScene(new Scene(root));
+      stage2.setTitle("App");
+      stage2.show();
+
+      Stage stage = (Stage) rootPane.getScene().getWindow();
+      stage.hide();
+
+    } catch (IOException e) {
       System.out.println(e);
     }
-  }
-
-  /**
-   * Gives the user a choice to open NTNU homepage in web-browser.
-   */
-  @FXML
-  void handleNtnuAction(ActionEvent event) {
-    System.out.println("NTNU");
   }
 
   /**
@@ -147,10 +177,11 @@ public class CourseController implements Initializable {
       AppController.getChatbot().show();
     }
   }
-  
+
   /**
    * Sets the rating of the subject.
-   * @param rating represents the value of the rating to be set 
+   * 
+   * @param rating represents the value of the rating to be set
    */
   @FXML
   public void setRating(double rating) {
@@ -166,17 +197,27 @@ public class CourseController implements Initializable {
     return Double.valueOf(this.rating.getText());
   }
 
-  //@FXML
-  //public void setCourseText(String text) {
-  //  this.courseText.setText(text.toString());
-  //}
+  @FXML
+  public void setCourseInformation(String information) {
+    this.courseInformation.setText(information.toString());
+  }
 
   @FXML
-  void openDiscussion(ActionEvent event){
+  void openDiscussion(ActionEvent event) {
 
-    try {
+    if(this.courseItem!= null) {
+
+      try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("Discussion.fxml"));
       Parent root = loader.load();
+      DiscussionController discussionController = (DiscussionController) loader.getController();
+
+      //TODO sjekke om den nede funker? Virker som det ikke gjør det.
+      if(this.courseItem!=null){
+      discussionController.addCourse(this.courseItem);
+      System.out.println("addet courseItem");
+      discussionController.updateView();
+      }
 
       Stage stage2 = new Stage();
       stage2.setScene(new Scene(root));
@@ -190,13 +231,44 @@ public class CourseController implements Initializable {
       System.out.println(e);
     }
 
+    } else {
+
+      System.out.println("Kunne ikke printe course.fxml med riktig informasjon");
+  
+    }
+
+    
 
   }
 
   @FXML
-  void handleAddCommentAction(ActionEvent event){
-    //TODO fikse metoden her. 
+  void handleAddCommentAction(ActionEvent event) {
+    //TODO fikse metoden her? 
     System.out.println("Adda en tilbakemelding");
   }
 
+  //TODO funker ikke :()
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    
+  }
+  
+  public void updateView(){
+    if(this.courseItem!= null) {
+    this.fagnavn.setText(courseItem.getFagnavn());
+    this.fagkode.setText(courseItem.getFagkode());
+    this.hjelpemidler.setText(courseItem.getHjelpemidler());
+    this.litterature.setText(courseItem.getPensumlitteratur());
+    this.rating.setText(String.valueOf(courseItem.getAverageVurdering()));
+    this.vurderingsform.setText(courseItem.getVurderingsform());
+    this.tips_tricks.setText(courseItem.getTips());
+    this.courseInformation.setText(courseItem.getInformasjon());
+    this.eksamensdato.setText(courseItem.getEksamensdato());
+
+    }
+  }
+
 }
+
+
+

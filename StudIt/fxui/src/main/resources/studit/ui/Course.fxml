@@ -60,7 +60,7 @@
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                                      <Label id="fagkode" fx:id="fagkode" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="173.0" text="TDT4109">
+                                                      <Label id="fagkode" fx:id="fagkode" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="173.0">
                                                           <font>
                                                               <Font name="Avenir Next Bold" size="32.0" />
                                                           </font>
@@ -68,7 +68,7 @@
                                                               <Insets left="5.0" right="5.0" />
                                                           </padding>
                                                       </Label>
-                                          <Label id="fagnavn" fx:id="fagnavn" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="901.0" text="Informasjonsteknologi grunnkurs">
+                                          <Label id="fagnavn" fx:id="fagnavn" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="901.0">
                                              <font>
                                                 <Font name="Avenir Next Bold" size="32.0" />
                                              </font>
@@ -218,7 +218,7 @@
                         <Font name="Avenir Next Bold" size="18.0" />
                      </font>
                   </Text>
-                  <TextField id="hjelpemidler" fx:id="hjelpemidler" prefHeight="55.0" prefWidth="238.0" style="-fx-background-color: transparenttransparent;" />
+                  <TextField id="hjelpemidler" fx:id="hjelpemidler" prefHeight="55.0" prefWidth="238.0" style="-fx-background-color: transparent;" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
