@@ -77,6 +77,9 @@ import java.util.List;
           //Gi en visuell feedback
           System.out.println("allerede upvota");
 
+          //fjern UpVote
+          ///updateView
+
         } else {
 
           try{
@@ -172,7 +175,6 @@ import java.util.List;
       private Text comment = new Text();
       private Text upvotes = new Text();
       private Button button = new Button("Upvote");
-      private Button button2 = new Button("Downvote");
 
       /**
        * Instantiates a new body.
@@ -182,7 +184,7 @@ import java.util.List;
         //comment.getStyleClass().add("comment");
         
         VBox.setVgrow(this, Priority.ALWAYS);
-        getChildren().addAll(comment, upvotes, button, button2);
+        getChildren().addAll(comment, upvotes, button);
 
         
       }
