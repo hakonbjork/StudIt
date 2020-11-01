@@ -24,7 +24,7 @@ import studit.ui.TestServer;
 import studit.ui.TestServlet;
 
 public class RemoteStuditModelAccesTest {
-  
+
   /**
    * To prevent multiple server restarts, we only use the @Test annotation when a
    * strict server restart is required (every time a new Test instance is created
@@ -165,6 +165,12 @@ public class RemoteStuditModelAccesTest {
         remoteModel.addCommentToDiscussion("TMA4140", "foo", "foo"));
     compareDiscussion(defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon(),
         remoteModel.getDiscussion("TMA4140"));
+
+    defaultModel.getCourseList().getCourseByFagkode("TDT4120").getDiskusjon().addComment("foo", "foo");
+    assertEquals(defaultModel.getCourseList().getCourseByFagkode("TDT4120").getDiskusjon().getPrevAssignedID(),
+        remoteModel.addCommentToDiscussion("TDT4120", "foo", "foo"));
+    compareDiscussion(defaultModel.getCourseList().getCourseByFagkode("TDT4120").getDiskusjon(),
+        remoteModel.getDiscussion("TDT4120"));
   }
 
   public void testDeleteCommentById() throws ApiCallException {
@@ -186,7 +192,7 @@ public class RemoteStuditModelAccesTest {
         remoteModel.getDiscussion("TMA4140"));
   }
 
-    public void testDownvoteCommentById() throws ApiCallException {
+  public void testDownvoteCommentById() throws ApiCallException {
     assertThrows(ApiCallException.class, () -> remoteModel.downvoteCommentByID("TMA4140", "Bobby", -1));
     assertThrows(ApiCallException.class, () -> remoteModel.downvoteCommentByID("FOO", "Bobby", 0));
     defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().downvote("Bobby", 0);

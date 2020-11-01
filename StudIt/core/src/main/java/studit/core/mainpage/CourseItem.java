@@ -126,7 +126,7 @@ public class CourseItem {
   }
 
   public void setDiskusjon(Discussion diskusjon) {
-    this.diskusjon = diskusjon;
+    this.diskusjon = diskusjon == null ? new Discussion() : diskusjon;
   }
 
 
