@@ -1,11 +1,7 @@
 package studit.ui;
 
-import java.net.URL;
-import java.util.Map;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -14,9 +10,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import studit.core.users.User;
-import studit.core.users.Users;
-import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class LoginController {
@@ -40,12 +33,16 @@ public class LoginController {
 
   private RemoteStuditModelAccess remote;
 
+  /**
+   * The constrcutur sets up a remote, to call methods from RemoteStuditModelAccess
+   * Frontend needs this class to connect to API/backend.
+   */
   public LoginController() {
     this.remote = new RemoteStuditModelAccess();
   }
 
   /**
-   * Method to register new user.
+   * Method to register new user. Loads new window: "Newuser.fxml"
    * 
    */
   public void registerUser() {
@@ -68,22 +65,6 @@ public class LoginController {
     // TODO: This.
   }
 
-  //Mulig denne kan tas bort
-  private boolean containsUser(String username, String password) throws ApiCallException {
-    Users users = remote.getUsers();
-    Map<Integer, User> user_map = users.getUsers();
-    for (User user : user_map.values()) {
-      if (user.getUsername().equals(username)) {
-        if (user.getPassword().equals(password)) {
-          System.out.println(" containsUser = true");
-          return true;
-        }
-      }
-    }
-    System.out.println(" containsUser = true");
-    return false;
-  }
-
   /**
    * Checks if login credentials are correct, logs in if it is. Else produces an
    * error message in the application
@@ -95,8 +76,8 @@ public class LoginController {
       loginInfoText.setText("");
       BorderPane pane = FXMLLoader.load(getClass().getResource("App.fxml"));
       Scene scene = new Scene(pane);
-      // scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
-      // The line above works in gitpod, but not in IDEA
+      //scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
+      //TODO: trenger vi linjen over?
       Stage stage = new Stage();
       stage.setScene(scene);
       stage.setTitle("StudIt");
