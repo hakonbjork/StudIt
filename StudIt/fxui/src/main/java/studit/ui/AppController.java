@@ -117,39 +117,39 @@ public class AppController {
     mouseClicked();
   }
 
-  /**
-   * Function to search for subjects. The listview will then only show subjects
-   * with the letters in the search field.
-   */
-  @FXML
-  public void handleSearchViewAction() {
-    // Wrap the ObservableList in a FilteredList (initially display all data).
-    FilteredList<String> filteredData = new FilteredList<>(this.getData(), (p -> true));
+  // /**
+  //  * Function to search for subjects. The listview will then only show subjects
+  //  * with the letters in the search field.
+  //  */
+  // @FXML
+  // public void handleSearchViewAction() {
+  //   // Wrap the ObservableList in a FilteredList (initially display all data).
+  //   FilteredList<String> filteredData = new FilteredList<>(this.getData(), (p -> true));
 
-    // Set the filter Predicate whenever the filter changes.
-    searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-      filteredData.setPredicate(courseItem -> {
-        // If filter text is empty, display all persons.
-        if (newValue == null || newValue.isEmpty()) {
-          return true;
-        }
-        // Compare course name and course code of every CourseItem with the filter text.
-        String lowerCaseFilter = newValue.toLowerCase();
+  //   // Set the filter Predicate whenever the filter changes.
+  //   searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+  //     filteredData.setPredicate(courseItem -> {
+  //       // If filter text is empty, display all persons.
+  //       if (newValue == null || newValue.isEmpty()) {
+  //         return true;
+  //       }
+  //       // Compare course name and course code of every CourseItem with the filter text.
+  //       String lowerCaseFilter = newValue.toLowerCase();
 
-        if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
-          return true; // filter matches course name
+  //       if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
+  //         return true; // filter matches course name
 
-          // } else if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
-          // return true; // filter matches course code
+  //         // } else if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
+  //         // return true; // filter matches course code
 
-        }
-        return false; // Does not match
-      });
-    });
+  //       }
+  //       return false; // Does not match
+  //     });
+  //   });
 
-    SortedList<String> sortedData = new SortedList<>(filteredData);
-    coursesList.setItems(sortedData);
-  }
+  //   SortedList<String> sortedData = new SortedList<>(filteredData);
+  //   coursesList.setItems(sortedData);
+  // }
 
   /**
    * Opens chatbot.
@@ -192,14 +192,6 @@ public class AppController {
     }
   }
 
-  /**
-   * redirects user to the main page.
-   */
-  @FXML
-  void handleMainPageAction() {
-    // nothing should really happen when you are in the home page other than maybe
-    // refresh(?)
-  }
 
   /**
    * A function that does something when an element in the listview is clicked on.
