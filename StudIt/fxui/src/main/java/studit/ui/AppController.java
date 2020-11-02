@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -44,13 +45,13 @@ import studit.ui.remote.ApiCallException;
 import studit.core.users.User;
 import studit.ui.remote.RemoteStuditModelAccess;
 
-
 public class AppController {
 
   private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
-  private User user = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com", "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
-  
+  private User user = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com",
+      "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
+
   @FXML
   private ListView<String> coursesList;
   @FXML
@@ -100,7 +101,7 @@ public class AppController {
     chatbot = new Chatbot();
   }
 
-  public void addUser(User user){
+  public void addUser(User user) {
     this.user = user;
   }
 
@@ -114,27 +115,41 @@ public class AppController {
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     // Actions on clicked list item
     mouseClicked();
-    // searchField.textProperty().addListener(new
-    // ChangeListener<String>.changed(ObservableValue<? extends String>, String,
-    // String) {
-    // @Override
-    // public void changed(ObservableValue observable, Object oldValue, Object
-    // newValue) {
-    // filterCoursesList((String) oldValue, (String) newValue);
-    // }
-    // });
-
   }
 
-  // /**
-  // * Function to search for subjects. The listview will then only show subjects
-  // * with the letters in the search field.
-  // */
-  public void search(String newValue){
+  /**
+   * Function to search for subjects. The listview will then only show subjects
+   * with the letters in the search field.
+   */
+  @FXML
+  public void handleSearchViewAction() {
+    // Wrap the ObservableList in a FilteredList (initially display all data).
+    FilteredList<String> filteredData = new FilteredList<>(this.getData(), (p -> true));
 
+    // Set the filter Predicate whenever the filter changes.
+    searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+      filteredData.setPredicate(courseItem -> {
+        // If filter text is empty, display all persons.
+        if (newValue == null || newValue.isEmpty()) {
+          return true;
+        }
+        // Compare course name and course code of every CourseItem with the filter text.
+        String lowerCaseFilter = newValue.toLowerCase();
 
+        if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
+          return true; // filter matches course name
+
+          // } else if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
+          // return true; // filter matches course code
+
+        }
+        return false; // Does not match
+      });
+    });
+
+    SortedList<String> sortedData = new SortedList<>(filteredData);
+    coursesList.setItems(sortedData);
   }
-
 
   /**
    * Opens chatbot.
@@ -154,7 +169,6 @@ public class AppController {
   public static void closeChatbot() {
     chatbot = null;
   }
-
 
   /**
    * logs user out, and opens to login scene, closes current scene.
@@ -188,7 +202,7 @@ public class AppController {
   }
 
   /**
-   * A function that does something when a element in the listview is clicked on.
+   * A function that does something when an element in the listview is clicked on.
    */
   public void mouseClicked() {
     // Detecting mouse clicked
@@ -202,9 +216,9 @@ public class AppController {
         try {
           Stage primaryStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();
 
-          //FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
-          //Parent mainPane = mainLoader.load();
-          //Scene mainScene = new Scene(mainPane);
+          // FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
+          // Parent mainPane = mainLoader.load();
+          // Scene mainScene = new Scene(mainPane);
 
           // getting loader and a pane for the second scene.
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
@@ -213,7 +227,7 @@ public class AppController {
 
           // injecting first scene into the controller of the second scene
           CourseController courseController = (CourseController) courseLoader.getController();
-          //courseController.setMainScene(mainScene);
+          // courseController.setMainScene(mainScene);
 
           // injecting second scene into the controller of the first scene
           CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
@@ -249,18 +263,18 @@ public class AppController {
    */
   private void loadData() throws ApiCallException {
 
-      CourseList li = remoteStuditModelAccess.getCourseList();
+    CourseList li = remoteStuditModelAccess.getCourseList();
 
-      Collection<CourseItem> items = li.getCourseItems();
-      this.courseList = (List<CourseItem>) items;
+    Collection<CourseItem> items = li.getCourseItems();
+    this.courseList = (List<CourseItem>) items;
 
-      // System.out.println(items.size());
+    // System.out.println(items.size());
 
-      for (CourseItem c : items) {
-        this.list.add(c.getFagnavn());
-      }
+    for (CourseItem c : items) {
+      this.list.add(c.getFagnavn());
+    }
 
-      this.coursesList.setItems(this.list);
+    this.coursesList.setItems(this.list);
 
   }
 

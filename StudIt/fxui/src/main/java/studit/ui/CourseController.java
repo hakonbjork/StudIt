@@ -73,46 +73,46 @@ public class CourseController implements Initializable {
   @FXML
   private Button addCommentAction;
 
-  //private Scene mainScene;
+  // private Scene mainScene;
 
   private CourseItem courseItem;
 
-  public void setCourseItem(CourseItem courseItem){
+  public void setCourseItem(CourseItem courseItem) {
     this.courseItem = courseItem;
   }
 
-  public void setHjelpemidler(String hjelpemidler){
+  public void setHjelpemidler(String hjelpemidler) {
     this.hjelpemidler.setText(hjelpemidler);
   }
 
-  public void setVurderingsForm(String vurderingsform){
+  public void setVurderingsForm(String vurderingsform) {
     this.vurderingsform.setText(vurderingsform);
   }
 
-  public void setEksamensdato(String eksamensdato){
+  public void setEksamensdato(String eksamensdato) {
     this.eksamensdato.setText(eksamensdato);
   }
 
-  public void setTips(String tips){
+  public void setTips(String tips) {
     this.tips_tricks.setText(tips);
   }
 
-  public void setLitterature(String litteratur){
+  public void setLitterature(String litteratur) {
     this.litterature.setText(litteratur);
   }
 
-  public void setRating(Float rating){
+  public void setRating(Float rating) {
     this.rating.setText(rating.toString());
   }
 
-  //public void setMainScene(Scene scene) {
-  //  this.mainScene = scene;
-  //}
+  // public void setMainScene(Scene scene) {
+  // this.mainScene = scene;
+  // }
 
-  public void setFagkode(String fagkode){
+  public void setFagkode(String fagkode) {
     this.fagkode.setText(fagkode);
   }
-  
+
   /**
    * Function to set the label - the name of the subject on the top of the page.
    * 
@@ -123,7 +123,6 @@ public class CourseController implements Initializable {
   public void setFagnavn(String fagnavn) {
     this.fagnavn.setText(fagnavn);
   }
-
 
   /**
    * logs user out, and goes to login scene closes the current window.
@@ -208,75 +207,69 @@ public class CourseController implements Initializable {
   @FXML
   void openDiscussion(ActionEvent event) {
 
-    if(this.courseItem!= null) {
+    if (this.courseItem != null) {
 
       try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Discussion.fxml"));
-      Parent root = loader.load();
-      DiscussionController discussionController = (DiscussionController) loader.getController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Discussion.fxml"));
+        Parent root = loader.load();
+        DiscussionController discussionController = (DiscussionController) loader.getController();
 
-      //TODO sjekke om den nede funker? Virker som det ikke gjør det.
-      if(this.courseItem!=null){
-      discussionController.addCourse(this.courseItem);
-      discussionController.setCurrentUser(this.currentUser);
-      System.out.println("addet courseItem");
-      discussionController.updateView();
+        // TODO sjekke om den nede funker? Virker som det ikke gjør det.
+        if (this.courseItem != null) {
+          discussionController.addCourse(this.courseItem);
+          discussionController.setCurrentUser(this.currentUser);
+          System.out.println("addet courseItem");
+          discussionController.updateView();
+        }
+
+        Stage stage2 = new Stage();
+        stage2.setScene(new Scene(root));
+        stage2.setTitle("Discussion");
+        stage2.show();
+
+        Stage stage = (Stage) rootPane.getScene().getWindow();
+        stage.hide();
+
+      } catch (IOException e) {
+        System.out.println(e);
       }
-
-      Stage stage2 = new Stage();
-      stage2.setScene(new Scene(root));
-      stage2.setTitle("Discussion");
-      stage2.show();
-
-      Stage stage = (Stage) rootPane.getScene().getWindow();
-      stage.hide();
-
-    } catch (IOException e) {
-      System.out.println(e);
-    }
 
     } else {
 
       System.out.println("Kunne ikke printe course.fxml med riktig informasjon");
-  
+
     }
-
-    
-
   }
 
   @FXML
   void handleAddCommentAction(ActionEvent event) {
-    //TODO fikse metoden her? 
-    System.out.println("Adda en tilbakemelding");
+    // TODO fikse metoden her?
+    // Send tilbakemeldingen til API serveren?
   }
 
-  //TODO funker ikke :()
+  // TODO funker ikke :()
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    
+
   }
-  
-  public void updateView(){
-    if(this.courseItem!= null) {
-    this.fagnavn.setText(courseItem.getFagnavn());
-    this.fagkode.setText(courseItem.getFagkode());
-    this.hjelpemidler.setText(courseItem.getHjelpemidler());
-    this.litterature.setText(courseItem.getPensumlitteratur());
-    this.rating.setText(String.valueOf(courseItem.getAverageVurdering()));
-    this.vurderingsform.setText(courseItem.getVurderingsform());
-    this.tips_tricks.setText(courseItem.getTips());
-    this.courseInformation.setText(courseItem.getInformasjon());
-    this.eksamensdato.setText(courseItem.getEksamensdato());
+
+  public void updateView() {
+    if (this.courseItem != null) {
+      this.fagnavn.setText(courseItem.getFagnavn());
+      this.fagkode.setText(courseItem.getFagkode());
+      this.hjelpemidler.setText(courseItem.getHjelpemidler());
+      this.litterature.setText(courseItem.getPensumlitteratur());
+      this.rating.setText(String.valueOf(courseItem.getAverageVurdering()));
+      this.vurderingsform.setText(courseItem.getVurderingsform());
+      this.tips_tricks.setText(courseItem.getTips());
+      this.courseInformation.setText(courseItem.getInformasjon());
+      this.eksamensdato.setText(courseItem.getEksamensdato());
 
     }
   }
 
-  public void setCurrentUser(User user){
+  public void setCurrentUser(User user) {
     this.currentUser = user;
   }
 
 }
-
-
-
