@@ -2,7 +2,6 @@ package studit.ui.chatbot;
 
 import java.util.HashMap;
 import studit.core.chatbot.prompt.Func;
-import studit.ui.ChatbotController;
 
 public class Commands {
   private HashMap<String, Func> commands;

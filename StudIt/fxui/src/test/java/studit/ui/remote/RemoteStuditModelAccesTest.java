@@ -20,7 +20,6 @@ import studit.core.mainpage.CourseList;
 import studit.core.mainpage.Discussion;
 import studit.core.users.User;
 import studit.core.users.Users;
-import studit.ui.TestServer;
 import studit.ui.TestServlet;
 
 public class RemoteStuditModelAccesTest {

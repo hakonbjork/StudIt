@@ -2,7 +2,6 @@ package studit.ui.chatbot;
 
 import java.util.List;
 import studit.core.chatbot.Response;
-import studit.ui.ChatbotController;
 
 public class Message {
 

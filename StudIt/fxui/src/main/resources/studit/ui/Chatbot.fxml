@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="pane_chatbot" minHeight="200.0" minWidth="150.0" prefHeight="550.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.ChatbotController">
+<BorderPane fx:id="pane_chatbot" minHeight="200.0" minWidth="150.0" prefHeight="550.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.chatbot.ChatbotController">
    <top>
       <ToolBar fx:id="toolbar_main" onMouseDragged="#moveWindow" onMousePressed="#setOffset" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>

@@ -1,4 +1,4 @@
-package studit.ui;
+package studit.ui.chatbot;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,9 +26,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import studit.core.chatbot.Response;
 import studit.core.chatbot.prompt.PromptManager;
-import studit.ui.chatbot.Commands;
-import studit.ui.chatbot.Message;
-import studit.ui.chatbot.Prompt;
+import studit.ui.AppController;
 
 public class ChatbotController implements Initializable {
 
@@ -223,7 +221,7 @@ public class ChatbotController implements Initializable {
       list_chat.getItems().add(new Message(userInput, "user"));
       // Make sure that the caret is at first position for a new command!
       txt_user_entry.selectPositionCaret(0);
-      Response response = AppController.chatbot.manageInput(userInput);
+      Response response = AppController.getChatbot().manageInput(userInput);
       list_chat.getItems().add(new Message(response, "chatbot"));
     }
   }

@@ -12,11 +12,11 @@
       "hjelpemidler" : "alle",
       "vurderinger" : [ "3", "5", "9", "8" ],
       "diskusjon" : {
-        "prevAssignedID" : "3",
+        "prevAssignedID" : "2",
         "comments" : [ {
           "brukernavn" : "BobbyBigBoi",
           "kommentar" : "Bra saker!",
-          "dato" : "03-11-2020 04:18:26",
+          "dato" : "03-11-2020 04:21:24",
           "upvotes" : "1",
           "downvotes" : "1",
           "uniqueID" : "0",
@@ -25,7 +25,7 @@
         }, {
           "brukernavn" : "BobbyBigBoi",
           "kommentar" : "Ok saker :/",
-          "dato" : "03-11-2020 04:18:26",
+          "dato" : "03-11-2020 04:21:24",
           "upvotes" : "0",
           "downvotes" : "0",
           "uniqueID" : "1",
@@ -34,20 +34,11 @@
         }, {
           "brukernavn" : "BjarteBrorMor",
           "kommentar" : "Bobby er en idiot!",
-          "dato" : "03-11-2020 04:18:26",
+          "dato" : "03-11-2020 04:21:24",
           "upvotes" : "2",
           "downvotes" : "0",
           "uniqueID" : "2",
           "upvoters" : [ "BjarteBrorMor", "BobbyBigBoi" ],
-          "downvoters" : [ ]
-        }, {
-          "brukernavn" : "WhamMaster28",
-          "kommentar" : "Dinglepop!",
-          "dato" : "03-11-2020 04:18:26",
-          "upvotes" : "0",
-          "downvotes" : "0",
-          "uniqueID" : "3",
-          "upvoters" : [ ],
           "downvoters" : [ ]
         } ]
       }

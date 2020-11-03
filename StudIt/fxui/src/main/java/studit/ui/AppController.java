@@ -29,10 +29,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import studit.core.chatbot.Chatbot;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 import studit.json.CoursePersistence;
+import studit.ui.chatbot.Chatbot;
 
 public class AppController {
 
@@ -64,7 +64,7 @@ public class AppController {
   @FXML 
   private Button discussion_btn;
 
-  static Chatbot chatbot = null;
+  private static Chatbot chatbot = null;
   private ObservableList<CourseItem> list = FXCollections.observableArrayList();
   private List<CourseItem> courseList;
   private String label;

@@ -82,5 +82,4 @@ public class CourseListResource {
     LOG.debug("getCourseItem({})", fagkode);
     return new DiscussionResource(item.getDiskusjon());
   }
-
 }

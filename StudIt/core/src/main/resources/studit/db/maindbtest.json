@@ -10,7 +10,10 @@
     "vurderingsform" : null,
     "hjelpemidler" : null,
     "vurderinger" : [ ],
-    "diskusjon" : null
+    "diskusjon" : {
+      "comments" : { },
+      "prevAssignedID" : -1
+    }
   }, {
     "fagkode" : "TMA4125",
     "fagnavn" : "Statistikk",
@@ -22,6 +25,9 @@
     "vurderingsform" : null,
     "hjelpemidler" : null,
     "vurderinger" : [ ],
-    "diskusjon" : null
+    "diskusjon" : {
+      "comments" : { },
+      "prevAssignedID" : -1
+    }
   } ]
 }

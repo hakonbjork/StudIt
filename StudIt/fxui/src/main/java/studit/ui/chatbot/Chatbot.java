@@ -1,4 +1,4 @@
-package studit.core.chatbot;
+package studit.ui.chatbot;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import studit.core.chatbot.ChatbotManager;
+import studit.core.chatbot.Response;
 
 public class Chatbot {
 

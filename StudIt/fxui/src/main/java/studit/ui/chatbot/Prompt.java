@@ -9,7 +9,6 @@ import javafx.scene.text.TextFlow;
 import studit.core.chatbot.prompt.ActionRequest;
 import studit.core.chatbot.prompt.Func;
 import studit.core.chatbot.prompt.PromptManager;
-import studit.ui.ChatbotController;
 
 public class Prompt {
 
