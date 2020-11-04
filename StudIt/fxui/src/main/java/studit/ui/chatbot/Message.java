@@ -25,7 +25,7 @@ public class Message {
   /**
    * Returns formatted text with correct line breaks.
    * 
-   * @return String ready to be printed to the screen
+   * @return String ready to be printed to the screen.
    */
   public String getText() {
 

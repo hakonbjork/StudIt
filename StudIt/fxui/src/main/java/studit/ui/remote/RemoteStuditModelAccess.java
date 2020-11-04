@@ -1,5 +1,7 @@
 package studit.ui.remote;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.URI;
@@ -10,10 +12,6 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import studit.core.StuditModel;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
@@ -25,8 +23,9 @@ import studit.json.StuditModule;
 
 public class RemoteStuditModelAccess {
 
+  private static String DEFAULT_PATH = "http://localhost:8080/studit";
+
   private String endpointPath;
-  private final static String DEFAULT_PATH = "http://localhost:8080/studit";
   protected ObjectMapper objectMapper;
   private boolean test = false;
 
@@ -430,7 +429,8 @@ public class RemoteStuditModelAccess {
    *                          json-parsing error.
    */
   public Comment getCommentById(String fagkode, int id) throws ApiCallException {
-    HttpResponse<String> response = newGetRequest(null, "courses", fagkode, "discussion", "comment", String.valueOf(id));
+    HttpResponse<String> response = newGetRequest(null, "courses", fagkode, "discussion", "comment",
+        String.valueOf(id));
 
     if (response.statusCode() == Status.NOT_FOUND.get()) {
       throw new ApiCallException("Error -> comment with id '" + id + "' not found'");
@@ -522,24 +522,27 @@ public class RemoteStuditModelAccess {
   }
 
   /**
+   * Set test param.
+   * 
    * @param test set to true to disable error print.
    */
   public void setTest(boolean test) {
     this.test = test;
   }
 
-}
+  enum Status {
+    OK(200), ACCEPTED(202), NO_CONTENT(204), BAD_REQUEST(400), UNAUTHORIZED(401), NOT_FOUND(404), FORBIDDEN(405),
+    SERVER_ERROR(500);
 
-enum Status {
-  OK(200), ACCEPTED(202), NO_CONTENT(204), BAD_REQUEST(400), UNAUTHORIZED(401), NOT_FOUND(404), FORBIDDEN(405), SERVER_ERROR(500);
+    private int code;
 
-  private int code;
+    private Status(int code) {
+      this.code = code;
+    }
 
-  private Status(int code) {
-    this.code = code;
+    public int get() {
+      return this.code;
+    }
   }
 
-  public int get() {
-    return this.code;
-  }
 }

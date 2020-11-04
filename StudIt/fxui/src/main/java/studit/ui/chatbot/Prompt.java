@@ -69,7 +69,7 @@ public class Prompt {
       }
     }
 
-    // Make sure all commands are disable if the ListView is not updated (does not perform isClicked
+    // Make sure all commands are disabled if the ListView is not updated (does not perform isClicked
     // check)
     for (Hyperlink command : commands) {
       command.setOnAction(null);

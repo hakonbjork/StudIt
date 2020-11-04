@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.Discussion;
 
@@ -63,7 +62,7 @@ public class DiscussionResource {
 
     if (comment == null) {
       LOG.debug("Requested comment with id'" + id + "' does not exist");
-      return Response.status(Status.NOT_FOUND).entity("Comment with id '" + id +"' doesn't exist").build();
+      return Response.status(Status.NOT_FOUND).entity("Comment with id '" + id + "' doesn't exist").build();
     }
 
     return Response.ok(comment, MediaType.APPLICATION_JSON).build();

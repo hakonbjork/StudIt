@@ -6,7 +6,6 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-
 import studit.core.StuditModel;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;

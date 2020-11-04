@@ -67,7 +67,7 @@ public class CourseListResource {
   }
 
   /**
-   * Handles discussion request, and pass it over to the DiscussionResource class
+   * Handles discussion request, and pass it over to the DiscussionResource class.
    * 
    * @param fagkode fagkode of the requested discussion
    * @return DiscussionResource if fagkode exists, otherwise null;

@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
-
 import studit.core.StuditModel;
 import studit.json.StuditPersistence;
 import studit.restapi.StuditService;
@@ -42,7 +41,7 @@ public class StuditConfig extends ResourceConfig {
   }
 
   /**
-   * This is used exclusively for testing and initializing a default model
+   * This is used exclusively for testing and initializing a default model.
    * @param path test path
    */
   public StuditConfig(String path) {
