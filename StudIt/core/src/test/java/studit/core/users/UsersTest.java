@@ -45,7 +45,7 @@ public class UsersTest {
   @Test
   public void addUserFailEmail() {
     String[] s = u.addUser("name", "username", "mail", "password");
-    assertEquals("-3", s[2]);
+    assertEquals("-4", s[2]);
   }
 
   @Test

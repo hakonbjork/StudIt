@@ -106,8 +106,8 @@ public class DirectStuditModelAccessTest {
     assertNull(response[0]);
     assertEquals("Success", response[1]);
 
-    defaultModel.getUsers().changeUsername(0, "Berte92");
-    String[] response2 = directModel.changeUsername(0, "Berte92");
+    defaultModel.getUsers().changeUsername(0, "IdaErBest");
+    String[] response2 = directModel.changeUsername(0, "IdaErBest");
     compareUsers(defaultModel.getUsers(), directModel.getUsers());
     assertNotNull(response2[0]);
     assertNotNull(response2[1]);
