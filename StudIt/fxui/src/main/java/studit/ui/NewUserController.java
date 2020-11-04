@@ -46,10 +46,10 @@ public class NewUserController {
     String mail = mailField.getText();
     String password = userPasswordField.getText();
     String[] wut = remote.addUser(name, username, mail, password);
-    
-    //Løkken under er bare for testing, kan tas bort i ferdig implementasjon 
-    for (int i =0; i < wut.length; i++) {
-      System.out.println("i: "+i + ", message \"" + wut[i] + "\"");
+
+    // Løkken under er bare for testing, kan tas bort i ferdig implementasjon
+    for (int i = 0; i < wut.length; i++) {
+      System.out.println("i: " + i + ", message \"" + wut[i] + "\"");
     }
     if (wut[0] != null) {
       infoTextField.setText(wut[0]);

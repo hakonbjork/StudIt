@@ -1,20 +1,18 @@
 package studit.ui;
 
-import javafx.fxml.FXML;
+import java.util.List;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import studit.core.mainpage.Comment;
-import javafx.scene.layout.BorderPane; 
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.geometry.Insets;
+import studit.core.mainpage.Comment;
+import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
-import java.util.List;
-import studit.core.mainpage.CourseItem;
-import studit.core.mainpage.Comment;
 
 public class CommentListCell extends BorderPane {
 
@@ -94,7 +92,7 @@ public class CommentListCell extends BorderPane {
   }
 
   /**
-   * Updates the commentListCellView
+   * Updates the commentListCellView.
    */
   public void updateView() {
     header.setTitle(this.comment.getBrukernavn());
@@ -106,7 +104,7 @@ public class CommentListCell extends BorderPane {
   /**
    * The Class Header.
    */
-  static private class Header extends AnchorPane {
+  static class Header extends AnchorPane {
 
     private Text title = new Text();
     private Text date = new Text();
@@ -142,7 +140,7 @@ public class CommentListCell extends BorderPane {
     }
 
     /**
-     * Sets the date
+     * Sets the date.
      *
      * @param date date
      */
@@ -155,7 +153,7 @@ public class CommentListCell extends BorderPane {
   /**
    * The Class Body.
    */
-  static private class Body extends VBox {
+  static class Body extends VBox {
 
     private Text comment = new Text();
     private Text upvotes = new Text();
@@ -174,7 +172,7 @@ public class CommentListCell extends BorderPane {
     }
 
     /**
-     * Sets the comment
+     * Sets the comment.
      *
      * @param comment the new description
      */
@@ -183,7 +181,7 @@ public class CommentListCell extends BorderPane {
     }
 
     /**
-     * Sets upvotes
+     * Sets upvotes.
      *
      * @param amount amount of upvotes
      */
