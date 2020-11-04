@@ -33,6 +33,7 @@ public class DiscussionController implements Initializable {
 
   private User currentUser;
 
+  @FXML
   private BorderPane rootPane;
 
   @FXML
