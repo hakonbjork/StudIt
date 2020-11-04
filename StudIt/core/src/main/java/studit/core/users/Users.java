@@ -137,7 +137,7 @@ public class Users {
       return "'" + newUsername + "' is not unique";
     }
 
-    userToModify.setName(newUsername);
+    userToModify.setUsername(newUsername);
     return null;
   }
 

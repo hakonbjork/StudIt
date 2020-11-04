@@ -1,10 +1,7 @@
 package studit.ui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -13,8 +10,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import studit.ui.remote.RemoteStuditModelAccess;
 
-public class LoginController implements Initializable {
+public class LoginController {
 
   @FXML
   PasswordField passwordField;
@@ -33,19 +31,18 @@ public class LoginController implements Initializable {
   @FXML
   Text loginInfoText;
 
-  public LoginController() {
-  }
+  private RemoteStuditModelAccess remote;
 
   /**
-   * Initializes the UserManager database with usernames and passwords.
+   * The constrcutur sets up a remote, to call methods from RemoteStuditModelAccess
+   * Frontend needs this class to connect to API/backend.
    */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    studit.core.users.UserManager.startStuff();
+  public LoginController() {
+    this.remote = new RemoteStuditModelAccess();
   }
 
   /**
-   * Method to register new user.
+   * Method to register new user. Loads new window: "Newuser.fxml"
    * 
    */
   public void registerUser() {
@@ -65,7 +62,7 @@ public class LoginController implements Initializable {
    * Checks if email is registered, sends password to user if it is
    */
   public void forgotPassword() {
-    // code
+    // TODO: This.
   }
 
   /**
@@ -75,12 +72,12 @@ public class LoginController implements Initializable {
   public void loginButtonAction() throws Exception {
     String username = usernameField.getText();
     String password = passwordField.getText();
-    if (studit.core.users.LoginManager.match(username, password)) {
+    if (remote.authenticateLogin(username, password)) {
       loginInfoText.setText("");
       BorderPane pane = FXMLLoader.load(getClass().getResource("App.fxml"));
       Scene scene = new Scene(pane);
-      // scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
-      // The line above works in gitpod, but not in IDEA
+      //scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
+      //TODO: trenger vi linjen over?
       Stage stage = new Stage();
       stage.setScene(scene);
       stage.setTitle("StudIt");

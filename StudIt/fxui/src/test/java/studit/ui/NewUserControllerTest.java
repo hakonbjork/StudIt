@@ -23,14 +23,14 @@ public class NewUserControllerTest extends ApplicationTest {
     stage.show();
   }
 
- // @Test
- //public void testSaveNewUserAction() {
- //   User user = new User("Ola Halvorsen", "olahalla", "ola.halvorsen@gmail.com", "olala");
- //   UserManager.addUser(user);
- //   writeNewUserFields();
- //   clickOn("#saveNewUserButton");
- //   assertTrue(controller.infoTextField.getText().equals("Error: This username is already taken"));
- // }
+  // @Test
+  // public void testSaveNewUserAction() {
+  //   User user = new User("Ola Halvorsen", "olahalla", "ola.halvorsen@gmail.com", "olala");
+  //   UserManager.addUser(user);
+  //   writeNewUserFields();
+  //   clickOn("#saveNewUserButton");
+  //   assertTrue(controller.infoTextField.getText().equals("Error: This username is already taken"));
+  // }
 
   //TODO denne feila
   //public void writeNewUserFields() {
