@@ -28,11 +28,10 @@ public class DiscussionController implements Initializable {
 
   RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
- 
   private User currentUser;
-
+  
+  @FXML
   private BorderPane rootPane;
-
   @FXML
   private Button information_btn;
   @FXML
