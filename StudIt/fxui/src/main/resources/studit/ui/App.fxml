@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="rootPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" stylesheets="@gr2060/StudIt/src/main/resources/studit/ui/mainPage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.AppController">
+<BorderPane id="rootPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.AppController">
    <top>
       <HBox prefHeight="92.0" prefWidth="1280.0">
          <children>
@@ -45,7 +45,7 @@
                                           <Image url="@gr2060/StudIt/src/main/resources/studit/icons/search.png" />
                                        </image>
                                     </ImageView>
-                                    <TextField id="searchField" fx:id="searchViewAction" prefHeight="57.0" prefWidth="1050.0" promptText="Søk på fag" style="-fx-background-color: white;">
+                                    <TextField id="searchField" fx:id="searchField" onAction="#handleSearchFieldAction" prefHeight="57.0" prefWidth="1050.0" promptText="Søk på fag" style="-fx-background-color: white;">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -134,11 +134,6 @@
                      <VBox.margin>
                         <Insets left="1.0" />
                      </VBox.margin>
-                  </Button>
-                  <Button id="editUser_btn" fx:id="editUser_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleEditUser" prefHeight="59.0" prefWidth="267.0" text="Rediger bruker" textAlignment="CENTER" textFill="#888889">
-                     <font>
-                        <Font name="Avenir Next Bold" size="18.0" />
-                     </font>
                   </Button>
                   <Button id="logout_btn" fx:id="logoutAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="79.0" prefWidth="253.0" text="Logg ut" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
                      <font>
