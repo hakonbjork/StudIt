@@ -23,33 +23,48 @@ import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
+import studit.ui.CommentListCell;
+import studit.core.mainpage.CourseItem;
+import studit.core.users.User;
+import java.util.*; 
+
 
 public class DiscussionController implements Initializable {
 
   RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
   private User currentUser;
-  
+
   @FXML
   private BorderPane rootPane;
+
   @FXML
   private Button information_btn;
+
   @FXML
   private Button forum_btn;
+
   @FXML
   private Label fagkode;
+
   @FXML
   private Label fagnavn;
+
   @FXML
   private Button mainPageAction;
+
   @FXML
   private Button chatbot_btn;
+
   @FXML
   private Button logoutAction;
+
   @FXML
   private TextField newPostInputField;
+
   @FXML
   private Button handleAddNewPost;
+
   @FXML
   private ListView<Comment> forumList;
 
@@ -75,8 +90,6 @@ public class DiscussionController implements Initializable {
     } catch (ApiCallException e) {
       e.printStackTrace();
     }
-  
-  
   }
 
   public void updateView(){
@@ -140,6 +153,12 @@ public class DiscussionController implements Initializable {
     }
   }
 
+  //TODO skal denne være her?
+  @FXML
+  void handleNtnuAction(ActionEvent event) {
+
+  }
+
   /**
    * Opens Chatbot.
    */
@@ -183,6 +202,8 @@ public class DiscussionController implements Initializable {
 
   public void loadView(){
 
+    listView.clear();
+
     if(this.courseItem.getDiskusjon() != null){
 
       this.fagnavn.setText(this.courseItem.getFagnavn());
@@ -191,37 +212,30 @@ public class DiscussionController implements Initializable {
 
       for (Comment comment : this.courseItem.getDiskusjon().getComments().values()) {
 
-      listView.add(comment);
-    
-      }
+        listView.add(comment);
 
-      if (!listView.isEmpty()) {
+      }      
 
-          forumList.setItems(listView);
+      forumList.setItems(listView);
 
-          forumList.setCellFactory(param -> new ListCell<Comment>() {
+      forumList.setCellFactory(param -> new ListCell<Comment>() {
 
-			    private CommentListCell commentListCell;
+			private CommentListCell commentListCell;
 			
-			    @Override
-			    public void updateItem(Comment comment, boolean empty) {
-				    super.updateItem(comment, empty);
-				    if(empty) {
-					    setText(null);
-					    setGraphic(null);
-					  return;
-				  }
-            commentListCell = new CommentListCell(comment, currentUser, courseItem);
+			@Override
+			public void updateItem(Comment comment, boolean empty) {
+				super.updateItem(comment, empty);
+				if(empty) {
+					setText(null);
+					setGraphic(null);
+				return;
+			}
+        commentListCell = new CommentListCell(comment, currentUser, courseItem);
             
-				    setGraphic(commentListCell);
-			    }
-        });
-        
-      } else {
-
-        System.out.println("faile med listcell");
-
-      }
+				setGraphic(commentListCell);
+			}
+     });
+     
   
     } else{
 
@@ -237,5 +251,4 @@ public void setCurrentUser(User user){
 }
 
   
-
 

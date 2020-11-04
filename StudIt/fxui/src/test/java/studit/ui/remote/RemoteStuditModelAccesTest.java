@@ -41,7 +41,7 @@ public class RemoteStuditModelAccesTest {
 
     remoteModel = new RemoteStuditModelAccess();
     remoteModel.setTest(false);
-    assertTrue(remoteModel.ping());
+    assertFalse(remoteModel.ping());
   }
 
   /**
