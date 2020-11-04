@@ -1,6 +1,5 @@
 package studit.ui;
 
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -37,19 +36,19 @@ public class AppController {
       "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
   @FXML
-    private BorderPane rootPane;
+  private BorderPane rootPane;
 
-    @FXML
-    private TextField searchField;
+  @FXML
+  private TextField searchField;
 
-    @FXML
-    private ListView<String> coursesList;
+  @FXML
+  private ListView<String> coursesList;
 
-    @FXML
-    private Button chatbot_btn;
+  @FXML
+  private Button chatbot_btn;
 
-    @FXML
-    private Button logoutAction;
+  @FXML
+  private Button logoutAction;
 
   static Chatbot chatbot = null;
   private ObservableList<String> list = FXCollections.observableArrayList();
@@ -120,8 +119,28 @@ public class AppController {
 
     SortedList<String> sortedData = new SortedList<>(filteredData);
     coursesList.setItems(sortedData);
+
+    // coursesList.setCellFactory(new Callback<ListView<String>, ListCell<String>>()
+    // {
+    // @Override
+    // public ListCell<String> call(ListView<String> list) {
+    // return new ListCell<String>() {
+    // @Override
+    // protected void updateItem(String t, boolean bln) {
+    // super.updateItem(t, bln);
+    // if (t == null) {
+    // setGraphic(null);
+    // setText(null);
+    // } else {
+    // setGraphic(imageView);
+    // setText(t.getName());
+    // }
+    // }
+
+    // };
+    // }
+    // });
   }
-  
 
   /**
    * Opens chatbot.
@@ -163,7 +182,6 @@ public class AppController {
       System.out.println(e);
     }
   }
-
 
   /**
    * A function that does something when an element in the listview is clicked on.
