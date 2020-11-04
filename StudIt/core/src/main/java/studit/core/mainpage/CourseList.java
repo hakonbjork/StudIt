@@ -54,6 +54,11 @@ public class CourseList implements Iterable<CourseItem> {
     return items;
   }
 
+  /**
+   * Get CourseItem by its fagkode.
+   * @param fagkode fagkode of the requested course.
+   * @return CourseItem if it exists, otherwise null.
+   */
   public CourseItem getCourseByFagkode(String fagkode) {
     for (CourseItem item : items) {
       if (item.getFagkode().equals(fagkode)) {
@@ -61,6 +66,18 @@ public class CourseList implements Iterable<CourseItem> {
       }
     }
     return null;
+  }
+
+  /**
+   * Get a list on the form [fagkode, fagnavn].
+   * @return List of String arrays where String[0] = fagkode & String[1] = fagnavn.
+   */
+  public List<String[]> getCourseNameList() {
+    List<String[]> courseNameList = new ArrayList<>();
+    for (CourseItem item : items) {
+      courseNameList.add(new String[] {item.getFagkode(), item.getFagnavn()});
+    }
+    return courseNameList;
   }
 
 }
