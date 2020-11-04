@@ -23,45 +23,34 @@ import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
-import studit.ui.CommentListCell;
-import studit.core.mainpage.CourseItem;
-import studit.core.users.User;
 
 public class DiscussionController implements Initializable {
 
   RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
+ 
   private User currentUser;
 
   private BorderPane rootPane;
 
   @FXML
   private Button information_btn;
-
   @FXML
   private Button forum_btn;
-
   @FXML
   private Label fagkode;
-
   @FXML
   private Label fagnavn;
-
   @FXML
   private Button mainPageAction;
-
   @FXML
   private Button chatbot_btn;
-
   @FXML
   private Button logoutAction;
-
   @FXML
   private TextField newPostInputField;
-
   @FXML
   private Button handleAddNewPost;
-
   @FXML
   private ListView<Comment> forumList;
 
@@ -150,12 +139,6 @@ public class DiscussionController implements Initializable {
     } catch (IOException e) {
       System.out.println(e);
     }
-  }
-
-  //TODO skal denne være her?
-  @FXML
-  void handleNtnuAction(ActionEvent event) {
-
   }
 
   /**

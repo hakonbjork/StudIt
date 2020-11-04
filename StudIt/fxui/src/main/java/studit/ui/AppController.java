@@ -1,19 +1,9 @@
 package studit.ui;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import com.google.common.base.Predicate;
-
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,21 +16,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import studit.core.chatbot.Chatbot;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
-import studit.json.CoursePersistence;
 import studit.ui.remote.ApiCallException;
 import studit.core.users.User;
 import studit.ui.remote.RemoteStuditModelAccess;
@@ -53,32 +37,19 @@ public class AppController {
       "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
   @FXML
-  private ListView<String> coursesList;
-  @FXML
-  private Button mainPageAction;
-  @FXML
-  private Button openChatBot;
-  @FXML
-  private Button ntnuAction;
-  @FXML
-  private Button logoutAction;
-  @FXML
-  public BorderPane rootPane;
-  @FXML
-  private AnchorPane mainPane;
-  @FXML
-  private TextField searchField;
-  @FXML
-  private Button mainPage_btn;
-  @FXML
-  private Button chatbot_btn;
-  @FXML
-  private Button ntnu_btn;
-  @FXML
-  private Button logout_btn;
+    private BorderPane rootPane;
 
-  @FXML
-  private Button discussion_btn;
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private ListView<String> coursesList;
+
+    @FXML
+    private Button chatbot_btn;
+
+    @FXML
+    private Button logoutAction;
 
   static Chatbot chatbot = null;
   private ObservableList<String> list = FXCollections.observableArrayList();
@@ -117,39 +88,40 @@ public class AppController {
     mouseClicked();
   }
 
-  // /**
-  //  * Function to search for subjects. The listview will then only show subjects
-  //  * with the letters in the search field.
-  //  */
-  // @FXML
-  // public void handleSearchViewAction() {
-  //   // Wrap the ObservableList in a FilteredList (initially display all data).
-  //   FilteredList<String> filteredData = new FilteredList<>(this.getData(), (p -> true));
+  /**
+   * Function to search for subjects. The listview will then only show subjects
+   * with the letters in the search field.
+   */
+  @FXML
+  public void handleSearchFieldAction() {
+    // Wrap the ObservableList in a FilteredList (initially display all data).
+    FilteredList<String> filteredData = new FilteredList<>(this.getData(), (p -> true));
 
-  //   // Set the filter Predicate whenever the filter changes.
-  //   searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-  //     filteredData.setPredicate(courseItem -> {
-  //       // If filter text is empty, display all persons.
-  //       if (newValue == null || newValue.isEmpty()) {
-  //         return true;
-  //       }
-  //       // Compare course name and course code of every CourseItem with the filter text.
-  //       String lowerCaseFilter = newValue.toLowerCase();
+    // Set the filter Predicate whenever the filter changes.
+    searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+      filteredData.setPredicate(courseItem -> {
+        // If filter text is empty, display all persons.
+        if (newValue == null || newValue.isEmpty()) {
+          return true;
+        }
+        // Compare course name and course code of every CourseItem with the filter text.
+        String lowerCaseFilter = newValue.toLowerCase();
 
-  //       if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
-  //         return true; // filter matches course name
+        if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
+          return true; // filter matches course name
 
-  //         // } else if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
-  //         // return true; // filter matches course code
+          // } else if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
+          // return true; // filter matches course code
 
-  //       }
-  //       return false; // Does not match
-  //     });
-  //   });
+        }
+        return false; // Does not match
+      });
+    });
 
-  //   SortedList<String> sortedData = new SortedList<>(filteredData);
-  //   coursesList.setItems(sortedData);
-  // }
+    SortedList<String> sortedData = new SortedList<>(filteredData);
+    coursesList.setItems(sortedData);
+  }
+  
 
   /**
    * Opens chatbot.
