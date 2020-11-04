@@ -109,9 +109,6 @@ public class AppController {
         if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
           return true; // filter matches course name
 
-          // } else if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
-          // return true; // filter matches course code
-
         }
         return false; // Does not match
       });
@@ -119,27 +116,6 @@ public class AppController {
 
     SortedList<String> sortedData = new SortedList<>(filteredData);
     coursesList.setItems(sortedData);
-
-    // coursesList.setCellFactory(new Callback<ListView<String>, ListCell<String>>()
-    // {
-    // @Override
-    // public ListCell<String> call(ListView<String> list) {
-    // return new ListCell<String>() {
-    // @Override
-    // protected void updateItem(String t, boolean bln) {
-    // super.updateItem(t, bln);
-    // if (t == null) {
-    // setGraphic(null);
-    // setText(null);
-    // } else {
-    // setGraphic(imageView);
-    // setText(t.getName());
-    // }
-    // }
-
-    // };
-    // }
-    // });
   }
 
   /**
