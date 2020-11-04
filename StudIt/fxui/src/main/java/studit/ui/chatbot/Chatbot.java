@@ -1,6 +1,7 @@
 package studit.ui.chatbot;
 
 import java.io.IOException;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,6 +10,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import studit.core.chatbot.ChatbotManager;
 import studit.core.chatbot.Response;
+import studit.core.mainpage.CourseList;
+import studit.ui.remote.ApiCallException;
+import studit.ui.remote.RemoteStuditModelAccess;
 
 public class Chatbot {
 
@@ -17,7 +21,13 @@ public class Chatbot {
 
   public Chatbot() {
     displayWindow();
-    chatbotManager = new ChatbotManager();
+    RemoteStuditModelAccess remoteAccess = new RemoteStuditModelAccess();
+    try {
+      CourseList courseList = remoteAccess.getCourseList();
+      chatbotManager = new ChatbotManager(courseList.getCourseNameList());
+    } catch (ApiCallException e) {
+      e.printStackTrace();
+    }
   }
 
   /*
@@ -30,12 +40,12 @@ public class Chatbot {
       chatStage = new Stage();
       Scene scene = new Scene(root);
 
-      // Setting the background to be transparent, so we can create rounded corners in our css file
+      // Setting the background to be transparent, so we can create rounded corners in
+      // our css file
       chatStage.initStyle(StageStyle.TRANSPARENT);
       scene.setFill(Color.TRANSPARENT);
 
-      scene.getStylesheets()
-          .setAll(getClass().getResource("/studit/ui/chatbot.css").toExternalForm());
+      scene.getStylesheets().setAll(getClass().getResource("/studit/ui/chatbot.css").toExternalForm());
       chatStage.setScene(scene);
       chatStage.setTitle("Chatbot");
       chatStage.show();
@@ -45,7 +55,7 @@ public class Chatbot {
     } catch (NullPointerException e) {
       // Doing this to prevent testing errors
     }
-    
+
   }
 
   public void show() {
