@@ -122,7 +122,7 @@
                         <Insets />
                     </VBox.margin>
                 </Button>
-                <Button id="ntnu_btn" fx:id="ntnuAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleNtnuAction" prefHeight="84.0" prefWidth="318.0" text="NTNU" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
+                <Button id="ntnu_btn" fx:id="ntnuAction" minHeight="-Infinity" mnemonicParsing="false" prefHeight="84.0" prefWidth="318.0" text="NTNU" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
                     <font>
                         <Font name="Avenir Next Bold" size="24.0" />
                     </font>

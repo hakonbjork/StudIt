@@ -1,15 +1,10 @@
 package studit.ui;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,26 +13,29 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
-import studit.json.CoursePersistence;
 import studit.ui.chatbot.Chatbot;
+import studit.ui.remote.ApiCallException;
+import studit.core.users.User;
+import studit.ui.remote.RemoteStuditModelAccess;
 
 public class AppController {
 
+  private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
+
+  private User user = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com",
+      "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
+
   @FXML
-  private ListView<CourseItem> coursesList;
+  private ListView<String> coursesList;
   @FXML
   private Button mainPageAction;
   @FXML
@@ -61,14 +59,15 @@ public class AppController {
   @FXML
   private Button logout_btn;
 
-  @FXML 
+  @FXML
   private Button discussion_btn;
 
   private static Chatbot chatbot = null;
-  private ObservableList<CourseItem> list = FXCollections.observableArrayList();
+  // private ObservableList<CourseItem> list =
+  // FXCollections.observableArrayList();
+  private ObservableList<String> list = FXCollections.observableArrayList();
   private List<CourseItem> courseList;
   private String label;
-  private CoursePersistence coursePersistence = new CoursePersistence();
 
   public void setLabel(String label) {
     this.label = label;
@@ -86,10 +85,16 @@ public class AppController {
     chatbot = new Chatbot();
   }
 
+  public void addUser(User user) {
+    this.user = user;
+  }
+
   /**
    * Function to initialize AppController.
+   * 
+   * @throws ApiCallException
    */
-  public void initialize() {
+  public void initialize() throws ApiCallException {
     loadData();
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     // Actions on clicked list item
@@ -103,63 +108,15 @@ public class AppController {
     // filterCoursesList((String) oldValue, (String) newValue);
     // }
     // });
+
   }
 
-  /**
-   * Function to search for subjects. The listview will then only show subjects
-   * with the letters in the search field.
-   */
-  @FXML
-  public void handleSearchViewAction() {
-    // Wrap the ObservableList in a FilteredList (initially display all data).
-    FilteredList<CourseItem> filteredData = new FilteredList<>(getData(), p -> true);
+  // /**
+  // * Function to search for subjects. The listview will then only show subjects
+  // * with the letters in the search field.
+  // */
+  public void search(String newValue) {
 
-    // Set the filter Predicate whenever the filter changes.
-    searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-      filteredData.setPredicate(courseItem -> {
-        // If filter text is empty, display all persons.
-        if (newValue == null || newValue.isEmpty()) {
-          return true;
-        }
-
-        // Compare course name and course code of every CourseItem with the filter text.
-        String lowerCaseFilter = newValue.toLowerCase();
-
-        if (courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter)) {
-          return true; // filter matches course name
-        } else if (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter)) {
-          return true; // filter matches course code
-        }
-        return false; // Does not match
-      });
-    });
-
-    // Wrap the FilteredList in a SortedList.
-    SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
-
-    // put the sorted list into the listview
-    coursesList.setItems(sortedData);
-
-    coursesList.setCellFactory(new Callback<ListView<CourseItem>, ListCell<CourseItem>>() {
-      @Override
-      public ListCell<CourseItem> call(ListView<CourseItem> param) {
-        final Label leadLbl = new Label();
-        final Tooltip tooltip = new Tooltip();
-        final ListCell<CourseItem> cell = new ListCell<CourseItem>() {
-          @Override
-          public void updateItem(CourseItem item, boolean empty) {
-            super.updateItem(item, empty);
-            if (item != null) {
-              leadLbl.setText(item.getFagkode());
-              setText(item.getFagnavn() + " " + item.getFagnavn());
-              tooltip.setText(item.getFagkode());
-              setTooltip(tooltip);
-            }
-          }
-        };
-        return cell;
-      }
-    });
   }
 
   /**
@@ -179,17 +136,6 @@ public class AppController {
    */
   public static void closeChatbot() {
     chatbot = null;
-  }
-
-  /**
-   * Should give the option to go to the subjects web-page.
-   */
-  @FXML
-  void handleNtnuAction(ActionEvent event) {
-
-    // go to NTNU homepage (question if you want to open web-browser)?
-    // or a new window with information about NTNU?
-
   }
 
   /**
@@ -233,36 +179,33 @@ public class AppController {
       @Override
       public void handle(MouseEvent arg0) {
         // System.out.println((coursesList.getSelectionModel().getSelectedItem()));
-        setLabel(coursesList.getSelectionModel().getSelectedItem().getFagnavn());
+        setLabel(coursesList.getSelectionModel().getSelectedItem());
 
         try {
           Stage primaryStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();
 
-          FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
-          Parent mainPane = mainLoader.load();
-          Scene mainScene = new Scene(mainPane);
+          // FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
+          // Parent mainPane = mainLoader.load();
+          // Scene mainScene = new Scene(mainPane);
 
           // getting loader and a pane for the second scene.
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
           Parent coursePane = courseLoader.load();
           Scene courseScene = new Scene(coursePane);
-  
 
           // injecting first scene into the controller of the second scene
           CourseController courseController = (CourseController) courseLoader.getController();
-          courseController.setMainScene(mainScene);
+          // courseController.setMainScene(mainScene);
 
-          //TODO fikse undermetoden slik at det blir riktig med ny oppdatering
-  
           // injecting second scene into the controller of the first scene
-          //CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem().getFagnavn());
-          //courseController.setCourseText(courseItem.getInformasjon());
-          //courseController.setLabel(coursesList.getSelectionModel().getSelectedItem().getFagnavn().substring(0, 8));
+          CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
+          courseController.setCourseItem(courseItem);
+          courseController.setCurrentUser(user);
+          courseController.updateView();
 
           primaryStage.setScene(courseScene);
           primaryStage.setTitle("StudIt");
           primaryStage.show();
-
 
         } catch (Exception e) {
           System.out.println(e);
@@ -270,7 +213,6 @@ public class AppController {
       }
     });
   }
-
 
   private CourseItem findCourseItem(String name) {
     for (CourseItem courseItem : this.courseList) {
@@ -284,31 +226,23 @@ public class AppController {
   /**
    * This function should actually fetch data from a database. This will be
    * implemented later.
+   * 
+   * @throws ApiCallException
    */
-  private void loadData() {
+  private void loadData() throws ApiCallException {
 
-    try (FileReader fr = new FileReader("src/main/resources/studit/db/db.json", StandardCharsets.UTF_8)) {
+    CourseList li = remoteStuditModelAccess.getCourseList();
 
-      CourseList li = coursePersistence.readCourseList(fr);
+    Collection<CourseItem> items = li.getCourseItems();
+    this.courseList = (List<CourseItem>) items;
 
-      // System.out.println(li.getCourseItems().size());
+    // System.out.println(items.size());
 
-      Collection<CourseItem> items = li.getCourseItems();
-      this.courseList = (List<CourseItem>) items;
-
-      // System.out.println(items.size());
-
-      for (CourseItem c : items) {
-        this.list.add(c);
-      }
-
-      this.coursesList.setItems(this.list);
-
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
+    for (CourseItem c : items) {
+      this.list.add(c.getFagnavn());
     }
+
+    this.coursesList.setItems(this.list);
 
   }
 
@@ -317,8 +251,8 @@ public class AppController {
    * 
    * @return list;
    */
-  public ObservableList<CourseItem> getData() {
-    return (ObservableList<CourseItem>) list;
+  public ObservableList<String> getData() {
+    return (ObservableList<String>) list;
   }
 
 }
