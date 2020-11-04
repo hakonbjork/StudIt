@@ -115,8 +115,6 @@ public class CourseController implements Initializable {
 
   /**
    * Function to set the label - the name of the subject on the top of the page.
-   * 
-   * @param label the label to set
    */
 
   @FXML
