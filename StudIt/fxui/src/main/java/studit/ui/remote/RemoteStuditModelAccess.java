@@ -10,10 +10,8 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import studit.core.StuditModel;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
