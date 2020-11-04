@@ -14,7 +14,7 @@ public class CommandManager {
     switch (match) {
       case "avslutt":
         addition = "Er du sikker på at du vil avslutte samtalen?";
-        response.prompt = List.of(new String[] {"ja", "exit"}, new String[] {"nei", "regret"});
+        response.setPrompt(List.of(new String[] {"ja", "exit"}, new String[] {"nei", "regret"}));
         break;
       case "hade":
         addition = "Jeg håper jeg kunne være til hjelp! Takk for samtalen.";

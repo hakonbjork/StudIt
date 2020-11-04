@@ -12,10 +12,12 @@ public class ChatbotManager {
 
   private KeywordLinker linker;
   private CommandManager cmg;
+  //private DataMatcher dataMatcher;
 
   public ChatbotManager() {
     writeDefaultCommandsToDb();
     linker = new KeywordLinker(loadJson("keywordLinks.json"));
+    //dataMatcher = new DataMatcher(linker.getRecognizedWordsList());
     cmg = new CommandManager();
   }
 
@@ -38,19 +40,14 @@ public class ChatbotManager {
       if (match.precedence == nextPrecedence) {
         if (match.match >= 1.0) {
           cmg.executeCommand(match.command, response);
+          //response.setDataMatch(match.dataMatch);
         }
         nextPrecedence += 1;
       }
       // System.out.println(match);
     }
 
-    if (response.prompt != null) {
-      // Add this check to prevent spotbug, as functionallity is not fully implemented yet.
-    }
-
-    // System.out.println(response.prompt);
-
-    if (response.response.length() == 0) {
+    if (response.getResponse().length() == 0) {
       response.add(
           "Jeg beklager, men det forstod jeg ikke helt. Prøv å formulere setningen på en annen måte");
     }

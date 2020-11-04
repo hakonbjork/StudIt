@@ -1,44 +1,27 @@
 package studit.core.chatbot;
 
-import static studit.core.Commons.contains;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class DataMatcher {
 
-  private List<String> matchCandidates;
+  private List<String> wordsToExclude;
 
-  public DataMatcher(String dataMatch, String[] words, String[] wordsToExclude) {
-    matchCandidates = new ArrayList<>();
-    for (String word : words) {
-      if (!contains(wordsToExclude, word)) {
-        matchCandidates.add(word);
-      }
-    }
-
+  public DataMatcher(List<String> wordsToExclude) {
+    this.wordsToExclude = wordsToExclude;
   }
 
-  public String findMatch() {
-    return null;
-  }
-
-  /**
-   * Get macth candidate.
-   * 
-   * @return the matchCandidates.
+  /** Get words to exclude.
+   * @return the wordsToExclude
    */
-  public List<String> getMatchCandidates() {
-    return matchCandidates;
+  public List<String> getWordsToExclude() {
+    return wordsToExclude;
   }
 
-  /**
-   * Set match candidate.
-   * 
-   * @param matchCandidates the matchCandidates to set
+  /** Set words to exclude.
+   * @param wordsToExclude the wordsToExclude to set
    */
-  public void setMatchCandidates(List<String> matchCandidates) {
-    this.matchCandidates = matchCandidates;
+  public void setWordsToExclude(List<String> wordsToExclude) {
+    this.wordsToExclude = wordsToExclude;
   }
 
 }

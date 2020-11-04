@@ -16,7 +16,7 @@ public class ChatbotManagerTest {
 
   @Test
   public void testManageInput() {
-    assertEquals(chatbotManager.manageInput("Hei!").response, "Hei! ");
+    assertEquals(chatbotManager.manageInput("Hei!").getResponse(), "Hei! ");
   }
 
 }

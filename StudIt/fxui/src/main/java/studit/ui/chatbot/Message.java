@@ -11,8 +11,8 @@ public class Message {
   private boolean clicked;
 
   public Message(Response response, String user) {
-    this.text = response.response;
-    this.prompt = response.prompt;
+    this.text = response.getResponse();
+    this.prompt = response.getPrompt();
     this.user = user;
     this.clicked = false;
   }

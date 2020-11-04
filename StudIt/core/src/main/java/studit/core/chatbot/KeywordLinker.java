@@ -88,6 +88,10 @@ public class KeywordLinker {
     return recognizedWords;
   }
 
+  public List<String> getRecognizedWordsList() {
+    return new ArrayList<String>(recognizedWords.values());
+  }
+
   /**
    * Iterates over recognized words in our vocabulary and finds the closest match.
    * 

@@ -17,7 +17,7 @@ public class CommandManagerTest {
   public void testExecuteCommand() {
     Response response = new Response();
     cm.executeCommand("hils", response);
-    assertEquals(response.response, "Hei! ");
+    assertEquals(response.getResponse(), "Hei! ");
   }
 
 }
