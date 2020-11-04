@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,7 +19,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.mainpage.CourseItem;
@@ -35,32 +36,19 @@ public class AppController {
       "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
   @FXML
-  private ListView<String> coursesList;
-  @FXML
-  private Button mainPageAction;
-  @FXML
-  private Button openChatBot;
-  @FXML
-  private Button ntnuAction;
-  @FXML
-  private Button logoutAction;
-  @FXML
-  public BorderPane rootPane;
-  @FXML
-  private AnchorPane mainPane;
-  @FXML
-  private TextField searchField;
-  @FXML
-  private Button mainPage_btn;
-  @FXML
-  private Button chatbot_btn;
-  @FXML
-  private Button ntnu_btn;
-  @FXML
-  private Button logout_btn;
+  private BorderPane rootPane;
 
   @FXML
-  private Button discussion_btn;
+  private TextField searchField;
+
+  @FXML
+  private ListView<String> coursesList;
+
+  @FXML
+  private Button chatbot_btn;
+
+  @FXML
+  private Button logoutAction;
 
   private static Chatbot chatbot = null;
   // private ObservableList<CourseItem> list =
@@ -99,24 +87,37 @@ public class AppController {
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     // Actions on clicked list item
     mouseClicked();
-    // searchField.textProperty().addListener(new
-    // ChangeListener<String>.changed(ObservableValue<? extends String>, String,
-    // String) {
-    // @Override
-    // public void changed(ObservableValue observable, Object oldValue, Object
-    // newValue) {
-    // filterCoursesList((String) oldValue, (String) newValue);
-    // }
-    // });
-
   }
 
-  // /**
-  // * Function to search for subjects. The listview will then only show subjects
-  // * with the letters in the search field.
-  // */
-  public void search(String newValue) {
+  /**
+   * Function to search for subjects. The listview will then only show subjects
+   * with the letters in the search field.
+   */
+  @FXML
+  public void handleSearchFieldAction() {
+    // Wrap the ObservableList in a FilteredList (initially display all data).
+    FilteredList<String> filteredData = new FilteredList<>(this.getData(), (p -> true));
 
+    // Set the filter Predicate whenever the filter changes.
+    searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+      filteredData.setPredicate(courseItem -> {
+        // If filter text is empty, display all persons.
+        if (newValue == null || newValue.isEmpty()) {
+          return true;
+        }
+        // Compare course name and course code of every CourseItem with the filter text.
+        String lowerCaseFilter = newValue.toLowerCase();
+
+        if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
+          return true; // filter matches course name
+
+        }
+        return false; // Does not match
+      });
+    });
+
+    SortedList<String> sortedData = new SortedList<>(filteredData);
+    coursesList.setItems(sortedData);
   }
 
   /**
@@ -161,16 +162,7 @@ public class AppController {
   }
 
   /**
-   * redirects user to the main page.
-   */
-  @FXML
-  void handleMainPageAction() {
-    // nothing should really happen when you are in the home page other than maybe
-    // refresh(?)
-  }
-
-  /**
-   * A function that does something when a element in the listview is clicked on.
+   * A function that does something when an element in the listview is clicked on.
    */
   public void mouseClicked() {
     // Detecting mouse clicked

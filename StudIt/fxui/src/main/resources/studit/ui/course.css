@@ -43,13 +43,12 @@
 
 }
 
-
 #chatbot_btn, #ntnu_btn, #mainPage_btn, #logout_btn {
     -fx-background-color: white;
     background-color: white;
 }
 
-#chatbot_btn:hover, #ntnu_btn:hover, #mainPage_btn:hover, #logout_btn:hover {
+#chatbot_btn:hover, #mainPage_btn:hover, #logout_btn:hover {
     
     background-color: black;
     -fx-background-color: black;
@@ -61,11 +60,10 @@
     -fx-border-top-color: grey;
     }
 
-    #chatbot_btn:active, #ntnu_btn:active, #mainPage_btn:active, #logout_btn:active {
+    #chatbot_btn:active, #mainPage_btn:active, #logout_btn:active {
         background-color: black;
         -fx-background-color: black;
     }
-
 
 
 
