@@ -6,11 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.List;
 import java.util.Map.Entry;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import studit.core.StuditModel;
@@ -321,7 +318,7 @@ public class RemoteStuditModelAccesTest {
    * @param discussion1 Correct Discussion object.
    * @param discussion2 Discussion to compare against.
    */
-  private static void compareDiscussion(Discussion discussion1, Discussion discussion2) {
+  public static void compareDiscussion(Discussion discussion1, Discussion discussion2) {
     if (discussion1 == null && discussion2 == null) {
       return;
     }
@@ -343,7 +340,7 @@ public class RemoteStuditModelAccesTest {
    * @param comment1 Correct Comment.
    * @param comment2 Comment to compare against.
    */
-  private static void compareComment(Comment comment1, Comment comment2) {
+  public static void compareComment(Comment comment1, Comment comment2) {
     if (comment1 == null && comment2 == null) {
       return;
     }

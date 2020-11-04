@@ -27,7 +27,7 @@ public class RemoteStuditModelAccess {
 
   private String endpointPath;
   private final static String DEFAULT_PATH = "http://localhost:8080/studit";
-  private ObjectMapper objectMapper;
+  protected ObjectMapper objectMapper;
   private boolean test = false;
 
   public RemoteStuditModelAccess() {
