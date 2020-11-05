@@ -52,9 +52,14 @@ public class ChatbotManager {
     }
 
     if (response.getResponse().length() == 0 && !response.funcCall()) {
-      response.add("Jeg beklager, men det forstod jeg ikke helt. Prøv å formulere setningen på en annen måte");
-    }
+      String[] possibleMatch = dataMatcher.findDataMatch(command, "course");
+      if (possibleMatch[0].equals("0") || possibleMatch[0].equals("1")) {
+        response.add("Vennligst vær litt mer spesifikk: , f.eks: 'Jeg vil vite mer om '" + possibleMatch[1]);
+      } else {
+        response.add("Jeg beklager, men det forstod jeg ikke helt. Prøv å formulere setningen på en annen måte");
+      }
 
+    }
     return response;
 
   }
