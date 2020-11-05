@@ -1,11 +1,14 @@
 package studit.ui;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -34,11 +37,38 @@ public class LoginController {
   private RemoteStuditModelAccess remote;
 
   /**
-   * The constrcutur sets up a remote, to call methods from RemoteStuditModelAccess
-   * Frontend needs this class to connect to API/backend.
+   * The constrcutur sets up a remote, to call methods from
+   * RemoteStuditModelAccess Frontend needs this class to connect to API/backend.
    */
   public LoginController() {
     this.remote = new RemoteStuditModelAccess();
+  }
+
+  /*
+  * Initializes the listener for ENTER buttin in passwordField.
+  */
+  public void initialize() {
+    listenForEnter();
+  }
+
+  /*
+   * Creates a listener for the ENTER button when passwordField is highlited. When
+   * ENTER is pressed, the loginButtonAction is triggered. This method is only
+   * needed to run once to create the listener.
+   */
+  public void listenForEnter() {
+    passwordField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+      public void handle(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+          try {
+            loginButtonAction();
+          } catch (Exception e) {
+            System.out.println("Error occured while logging in");
+            e.printStackTrace();
+          }
+        }
+      }
+    });
   }
 
   /**
@@ -62,7 +92,7 @@ public class LoginController {
    * Checks if email is registered, sends password to user if it is
    */
   public void forgotPassword() {
-    // TODO: This.
+    // maybe drop this method
   }
 
   /**
@@ -76,8 +106,8 @@ public class LoginController {
       loginInfoText.setText("");
       BorderPane pane = FXMLLoader.load(getClass().getResource("App.fxml"));
       Scene scene = new Scene(pane);
-      //scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
-      //TODO: trenger vi linjen over?
+      // scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
+      // TODO: trenger vi linjen over?
       Stage stage = new Stage();
       stage.setScene(scene);
       stage.setTitle("StudIt");
