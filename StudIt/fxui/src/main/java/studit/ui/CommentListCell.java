@@ -13,7 +13,6 @@ import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
-import studit.ui.DiscussionController;
 
 public class CommentListCell extends BorderPane {
 
