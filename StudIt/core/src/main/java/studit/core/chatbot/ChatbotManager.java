@@ -1,12 +1,12 @@
 package studit.core.chatbot;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ChatbotManager {
 
@@ -30,7 +30,6 @@ public class ChatbotManager {
   public Response manageInput(String input) {
     // Splitting string by spaces, and removing all newline chars
     String[] command = input.replaceAll("[^a-zA-Z0-9 æøå]", "").toLowerCase().split(" ");
-
 
     Response response = new Response();
     List<Match> matches = linker.matchCommand(command);
@@ -69,6 +68,8 @@ public class ChatbotManager {
 
     links.add(new KeywordLink("avslutt", null, 1, List.of(Map.of("avslutt", 1.0f),
         Map.of("kan", 0.2f, "du", 0.2f, "lukke", 0.2f, "lukk", 0.6f, "chatboten", 0.4f))));
+
+    links.add(new KeywordLink("takk", null, 1, List.of(Map.of("takk", 1.0f))));
 
     links.add(
         new KeywordLink("hils", null, 1, List.of(Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f))));

@@ -22,6 +22,8 @@ public class ResponseManager {
         result = "Avslutter chatbot...";
         action.setFuncKey("exit");
         break;
+      case "faginfo": 
+        action.setFuncKey("faginfo");
       default:
         result = "";
     }

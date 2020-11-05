@@ -8,6 +8,8 @@ public class Message {
   private String text;
   private String user;
   private List<String[]> prompt = null;
+  private List<Object> args1 = null;
+  private List<Object> args2 = null;
   private boolean clicked;
 
   public Message(Response response, String user) {
@@ -15,8 +17,10 @@ public class Message {
     this.prompt = response.getPrompt();
     this.user = user;
     this.clicked = false;
+    this.args1 = response.getArgs1();
+    this.args2 = response.getArgs2();
   }
-  
+
   public Message(String response, String user) {
     this.text = response;
     this.user = user;
@@ -61,11 +65,11 @@ public class Message {
   public void setUser(String user) {
     this.user = user;
   }
-  
+
   public void setPromt(List<String[]> prompt) {
     this.prompt = prompt;
   }
-  
+
   public List<String[]> getPrompt() {
     return this.prompt;
   }
@@ -77,4 +81,24 @@ public class Message {
   public void click() {
     this.clicked = true;
   }
+
+  /**
+   * Get args for first prompt action.
+   * 
+   * @return the args1
+   */
+  public List<Object> getArgs1() {
+    return args1;
+  }
+
+
+  /**
+   * Get args for second prompt action.
+   * 
+   * @return the args2
+   */
+  public List<Object> getArgs2() {
+    return args2;
+  }
+
 }

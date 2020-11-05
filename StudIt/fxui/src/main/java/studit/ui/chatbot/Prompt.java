@@ -17,28 +17,40 @@ public class Prompt {
   private ResponseManager responseManager;
   private ChatbotController chatbotController;
 
-  public Prompt(List<String[]> prompts, TextFlow text, ListView<Message> listChat, Message message,
-      ChatbotController chatbotController) {
+  public Prompt(List<String[]> prompts, List<Object> args1, List<Object> args2, TextFlow text,
+      ListView<Message> listChat, Message message, ChatbotController chatbotController) {
 
     this.commands = new ArrayList<>();
     this.listChat = listChat;
     this.responseManager = chatbotController.promptManager;
     this.chatbotController = chatbotController;
 
+    boolean first = false;
     // Assign commands to each of the options
     for (String[] prompt : prompts) {
       Hyperlink command = new Hyperlink(prompt[0]);
-      // If the user has already clicked an option, make sure that we disable further clicks
+      // If the user has already clicked an option, make sure that we disable further
+      // clicks
       if (!message.isClicked()) {
-        command.setOnAction(e -> {
-          handleHyperlinkClick(prompt[1]);
-          message.click();
-        });
+        if (!first) {
+          command.setOnAction(e -> {
+            handleHyperlinkClick(prompt[1], args1);
+            message.click();
+          });
+        } else {
+          command.setOnAction(e -> {
+            handleHyperlinkClick(prompt[1], args2);
+            message.click();
+          });
+        }
+
       } else {
         command.setOnAction(null);
       }
       text.getChildren().addAll(command, new Text("  "));
       commands.add(command);
+
+      first = true;
     }
   }
 
@@ -47,9 +59,11 @@ public class Prompt {
    * 
    * @param option user selected option
    */
-  private void handleHyperlinkClick(String option) {
+  private void handleHyperlinkClick(String option, List<Object> args) {
 
     ActionRequest action = responseManager.handlePrompt(option);
+
+    action.setArguments(args);
     String result = action.getChatbotResponse();
 
     if (!result.isEmpty()) {
@@ -64,12 +78,13 @@ public class Prompt {
         func.execute(action.getArguments());
       } catch (ClassCastException e) {
         e.printStackTrace();
-        System.out.println("^ Error occured casting function arguments from '" + action.getFuncKey()
-            + "'. Update code immediately");
+        System.out.println(
+            "^ Error occured casting function arguments from '" + action.getFuncKey() + "'. Update code immediately");
       }
     }
 
-    // Make sure all commands are disabled if the ListView is not updated (does not perform isClicked
+    // Make sure all commands are disabled if the ListView is not updated (does not
+    // perform isClicked
     // check)
     for (Hyperlink command : commands) {
       command.setOnAction(null);

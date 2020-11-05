@@ -31,12 +31,14 @@ public class InformationRequestExecutor {
         break;
       case "0":
         response.add("Jeg er litt usiker på hva du mener, ønsker du å vite mer om '" + args.get(1) + "'?");
-        response.setPrompt(List.of(new String[] {"ja", "courseInfo"}, new String[] {"nei", "courseInfo"}));
+        String fagkod = identifyFagkode(args.get(1)) ? args.get(1) : args.get(2);
+        response.setPrompt(List.of(new String[] {"ja", "faginfo"}, new String[] {"nei", "faginfo"}), List.of(fagkod.toUpperCase()), null);
         break;
       case "1":
         String fagkode = identifyFagkode(args.get(1)) ? args.get(1) : args.get(2);
         response.add("Her har du litt informasjon om " + fagkode + ": "
             + courseList.getCourseByFagkode(fagkode.toUpperCase()).getInformasjon());
+        break;
       default:
         break;
     }

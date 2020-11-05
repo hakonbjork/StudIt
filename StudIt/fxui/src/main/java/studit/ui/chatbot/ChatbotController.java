@@ -51,7 +51,7 @@ public class ChatbotController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
 
     chatbotController = this;
-    commands = new Commands(chatbotController);
+    commands = new Commands(chatbotController, remoteAccess);
     promptManager = new ResponseManager();
     txt_user_entry.textProperty().addListener(l -> checkForLineBreak());
 
@@ -100,7 +100,7 @@ public class ChatbotController implements Initializable {
               if (item.getPrompt() != null) {
                 text.setText(text.getText() + "\n");
                 flowTextLeft.getChildren().add(text);
-                new Prompt(item.getPrompt(), flowTextLeft, list_chat, item, chatbotController);
+                new Prompt(item.getPrompt(), item.getArgs1(), item.getArgs2(), flowTextLeft, list_chat, item, chatbotController);
               } else {
                 flowTextLeft.getChildren().add(text);
               }
