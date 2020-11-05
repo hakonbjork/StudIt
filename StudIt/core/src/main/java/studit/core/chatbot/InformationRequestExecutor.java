@@ -37,6 +37,7 @@ public class InformationRequestExecutor {
         String fagkode = identifyFagkode(args.get(1)) ? args.get(1) : args.get(2);
         response.add("Her har du litt informasjon om " + fagkode + ": "
             + courseList.getCourseByFagkode(fagkode.toUpperCase()).getInformasjon());
+        break;
       default:
         break;
     }
