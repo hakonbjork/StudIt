@@ -107,7 +107,7 @@ public class Response {
     return args1;
   }
 
-   /**
+  /**
    * Get the second prompt arguments.
    * 
    * @return the args2

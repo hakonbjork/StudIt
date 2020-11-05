@@ -3,7 +3,6 @@ package studit.core.chatbot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import studit.core.mainpage.CourseList;
 
 public class InformationRequestExecutor {

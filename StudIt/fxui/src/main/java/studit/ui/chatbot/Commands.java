@@ -2,7 +2,6 @@ package studit.ui.chatbot;
 
 import java.util.HashMap;
 import java.util.List;
-
 import studit.core.chatbot.prompt.Func;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
@@ -54,10 +53,11 @@ public class Commands {
   private void fagoversikt() {
     try {
       CourseList courseList = remoteAccess.getCourseList();
-      StringBuffer buffer = new StringBuffer(String.format("Fagoversikt:%1$"+(ChatbotController.lineBreakLength - 20)+"s", ""));
+      StringBuffer buffer = new StringBuffer(
+          String.format("Fagoversikt:%1$" + (ChatbotController.lineBreakLength - 20) + "s", ""));
       for (CourseItem courseItem : courseList) {
         String str = courseItem.getFagkode() + " - " + courseItem.getFagnavn();
-        buffer.append(String.format(str + "%1$"+(ChatbotController.lineBreakLength - 8 - str.length())+"s", ""));
+        buffer.append(String.format(str + "%1$" + (ChatbotController.lineBreakLength - 8 - str.length()) + "s", ""));
       }
       chatbotController.list_chat.getItems().add(new Message(buffer.toString(), "chatbot"));
     } catch (ApiCallException e) {

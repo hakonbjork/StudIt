@@ -27,6 +27,7 @@ public class ResponseManager {
         break;
       case "fagoversikt":
         action.setFuncKey("fagoversikt");
+        break;
       default:
         result = "";
     }
