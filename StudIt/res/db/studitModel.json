@@ -2,62 +2,125 @@
   "courseList" : {
     "items" : [ {
       "fagkode" : "TMA4140",
-      "fagnavn" : "Diskret Matematikk 1",
-      "informasjon" : "Diskret Matematikk er et kjempeartig studie som jeg liker å kalle potetmos. La oss alle juble, dere",
-      "pensumlitteratur" : "Mathematics for dummies and retards",
-      "anbefaltLitteratur" : "Kompendium Diskmat",
-      "tips" : "Ikke kok",
+      "fagnavn" : "Diskret Matematikk",
+      "informasjon" : "Emnet gir en innføring i matematisk logikk og mengdelære, og elementær tallteori med modulær aritmetikk. Andre sentrale tema er: Følger, rekurrensrelasjoner, matematisk induksjon og kombinatoriske tellemetoder med anvendelser. I tillegg gis en innføring i teorien for relasjoner, grafer og trær, samt formelle språk, grammatikker og endelige automater.",
+      "pensumlitteratur" : "Kenneth H. Rosen's Discrete Mathematics and Its Applications, 8. edition (ISBN 978-1-260-09199-1).",
+      "anbefaltLitteratur" : "Kompendium Diskmat - Kjøpes hos Abakus",
+      "tips" : "Veldig store deler av pensum bygger på hverandre, svært viktig å følge med fra starten. Fokuser på å forstå beviser til eksamen, de er vanskelig å forbedre seg på.",
       "eksamensdato" : "03/12/2020",
       "vurderingsform" : "Hjemmeksamen",
-      "hjelpemidler" : "alle",
-      "vurderinger" : [ "3", "5", "9", "8" ],
+      "hjelpemidler" : "A - alle",
+      "vurderinger" : [ "3", "5", "2", "1" ],
       "diskusjon" : {
-        "prevAssignedID" : "2",
+        "prevAssignedID" : "3",
         "comments" : [ {
-          "brukernavn" : "BobbyBigBoi",
+          "brukernavn" : "Einar82",
           "kommentar" : "Bra saker!",
-          "dato" : "19-10-2020 11:29:09",
-          "upvotes" : "1",
-          "downvotes" : "1",
-          "uniqueID" : "0",
-          "upvoters" : [ "BobbyBigBoi" ],
-          "downvoters" : [ "BjarteBrorMor" ]
-        }, {
-          "brukernavn" : "BobbyBigBoi",
-          "kommentar" : "Ok saker :/",
-          "dato" : "19-10-2020 11:29:09",
-          "upvotes" : "0",
-          "downvotes" : "0",
-          "uniqueID" : "1",
-          "upvoters" : [ ],
-          "downvoters" : [ ]
-        }, {
-          "brukernavn" : "BjarteBrorMor",
-          "kommentar" : "Bobby er en idiot!",
           "dato" : "19-10-2020 11:29:09",
           "upvotes" : "2",
           "downvotes" : "0",
-          "uniqueID" : "2",
-          "upvoters" : [ "BjarteBrorMor", "BobbyBigBoi" ],
+          "uniqueID" : "0",
+          "upvoters" : [ "KristineKre", "Geirstein" ],
           "downvoters" : [ ]
+        }, {
+          "brukernavn" : "FridaFronse",
+          "kommentar" : "Kompendiet i Diskmat er udugelig!",
+          "dato" : "19-10-2020 11:29:09",
+          "upvotes" : "0",
+          "downvotes" : "3",
+          "uniqueID" : "1",
+          "upvoters" : [ ],
+          "downvoters" : [ "Pessimen", "Jossekaren", "Brilillia" ]
+        }, {
+          "brukernavn" : "helstad2",
+          "kommentar" : "Noen som har kok?",
+          "dato" : "19-10-2020 11:29:09",
+          "upvotes" : "0",
+          "downvotes" : "0",
+          "uniqueID" : "2",
+          "upvoters" : [  ],
+          "downvoters" : [  ]
+        }, {
+          "brukernavn" : "KaroKine",
+          "kommentar" : "Anbefaler å bruke YouTube! Mye bra som ligger ute",
+          "dato" : "19-10-2020 11:29:09",
+          "upvotes" : "2",
+          "downvotes" : "2",
+          "uniqueID" : "3",
+          "upvoters" : [ "Halida", "0x1" ],
+          "downvoters" : [ "Oscar", "fjellknausen" ]
         } ]
       }
     }, {
-      "fagkode" : "TDT4120",
-      "fagnavn" : "Informasjonsteknologi - Avansert kurs",
-      "informasjon" : "Masse informasjon her",
-      "pensumlitteratur" : "Informatics for dummies and retards",
-      "anbefaltLitteratur" : "Kompendium IT",
-      "tips" : "Ikke kok. Spis grønnsaker",
-      "eksamensdato" : "05/12/2020",
-      "vurderingsform" : "Muntlig eksamen",
-      "hjelpemidler" : "Mamma på telefon",
-      "vurderinger" : [ "3", "5", "9", "8" ],
-      "diskusjon" : null
+      "fagkode" : "IT1901",
+      "fagnavn" : "Informatikk Prosjektarbeid 1",
+      "informasjon" : "Emnet gir kunnskap og ferdigheter i smidig applikasjonsutvikling i team. Applikasjonen vil bruke en klientserverarkitektur, strukturert i moduler og konfigurert med et byggesystem. Gruppene vil bruke et system for sporing av utviklingsoppgaver, kildekodeadministrasjon og kodevurdering. Fokuset er mer på kodekvalitet og testing, enn på funksjonalitet.",
+      "pensumlitteratur" : "Forelesninger og videoer publisert på BlackBoard",
+      "anbefaltLitteratur" : "Mange gode YouYube-vidoer om smidig utvikling, scrum, testing, JavaFX m.m",
+      "tips" : "Les ofisiell dokumentasjon til rammeverkene og bruk Stackoverflow / YouTube aktivt for inspirasjon og kodeeksempler. Begynn med gode arbeidsvaner tidlig i semesteret, med fokus på struktur, dokumentasjon og leselighet av koden. Følg med i forelesning, mye nyttig informasjon å hente",
+      "eksamensdato" : "22/11/2020",
+      "vurderingsform" : "Skriftlige innleveringer og selvstendig rapport.",
+      "hjelpemidler" : "A - alle",
+      "vurderinger" : [ "5", "5", "4", "3" ],
+      "diskusjon" : {
+        "prevAssignedID" : "1",
+        "comments" : [ {
+          "brukernavn" : "Jodleren",
+          "kommentar" : "Bra skrevet, anbefaler å bruke checkstyle plugins i Eclipse for å gjøre formattering av koden enklere!",
+          "dato" : "19-08-2020 11:15:09",
+          "upvotes" : "3",
+          "downvotes" : "0",
+          "uniqueID" : "0",
+          "upvoters" : [ "KristineKre", "Geirstein", "isidi191919" ],
+          "downvoters" : [ ]
+        }, {
+          "brukernavn" : "frodigOgledig",
+          "kommentar" : "Savner mer utfyllende pensumbeskrivelse",
+          "dato" : "16-10-2020 10:40:09",
+          "upvotes" : "2",
+          "downvotes" : "2",
+          "uniqueID" : "1",
+          "upvoters" : [ "Halida", "samuelsteinbark" ],
+          "downvoters" : [ "Oscar", "hurpesnes" ]
+        } ]
+      }
+    }, {
+      "fagkode" : "TMA4240",
+      "fagnavn" : "Statistikk",
+      "informasjon" : "Deskriptiv statistikk. Sannsynlighet for hendelser og stokastiske variabler. Uavhengige og avhengige stokastiske variabler. Betinget sannsynlighet. En- og flerdimensjonale sannsynlighetsfordelinger. De viktigste klasser av endimensjonale sannsynlighetsfordelinger. Ekstremvariabler. Parameterestimering, intervallestimering og hypotesetesting for et- og to-utvalgsdata. Enkel lineær regresjon.",
+      "pensumlitteratur" : "Forelesninger og videoer publisert på BlackBoard",
+      "anbefaltLitteratur" : "Mange gode YouYube-vidoer om smidig utvikling, scrum, testing, JavaFX m.m",
+      "tips" : "Les ofisiell dokumentasjon til rammeverkene og bruk Stackoverflow / YouTube aktivt for inspirasjon og kodeeksempler. Begynn med gode arbeidsvaner tidlig i semesteret, med fokus på struktur, dokumentasjon og leselighet av koden. Følg med i forelesning, mye nyttig informasjon å hente",
+      "eksamensdato" : "22/11/2020",
+      "vurderingsform" : "Skriftlige innleveringer og selvstendig rapport.",
+      "hjelpemidler" : "A - alle",
+      "vurderinger" : [ "5", "5", "4", "3" ],
+      "diskusjon" : {
+        "prevAssignedID" : "1",
+        "comments" : [ {
+          "brukernavn" : "Jodleren",
+          "kommentar" : "Bra skrevet, anbefaler å bruke checkstyle plugins i Eclipse for å gjøre formattering av koden enklere!",
+          "dato" : "19-08-2020 11:15:09",
+          "upvotes" : "3",
+          "downvotes" : "0",
+          "uniqueID" : "0",
+          "upvoters" : [ "KristineKre", "Geirstein", "isidi191919" ],
+          "downvoters" : [ ]
+        }, {
+          "brukernavn" : "frodigOgledig",
+          "kommentar" : "Savner mer utfyllende pensumbeskrivelse",
+          "dato" : "16-10-2020 10:40:09",
+          "upvotes" : "2",
+          "downvotes" : "2",
+          "uniqueID" : "1",
+          "upvoters" : [ "Halida", "samuelsteinbark" ],
+          "downvoters" : [ "Oscar", "hurpesnes" ]
+        } ]
+      }
     } ]
   },
   "users" : {
-    "prevAssignedID" : "1",
+    "prevAssignedID" : "2",
     "users" : [ {
       "name" : "Berte bjernsen",
       "username" : "Berte92",
@@ -70,6 +133,12 @@
       "mail" : "IdaElskerHunder@flyskflysk.com",
       "password" : "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3",
       "uniqueID" : "1"
+    }, {
+      "name" : "user",
+      "username" : "user",
+      "mail" : "user@mail.com",
+      "password" : "844b8ea36eca6a3bd97eac6644b7df5fd8d27a79fe26750c8d99df96d25dc216",
+      "uniqueID" : "2"
     } ]
   }
 }
