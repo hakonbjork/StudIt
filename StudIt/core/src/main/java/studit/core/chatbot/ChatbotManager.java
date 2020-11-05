@@ -1,12 +1,12 @@
 package studit.core.chatbot;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ChatbotManager {
 
@@ -31,8 +31,10 @@ public class ChatbotManager {
     // Splitting string by spaces, and removing all newline chars
     String[] command = input.replaceAll("[^a-zA-Z0-9 æøå]", "").toLowerCase().split(" ");
 
+
     Response response = new Response();
     List<Match> matches = linker.matchCommand(command);
+    System.out.println(matches);
 
     int nextPrecedence = 1;
 
@@ -40,14 +42,17 @@ public class ChatbotManager {
       if (match.precedence == nextPrecedence) {
         if (match.match >= 1.0) {
           cmg.executeCommand(match.command, response);
-          // response.setDataMatch(match.dataMatch);
+          if (!match.dataMatch.isEmpty()) {
+            response.handleMatchResult(dataMatcher.findDataMatch(command, match.dataMatch));
+            response.setFuncKey(match.command);
+          }
         }
         nextPrecedence += 1;
       }
       // System.out.println(match);
     }
 
-    if (response.getResponse().length() == 0) {
+    if (response.getResponse().length() == 0 && !response.funcCall()) {
       response.add("Jeg beklager, men det forstod jeg ikke helt. Prøv å formulere setningen på en annen måte");
     }
 
@@ -81,6 +86,10 @@ public class ChatbotManager {
         List.of(Map.of("det", 0.2f, "går", 0.2f, "dårlig", 0.6f, "ikke", 0.4f, "så", 0.05f, "bra", 0.05f))));
 
     links.add(new KeywordLink("uhyggelig", null, 1, List.of(Map.of("nei", 1.0f, "nope", 1.0f, "niks", 1.0f))));
+
+    links.add(new KeywordLink("faginfo", "course", 2,
+        List.of(Map.of("jeg", 0.1f, "vil", 0.1f, "vite", 0.4f, "mer", 0.3f, "om", 0.3f),
+            Map.of("kan", 0.1f, "du", 0.1f, "fortelle", 0.6f, "meg", 0.2f, "om", 0.2f))));
 
     ObjectMapper mapper = new ObjectMapper();
     try {

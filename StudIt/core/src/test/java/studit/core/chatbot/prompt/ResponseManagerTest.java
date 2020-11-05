@@ -3,12 +3,12 @@ package studit.core.chatbot.prompt;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-class PromptManagerTest {
+class ResponseManagerTest {
 
   @Test
   void testHandlePrompt() {
     ActionRequest action = new ActionRequest();
-    PromptManager pm = new PromptManager();
+    ResponseManager pm = new ResponseManager();
     action.setFuncKey("exit");
     action.setChatbotResponse("Avslutter chatbot...");
     

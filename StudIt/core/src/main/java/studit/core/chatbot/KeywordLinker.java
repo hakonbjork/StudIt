@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 public class KeywordLinker {
 
   private List<KeywordLink> links;
@@ -58,7 +57,8 @@ public class KeywordLinker {
   }
 
   /**
-   * Create a list of Keyword-arrays that contain word IDS and their respective match.
+   * Create a list of Keyword-arrays that contain word IDS and their respective
+   * match.
    * 
    * @param keywordLinks list of links obtained from the KeywordLink class
    * @return list containing all of our keyword matches
@@ -120,8 +120,7 @@ public class KeywordLinker {
       }
 
       float pct = unions / (float) (unions + complements);
-      pct *=
-          (word.length() - Math.abs(wordToCheck.length() - word.length())) / (float) word.length();
+      pct *= (word.length() - Math.abs(wordToCheck.length() - word.length())) / (float) word.length();
 
       if (pct >= 0.65f && pct >= matchPct && wordToCheck.length() > lastLen) {
         matchID = entry.getKey();
@@ -135,12 +134,13 @@ public class KeywordLinker {
   }
 
   /**
-   * Reads the user input and tries to match the input to the most probable command.
+   * Reads the user input and tries to match the input to the most probable
+   * command.
    * 
-   * @param words processed user input, where all special characters are removed and words are split
-   *        by spaces.
-   * @return Sorted list of Match objects, containing information about match percentage,
-   *         precedence, and the command key identifier
+   * @param words processed user input, where all special characters are removed
+   *              and words are split by spaces.
+   * @return Sorted list of Match objects, containing information about match
+   *         percentage, precedence, and the command key identifier
    */
   public List<Match> matchCommand(String[] words) {
 
@@ -167,8 +167,8 @@ public class KeywordLinker {
         idx++;
       }
 
-      matches.add(
-          new Match(entry.getKey(), Floats.max(matchWeights), precedences.get(entry.getKey()), ""));
+      matches.add(new Match(entry.getKey(), Floats.max(matchWeights), precedences.get(entry.getKey()),
+          dataMatches.get(entry.getKey()) == null ? "" : dataMatches.get(entry.getKey())));
 
     }
 

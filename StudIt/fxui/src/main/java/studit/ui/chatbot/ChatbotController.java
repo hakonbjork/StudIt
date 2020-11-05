@@ -1,5 +1,7 @@
 package studit.ui.chatbot;
 
+import static studit.core.chatbot.InformationRequestExecutor.executeCommand;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -25,20 +27,24 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import studit.core.chatbot.Response;
-import studit.core.chatbot.prompt.PromptManager;
+import studit.core.chatbot.prompt.ResponseManager;
 import studit.ui.AppController;
+import studit.ui.remote.ApiCallException;
+import studit.ui.remote.RemoteStuditModelAccess;
 
 public class ChatbotController implements Initializable {
 
   private Stage stage = null;
   private double xOffset = 0;
   private double yOffset = 0;
-  //private CallToActionBuffer callToActionBuffer = null;
+  // private CallToActionBuffer callToActionBuffer = null;
   // This value is hardcoded as it is based on current font, size and more, hard
   // to make dynamic.
   public static final int lineBreakLength = 48;
-  public PromptManager promptManager;
+  public ResponseManager promptManager;
   private ChatbotController chatbotController;
+  private RemoteStuditModelAccess remoteAccess = new RemoteStuditModelAccess();
+
   public Commands commands;
 
   @Override
@@ -46,7 +52,7 @@ public class ChatbotController implements Initializable {
 
     chatbotController = this;
     commands = new Commands(chatbotController);
-    promptManager = new PromptManager();
+    promptManager = new ResponseManager();
     txt_user_entry.textProperty().addListener(l -> checkForLineBreak());
 
     ObservableList<Message> chatMessages = FXCollections.observableArrayList();
@@ -223,8 +229,23 @@ public class ChatbotController implements Initializable {
       // Make sure that the caret is at first position for a new command!
       txt_user_entry.selectPositionCaret(0);
       Response response = AppController.getChatbot().manageInput(userInput);
+      if (response.funcCall()) {
+        try {
+          executeCommand(response, remoteAccess.getCourseList());
+        } catch (ApiCallException e) {
+          response.add("Error -> could not establish connection to server");
+        }
+      }
       list_chat.getItems().add(new Message(response, "chatbot"));
     }
+  }
+
+  /**
+   * Used for testing purposes only.
+   * @param remoteAccess the remoteAccess to set
+   */
+  public void setRemoteAccess(RemoteStuditModelAccess remoteAccess) {
+    this.remoteAccess = remoteAccess;
   }
 
 }

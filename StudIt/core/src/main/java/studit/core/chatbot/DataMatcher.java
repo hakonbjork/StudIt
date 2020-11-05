@@ -24,9 +24,10 @@ public class DataMatcher {
    * @param userInput Array of user input separted by spaces.
    * @param dataMatch used to identify which match we are trying to find, e.g
    *                  "course" if we want to match a course.
-   * @return String[], where String[0] is the match, or null if no match was
-   *         found. String[1] is null if no plausible match is found, otherwise
-   *         plausible match.
+   * @return String[], String[0] contains status code (can be safly cast to int):
+   *         -1 = no match found, 0 = plausible match found, 1 = 100% match found.
+   *         String[1] contains the closest match, String[2] contains extra
+   *         information (check other class methods for more info)
    */
   public String[] findDataMatch(String[] userInput, String dataMatch) {
     List<String> matchCandidates = new ArrayList<>();
@@ -38,7 +39,7 @@ public class DataMatcher {
     }
 
     if (matchCandidates.isEmpty()) {
-      return null;
+      return new String[] {"-1", null, null};
     }
 
     switch (dataMatch) {
@@ -53,35 +54,73 @@ public class DataMatcher {
    * Check for course matches with the given candidates.
    * 
    * @param matchCandidates list of possible matches.
-   * @return String[], where String[0] is the match, or null if no match was
-   *         found. String[1] is null if no plausible match is found, otherwise
-   *         plausible match.
+   * @return String[]. String[0] is the status code of the match: -1 means no
+   *         match found, 0 means plausible match found, 1 means 100% match found.
+   *         (can be safely cast to int). String[1] and String[2] contains the
+   *         fagkode and course name, where String[1] is either the fagkode or
+   *         course name, and contains the closest match, where String[2] contains
+   *         the corresponding course name / fagkode.
    */
   private String[] matchCourse(List<String> matchCandidates) {
 
-    String bestMatch = "";
-    float matchPct = 0.0f;
+    int bestFagkodeMatchIdx = -1;
+    float bestFagkodePct = 0.0f;
 
-    for (String candidate : matchCandidates) {
-      for (String[] courseName : courseNameList) {
-        // Find match percentages.
-        float match1 = matchWords(courseName[0], candidate);
-        float match2 = matchWords(courseName[1], candidate);
+    int bestTitleMatchIdx = -1;
+    float bestTitlePct = 0.0f;
 
-        // Update greatest match if found.
-        if (match1 >= matchPct) {
-          matchPct = match1;
-          bestMatch = courseName[0];
-        } 
-        if (match2 >= matchPct) {
-          matchPct = match2;
-          bestMatch = courseName[1];
+    for (int i = 0; i < courseNameList.size(); i++) {
+      String[] titleFragments = courseNameList.get(i)[1].split(" "); // Split course title by spaces.
+      float titlePct = 0.0f;
+
+      for (String candidate : matchCandidates) {
+
+        float fagkodeMatch = matchWords(courseNameList.get(i)[0], candidate);
+        if (fagkodeMatch > bestFagkodePct) {
+          bestFagkodeMatchIdx = i;
+          bestFagkodePct = fagkodeMatch;
+        }
+
+        float tmpMaxTitlePct = 0.0f;
+        // Iterate over the title fragments to see if we find a match in one of the
+        // words, eg "informatikk" or "prosjektarbeid"
+        for (String fragment : titleFragments) {
+          float match = matchWords(fragment, candidate);
+          if (match > tmpMaxTitlePct) {
+            tmpMaxTitlePct = match;
+          }
+        }
+
+        if (tmpMaxTitlePct > 0) {
+          titlePct += tmpMaxTitlePct;
         }
       }
 
+      if (titlePct > bestTitlePct) {
+        bestTitleMatchIdx = i;
+        bestTitlePct = titlePct;
+      }
     }
-    System.out.println(bestMatch + " " + matchPct);
-    return new String[] { matchPct == 1.0f ? bestMatch : null, matchPct > 0.6f ? bestMatch : null };
+
+    if (bestFagkodePct > 0.74) {
+      return new String[] { bestFagkodePct >= 1.0f ? "1" : "0", courseNameList.get(bestFagkodeMatchIdx)[0],
+          courseNameList.get(bestFagkodeMatchIdx)[1] };
+    }
+
+    int titleSplitLength = courseNameList.get(bestTitleMatchIdx)[1].split(" ").length;
+    float matchPctPerWord = bestTitlePct / (float) titleSplitLength;
+
+    if (matchPctPerWord >= 1.0f) {
+      return new String[] { "1", courseNameList.get(bestTitleMatchIdx)[1],
+          courseNameList.get(bestTitleMatchIdx)[0] };
+    }
+
+    if (titleSplitLength == 1 && matchPctPerWord >= 0.7f || titleSplitLength > 1 && matchPctPerWord > 0.49) {
+      return new String[] { "0", courseNameList.get(bestTitleMatchIdx)[1],
+          courseNameList.get(bestTitleMatchIdx)[0] };
+    }
+
+    return new String[] { "-1", null, null };
   }
 
   /**
@@ -97,8 +136,6 @@ public class DataMatcher {
 
     StringBuffer tmpWord = new StringBuffer(word2);
 
-    System.out.println("Mathing: " + word1 + " with " + word2);
-    
     for (int i = 0; i < word1.length(); i++) {
       char c = word1.charAt(i);
 
@@ -113,8 +150,16 @@ public class DataMatcher {
 
     float pct = unions / (float) (unions + complements);
     pct *= (word2.length() - Math.abs(word1.length() - word2.length())) / (float) word2.length();
-    System.out.println(pct);
     return pct;
+  }
+
+  /**
+   * Set courseNameList.
+   * 
+   * @param courseNameList the courseNameList to set
+   */
+  public void setCourseNameList(List<String[]> courseNameList) {
+    this.courseNameList = courseNameList;
   }
 
 }

@@ -25,6 +25,9 @@ public class CommandManager {
       case "nei":
         addition = "Neivel. ";
         break;
+      case "faginfo":
+        addition = "";
+        break;
       case "hyggelig":
         addition = "Så bra da! Hva kan jeg hjelpe deg med?";
         break;

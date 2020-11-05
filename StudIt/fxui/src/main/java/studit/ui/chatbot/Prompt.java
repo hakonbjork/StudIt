@@ -8,13 +8,13 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import studit.core.chatbot.prompt.ActionRequest;
 import studit.core.chatbot.prompt.Func;
-import studit.core.chatbot.prompt.PromptManager;
+import studit.core.chatbot.prompt.ResponseManager;
 
 public class Prompt {
 
   private List<Hyperlink> commands;
   private ListView<Message> listChat;
-  private PromptManager responseManager;
+  private ResponseManager responseManager;
   private ChatbotController chatbotController;
 
   public Prompt(List<String[]> prompts, TextFlow text, ListView<Message> listChat, Message message,
