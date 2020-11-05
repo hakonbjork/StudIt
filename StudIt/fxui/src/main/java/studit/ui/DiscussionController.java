@@ -226,7 +226,15 @@ public class DiscussionController implements Initializable {
 
           setGraphic(commentListCell);
         }
-      });
+        });
+
+        forumList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+        @Override
+        public void handle(MouseEvent event) {
+            System.out.println("clicked on " + forumList.getSelectionModel().getSelectedItem());
+        }
+    });
 
     } else {
 
@@ -238,5 +246,7 @@ public class DiscussionController implements Initializable {
   public void setCurrentUser(User user) {
     this.currentUser = user;
   }
+  
+  
 
 }
