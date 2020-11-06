@@ -11,54 +11,30 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane id="rootPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.AppController">
+<BorderPane id="rootPane" fx:id="rootPane" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #F8F8F8#F8F8F;" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.AppController">
    <top>
-      <HBox prefHeight="92.0" prefWidth="1280.0">
+      <HBox prefHeight="44.0" prefWidth="1280.0">
          <children>
-            <VBox prefHeight="232.0" prefWidth="1830.0">
+            <VBox prefHeight="74.0" prefWidth="176.0">
                <children>
-                  <HBox prefHeight="78.0" prefWidth="1260.0" style="-fx-background-color: white;">
+                  <HBox prefHeight="74.0" prefWidth="101.0" style="-fx-background-color: #f7f7f7 #f7f7f7;">
                      <children>
-                        <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="210.0" prefWidth="253.0" style="-fx-background-color: white;">
+                        <HBox alignment="TOP_CENTER" minWidth="-Infinity" prefHeight="64.0" prefWidth="101.0" style="-fx-background-color: #f7f7f7 #f7f7f7;" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="210.0" fitWidth="208.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="logo_btn" fitHeight="64.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                                  <image>
-                                    <Image url="@../icons/ugle.png"/>
+                                    <Image url="@../icons/ugle.png" />
                                  </image>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
                               </ImageView>
                            </children>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="142.0" prefWidth="987.0" style="-fx-background-color: #e6faff#e6faff #e6faff#e6faff #e6faff#e6faff #e6faff#e6faff;">
-                           <HBox.margin>
-                              <Insets left="20.0" right="20.0" top="20.0" />
-                           </HBox.margin>
-                           <children>
-                              <HBox id="searchbar" alignment="CENTER" maxHeight="70.0" prefHeight="70.0" prefWidth="2171.0" style="-fx-background-color: white; -fx-background-radius: 20;">
-                                 <children>
-                                    <HBox prefHeight="97.0" prefWidth="68.0" />
-                                    <ImageView fitHeight="49.0" fitWidth="47.0" opacity="0.64" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/search.png"/>
-                                       </image>
-                                    </ImageView>
-                                    <TextField id="searchField" fx:id="searchField" onAction="#handleSearchFieldAction" prefHeight="57.0" prefWidth="1050.0" promptText="Søk på fag" style="-fx-background-color: white;">
-                                       <font>
-                                          <Font size="30.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="5.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" />
-                                 </HBox.margin>
-                              </HBox>
-                           </children>
                         </HBox>
                      </children>
                      <VBox.margin>
@@ -67,6 +43,32 @@
                   </HBox>
                </children>
             </VBox>
+            <HBox prefHeight="74.0" prefWidth="1162.0" style="-fx-background-color: #F8F8F8;" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button id="mainPage_btn" minHeight="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="500.0" text="Fagoversikt" textAlignment="CENTER" textFill="#888889" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Avenir Next Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button id="chatbot_btn" fx:id="chatbot_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openChatBot" prefHeight="48.0" prefWidth="500.0" text="Chatbot" textAlignment="CENTER" textFill="#888889" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Avenir Next Bold" size="18.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/robot.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="logout_btn" fx:id="logoutAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="48.0" prefWidth="500.0" text="Logg ut" textAlignment="CENTER" textFill="#888889" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Avenir Next Bold" size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets top="1.0" />
@@ -74,78 +76,75 @@
       </HBox>
    </top>
    <center>
-      <VBox prefHeight="579.0" prefWidth="986.0" style="-fx-background-color: #e6faff#e6faff #e6faff#e6faff;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="679.0" prefWidth="1234.0" style="-fx-background-color: #F8F8F;" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="150.0" prefWidth="966.0">
+            <Label prefHeight="52.0" prefWidth="447.0" text="Fagoversikt ">
+               <font>
+                  <Font name="Avenir Next Bold" size="48.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Her er en oversikt over alle fag på NTNU. Klikk på det faget du vil lese mer om. Lurer du på noe kan du alltids spørre chatboten " wrappingWidth="479.77587890625">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Text>
+            <VBox prefHeight="595.0" prefWidth="1020.0" style="-fx-background-color: #e6faff#e6faff #e6faff#e6faff #e6faff#e6faff #e6faff#e6faff;">
                <children>
-                  <Label text="Fag">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" />
-                     </HBox.margin>
-                  </Label>
+                  <HBox id="searchbar" alignment="CENTER" maxHeight="70.0" prefHeight="40.0" prefWidth="910.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                     <children>
+                        <ImageView fitHeight="28.0" fitWidth="32.0" opacity="0.64" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+                           <image>
+                              <Image url="@../icons/search.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <TextField id="searchField" fx:id="searchField" onAction="#handleSearchFieldAction" prefHeight="57.0" prefWidth="820.0" promptText="Søk på fag" style="-fx-background-color: white;" HBox.hgrow="NEVER">
+                           <font>
+                              <Font name="Avenir Book" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <ListView id="coursesList" fx:id="coursesList" prefHeight="427.0" prefWidth="910.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+                     </padding>
+                  </ListView>
                </children>
-               <VBox.margin>
-                  <Insets left="20.0" />
-               </VBox.margin>
-               <HBox.margin>
-                  <Insets top="100.0" />
-               </HBox.margin>
-            </HBox>
-            <ListView id="coursesList" fx:id="coursesList" prefHeight="1012.0" prefWidth="1214.0" style="-fx-background-color: white;">
-               <VBox.margin>
-                  <Insets bottom="30.0" left="30.0" right="30.0" />
-               </VBox.margin>
                <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </padding>
-            </ListView>
+               <VBox.margin>
+                  <Insets right="60.0" />
+               </VBox.margin>
+            </VBox>
          </children>
          <BorderPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" />
+            <Insets bottom="20.0" left="100.0" />
          </BorderPane.margin>
          <padding>
-            <Insets top="20.0" />
+            <Insets left="50.0" right="50.0" top="30.0" />
          </padding>
          <HBox.margin>
             <Insets />
          </HBox.margin>
       </VBox>
    </center>
-   <left>
-      <VBox id="menu" opacity="0.71" prefHeight="562.0" prefWidth="254.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-         <children>
-            <VBox id="menu" alignment="BOTTOM_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="254.0" style="-fx-background-color: white;">
-               <children>
-                  <Button id="mainPage_btn" minHeight="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="276.0" text="Fagoversikt" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
-                     <font>
-                        <Font name="Avenir Next Bold" size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="1.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button id="chatbot_btn" fx:id="chatbot_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openChatBot" prefHeight="59.0" prefWidth="289.0" text="Chatbot" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
-                     <font>
-                        <Font name="Avenir Next Bold" size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="1.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button id="logout_btn" fx:id="logoutAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="79.0" prefWidth="253.0" text="Logg ut" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
-                     <font>
-                        <Font name="Avenir Next Bold" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="1.0" left="1.0" top="320.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
-   </left>
 </BorderPane>

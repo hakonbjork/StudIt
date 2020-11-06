@@ -1,3 +1,5 @@
+@import "buttons.css";
+
 #borderpane {
     -fx-background-color:  #cee7f8;
     background-color:  #cee7f8;
@@ -15,11 +17,6 @@
     -fx-border-radius: 30%;
     -fx-margin: 0px 40px 20px 60;
     -fx-padding: 2 10 10 10;
-}
-
-#menu {
-    -fx-background-color: white;
-
 }
 
 .list-cell:even{
@@ -89,28 +86,6 @@
     opacity: 0;
     -fx-opacity: 0;
 }
-
-#chatbot_btn, #ntnu_btn, #mainPage_btn, #logout_btn {
-    -fx-background-color: white;
-    background-color: white;
-}
-
-#chatbot_btn:hover, #mainPage_btn:hover, #logout_btn:hover {
-    
-    background-color: black;
-    -fx-background-color: black;
-
-    border-bottom-color: grey;
-    -fx-border-bottom-color: grey;
-
-    border-top-color: grey;
-    -fx-border-top-color: grey;
-    }
-
-    #chatbot_btn:active, #mainPage_btn:active, #logout_btn:active {
-        background-color: black;
-        -fx-background-color: black;
-    }
 
 
 

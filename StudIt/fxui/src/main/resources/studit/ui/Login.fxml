@@ -34,7 +34,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <Label alignment="CENTER" prefHeight="94.0" prefWidth="400.0" style="-fx-background-color: white;" text="Logg inn" textFill="#06349c">
+                  <Label alignment="CENTER" prefHeight="94.0" prefWidth="400.0" style="-fx-background-color: white;" text="Logg inn" textFill="#2c5282">
                      <font>
                         <Font name="Avenir Next Bold" size="64.0" />
                      </font>
@@ -76,7 +76,7 @@
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
             </PasswordField>
-            <Button fx:id="login_btn" id="login_btn" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="40.0" prefWidth="300.0" text="Logg inn" textFill="#06349c">
+            <Button fx:id="login_btn" id="login_btn" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="40.0" prefWidth="300.0" text="Logg inn" textFill="#2c5282">
                <VBox.margin>
                   <Insets bottom="10.0" top="30.0" />
                </VBox.margin>
@@ -89,7 +89,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="44.0" prefWidth="598.0">
                      <children>
-                        <Text fx:id="registerUser_btn" fill="#6b6b6b" onMouseClicked="#registerUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Har du ikke en bruker?" textAlignment="CENTER">
+                        <Text fx:id="registerUser_btn" fill="#2c5282" onMouseClicked="#registerUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Har du ikke en bruker?" textAlignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -97,17 +97,12 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Text>
-                        <Text fx:id="registerUser_btn1" fill="#06349c" onMouseClicked="#registerUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer deg" textAlignment="CENTER">
-                           <font>
-                              <Font name="Avenir Book" size="14.0" />
-                           </font>
-                        </Text>
                      </children>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </HBox>
-                  <Text fx:id="forgotPassword" fill="#06349c" onMouseClicked="#forgotPassword" strokeType="OUTSIDE" strokeWidth="0.0" text="Glemt passord?" textAlignment="CENTER" wrappingWidth="201.50399780273438">
+                  <Text fx:id="forgotPassword" fill="#2c5282" onMouseClicked="#forgotPassword" strokeType="OUTSIDE" strokeWidth="0.0" text="Glemt passord?" textAlignment="CENTER" wrappingWidth="201.50399780273438">
                      <font>
                         <Font name="Avenir Book" size="14.0" />
                      </font>
