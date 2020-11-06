@@ -1,22 +1,11 @@
 @import "buttons.css";
 
-#borderpane {
-    -fx-background-color:  #cee7f8;
-    background-color:  #cee7f8;
-}
-
-#searchbar {
-    -fx-background-color: white;
-    -fx-border-radius: 30%;
-    -fx-margin: 80px 40px 80px 0;
-    -fx-padding: 0 0 0 20;
-}
-
 #coursesList {
     -fx-background-color: white;
     -fx-border-radius: 30%;
     -fx-margin: 0px 40px 20px 60;
     -fx-padding: 2 10 10 10;
+
 }
 
 .list-cell:even{
@@ -49,6 +38,7 @@
 .list-cell > * {
     -fx-font-family: Consolas;
     -fx-font-size: 25;
+    -fx-cursor: hand;
 }
 
 .list-cell:odd{

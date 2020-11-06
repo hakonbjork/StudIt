@@ -13,169 +13,145 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane id="rootPane" fx:id="rootPane" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #F8F8F8;" stylesheets="@course.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.DiscussionController">
+<BorderPane id="rootPane" fx:id="rootPane" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #F8F8F8;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.DiscussionController">
    <top>
-      <HBox prefHeight="232.0" prefWidth="2000.0" style="-fx-background-color: #f7f7f7 #f7f7f7;">
+      <HBox prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #EBF8FF;">
          <children>
-            <VBox prefHeight="232.0" prefWidth="1700.0">
-               <children>
-                  <HBox prefHeight="232.0" prefWidth="500.0" style="-fx-background-color: white;">
-                     <children>
-                        <HBox prefHeight="94.0" prefWidth="1000.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="284.0" prefWidth="168.0" style="-fx-background-color: #F8F8F8;">
-                                 <children>
-                                    <ImageView fx:id="logo_btn" fitHeight="68.0" fitWidth="80.0" onMouseClicked="#handleMainPageAction" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../icons/ugle.png" />
-                                       </image>
-                                       <VBox.margin>
-                                          <Insets top="10.0" />
-                                       </VBox.margin>
-                                    </ImageView>
-                                    <Button id="information_btn" fx:id="information_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openInformationTab" prefHeight="58.0" prefWidth="43.0" style="-fx-background-color: #e6faff#e6faff #e6faff#e6faff; -fx-background-radius: 100;" textAlignment="CENTER" textFill="#242424dc">
-                                       <font>
-                                          <Font name="Avenir Next Bold" size="24.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fitHeight="38.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../icons/arrow.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <VBox.margin>
-                                          <Insets top="65.0" />
-                                       </VBox.margin>
-                                    </Button>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </VBox>
-                              <VBox prefHeight="284.0" prefWidth="1151.0" style="-fx-background-color: #F8F8F8;" stylesheets="@mainPage.css" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <HBox alignment="CENTER" prefHeight="49.0" prefWidth="1115.0" style="-fx-background-color: #f7f7f7 #f7f7f7;">
-                                       <children>
-                                          <Button id="mainPage_btn" fx:id="mainPageAction" mnemonicParsing="false" onAction="#handleMainPageAction" prefHeight="48.0" prefWidth="456.0" text="Fagoversikt" textAlignment="CENTER" textFill="#888889" HBox.hgrow="ALWAYS">
-                                             <font>
-                                                <Font name="Avenir Next Bold" size="18.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </Button>
-                                          <Button id="chatbot_btn" fx:id="chatbot_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openChatBot" prefHeight="48.0" prefWidth="456.0" text="Chatbot" textAlignment="CENTER" textFill="#888889" HBox.hgrow="ALWAYS">
-                                             <font>
-                                                <Font name="Avenir Next Bold" size="18.0" />
-                                             </font>
-                                             <graphic>
-                                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../icons/robot.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                          <Button id="logout_btn" fx:id="logoutAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="48.0" prefWidth="321.0" text="Logg ut" textAlignment="CENTER" textFill="#888889" HBox.hgrow="ALWAYS">
-                                             <font>
-                                                <Font name="Avenir Next Bold" size="24.0" />
-                                             </font>
-                                          </Button>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <Label id="fagnavn" fx:id="fagnavn1" alignment="BOTTOM_LEFT" prefHeight="70.0" prefWidth="345.0" text="Fagdiskusjon">
-                                       <font>
-                                          <Font name="Avenir Next Bold" size="48.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" right="5.0" />
-                                       </padding>
-                                       <VBox.margin>
-                                          <Insets top="80.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <HBox prefHeight="45.0" prefWidth="1139.0" style="-fx-background-color: #f7f7f7 #f7f7f7;">
-                                       <children>
-                                          <Label id="fagkode" fx:id="fagkode" alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="145.0" text="TDT4109">
-                                             <font>
-                                                <Font name="Avenir Next Bold" size="24.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets left="5.0" right="5.0" />
-                                             </padding>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label id="fagnavn" fx:id="fagnavn" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="901.0" text="Informasjonsteknologi grunnkurs">
-                                             <font>
-                                                <Font name="Avenir Next Bold" size="24.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets left="5.0" right="5.0" />
-                                             </padding>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets top="50.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </HBox>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </HBox>
-   </top>
-   <center>
-      <VBox prefHeight="583.0" prefWidth="1000.0" style="-fx-background-color: #EBF8FF;">
-         <children>
-            <TextField fx:id="newPostInputField" prefHeight="94.0" prefWidth="882.0" promptText="Skriv din kommentar her" VBox.vgrow="ALWAYS">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Button id="information_btn" fx:id="handleAddNewPost" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" mnemonicParsing="false" onAction="#addNewPost" prefHeight="28.0" prefWidth="86.0" text="Send inn" textAlignment="CENTER">
-               <font>
-                  <Font name="Avenir Next Bold" size="13.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Button>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Innlegg" wrappingWidth="219.943603515625">
+            <ImageView fx:id="logo_btn" fitHeight="50.0" fitWidth="80.0" onMouseClicked="#handleMainPageAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/ugle.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Button id="mainPage_btn" fx:id="mainPageAction" mnemonicParsing="false" onAction="#handleMainPageAction" prefHeight="50.0" prefWidth="500.0" text="Fagoversikt" textAlignment="CENTER" textFill="#2a4365" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="Avenir Next Bold" size="18.0" />
                </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <Button id="chatbot_btn" fx:id="chatbot_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openChatBot" prefHeight="50.0" prefWidth="500.0" text="Chatbot" textAlignment="CENTER" textFill="#2a4365" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Avenir Next Bold" size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/robot.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="logout_btn" fx:id="logoutAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="50.0" prefWidth="500.0" text="Logg ut" textAlignment="CENTER" textFill="#2a4365" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Avenir Next Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="682.0" prefWidth="1013.0" style="-fx-background-color: #F8F8F8;">
+         <children>
+            <Label id="fagnavn" fx:id="fagnavn1" alignment="BOTTOM_LEFT" prefHeight="70.0" prefWidth="345.0" text="Fagdiskusjon" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="Avenir Next Bold" size="48.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
                <VBox.margin>
-                  <Insets bottom="10.0" top="20.0" />
+                  <Insets />
                </VBox.margin>
-            </Text>
-            <ListView id="forumList" fx:id="forumList" prefHeight="415.0" prefWidth="794.0" VBox.vgrow="ALWAYS" />
+            </Label>
+            <HBox prefHeight="45.0" prefWidth="1139.0">
+               <children>
+                  <Label id="fagkode" fx:id="fagkode" alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="255.0" text="TDT4109">
+                     <font>
+                        <Font name="Avenir Next Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="fagnavn" fx:id="fagnavn" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="901.0" text="Informasjonsteknologi grunnkurs">
+                     <font>
+                        <Font name="Avenir Next Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox prefHeight="517.0" prefWidth="970.0" style="-fx-background-color: #EBF8FF;">
+               <children>
+                  <TextField fx:id="newPostInputField" prefHeight="94.0" prefWidth="882.0" promptText="Skriv din kommentar her" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button id="information_btn" fx:id="handleAddNewPost" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" mnemonicParsing="false" onAction="#addNewPost" prefHeight="28.0" prefWidth="86.0" text="Send inn" textAlignment="CENTER">
+                     <font>
+                        <Font name="Avenir Next Bold" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Innlegg" wrappingWidth="219.943603515625">
+                     <font>
+                        <Font name="Avenir Next Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="20.0" />
+                     </VBox.margin>
+                  </Text>
+                  <ListView id="forumList" fx:id="forumList" prefHeight="415.0" prefWidth="794.0" VBox.vgrow="ALWAYS" />
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
          </children>
          <BorderPane.margin>
-            <Insets bottom="20.0" left="150.0" right="120.0" top="20.0" />
+            <Insets bottom="20.0" left="70.0" right="120.0" top="65.0" />
          </BorderPane.margin>
          <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" />
          </padding>
       </VBox>
    </center>
+   <left>
+      <Button id="information_btn" fx:id="information_btn" alignment="CENTER" minHeight="-Infinity" mnemonicParsing="false" onAction="#openInformationTab" prefHeight="58.0" prefWidth="43.0" style="-fx-background-radius: 100;" textAlignment="CENTER" textFill="#242424dc" wrapText="true" BorderPane.alignment="TOP_CENTER">
+         <font>
+            <Font name="Avenir Next Bold" size="24.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="38.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <BorderPane.margin>
+            <Insets left="20.0" top="65.0" />
+         </BorderPane.margin>
+      </Button>
+   </left>
 </BorderPane>

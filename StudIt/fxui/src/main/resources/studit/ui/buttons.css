@@ -1,17 +1,19 @@
 
-#chatbot_btn, #mainPage_btn, #logout_btn, #mainpage_back {
-    -fx-background-color: #90CDF4;
-    background-color: #90CDF4;
+#chatbot_btn, #mainPage_btn, #logout_btn, #mainpage_back, #information_btn {
+    background-color: #BEE3F8;
+    border-width: 4px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    -fx-cursor: hand;
 }
 
 #chatbot_btn:hover, #mainPage_btn:hover, #logout_btn:hover, #mainpage_back:hover {
-    background-color:  #BEE3F8;
-    -fx-background-color:  #BEE3F8;
+    background-color:  #EBF8FF;
 }
 
 #chatbot_btn:active, #mainPage_btn:active, #logout_btn:active, #mainpage_back:hover {
     background-color:  #90CDF4;
-    -fx-background-color:  #90CDF4;
 }
 
 

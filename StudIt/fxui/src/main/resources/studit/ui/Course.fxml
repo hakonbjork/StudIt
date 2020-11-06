@@ -13,66 +13,43 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane id="rootPane" fx:id="rootPane" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #F8F8F8;" stylesheets="@gr2060/StudIt/src/main/resources/studit/ui/course.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.CourseController">
+<BorderPane id="rootPane" fx:id="rootPane" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #F8F8F8;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.CourseController">
     <top>
-        <HBox prefHeight="100.0" prefWidth="1280.0" style="-fx-background-color: #F8F8F8;">
+        <HBox prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #EBF8FF;">
             <BorderPane.margin>
                 <Insets />
             </BorderPane.margin>
          <children>
-            <VBox prefHeight="447.0" prefWidth="1280.0">
-               <children>
-                  <HBox prefHeight="94.0" prefWidth="1280.0">
-                     <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="94.0" prefWidth="179.0" style="-fx-background-color: #f7f7f7 #f7f7f7 #f7f7f7 #f7f7f7;">
-                           <children>
-                              <ImageView fx:id="logo_btn" fitHeight="72.0" fitWidth="80.0" onMouseClicked="#handleMainPageAction" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/ugle.png" />
-                                 </image>
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </ImageView>
-                           </children>
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox prefHeight="94.0" prefWidth="1134.0" style="-fx-background-color: #f7f7f7;" HBox.hgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1133.0" style="-fx-background-color: #F5F5F5;">
-                                 <children>
-                                    <Button id="mainPage_btn" fx:id="mainPageAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleMainPageAction" prefHeight="48.0" prefWidth="500.0" text="Fagoversikt" textAlignment="CENTER" textFill="#888889" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font name="Avenir Next Bold" size="18.0" />
-                                       </font>
-                                    </Button>
-                                    <Button id="chatbot_btn" fx:id="chatbot_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openChatBot" prefHeight="48.0" prefWidth="500.0" text="Chatbot" textAlignment="CENTER" textFill="#888889" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font name="Avenir Next Bold" size="18.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../icons/robot.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button id="logout_btn" fx:id="logoutAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="49.0" prefWidth="262.0" text="Logg ut" textAlignment="CENTER" textFill="#888889" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font name="Avenir Next Bold" size="24.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
+            <ImageView fx:id="logo_btn" fitHeight="50.0" fitWidth="80.0" onMouseClicked="#handleMainPageAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/ugle.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Button id="mainPage_btn" fx:id="mainPageAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleMainPageAction" prefHeight="50.0" prefWidth="500.0" text="Fagoversikt" textAlignment="CENTER" textFill="#2a4365" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Avenir Next Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button id="chatbot_btn" fx:id="chatbot_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openChatBot" prefHeight="50.0" prefWidth="500.0" text="Chatbot" textAlignment="CENTER" textFill="#2a4365" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Avenir Next Bold" size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/robot.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="logout_btn" fx:id="logoutAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="50.0" prefWidth="500.0" text="Logg ut" textAlignment="CENTER" textFill="#2a4365" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Avenir Next Bold" size="18.0" />
+               </font>
+            </Button>
          </children>
         </HBox>
     </top>
@@ -105,12 +82,15 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </HBox>
-            <VBox prefHeight="583.0" prefWidth="1238.0" style="-fx-background-color: #e6faff#e6faff #e6faff#e6faff;">
+            <VBox prefHeight="583.0" prefWidth="1238.0" style="-fx-background-color: #EBF8FF;">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Informasjon om emnet" wrappingWidth="219.943603515625">
                      <font>
                         <Font name="Avenir Next Bold" size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
                   </Text>
                       <TextArea id="courseInformation" fx:id="courseInformation" editable="false" prefHeight="250.0" prefWidth="600.0" text="&#10;" wrapText="true" VBox.vgrow="ALWAYS">
                           <font>
@@ -124,6 +104,9 @@
                      <font>
                         <Font name="Avenir Next Bold" size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
                   </Text>
                   <TextArea id="litterature" fx:id="litterature" editable="false" prefHeight="250.0" prefWidth="600.0" text="&#10;" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
@@ -137,6 +120,9 @@
                      <font>
                         <Font name="Avenir Next Bold" size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
                   </Text>
                   <TextArea id="tips_tricks" fx:id="tips_tricks" editable="false" prefHeight="250.0" prefWidth="600.0" text="&#10;" wrapText="true" VBox.vgrow="ALWAYS">
                      <font>
@@ -155,25 +141,25 @@
       </VBox>
     </center>
     <right>
-        <VBox prefHeight="650.0" prefWidth="264.0" style="-fx-background-color: #F8F8F8;" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" prefHeight="665.0" prefWidth="264.0" style="-fx-background-color: #F8F8F8;" BorderPane.alignment="CENTER">
             <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Har du noe å si om dette faget? Se diskusjonen og kom med din mening i fagdiskusjonen da vel!" wrappingWidth="212.56982421875">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Har du noe å si om dette faget? Se diskusjonen og kom med din mening i fagdiskusjonen da vel!" wrappingWidth="259.745849609375" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Avenir Book" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" />
                </VBox.margin>
             </Text>
-            <Button id="discussion_btn" fx:id="discussion_btn" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" mnemonicParsing="false" onAction="#openDiscussion" prefHeight="37.0" prefWidth="177.0" text="Fagdiskusjon" textAlignment="CENTER" textFill="#242424ed" VBox.vgrow="ALWAYS">
+            <Button id="discussion_btn" fx:id="discussion_btn" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" mnemonicParsing="false" onAction="#openDiscussion" prefHeight="37.0" prefWidth="119.0" style="-fx-background-color: #90CDF4;" text="Diskusjon" textAlignment="CENTER" textFill="#242424ed" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Avenir Next Bold" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="40.0" left="10.0" />
+                  <Insets bottom="40.0" top="5.0" />
                </VBox.margin>
             </Button>
-            <VBox prefHeight="479.0" prefWidth="274.0" style="-fx-background-color: #e6faff#e6faff;" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="479.0" prefWidth="274.0" style="-fx-background-color: #EBF8FF;" VBox.vgrow="ALWAYS">
                <children>
                   <VBox prefHeight="111.0" prefWidth="238.0" VBox.vgrow="ALWAYS">
                      <children>
@@ -189,7 +175,7 @@
                                                     <Image url="@../icons/star.png" />
                                                 </image>
                                                 <HBox.margin>
-                                                    <Insets bottom="8.0" right="10.0" />
+                                                    <Insets right="10.0" />
                                                 </HBox.margin>
                                             </ImageView>
                                             <Label id="rating" fx:id="rating" text="7.8">
@@ -211,23 +197,41 @@
                      <font>
                         <Font name="Avenir Next Bold" size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </Text>
-                  <TextField id="eksamensdato" fx:id="eksamensdato" editable="false" prefHeight="129.0" prefWidth="238.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS" />
+                  <TextField id="eksamensdato" fx:id="eksamensdato" editable="false" prefHeight="80.0" prefWidth="244.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin></TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vurderingsform" wrappingWidth="183.231689453125">
                      <font>
                         <Font name="Avenir Next Bold" size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
                   </Text>
-                  <TextField id="vurderingsform" fx:id="vurderingsform" editable="false" prefHeight="137.0" prefWidth="238.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS" />
+                  <TextField id="vurderingsform" fx:id="vurderingsform" editable="false" prefHeight="80.0" prefWidth="244.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin></TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hjelpemidler" wrappingWidth="183.231689453125">
                      <font>
                         <Font name="Avenir Next Bold" size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
                   </Text>
-                  <TextField id="hjelpemidler" fx:id="hjelpemidler" editable="false" prefHeight="109.0" prefWidth="238.0" style="-fx-background-color: transparenttransparent;" VBox.vgrow="ALWAYS" />
+                  <TextField id="hjelpemidler" fx:id="hjelpemidler" editable="false" prefHeight="80.0" prefWidth="244.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin></TextField>
                </children>
                <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
                <VBox.margin>
                   <Insets top="20.0" />
@@ -235,12 +239,12 @@
             </VBox>
             </children>
          <BorderPane.margin>
-            <Insets bottom="30.0" right="30.0" />
+            <Insets bottom="30.0" right="30.0" top="150.0" />
          </BorderPane.margin>
         </VBox>
     </right>
    <left>
-      <Button id="information_btn" fx:id="mainpage_back" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleMainPageAction" prefHeight="58.0" prefWidth="43.0" style="-fx-background-color: #e6faff#e6faff #e6faff#e6faff; -fx-background-radius: 100;" textAlignment="CENTER" textFill="#242424dc" BorderPane.alignment="TOP_LEFT">
+      <Button id="mainpage_back" fx:id="mainpage_back" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleMainPageAction" prefHeight="58.0" prefWidth="43.0" style="-fx-background-radius: 100;" textAlignment="CENTER" textFill="#242424dc" BorderPane.alignment="TOP_LEFT">
          <font>
             <Font name="Avenir Next Bold" size="24.0" />
          </font>
