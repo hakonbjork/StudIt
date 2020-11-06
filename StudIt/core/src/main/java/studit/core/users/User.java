@@ -12,15 +12,6 @@ public class User {
 
   }
 
-  // TODO: This method is decrepated, and must be removed in future releases
-  public User(String name, String username, String mail, String password) {
-    this.name = name;
-    this.username = username;
-    this.mail = mail;
-    this.password = password;
-    this.uniqueID = 0;
-  }
-
   public User(String name, String username, String mail, String password, int uniqueID) {
     this.name = name;
     this.username = username;
