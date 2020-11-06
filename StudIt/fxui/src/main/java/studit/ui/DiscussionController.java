@@ -26,7 +26,6 @@ import studit.ui.remote.RemoteStuditModelAccess;
 import studit.ui.CommentListCell;
 import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
-import java.util.*; 
 
 
 public class DiscussionController implements Initializable {
@@ -76,9 +75,6 @@ public class DiscussionController implements Initializable {
     this.courseItem = name;
   }
 
-  //TODO Vi må fikse at brukeren er en variabel som er tilgjengelig i alle controllers slik at kind of er en global variabel.
-  //Pluss se på API i forhold til add comment.
-
   @FXML
   void addNewPost(ActionEvent event) {
   
@@ -92,6 +88,7 @@ public class DiscussionController implements Initializable {
     }
   }
 
+
   public void updateView(){
     
     try {
@@ -101,7 +98,6 @@ public class DiscussionController implements Initializable {
       loadView();
 
     } catch (ApiCallException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
 
@@ -255,8 +251,16 @@ public class DiscussionController implements Initializable {
 
 public void setCurrentUser(User user){
     this.currentUser = user;
-  }
+}
 
+//Methods for test
+public TextField getInputField(){
+  return this.newPostInputField;
+}
+
+public ListView<Comment> getForumList(){
+  return this.forumList;
+}
 }
 
   
