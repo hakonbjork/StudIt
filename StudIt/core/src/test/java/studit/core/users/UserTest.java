@@ -10,7 +10,7 @@ public class UserTest {
 
   @BeforeEach
   public void initEach() {
-    this.user = new User("Hans Hansen", "hanse", "hanse@gmail.com", "hanse123");
+    this.user = new User("Hans Hansen", "hanse", "hanse@gmail.com", "hanse123", 0);
   }
 
   @Test
