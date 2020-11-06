@@ -23,10 +23,6 @@ import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
-import studit.ui.CommentListCell;
-import studit.core.mainpage.CourseItem;
-import studit.core.users.User;
-import java.util.*; 
 
 
 public class DiscussionController implements Initializable {

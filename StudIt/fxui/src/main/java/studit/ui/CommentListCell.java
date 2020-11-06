@@ -1,6 +1,5 @@
 package studit.ui;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import studit.core.mainpage.Comment;
@@ -14,7 +13,6 @@ import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
 import java.util.List;
 import studit.core.mainpage.CourseItem;
-import studit.core.mainpage.Comment;
 
 public class CommentListCell extends BorderPane {
 
