@@ -126,7 +126,8 @@ public class RemoteStuditModelAccess {
       return true;
     } catch (ApiCallException e) {
       if (!test) {
-        e.printStackTrace();
+        //e.printStackTrace();
+        System.out.println("Could not establish connection to server.");
       }
       return false;
     }

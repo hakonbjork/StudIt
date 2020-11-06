@@ -101,9 +101,10 @@ public class CourseController implements Initializable {
     this.litterature.setText(litteratur);
   }
 
+  /*
   public void setRating(Float rating) {
     this.rating.setText(rating.toString());
-  }
+  } */
 
   // public void setMainScene(Scene scene) {
   // this.mainScene = scene;

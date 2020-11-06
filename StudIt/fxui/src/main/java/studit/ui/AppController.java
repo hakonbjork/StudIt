@@ -23,9 +23,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
+import studit.core.users.User;
 import studit.ui.chatbot.Chatbot;
 import studit.ui.remote.ApiCallException;
-import studit.core.users.User;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class AppController {
@@ -80,7 +80,7 @@ public class AppController {
   /**
    * Function to initialize AppController.
    * 
-   * @throws ApiCallException
+   * @throws ApiCallException If connection to server could not be established.
    */
   public void initialize() throws ApiCallException {
     loadData();
@@ -174,8 +174,6 @@ public class AppController {
         setLabel(coursesList.getSelectionModel().getSelectedItem());
 
         try {
-          Stage primaryStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();
-
           // FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
           // Parent mainPane = mainLoader.load();
           // Scene mainScene = new Scene(mainPane);
@@ -183,17 +181,17 @@ public class AppController {
           // getting loader and a pane for the second scene.
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
           Parent coursePane = courseLoader.load();
-          Scene courseScene = new Scene(coursePane);
-
           // injecting first scene into the controller of the second scene
           CourseController courseController = (CourseController) courseLoader.getController();
           // courseController.setMainScene(mainScene);
-
           // injecting second scene into the controller of the first scene
           CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
           courseController.setCourseItem(courseItem);
           courseController.setCurrentUser(user);
           courseController.updateView();
+
+          Stage primaryStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();
+          Scene courseScene = new Scene(coursePane);
 
           primaryStage.setScene(courseScene);
           primaryStage.setTitle("StudIt");
@@ -219,7 +217,7 @@ public class AppController {
    * This function should actually fetch data from a database. This will be
    * implemented later.
    * 
-   * @throws ApiCallException
+   * @throws ApiCallException If connection to server could not be established.
    */
   private void loadData() throws ApiCallException {
 
@@ -230,9 +228,9 @@ public class AppController {
 
 
     for (CourseItem c : items) {
-      this.list.add(c.getFagkode() + " " + c.getFagnavn());
+      this.list.add(c.getFagnavn());
     }
-
+    
     this.coursesList.setItems(this.list);
 
   }

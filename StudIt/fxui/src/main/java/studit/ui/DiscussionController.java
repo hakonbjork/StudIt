@@ -23,6 +23,10 @@ import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
+import studit.ui.CommentListCell;
+import studit.core.mainpage.CourseItem;
+import studit.core.users.User;
+
 
 public class DiscussionController implements Initializable {
 
@@ -71,10 +75,6 @@ public class DiscussionController implements Initializable {
     this.courseItem = name;
   }
 
-  // TODO Vi må fikse at brukeren er en variabel som er tilgjengelig i alle
-  // controllers slik at kind of er en global variabel.
-  // Pluss se på API i forhold til add comment.
-
   @FXML
   void addNewPost(ActionEvent event) {
 
@@ -88,8 +88,9 @@ public class DiscussionController implements Initializable {
     }
   }
 
-  public void updateView() {
 
+  public void updateView(){
+    
     try {
 
       this.courseItem = remoteStuditModelAccess.getCourseByFagkode(this.courseItem.getFagkode());
@@ -99,7 +100,6 @@ public class DiscussionController implements Initializable {
       loadView();
 
     } catch (ApiCallException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
 
@@ -219,23 +219,33 @@ public class DiscussionController implements Initializable {
 
       forumList.setCellFactory(param -> new ListCell<Comment>() {
 
-        private CommentListCell commentListCell;
-
-        @Override
-        public void updateItem(Comment comment, boolean empty) {
-          super.updateItem(comment, empty);
-          if (empty) {
-            setText(null);
-            setGraphic(null);
-            return;
+			private CommentListCell commentListCell;
+			
+			@Override
+			public void updateItem(Comment comment, boolean empty) {
+				super.updateItem(comment, empty);
+				if(empty) {
+					setText(null);
+					setGraphic(null);
+				return;
+      }
+  
+       int id = comment.getUniqueID();
+       
+          try {
+            Comment com = remoteStuditModelAccess.getCommentById(courseItem.getFagkode(), id);
+            commentListCell = new CommentListCell(com, currentUser, courseItem);
+            setGraphic(commentListCell);
+          } catch (ApiCallException e) {
+            e.printStackTrace();
           }
-          commentListCell = new CommentListCell(comment, currentUser, courseItem);
-
-          setGraphic(commentListCell);
-        }
-      });
-
-    } else {
+        
+       
+			}
+     });
+     
+  
+    } else{
 
       System.out.println("Dette fagets diskusjon har enda ingen kommentarer");
       forumList.setItems(listView);
@@ -244,6 +254,15 @@ public class DiscussionController implements Initializable {
 
   public void setCurrentUser(User user) {
     this.currentUser = user;
+  }
+
+  //Methods for test
+  public TextField getInputField(){
+   return this.newPostInputField;
+  }
+
+  public ListView<Comment> getForumList(){
+   return this.forumList;
   }
 
 }
