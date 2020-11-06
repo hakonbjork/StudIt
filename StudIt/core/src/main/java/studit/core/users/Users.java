@@ -121,6 +121,16 @@ public class Users {
   }
 
   /**
+   * Get User object by username.
+   * 
+   * @param username the respective users username
+   * @return User object if user with username exists, otherwise null
+   */
+  public User getUserByUsername(String username) {
+    return getUserByID(getIDbyUsername(username));
+  }
+
+  /**
    * Change the username of a user.
    * 
    * @param id          unique id

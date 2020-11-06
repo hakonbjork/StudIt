@@ -73,6 +73,11 @@ public class DirectStuditModelAccess extends RemoteStuditModelAccess {
   }
 
   @Override
+  public User getUserByUsername(String username) throws ApiCallException {
+    return studitModel.getUsers().getUserByUsername(username);
+  }
+
+  @Override
   public String[] changePassword(int id, String newPassword) throws ApiCallException {
     String result = studitModel.getUsers().changePassword(id, newPassword);
     return new String[] { result == null ? null : "-1", result == null ? "Success" : result };
