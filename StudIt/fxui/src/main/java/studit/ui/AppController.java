@@ -228,10 +228,9 @@ public class AppController {
     Collection<CourseItem> items = li.getCourseItems();
     this.courseList = (List<CourseItem>) items;
 
-    // System.out.println(items.size());
 
     for (CourseItem c : items) {
-      this.list.add(c.getFagnavn());
+      this.list.add(c.getFagkode() + " " + c.getFagnavn());
     }
 
     this.coursesList.setItems(this.list);

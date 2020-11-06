@@ -216,6 +216,7 @@ public class CourseController implements Initializable {
         if (this.courseItem != null) {
           discussionController.addCourse(this.courseItem);
           discussionController.setCurrentUser(this.currentUser);
+      
           System.out.println("addet courseItem");
           discussionController.updateView();
         }
@@ -234,7 +235,7 @@ public class CourseController implements Initializable {
 
     } else {
 
-      System.out.println("Kunne ikke printe course.fxml med riktig informasjon");
+      System.out.println("Kunne ikke gå til diskusjon med riktig informasjon");
 
     }
   }

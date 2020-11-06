@@ -24,7 +24,6 @@ import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
 
-
 public class DiscussionController implements Initializable {
 
   RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
@@ -72,12 +71,13 @@ public class DiscussionController implements Initializable {
     this.courseItem = name;
   }
 
-  //TODO Vi må fikse at brukeren er en variabel som er tilgjengelig i alle controllers slik at kind of er en global variabel.
-  //Pluss se på API i forhold til add comment.
+  // TODO Vi må fikse at brukeren er en variabel som er tilgjengelig i alle
+  // controllers slik at kind of er en global variabel.
+  // Pluss se på API i forhold til add comment.
 
   @FXML
   void addNewPost(ActionEvent event) {
-  
+
     String input = newPostInputField.getText();
     try {
       remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), this.currentUser.getName(), input);
@@ -88,11 +88,13 @@ public class DiscussionController implements Initializable {
     }
   }
 
-  public void updateView(){
-    
+  public void updateView() {
+
     try {
 
       this.courseItem = remoteStuditModelAccess.getCourseByFagkode(this.courseItem.getFagkode());
+      setFagkode();
+      setFagnavn();
 
       loadView();
 
@@ -101,11 +103,9 @@ public class DiscussionController implements Initializable {
       e.printStackTrace();
     }
 
-    
-
   }
 
- /**
+  /**
    * logs user out, and goes to login scene closes the current window.
    */
   @FXML
@@ -127,7 +127,7 @@ public class DiscussionController implements Initializable {
     }
   }
 
-   /**
+  /**
    * Opens main-page scene and closes the current scene.
    */
   @FXML
@@ -149,12 +149,6 @@ public class DiscussionController implements Initializable {
     }
   }
 
-  //TODO skal denne være her?
-  @FXML
-  void handleNtnuAction(ActionEvent event) {
-
-  }
-
   /**
    * Opens Chatbot.
    */
@@ -167,15 +161,25 @@ public class DiscussionController implements Initializable {
     }
   }
 
+  public void setFagkode() {
+    String label = this.courseItem.getFagkode();
+    this.fagkode.setText(label);
+  }
+
+  public void setFagnavn() {
+    String label = this.courseItem.getFagnavn();
+    this.fagnavn.setText(label);
+  }
+
+
   @FXML
-  void openInformationTab(ActionEvent event){
+  void openInformationTab(ActionEvent event) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("Course.fxml"));
       Parent root = loader.load();
       CourseController courseController = (CourseController) loader.getController();
       courseController.setCourseItem(this.courseItem);
       courseController.updateView();
-
 
       Stage stage2 = new Stage();
       stage2.setScene(new Scene(root));
@@ -190,17 +194,16 @@ public class DiscussionController implements Initializable {
     }
   }
 
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
   }
 
-  public void loadView(){
+  public void loadView() {
 
     listView.clear();
 
-    if(this.courseItem.getDiskusjon() != null){
+    if (this.courseItem.getDiskusjon() != null) {
 
       this.fagnavn.setText(this.courseItem.getFagnavn());
 
@@ -210,41 +213,37 @@ public class DiscussionController implements Initializable {
 
         listView.add(comment);
 
-      }      
+      }
 
       forumList.setItems(listView);
 
       forumList.setCellFactory(param -> new ListCell<Comment>() {
 
-			private CommentListCell commentListCell;
-			
-			@Override
-			public void updateItem(Comment comment, boolean empty) {
-				super.updateItem(comment, empty);
-				if(empty) {
-					setText(null);
-					setGraphic(null);
-				return;
-			}
-        commentListCell = new CommentListCell(comment, currentUser, courseItem);
-            
-				setGraphic(commentListCell);
-			}
-     });
-     
-  
-    } else{
+        private CommentListCell commentListCell;
+
+        @Override
+        public void updateItem(Comment comment, boolean empty) {
+          super.updateItem(comment, empty);
+          if (empty) {
+            setText(null);
+            setGraphic(null);
+            return;
+          }
+          commentListCell = new CommentListCell(comment, currentUser, courseItem);
+
+          setGraphic(commentListCell);
+        }
+      });
+
+    } else {
 
       System.out.println("Dette fagets diskusjon har enda ingen kommentarer");
       forumList.setItems(listView);
     }
-}
+  }
 
-public void setCurrentUser(User user){
+  public void setCurrentUser(User user) {
     this.currentUser = user;
   }
 
 }
-
-  
-
