@@ -229,10 +229,19 @@ public class DiscussionController implements Initializable {
 					setText(null);
 					setGraphic(null);
 				return;
-			}
-        commentListCell = new CommentListCell(comment, currentUser, courseItem);
-            
-				setGraphic(commentListCell);
+      }
+  
+       int id = comment.getUniqueID();
+       
+          try {
+            Comment com = remoteStuditModelAccess.getCommentById(courseItem.getFagkode(), id);
+            commentListCell = new CommentListCell(com, currentUser, courseItem);
+            setGraphic(commentListCell);
+          } catch (ApiCallException e) {
+            e.printStackTrace();
+          }
+        
+       
 			}
      });
      
