@@ -16,11 +16,7 @@
         "comments" : [ {
           "brukernavn" : "BobbyBigBoi",
           "kommentar" : "Bra saker!",
-<<<<<<< HEAD
-          "dato" : "06-11-2020 06:22:13",
-=======
-          "dato" : "06-11-2020 05:23:03",
->>>>>>> discussion-page
+          "dato" : "07-11-2020 11:09:36",
           "upvotes" : "1",
           "downvotes" : "1",
           "uniqueID" : "0",
@@ -29,11 +25,7 @@
         }, {
           "brukernavn" : "BobbyBigBoi",
           "kommentar" : "Ok saker :/",
-<<<<<<< HEAD
-          "dato" : "06-11-2020 06:22:13",
-=======
-          "dato" : "06-11-2020 05:23:03",
->>>>>>> discussion-page
+          "dato" : "07-11-2020 11:09:36",
           "upvotes" : "0",
           "downvotes" : "0",
           "uniqueID" : "1",
@@ -42,11 +34,7 @@
         }, {
           "brukernavn" : "BjarteBrorMor",
           "kommentar" : "Bobby er en idiot!",
-<<<<<<< HEAD
-          "dato" : "06-11-2020 06:22:13",
-=======
-          "dato" : "06-11-2020 05:23:03",
->>>>>>> discussion-page
+          "dato" : "07-11-2020 11:09:36",
           "upvotes" : "2",
           "downvotes" : "0",
           "uniqueID" : "2",

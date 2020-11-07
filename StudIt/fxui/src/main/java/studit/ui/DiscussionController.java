@@ -32,7 +32,7 @@ public class DiscussionController implements Initializable {
 
   RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
-  private User currentUser;
+  private User currentUser = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com", "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
   @FXML
   private BorderPane rootPane;
@@ -80,7 +80,7 @@ public class DiscussionController implements Initializable {
 
     String input = newPostInputField.getText();
     try {
-      remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), this.currentUser.getName(), input);
+      remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), this.currentUser.getUsername(), input);
       updateView();
       newPostInputField.clear();
     } catch (ApiCallException e) {
@@ -263,6 +263,14 @@ public class DiscussionController implements Initializable {
 
   public ListView<Comment> getForumList(){
    return this.forumList;
+  }
+
+  public void setStuditModelAccess(RemoteStuditModelAccess r){
+    this.remoteStuditModelAccess = r;
+  }
+
+  public User getCurrentUser(){
+    return this.currentUser;
   }
 
 }

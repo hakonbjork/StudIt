@@ -198,5 +198,16 @@ public class CommentListCell extends BorderPane {
       this.upvotes.setText(upvotes);
     }
 
+    public Button getButton(){
+      return this.button;
+    }
+
   }
+
+  //methods for test
+  public Body getBody() {
+    return this.body;
+  }
+
+
 }
