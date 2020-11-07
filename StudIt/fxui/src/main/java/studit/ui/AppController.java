@@ -35,6 +35,11 @@ public class AppController {
   private User user = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com",
       "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
+  /*
+  * The user that is currently logged in. 
+  */
+  private User currentUser = null;
+
   @FXML
   private BorderPane rootPane;
 
@@ -75,6 +80,24 @@ public class AppController {
 
   public void addUser(User user) {
     this.user = user;
+  }
+
+  /**
+   * Sets the current user (the user that is logged in from the input).
+   * 
+   * @param user The user that should be set as the current user.
+   */
+  public void setCurrentUser(User user) {
+    this.currentUser = user;
+  }
+
+  /**
+   * Gets the user that is currently logged in.
+   * 
+   * @return The current user
+   */
+  public User getCurrentUser() {
+    return this.currentUser;
   }
 
   /**

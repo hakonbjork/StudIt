@@ -3,6 +3,7 @@ package studit.ui;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -13,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import studit.core.users.User;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class LoginController {
@@ -35,6 +37,7 @@ public class LoginController {
   Text loginInfoText;
 
   private RemoteStuditModelAccess remote;
+  private User currentUser;
 
   /**
    * The constrcutur sets up a remote, to call methods from
@@ -42,16 +45,27 @@ public class LoginController {
    */
   public LoginController() {
     this.remote = new RemoteStuditModelAccess();
+    this.currentUser = null;
   }
 
-  /*
-  * Initializes the listener for ENTER buttin in passwordField.
-  */
+  /**
+   * Initializes the listener for ENTER buttin in passwordField.
+   */
   public void initialize() {
     listenForEnter();
   }
 
-  /*
+  /**
+   * Enables other classes in frontend to get the user that is currently logged
+   * in.
+   * 
+   * @return the user used to successfully logged in, else null.
+   */
+  public User getCurrentUser() {
+    return this.currentUser;
+  }
+
+  /**
    * Creates a listener for the ENTER button when passwordField is highlited. When
    * ENTER is pressed, the loginButtonAction is triggered. This method is only
    * needed to run once to create the listener.
@@ -102,16 +116,25 @@ public class LoginController {
   public void loginButtonAction() throws Exception {
     String username = usernameField.getText();
     String password = passwordField.getText();
+
+    // Check if username and password is correct
     if (remote.authenticateLogin(username, password)) {
       loginInfoText.setText("");
-      BorderPane pane = FXMLLoader.load(getClass().getResource("App.fxml"));
-      Scene scene = new Scene(pane);
-      // scene.getStylesheets().add(getClass().getResource("listStyles.css").toExternalForm());
-      // TODO: trenger vi linjen over?
+      this.currentUser = remote.getUserByUsername(username);
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+      Parent root = loader.load();
+
+      // Transfers the information about which user logged in to appController
+      AppController appController = (AppController) loader.getController();
+      appController.setCurrentUser(this.currentUser);
+
+      Scene scene = new Scene(root);
       Stage stage = new Stage();
       stage.setScene(scene);
       stage.setTitle("StudIt");
       stage.show();
+
+      //Hide the login window
       Stage stage2 = (Stage) passwordField.getScene().getWindow();
       stage2.hide();
     } else {
