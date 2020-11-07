@@ -70,6 +70,26 @@ public class UsersResource {
   }
 
   /**
+   * Returns response with User object.
+   * 
+   * @param username username of the requested user.
+   * @return Response with User json if the user exists (200 ok), otherwise 404 not found.
+   */
+  @GET
+  @Path("/username/{username}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getUserByUsername(@PathParam("username") String username) {
+    User user = users.getUserByUsername(username);
+    if (user == null) {
+      LOG.debug("User with the username '" + username + "' not found");
+      return Response.status(Response.Status.NOT_FOUND)
+          .entity("user with the username '" + username + "' does not exist").build();
+    }
+    LOG.debug("Returning user with id '" + username + "'");
+    return Response.ok(user, MediaType.APPLICATION_JSON).build();
+  }
+
+/**
    * Removes a User from the database.
    * 
    * @param id unique User id
