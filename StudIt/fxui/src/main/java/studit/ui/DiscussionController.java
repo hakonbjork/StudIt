@@ -30,7 +30,7 @@ import studit.core.users.User;
 
 public class DiscussionController implements Initializable {
 
-  RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
+  private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
   private User currentUser = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com", "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
@@ -267,6 +267,10 @@ public class DiscussionController implements Initializable {
 
   public void setStuditModelAccess(RemoteStuditModelAccess r){
     this.remoteStuditModelAccess = r;
+  }
+
+  public RemoteStuditModelAccess getStuditModelAcces(){
+    return this.remoteStuditModelAccess;
   }
 
   public User getCurrentUser(){

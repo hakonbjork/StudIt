@@ -31,7 +31,7 @@ public class DiscussionControllerTest extends ApplicationTest {
 
   private CourseItem item;
 
-  private DirectStuditModelAccess directStuditModelAccess = new DirectStuditModelAccess();
+  private final DirectStuditModelAccess directStuditModelAccess = new DirectStuditModelAccess();
 
   @Override
   public void start(final Stage stage) throws Exception {
@@ -65,18 +65,22 @@ public class DiscussionControllerTest extends ApplicationTest {
   }
 
   @Test
-  public void testComments() {
+  public void testComments() throws ApiCallException {
+
+    item = this.directStuditModelAccess.getCourseByFagkode("TDT4120");
+    discussionController.addCourse(item);
+    discussionController.setStuditModelAccess(directStuditModelAccess);
 
     // Assuming that the discussion is empty,
     // Checks if the first comment is inputed correctly.
-    String comment = "Jeg synes dette er et kjedelig fag";
+    final String comment = "Jeg synes dette er et kjedelig fag";
     discussionController.getInputField().setText(comment);
     clickOn("#information_btn");
     Assertions.assertThat((discussionController.getForumList().getItems().get(0).getKommentar())
         .equals("Jeg synes dette er et kjedelig fag"));
 
     // Checks if the second comment is inputed correctly.
-    String comment2 = "Uenig, det er et kult fag";
+    final String comment2 = "Uenig, det er et kult fag";
     discussionController.getInputField().setText(comment2);
     clickOn("#information_btn");
     Assertions.assertThat(
@@ -92,57 +96,52 @@ public class DiscussionControllerTest extends ApplicationTest {
     assertTrue((discussionController.getForumList().getItems().get(1).getBrukernavn())
         .equals(discussionController.getCurrentUser().getUsername()));
 
-  }
-
-  @Test
-  public void testUpVoteDuplicate() {
-
-    //Click on upVote
-    clickOn(findCommentListCellNode(cell -> true, ".button", 0));
-
-    //Click on upVote again, but nothing will happen because this user has already upvoted
-    clickOn(findCommentListCellNode(cell -> true, ".button", 0));
-
-    try {
-      Comment comment;
-      comment = directStuditModelAccess.getCourseByFagkode("TDT4120").getDiskusjon().getComments().get(0);
-      assertEquals(1, comment.getUpvotes());
-    
-    } catch (ApiCallException e) {
-      e.printStackTrace();
-    }
-
-  }
-
-  @Test
-  public void testSelectedListCell() {
 
     //selects the first item in the list view
-    clickOn(findCommentListCellNode(cell -> true, ".button", 0));  
-    
-    //checks if the same index in the  view is selected
+    clickOn(findCommentListCellNode(cell -> true, ".button", 0));
+  
+    //checks if the same index in the view is selected
     checkSelectedCommentInt(0);
-
+  
     //selects the second item in the list view
-    clickOn(findCommentListCellNode(cell -> true, ".button", 1));  
-    
-    //checks if the same index in the  view is selected
+    clickOn(findCommentListCellNode(cell -> true, ".button", 1));
+   
+    //checks if the same index in the view is selected
     checkSelectedCommentInt(1);
 
+    // Click on upVote
+    clickOn(findCommentListCellNode(cell -> true, ".button", 0));
+
+    // Click on upVote again, but nothing will happen because this user has already upvoted
+    clickOn(findCommentListCellNode(cell -> true, ".button", 0));
+
+    Comment com;
+    com = this.discussionController.getStuditModelAcces().getCourseByFagkode("TDT4120").getDiskusjon().getComments().get(0);
+    assertEquals(1, com.getUpvotes());
+
   }
 
+  @Test
+  public void testUpVoteDuplicate() throws ApiCallException {
 
-  @Test 
-  public void testUpVoteAndThenDownVote(){
+    
 
   }
 
+   @Test
+   public void testSelectedListCell() {
 
+   }
+
+  @Test
+  public void testUpVoteAndThenDownVote() {
+
+  }
 
   // utility methods
-  private Node findNode(Predicate<Node> nodeTest, int num) {
+  private Node findNode(final Predicate<Node> nodeTest, final int num) {
     int count = 0;
-    for (Node node : lookup(nodeTest).queryAll()) {
+    for (final Node node : lookup(nodeTest).queryAll()) {
       if (nodeTest.test(node) && count++ == num) {
         return node;
       }
@@ -150,36 +149,38 @@ public class DiscussionControllerTest extends ApplicationTest {
     return null;
   }
 
-  private Node waitForNode(Predicate<Node> nodeTest, int num) {
+  private Node waitForNode(final Predicate<Node> nodeTest, final int num) {
     WaitForAsyncUtils.waitForFxEvents();
-    Node[] nodes = new Node[1];
+    final Node[] nodes = new Node[1];
     try {
-      WaitForAsyncUtils.waitFor(2000, TimeUnit.MILLISECONDS,
-          () -> {
-            while (true) {
-              if ((nodes[0] = findNode(nodeTest, num)) != null) {
-                return true;
-              }
-              Thread.sleep(100);
-            }
+      WaitForAsyncUtils.waitFor(2000, TimeUnit.MILLISECONDS, () -> {
+        while (true) {
+          if ((nodes[0] = findNode(nodeTest, num)) != null) {
+            return true;
           }
-      );
-    } catch (TimeoutException e) {
+          Thread.sleep(1);
+        }
+      });
+    } catch (final TimeoutException e) {
       fail("No appropriate node available");
+      Thread.currentThread().interrupt();
+
     }
     return nodes[0];
   }
 
-  //private CommentListCell findCommentListCell(Predicate<CommentListCell> test, int num) {
-  //  return (CommentListCell) waitForNode(node -> node instanceof CommentListCell && test.test((CommentListCell) node), num);
-  //}
+   private CommentListCell findCommentListCell(Predicate<CommentListCell> test, int num) {
+    return (CommentListCell) waitForNode(node -> node instanceof CommentListCell
+     && test.test((CommentListCell) node), num);
+    }
 
-  private Node findCommentListCellNode(Predicate<CommentListCell> test, String selector, int num) {
-    Node listCell = waitForNode(node -> node instanceof CommentListCell && (selector == null || node.lookup(selector) != null) && test.test((CommentListCell) node), num);
+  private Node findCommentListCellNode(final Predicate<CommentListCell> test, final String selector, final int num) {
+    final Node listCell = waitForNode(node -> node instanceof CommentListCell
+        && (selector == null || node.lookup(selector) != null) && test.test((CommentListCell) node), num);
     return listCell.lookup(selector);
   }
 
-  private void checkSelectedCommentInt (int index) {
+  private void checkSelectedCommentInt(final int index) {
     final ListView<Comment> commentListView = lookup("#forumList").query();
     assertEquals(index, commentListView.getSelectionModel().getSelectedIndex());
   }
