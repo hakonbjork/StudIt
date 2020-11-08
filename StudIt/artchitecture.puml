@@ -25,4 +25,32 @@ component javafx {
 fxui ..> javafx
 fxui ..> fxml
 
+component restapi {
+	package studit.restapi
+}
+
+studit.restapi ..> studit.core
+studit.restapi ..> studit.json
+
+component jaxrs {
+}
+
+restapi ..> jaxrs
+
+component restserver {
+	package studit.restserver
+}
+
+studit.restserver ..> studit.core
+studit.restserver ..> studit.restapi
+
+component jersey {
+}
+
+component grizzly {
+}
+
+restserver ..> jersey
+restserver ..> grizzly
+
 @enduml
