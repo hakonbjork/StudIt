@@ -117,11 +117,8 @@ public class DiscussionControllerTest extends ApplicationTest {
     assertEquals(0, com.getUpvotes());
 
     // Click on upVote
-    //CommentListCell cell1 = findCommentListCell(cell -> true, 0);
-    //clickOn(cell1.getBody().lookup(".button"));
-    final ListView<Comment> listView = lookup("#forumList").query();
-    listView.getSelectionModel().select(0);
-    clickOn(".button");
+    CommentListCell cell1 = findCommentListCell(cell -> true, 0);
+    clickOn(cell1.getBody().lookup(".button"));
 
     // Click on upVote again, but nothing will happen because this user has already upvoted
     
@@ -129,7 +126,7 @@ public class DiscussionControllerTest extends ApplicationTest {
     //check if upvotes is one for first comment after upvote
     Comment com1;
     com1 = this.discussionController.getStuditModelAcces().getCourseByFagkode("TDT4120").getDiskusjon().getComments().get(0);
-    assertEquals(0, com1.getUpvotes());
+    assertEquals(1, com1.getUpvotes());
 
   }
 
