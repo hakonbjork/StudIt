@@ -45,14 +45,14 @@ public class NewUserController {
     String username = usernameField.getText();
     String mail = mailField.getText();
     String password = userPasswordField.getText();
-    String[] wut = remote.addUser(name, username, mail, password);
+    String[] feedback = remote.addUser(name, username, mail, password);
 
     // Løkken under er bare for testing, kan tas bort i ferdig implementasjon
-    for (int i = 0; i < wut.length; i++) {
-      System.out.println("i: " + i + ", message \"" + wut[i] + "\"");
+    for (int i = 0; i < feedback.length; i++) {
+      System.out.println("i: " + i + ", message \"" + feedback[i] + "\"");
     }
-    if (wut[0] != null) {
-      infoTextField.setText(wut[0]);
+    if (feedback[1] != null) {
+      infoTextField.setText(feedback[1]);
       return;
     }
     Stage stage = (Stage) saveNewUserButton.getScene().getWindow();
