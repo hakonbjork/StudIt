@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import jdk.dynalink.linker.support.Lookup;
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.Comment;
 import studit.ui.remote.ApiCallException;
@@ -98,33 +99,42 @@ public class DiscussionControllerTest extends ApplicationTest {
 
 
     //selects the first item in the list view
-    clickOn(findCommentListCellNode(cell -> true, ".button", 0));
+    //CommentListCell cell1 = findCommentListCell(cell -> true, 0);
+    //clickOn(cell1.lookup(".button"));
   
     //checks if the same index in the view is selected
-    checkSelectedCommentInt(0);
+    //checkSelectedCommentInt(0);
   
     //selects the second item in the list view
-    clickOn(findCommentListCellNode(cell -> true, ".button", 1));
+    //clickOn(findCommentListCellNode(cell -> true, ".button", 1));
    
     //checks if the same index in the view is selected
-    checkSelectedCommentInt(1);
+    //checkSelectedCommentInt(1);
 
-    // Click on upVote
-    clickOn(findCommentListCellNode(cell -> true, ".button", 0));
-
-    // Click on upVote again, but nothing will happen because this user has already upvoted
-    clickOn(findCommentListCellNode(cell -> true, ".button", 0));
-
+    //check if upvotes is zero for first comment
     Comment com;
     com = this.discussionController.getStuditModelAcces().getCourseByFagkode("TDT4120").getDiskusjon().getComments().get(0);
-    assertEquals(1, com.getUpvotes());
+    assertEquals(0, com.getUpvotes());
+
+    // Click on upVote
+    //CommentListCell cell1 = findCommentListCell(cell -> true, 0);
+    //clickOn(cell1.getBody().lookup(".button"));
+    final ListView<Comment> listView = lookup("#forumList").query();
+    listView.getSelectionModel().select(0);
+    clickOn(".button");
+
+    // Click on upVote again, but nothing will happen because this user has already upvoted
+    
+
+    //check if upvotes is one for first comment after upvote
+    Comment com1;
+    com1 = this.discussionController.getStuditModelAcces().getCourseByFagkode("TDT4120").getDiskusjon().getComments().get(0);
+    assertEquals(0, com1.getUpvotes());
 
   }
 
   @Test
   public void testUpVoteDuplicate() throws ApiCallException {
-
-    
 
   }
 
@@ -139,6 +149,19 @@ public class DiscussionControllerTest extends ApplicationTest {
   }
 
   // utility methods
+  private CommentListCell findCommentListCell(final Predicate<Node> test, int num) {
+    for (final Node node : lookup("#forumList").queryAll()) {
+      if (node instanceof CommentListCell) {
+        CommentListCell cell = (CommentListCell) node;
+
+        if(test.test(cell)){
+          return cell;
+        }
+      }
+    }
+    return null;
+  }
+
   private Node findNode(final Predicate<Node> nodeTest, final int num) {
     int count = 0;
     for (final Node node : lookup(nodeTest).queryAll()) {
@@ -169,10 +192,6 @@ public class DiscussionControllerTest extends ApplicationTest {
     return nodes[0];
   }
 
-   private CommentListCell findCommentListCell(Predicate<CommentListCell> test, int num) {
-    return (CommentListCell) waitForNode(node -> node instanceof CommentListCell
-     && test.test((CommentListCell) node), num);
-    }
 
   private Node findCommentListCellNode(final Predicate<CommentListCell> test, final String selector, final int num) {
     final Node listCell = waitForNode(node -> node instanceof CommentListCell
