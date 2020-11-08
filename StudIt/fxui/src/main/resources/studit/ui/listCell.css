@@ -7,7 +7,9 @@
   -fx-border-width: 2px;
   -fx-border-style: solid;
   -fx-border-color: #666666;
+  -fx-cursor: hand;
 }
+
 .list-cell:empty {
   -fx-background-color: transparent;
   -fx-border-width: 0px;

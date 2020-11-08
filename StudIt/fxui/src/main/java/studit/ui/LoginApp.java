@@ -11,7 +11,7 @@ public class LoginApp extends Application {
   @Override
   public void start(final Stage primaryStage) throws Exception {
     final Parent parent = FXMLLoader.load(getClass().getResource("Login.fxml"));
-    parent.getStylesheets().add(getClass().getResource("mainPage.css").toExternalForm());
+    parent.getStylesheets().add(getClass().getResource("main.css").toExternalForm());
 
     primaryStage.setScene(new Scene(parent));
     primaryStage.setTitle("Login");

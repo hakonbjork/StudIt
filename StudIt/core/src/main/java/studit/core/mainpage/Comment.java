@@ -32,7 +32,7 @@ public class Comment {
   }
 
   public String getBrukernavn() {
-    return brukernavn;
+    return this.brukernavn;
   }
 
   public void setBrukernavn(String brukernavn) {

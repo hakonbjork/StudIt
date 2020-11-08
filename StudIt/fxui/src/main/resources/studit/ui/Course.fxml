@@ -1,242 +1,263 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets ?>
-<?import javafx.scene.control.Button ?>
-<?import javafx.scene.control.Label ?>
-<?import javafx.scene.control.TextArea ?>
-<?import javafx.scene.control.TextField ?>
-<?import javafx.scene.image.Image ?>
-<?import javafx.scene.image.ImageView ?>
-<?import javafx.scene.layout.BorderPane ?>
-<?import javafx.scene.layout.HBox ?>
-<?import javafx.scene.layout.VBox ?>
-<?import javafx.scene.text.Font ?>
-<?import javafx.scene.text.Text ?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane id="rootPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" stylesheets="@course.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.CourseController">
+<BorderPane id="rootPane" fx:id="rootPane" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #F8F8F8;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studit.ui.CourseController">
     <top>
-        <HBox prefHeight="232.0" prefWidth="2000.0">
-            <children>
-                <VBox prefHeight="232.0" prefWidth="1700.0">
-                    <children>
-                        <HBox prefHeight="232.0" prefWidth="500.0" style="-fx-background-color: white;">
-                            <children>
-                                <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="232.0" prefWidth="180.0" style="-fx-background-color: white;">
-                                    <children>
-                                        <ImageView fitHeight="157.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../icons/ugle.png" />
-                                            </image>
-                                        </ImageView>
-                                    </children>
-                                    <HBox.margin>
-                                        <Insets />
-                                    </HBox.margin>
-                                </HBox>
-                                <HBox prefHeight="265.0" prefWidth="1080.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <VBox prefHeight="132.0" prefWidth="711.0" HBox.hgrow="ALWAYS">
-                                            <children>
-                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                                    <children>
-                                                        <HBox alignment="CENTER" prefHeight="77.0" prefWidth="793.0">
-                                                            <children>
-                                                                <Button id="information_btn" fx:id="information_btn" minHeight="-Infinity" mnemonicParsing="false" prefHeight="58.0" prefWidth="383.0" style="-fx-background-color: #80ccff;" text="Fagside" textAlignment="CENTER" textFill="#242424db">
-                                                                    <font>
-                                                                        <Font name="Avenir Next Bold" size="24.0" />
-                                                                    </font>
-                                                                </Button>
-                                                                <Button id="discussion_btn" fx:id="discussion_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openDiscussion" prefHeight="58.0" prefWidth="379.0" style="-fx-background-color: #e6faff#e6faff #e6faff#e6faff #e6faff#e6faff #e6faff#e6faff;" text="Diskusjon" textAlignment="CENTER" textFill="#242424ed">
-                                                                    <font>
-                                                                        <Font name="Avenir Next Bold" size="24.0" />
-                                                                    </font>
-                                                                    <HBox.margin>
-                                                                        <Insets />
-                                                                    </HBox.margin>
-                                                                </Button>
-                                                            </children>
-                                                        </HBox>
-                                                    </children>
-                                                </HBox>
-                                                <HBox prefHeight="74.0" prefWidth="1080.0">
-                                                    <children>
-                                                        <Label id="fagkode" fx:id="fagkode" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="173.0" text="TDT4109">
-                                                            <font>
-                                                                <Font name="Avenir Next Bold" size="32.0" />
-                                                            </font>
-                                                            <padding>
-                                                                <Insets left="5.0" right="5.0" />
-                                                            </padding>
-                                                        </Label>
-                                                        <Label id="fagnavn" fx:id="fagnavn" alignment="BOTTOM_LEFT" prefHeight="68.0" prefWidth="901.0" text="Informasjonsteknologi grunnkurs">
-                                                            <font>
-                                                                <Font name="Avenir Next Bold" size="32.0" />
-                                                            </font>
-                                                            <padding>
-                                                                <Insets left="5.0" right="5.0" />
-                                                            </padding>
-                                                        </Label>
-                                                    </children>
-                                                    <VBox.margin>
-                                                        <Insets />
-                                                    </VBox.margin>
-                                                    <padding>
-                                                        <Insets top="40.0" />
-                                                    </padding>
-                                                </HBox>
-                                                <HBox alignment="BOTTOM_LEFT" prefHeight="115.0" prefWidth="1080.0" VBox.vgrow="ALWAYS">
-                                                    <children>
-                                                        <ImageView fitHeight="39.0" fitWidth="30.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                                            <image>
-                                                                <Image url="@../icons/star.png" />
-                                                            </image>
-                                                            <HBox.margin>
-                                                                <Insets bottom="8.0" right="10.0" />
-                                                            </HBox.margin>
-                                                        </ImageView>
-                                                        <Label id="rating" fx:id="rating" text="7.8">
-                                                            <font>
-                                                                <Font name="Avenir Next Bold" size="24.0" />
-                                                            </font>
-                                                            <HBox.margin>
-                                                                <Insets />
-                                                            </HBox.margin>
-                                                        </Label>
-                                                    </children>
-                                                </HBox>
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                    <padding>
-                                        <Insets top="40.0" />
-                                    </padding>
-                                    <HBox.margin>
-                                        <Insets left="20.0" />
-                                    </HBox.margin>
-                                </HBox>
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-            </children>
+        <HBox prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #EBF8FF;">
             <BorderPane.margin>
                 <Insets />
             </BorderPane.margin>
+         <children>
+            <ImageView fx:id="logo_btn" fitHeight="50.0" fitWidth="80.0" onMouseClicked="#handleMainPageAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/ugle.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Button id="mainPage_btn" fx:id="mainPageAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleMainPageAction" prefHeight="50.0" prefWidth="500.0" text="Fagoversikt" textAlignment="CENTER" textFill="#2a4365" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Avenir Next Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button id="chatbot_btn" fx:id="chatbot_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openChatBot" prefHeight="50.0" prefWidth="500.0" text="Chatbot" textAlignment="CENTER" textFill="#2a4365" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Avenir Next Bold" size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/robot.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="logout_btn" fx:id="logoutAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="50.0" prefWidth="500.0" text="Logg ut" textAlignment="CENTER" textFill="#2a4365" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Avenir Next Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
         </HBox>
     </top>
     <center>
-        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #e6faff#e6faff #e6faff#e6faff;">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Informasjon om emnet" wrappingWidth="219.943603515625">
-                    <font>
+      <VBox prefHeight="673.0" prefWidth="750.0" style="-fx-background-color: #F8F8F8;">
+         <BorderPane.margin>
+            <Insets bottom="30.0" left="70.0" right="80.0" top="65.0" />
+         </BorderPane.margin>
+         <children>
+            <HBox prefHeight="52.0" prefWidth="750.0">
+               <children>
+                  <Label id="fagkode" fx:id="fagkode" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="173.0" text="TDT4109">
+                     <font>
+                        <Font name="Avenir Next Bold" size="32.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label id="fagnavn" fx:id="fagnavn" alignment="BOTTOM_LEFT" prefHeight="77.0" prefWidth="550.0" text="Informasjonsteknologi grunnkurs">
+                     <font>
+                        <Font name="Avenir Next Bold" size="32.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox prefHeight="583.0" prefWidth="1238.0" style="-fx-background-color: #EBF8FF;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Informasjon om emnet" wrappingWidth="219.943603515625">
+                     <font>
                         <Font name="Avenir Next Bold" size="18.0" />
-                    </font>
-                </Text>
-                <TextArea id="courseInformation" fx:id="courseInformation" editable="false" prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: #e6faff ;" text="&#10;">
-                    <font>
-                        <Font name="Avenir Book" size="18.0" />
-                    </font>
-                    <VBox.margin>
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Text>
+                      <TextArea id="courseInformation" fx:id="courseInformation" editable="false" prefHeight="250.0" prefWidth="600.0" text="&#10;" wrapText="true" VBox.vgrow="ALWAYS">
+                          <font>
+                              <Font name="Avenir Book" size="18.0" />
+                          </font>
+                     <VBox.margin>
                         <Insets bottom="20.0" />
-                    </VBox.margin>
-                </TextArea>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Litteratur" wrappingWidth="183.231689453125">
-                    <font>
+                     </VBox.margin>
+                      </TextArea>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Litteratur" wrappingWidth="183.231689453125">
+                     <font>
                         <Font name="Avenir Next Bold" size="18.0" />
-                    </font>
-                </Text>
-                <TextArea id="litterature" fx:id="litterature" editable="false" prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: transparent;" stylesheets="@gr2060/StudIt/src/main/resources/studit/ui/mainPage.css" text="&#10;">
-                    <font>
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextArea id="litterature" fx:id="litterature" editable="false" prefHeight="250.0" prefWidth="600.0" text="&#10;" wrapText="true" VBox.vgrow="ALWAYS">
+                     <font>
                         <Font name="Avenir Book" size="18.0" />
-                    </font>
-                    <VBox.margin>
+                     </font>
+                     <VBox.margin>
                         <Insets bottom="20.0" />
-                    </VBox.margin>
-                </TextArea>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tips og triks" wrappingWidth="183.231689453125">
-                    <font>
+                     </VBox.margin>
+                  </TextArea>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tips og triks" wrappingWidth="183.231689453125">
+                     <font>
                         <Font name="Avenir Next Bold" size="18.0" />
-                    </font>
-                </Text>
-                <TextArea id="tips_tricks" fx:id="tips_tricks" editable="false" prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: transparent;" stylesheets="@gr2060/StudIt/src/main/resources/studit/ui/mainPage.css" text="&#10;">
-                    <font>
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextArea id="tips_tricks" fx:id="tips_tricks" editable="false" prefHeight="250.0" prefWidth="600.0" text="&#10;" wrapText="true" VBox.vgrow="ALWAYS">
+                     <font>
                         <Font name="Avenir Book" size="18.0" />
-                    </font>
-                    <padding>
-                        <Insets bottom="20.0" />
-                    </padding>
-                </TextArea>
-            </children>
-            <BorderPane.margin>
-                <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
-            </BorderPane.margin>
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
-            </padding>
-        </VBox>
+                     </font>
+                  </TextArea>
+               </children>
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
     </center>
-    <left>
-        <VBox id="menu" alignment="BOTTOM_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="178.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-            <children>
-                <Button id="mainPage_btn" fx:id="mainPageAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleMainPageAction" prefHeight="56.0" prefWidth="187.0" text="Fagoversikt" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
-                    <font>
-                        <Font name="Avenir Next Bold" size="18.0" />
-                    </font>
-                </Button>
-                <Button id="chatbot_btn" fx:id="chatbot_btn" minHeight="-Infinity" mnemonicParsing="false" onAction="#openChatBot" prefHeight="60.0" prefWidth="178.0" text="Chatbot" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
-                    <font>
-                        <Font name="Avenir Next Bold" size="18.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets />
-                    </VBox.margin>
-                </Button>
-                <Button id="logout_btn" fx:id="logoutAction" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="70.0" prefWidth="178.0" text="Logg ut" textAlignment="CENTER" textFill="#888889" VBox.vgrow="ALWAYS">
-                    <font>
-                        <Font name="Avenir Next Bold" size="24.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets top="370.0" />
-                    </VBox.margin>
-                </Button>
-            </children>
-        </VBox>
-    </left>
     <right>
-        <VBox prefHeight="470.0" prefWidth="278.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" prefHeight="665.0" prefWidth="264.0" style="-fx-background-color: #F8F8F8;" BorderPane.alignment="CENTER">
             <children>
-                <VBox prefHeight="561.0" prefWidth="258.0" style="-fx-background-color: #e6faff#e6faff;">
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eksamensdato" wrappingWidth="183.231689453125">
-                            <font>
-                                <Font name="Avenir Next Bold" size="18.0" />
-                            </font>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Har du noe å si om dette faget? Se diskusjonen og kom med din mening i fagdiskusjonen da vel!" wrappingWidth="259.745849609375" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="Avenir Book" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Text>
+            <Button id="discussion_btn" fx:id="discussion_btn" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" mnemonicParsing="false" onAction="#openDiscussion" prefHeight="37.0" prefWidth="119.0" style="-fx-background-color: #90CDF4;" text="Diskusjon" textAlignment="CENTER" textFill="#242424ed" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="Avenir Next Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="40.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <VBox prefHeight="479.0" prefWidth="274.0" style="-fx-background-color: #EBF8FF;" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="111.0" prefWidth="238.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Studentenes rating:" wrappingWidth="183.231689453125">
+                           <font>
+                              <Font name="Avenir Next Bold" size="18.0" />
+                           </font>
                         </Text>
-                        <TextField id="eksamensdato" fx:id="eksamensdato" editable="false" prefHeight="90.0" prefWidth="238.0" style="-fx-background-color: transparent;" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vurderingsform" wrappingWidth="183.231689453125">
-                            <font>
-                                <Font name="Avenir Next Bold" size="18.0" />
-                            </font>
-                        </Text>
-                        <TextField id="vurderingsform" fx:id="vurderingsform" editable="false" prefHeight="97.0" prefWidth="238.0" style="-fx-background-color: transparent;" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hjelpemidler" wrappingWidth="183.231689453125">
-                            <font>
-                                <Font name="Avenir Next Bold" size="18.0" />
-                            </font>
-                        </Text>
-                        <TextField id="hjelpemidler" fx:id="hjelpemidler" editable="false" prefHeight="109.0" prefWidth="238.0" style="-fx-background-color: transparent;" />
-                    </children>
-                    <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                    </padding>
-                    <VBox.margin>
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="84.0" prefWidth="238.0" VBox.vgrow="ALWAYS">
+                                        <children>
+                                            <ImageView fitHeight="39.0" fitWidth="30.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@../icons/star.png" />
+                                                </image>
+                                                <HBox.margin>
+                                                    <Insets right="10.0" />
+                                                </HBox.margin>
+                                            </ImageView>
+                                            <Label id="rating" fx:id="rating" text="7.8">
+                                                <font>
+                                                    <Font name="Avenir Next Bold" size="24.0" />
+                                                </font>
+                                                <HBox.margin>
+                                                    <Insets />
+                                                </HBox.margin>
+                                            </Label>
+                                        </children>
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                                    </HBox>
+                     </children>
+                  </VBox>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eksamensdato" wrappingWidth="183.231689453125">
+                     <font>
+                        <Font name="Avenir Next Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Text>
+                  <TextField id="eksamensdato" fx:id="eksamensdato" editable="false" prefHeight="80.0" prefWidth="244.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin></TextField>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vurderingsform" wrappingWidth="183.231689453125">
+                     <font>
+                        <Font name="Avenir Next Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
                         <Insets top="20.0" />
-                    </VBox.margin>
-                </VBox>
+                     </VBox.margin>
+                  </Text>
+                  <TextField id="vurderingsform" fx:id="vurderingsform" editable="false" prefHeight="80.0" prefWidth="244.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin></TextField>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hjelpemidler" wrappingWidth="183.231689453125">
+                     <font>
+                        <Font name="Avenir Next Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Text>
+                  <TextField id="hjelpemidler" fx:id="hjelpemidler" editable="false" prefHeight="80.0" prefWidth="244.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin></TextField>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </VBox>
             </children>
-            <padding>
-                <Insets bottom="20.0" right="20.0" />
-            </padding>
+         <BorderPane.margin>
+            <Insets bottom="30.0" right="30.0" top="150.0" />
+         </BorderPane.margin>
         </VBox>
     </right>
+   <left>
+      <Button id="mainpage_back" fx:id="mainpage_back" minHeight="-Infinity" mnemonicParsing="false" onAction="#handleMainPageAction" prefHeight="58.0" prefWidth="43.0" style="-fx-background-radius: 100;" textAlignment="CENTER" textFill="#242424dc" BorderPane.alignment="TOP_LEFT">
+         <font>
+            <Font name="Avenir Next Bold" size="24.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="38.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <BorderPane.margin>
+            <Insets left="20.0" top="65.0" />
+         </BorderPane.margin>
+      </Button>
+   </left>
 </BorderPane>

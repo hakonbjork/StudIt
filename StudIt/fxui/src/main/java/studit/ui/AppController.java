@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ListCell;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -47,7 +48,7 @@ public class AppController {
   private TextField searchField;
 
   @FXML
-  private ListView<String> coursesList;
+  private ListView<CourseItem> coursesList;
 
   @FXML
   private Button chatbot_btn;
@@ -56,10 +57,11 @@ public class AppController {
   private Button logoutAction;
 
   private static Chatbot chatbot = null;
-  // private ObservableList<CourseItem> list =
-  // FXCollections.observableArrayList();
-  private ObservableList<String> list = FXCollections.observableArrayList();
+
+  private ObservableList<CourseItem> list = FXCollections.observableArrayList();
+
   private List<CourseItem> courseList;
+
   private String label;
 
   public void setLabel(String label) {
@@ -102,7 +104,7 @@ public class AppController {
 
   /**
    * Function to initialize AppController.
-   * 
+   *
    * @throws ApiCallException If connection to server could not be established.
    */
   public void initialize() throws ApiCallException {
@@ -119,10 +121,12 @@ public class AppController {
   @FXML
   public void handleSearchFieldAction() {
     // Wrap the ObservableList in a FilteredList (initially display all data).
-    FilteredList<String> filteredData = new FilteredList<>(this.getData(), (p -> true));
+    FilteredList<CourseItem> filteredData = new FilteredList<>(this.getData(), (p -> true));
 
     // Set the filter Predicate whenever the filter changes.
     searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+    System.out.println("textfield changed from " + oldValue + " to " + newValue);
+
       filteredData.setPredicate(courseItem -> {
         // If filter text is empty, display all persons.
         if (newValue == null || newValue.isEmpty()) {
@@ -131,16 +135,20 @@ public class AppController {
         // Compare course name and course code of every CourseItem with the filter text.
         String lowerCaseFilter = newValue.toLowerCase();
 
-        if (courseItem.toLowerCase().contains(lowerCaseFilter)) {
-          return true; // filter matches course name
-
+        if ((courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter))||(courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter))) {
+          return true; // filter matches course name or course code
         }
-        return false; // Does not match
+
+        return false; // Does not match 
+
       });
     });
 
-    SortedList<String> sortedData = new SortedList<>(filteredData);
-    coursesList.setItems(sortedData);
+    SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
+    ObservableList<CourseItem> filtredList = FXCollections.observableArrayList();
+    filtredList.setAll(sortedData);
+    this.coursesList.setItems(filtredList);
+    
   }
 
   /**
@@ -194,7 +202,7 @@ public class AppController {
       @Override
       public void handle(MouseEvent arg0) {
         // System.out.println((coursesList.getSelectionModel().getSelectedItem()));
-        setLabel(coursesList.getSelectionModel().getSelectedItem());
+        //setLabel(coursesList.getSelectionModel().getSelectedItem());
 
         try {
           // FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
@@ -208,7 +216,7 @@ public class AppController {
           CourseController courseController = (CourseController) courseLoader.getController();
           // courseController.setMainScene(mainScene);
           // injecting second scene into the controller of the first scene
-          CourseItem courseItem = findCourseItem(coursesList.getSelectionModel().getSelectedItem());
+          CourseItem courseItem = coursesList.getSelectionModel().getSelectedItem();
           courseController.setCourseItem(courseItem);
           courseController.setCurrentUser(user);
           courseController.updateView();
@@ -239,7 +247,7 @@ public class AppController {
   /**
    * This function should actually fetch data from a database. This will be
    * implemented later.
-   * 
+   *
    * @throws ApiCallException If connection to server could not be established.
    */
   private void loadData() throws ApiCallException {
@@ -249,23 +257,38 @@ public class AppController {
     Collection<CourseItem> items = li.getCourseItems();
     this.courseList = (List<CourseItem>) items;
 
-    // System.out.println(items.size());
 
     for (CourseItem c : items) {
-      this.list.add(c.getFagnavn());
+      this.list.add(c);
     }
 
     this.coursesList.setItems(this.list);
+
+    coursesList.setCellFactory(param -> new ListCell<CourseItem>() {
+
+			@Override
+			public void updateItem(CourseItem item, boolean empty) {
+				super.updateItem(item, empty);
+				if(empty) {
+					setText(null);
+					setGraphic(null);
+				return;
+        }
+
+      setText(item.getFagkode() + " " + item.getFagnavn());
+      setGraphic(null);
+      }
+    });
 
   }
 
   /**
    * This function returns the list of subjects.
-   * 
+   *
    * @return list;
    */
-  public ObservableList<String> getData() {
-    return (ObservableList<String>) list;
+  public ObservableList<CourseItem> getData() {
+    return list;
   }
 
 }

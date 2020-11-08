@@ -23,12 +23,16 @@ import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
+import studit.ui.CommentListCell;
+import studit.core.mainpage.CourseItem;
+import studit.core.users.User;
+
 
 public class DiscussionController implements Initializable {
 
-  RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
+  private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
-  private User currentUser;
+  private User currentUser = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com", "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
   @FXML
   private BorderPane rootPane;
@@ -71,16 +75,12 @@ public class DiscussionController implements Initializable {
     this.courseItem = name;
   }
 
-  // TODO Vi må fikse at brukeren er en variabel som er tilgjengelig i alle
-  // controllers slik at kind of er en global variabel.
-  // Pluss se på API i forhold til add comment.
-
   @FXML
   void addNewPost(ActionEvent event) {
 
     String input = newPostInputField.getText();
     try {
-      remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), this.currentUser.getName(), input);
+      remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), this.currentUser.getUsername(), input);
       updateView();
       newPostInputField.clear();
     } catch (ApiCallException e) {
@@ -88,16 +88,18 @@ public class DiscussionController implements Initializable {
     }
   }
 
-  public void updateView() {
 
+  public void updateView(){
+    
     try {
 
       this.courseItem = remoteStuditModelAccess.getCourseByFagkode(this.courseItem.getFagkode());
+      setFagkode();
+      setFagnavn();
 
       loadView();
 
     } catch (ApiCallException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
 
@@ -147,12 +149,6 @@ public class DiscussionController implements Initializable {
     }
   }
 
-  // TODO skal denne være her?
-  @FXML
-  void handleNtnuAction(ActionEvent event) {
-
-  }
-
   /**
    * Opens Chatbot.
    */
@@ -164,6 +160,17 @@ public class DiscussionController implements Initializable {
       AppController.getChatbot().show();
     }
   }
+
+  public void setFagkode() {
+    String label = this.courseItem.getFagkode();
+    this.fagkode.setText(label);
+  }
+
+  public void setFagnavn() {
+    String label = this.courseItem.getFagnavn();
+    this.fagnavn.setText(label);
+  }
+
 
   @FXML
   void openInformationTab(ActionEvent event) {
@@ -212,23 +219,33 @@ public class DiscussionController implements Initializable {
 
       forumList.setCellFactory(param -> new ListCell<Comment>() {
 
-        private CommentListCell commentListCell;
-
-        @Override
-        public void updateItem(Comment comment, boolean empty) {
-          super.updateItem(comment, empty);
-          if (empty) {
-            setText(null);
-            setGraphic(null);
-            return;
+			private CommentListCell commentListCell;
+			
+			@Override
+			public void updateItem(Comment comment, boolean empty) {
+				super.updateItem(comment, empty);
+				if(empty) {
+					setText(null);
+					setGraphic(null);
+				return;
+      }
+  
+       int id = comment.getUniqueID();
+       
+          try {
+            Comment com = remoteStuditModelAccess.getCommentById(courseItem.getFagkode(), id);
+            commentListCell = new CommentListCell(com, currentUser, courseItem);
+            setGraphic(commentListCell);
+          } catch (ApiCallException e) {
+            e.printStackTrace();
           }
-          commentListCell = new CommentListCell(comment, currentUser, courseItem);
-
-          setGraphic(commentListCell);
-        }
-      });
-
-    } else {
+        
+       
+			}
+     });
+     
+  
+    } else{
 
       System.out.println("Dette fagets diskusjon har enda ingen kommentarer");
       forumList.setItems(listView);
@@ -237,6 +254,27 @@ public class DiscussionController implements Initializable {
 
   public void setCurrentUser(User user) {
     this.currentUser = user;
+  }
+
+  //Methods for test
+  public TextField getInputField(){
+   return this.newPostInputField;
+  }
+
+  public ListView<Comment> getForumList(){
+   return this.forumList;
+  }
+
+  public void setStuditModelAccess(RemoteStuditModelAccess r){
+    this.remoteStuditModelAccess = r;
+  }
+
+  public RemoteStuditModelAccess getStuditModelAcces(){
+    return this.remoteStuditModelAccess;
+  }
+
+  public User getCurrentUser(){
+    return this.currentUser;
   }
 
 }

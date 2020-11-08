@@ -1,8 +1,11 @@
 package studit.ui;
 
 import java.util.List;
+
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
@@ -13,10 +16,13 @@ import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
+import studit.ui.DiscussionController;
 
 public class CommentListCell extends BorderPane {
 
   RemoteStuditModelAccess remote = new RemoteStuditModelAccess();
+  //DiscussionController controller;
+  //Linjen over dukket opp som spotbug siden feltet ikke er brukt senere, så kommentert ut inntil videre
 
   User currentUser;
   CourseItem courseItem;
@@ -80,6 +86,8 @@ public class CommentListCell extends BorderPane {
 
           updateView();
 
+
+
         } catch (Exception e) {
 
           System.out.println(e);
@@ -99,6 +107,8 @@ public class CommentListCell extends BorderPane {
     header.setDate(this.comment.getDato());
     body.setComment(this.comment.getKommentar());
     body.setUpvotes(String.valueOf(this.comment.getUpvotes()));
+
+    
   }
 
   /**
@@ -189,5 +199,16 @@ public class CommentListCell extends BorderPane {
       this.upvotes.setText(upvotes);
     }
 
+    public Button getButton(){
+      return this.button;
+    }
+
   }
+
+  //methods for test
+  public Body getBody() {
+    return this.body;
+  }
+
+
 }

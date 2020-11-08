@@ -6,7 +6,10 @@
 ## Project structure
 The project is seperated into two modules:
 * Application logic is under *studit/core/..*  
-* GUI implementations is under *studi/fxui/..*
+* GUI implementations is under *studit/fxui/..*
+* The RESTApi is under *studit/fxui/restapi/..*
+* Server (Grizzly) source code is under *studit/restserver/..*
+* Servlet (Jersey) is under *studit/servlet/..*
 ---
 Main code for each module is found under *src/main/..*  
 Testing for each module is found under *src/test/..*  
@@ -16,7 +19,11 @@ The project uses maven for building and running.
 
 * To build the project, click the gitpod link and run: `mvn install` in the root folder, to run all the testes and quality checking.
 
-* To run the project, you have to use the fxmui-module and therefore run `mvn javafx:run -f fxui/pom.xml`
+* To build the project without testes run: `mvn install -Dmaven.test.skip=true` in the root folder
+
+* To run the project, you have to use the fxmui-module and therefore run `mvn install`
+
+* To run the server, you have to run: `mvn jetty:run -f servlet/pom.xml`
 
 * For unit testing and code coverage, run `mvn test`  
 
