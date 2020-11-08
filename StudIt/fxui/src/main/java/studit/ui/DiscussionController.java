@@ -21,18 +21,16 @@ import javafx.stage.Stage;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
+import studit.ui.CommentListCell;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
-import studit.ui.CommentListCell;
-import studit.core.mainpage.CourseItem;
-import studit.core.users.User;
-
 
 public class DiscussionController implements Initializable {
 
   private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
-  private User currentUser = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com", "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
+  private User currentUser = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com",
+      "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
   @FXML
   private BorderPane rootPane;
@@ -80,7 +78,8 @@ public class DiscussionController implements Initializable {
 
     String input = newPostInputField.getText();
     try {
-      remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), this.currentUser.getUsername(), input);
+      remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), this.currentUser.getUsername(),
+          input);
       updateView();
       newPostInputField.clear();
     } catch (ApiCallException e) {
@@ -88,9 +87,8 @@ public class DiscussionController implements Initializable {
     }
   }
 
+  public void updateView() {
 
-  public void updateView(){
-    
     try {
 
       this.courseItem = remoteStuditModelAccess.getCourseByFagkode(this.courseItem.getFagkode());
@@ -171,7 +169,6 @@ public class DiscussionController implements Initializable {
     this.fagnavn.setText(label);
   }
 
-
   @FXML
   void openInformationTab(ActionEvent event) {
     try {
@@ -219,19 +216,19 @@ public class DiscussionController implements Initializable {
 
       forumList.setCellFactory(param -> new ListCell<Comment>() {
 
-			private CommentListCell commentListCell;
-			
-			@Override
-			public void updateItem(Comment comment, boolean empty) {
-				super.updateItem(comment, empty);
-				if(empty) {
-					setText(null);
-					setGraphic(null);
-				return;
-      }
-  
-       int id = comment.getUniqueID();
-       
+        private CommentListCell commentListCell;
+
+        @Override
+        public void updateItem(Comment comment, boolean empty) {
+          super.updateItem(comment, empty);
+          if (empty) {
+            setText(null);
+            setGraphic(null);
+            return;
+          }
+
+          int id = comment.getUniqueID();
+
           try {
             Comment com = remoteStuditModelAccess.getCommentById(courseItem.getFagkode(), id);
             commentListCell = new CommentListCell(com, currentUser, courseItem);
@@ -239,13 +236,11 @@ public class DiscussionController implements Initializable {
           } catch (ApiCallException e) {
             e.printStackTrace();
           }
-        
-       
-			}
-     });
-     
-  
-    } else{
+
+        }
+      });
+
+    } else {
 
       System.out.println("Dette fagets diskusjon har enda ingen kommentarer");
       forumList.setItems(listView);
@@ -256,24 +251,24 @@ public class DiscussionController implements Initializable {
     this.currentUser = user;
   }
 
-  //Methods for test
-  public TextField getInputField(){
-   return this.newPostInputField;
+  // Methods for test
+  public TextField getInputField() {
+    return this.newPostInputField;
   }
 
-  public ListView<Comment> getForumList(){
-   return this.forumList;
+  public ListView<Comment> getForumList() {
+    return this.forumList;
   }
 
-  public void setStuditModelAccess(RemoteStuditModelAccess r){
+  public void setStuditModelAccess(RemoteStuditModelAccess r) {
     this.remoteStuditModelAccess = r;
   }
 
-  public RemoteStuditModelAccess getStuditModelAcces(){
+  public RemoteStuditModelAccess getStuditModelAcces() {
     return this.remoteStuditModelAccess;
   }
 
-  public User getCurrentUser(){
+  public User getCurrentUser() {
     return this.currentUser;
   }
 

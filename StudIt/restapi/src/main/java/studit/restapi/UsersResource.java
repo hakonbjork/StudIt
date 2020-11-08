@@ -73,7 +73,8 @@ public class UsersResource {
    * Returns response with User object.
    * 
    * @param username username of the requested user.
-   * @return Response with User json if the user exists (200 ok), otherwise 404 not found.
+   * @return Response with User json if the user exists (200 ok), otherwise 404
+   *         not found.
    */
   @GET
   @Path("/username/{username}")
@@ -89,7 +90,7 @@ public class UsersResource {
     return Response.ok(user, MediaType.APPLICATION_JSON).build();
   }
 
-/**
+  /**
    * Removes a User from the database.
    * 
    * @param id unique User id

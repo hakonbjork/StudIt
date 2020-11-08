@@ -130,7 +130,7 @@ public class Users {
     return getUserByID(getIDbyUsername(username));
   }
 
-/**
+  /**
    * Change the username of a user.
    * 
    * @param id          unique id

@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ListCell;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -16,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -37,8 +37,8 @@ public class AppController {
       "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
   /*
-  * The user that is currently logged in. 
-  */
+   * The user that is currently logged in.
+   */
   private User currentUser = null;
 
   @FXML
@@ -125,7 +125,7 @@ public class AppController {
 
     // Set the filter Predicate whenever the filter changes.
     searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-    System.out.println("textfield changed from " + oldValue + " to " + newValue);
+      System.out.println("textfield changed from " + oldValue + " to " + newValue);
 
       filteredData.setPredicate(courseItem -> {
         // If filter text is empty, display all persons.
@@ -135,11 +135,12 @@ public class AppController {
         // Compare course name and course code of every CourseItem with the filter text.
         String lowerCaseFilter = newValue.toLowerCase();
 
-        if ((courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter))||(courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter))) {
+        if ((courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter))
+            || (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter))) {
           return true; // filter matches course name or course code
         }
 
-        return false; // Does not match 
+        return false; // Does not match
 
       });
     });
@@ -148,7 +149,7 @@ public class AppController {
     ObservableList<CourseItem> filtredList = FXCollections.observableArrayList();
     filtredList.setAll(sortedData);
     this.coursesList.setItems(filtredList);
-    
+
   }
 
   /**
@@ -202,7 +203,7 @@ public class AppController {
       @Override
       public void handle(MouseEvent arg0) {
         // System.out.println((coursesList.getSelectionModel().getSelectedItem()));
-        //setLabel(coursesList.getSelectionModel().getSelectedItem());
+        // setLabel(coursesList.getSelectionModel().getSelectedItem());
 
         try {
           // FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
@@ -257,7 +258,6 @@ public class AppController {
     Collection<CourseItem> items = li.getCourseItems();
     this.courseList = (List<CourseItem>) items;
 
-
     for (CourseItem c : items) {
       this.list.add(c);
     }
@@ -266,17 +266,17 @@ public class AppController {
 
     coursesList.setCellFactory(param -> new ListCell<CourseItem>() {
 
-			@Override
-			public void updateItem(CourseItem item, boolean empty) {
-				super.updateItem(item, empty);
-				if(empty) {
-					setText(null);
-					setGraphic(null);
-				return;
+      @Override
+      public void updateItem(CourseItem item, boolean empty) {
+        super.updateItem(item, empty);
+        if (empty) {
+          setText(null);
+          setGraphic(null);
+          return;
         }
 
-      setText(item.getFagkode() + " " + item.getFagnavn());
-      setGraphic(null);
+        setText(item.getFagkode() + " " + item.getFagnavn());
+        setGraphic(null);
       }
     });
 
