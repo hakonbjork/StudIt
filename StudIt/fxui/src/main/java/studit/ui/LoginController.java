@@ -56,6 +56,14 @@ public class LoginController {
   }
 
   /**
+   * For testing purposes only. Changes the remote.
+   * @param remote - The new remote to be set
+   */
+  public void setRemote(RemoteStuditModelAccess remote) {
+    this.remote = remote;
+  }
+
+  /**
    * Enables other classes in frontend to get the user that is currently logged
    * in.
    * 
@@ -127,7 +135,7 @@ public class LoginController {
       // Transfers the information about which user logged in to appController
       AppController appController = (AppController) loader.getController();
       appController.setCurrentUser(this.currentUser);
-
+    
       Scene scene = new Scene(root);
       Stage stage = new Stage();
       stage.setScene(scene);
