@@ -27,6 +27,7 @@ import studit.core.mainpage.CourseList;
 import studit.core.users.User;
 import studit.ui.chatbot.Chatbot;
 import studit.ui.remote.ApiCallException;
+import studit.ui.remote.DirectStuditModelAccess;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class AppController {
@@ -85,6 +86,14 @@ public class AppController {
   }
 
   /**
+   * For testing purposes only. Changes the remote.
+   * @param remote - The new remote to be set
+   */
+  public void setRemote(RemoteStuditModelAccess remote) {
+    this.remoteStuditModelAccess = remote;
+  }
+
+  /**
    * Sets the current user (the user that is logged in from the input).
    * 
    * @param user The user that should be set as the current user.
@@ -108,6 +117,11 @@ public class AppController {
    * @throws ApiCallException If connection to server could not be established.
    */
   public void initialize() throws ApiCallException {
+    if (LoginController.getTestingMode()) {
+      setRemote(new DirectStuditModelAccess());
+    } else {
+      System.out.println("Using old remote :( \n");
+    }
     loadData();
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     // Actions on clicked list item
