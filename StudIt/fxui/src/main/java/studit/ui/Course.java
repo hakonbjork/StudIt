@@ -19,7 +19,7 @@ public class Course extends Application {
     scene.getStylesheets().add(getClass().getResource("mainPage.css").toExternalForm());
 
     primaryStage.setScene(scene);
-    primaryStage.setTitle("StudIt");
+    primaryStage.setTitle("Course");
     primaryStage.show();
   }
 

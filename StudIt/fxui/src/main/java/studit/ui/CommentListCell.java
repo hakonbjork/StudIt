@@ -8,12 +8,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javassist.expr.Instanceof;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
-import studit.ui.remote.DirectStuditModelAccess;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class CommentListCell extends BorderPane {
@@ -153,15 +151,11 @@ public class CommentListCell extends BorderPane {
 
       setLeftAnchor(title, 0.0);
       setBottomAnchor(title, 0.0);
-      // ****************TODO***************************************************************************/
-      // title.getStyleClass().add("title");
-
+      
       badge = new VBox(date);
       setRightAnchor(badge, 0.0);
       setBottomAnchor(badge, 5.0);
-      // ****************TODO***************************************************************************/
-      // badge.getStyleClass().add("state");
-
+     
       getChildren().addAll(title, badge);
     }
 
@@ -200,7 +194,6 @@ public class CommentListCell extends BorderPane {
      * Instantiates a new body.
      */
     public Body() {
-      // ****************TODO***************************************************************************/
       upvoteButton.getStyleClass().add("upvoteButton");
 
       downvoteButton.getStyleClass().add("downvoteButton");
@@ -232,23 +225,26 @@ public class CommentListCell extends BorderPane {
       return this.upvoteButton;
     }
 
-     public Button getDownvoteButton() {
+    public Button getDownvoteButton() {
       return this.downvoteButton;
     }
 
   }
 
-  // methods for test
+  // The following methods are used for testing.
   public Body getBody() {
     return this.body;
   }
 
 
+ 
   /**
-   * @param remote the remote to set
-   */
-  public static void setRemote(RemoteStuditModelAccess r) {
-    CommentListCell.remote = r;
+    * Sets the remote to use for the test.
+    *
+    * @param remote the remote to set
+    */
+  public static void setRemote(RemoteStuditModelAccess remote) {
+    CommentListCell.remote = remote;
   }
 
 }

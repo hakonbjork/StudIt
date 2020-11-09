@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
-import studit.ui.CommentListCell;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
 
@@ -87,6 +86,9 @@ public class DiscussionController implements Initializable {
     }
   }
 
+  /**
+   * Method to update the view after actions that changes attributes in the core are triggered.
+   */
   public void updateView() {
 
     try {
@@ -169,6 +171,10 @@ public class DiscussionController implements Initializable {
     this.fagnavn.setText(label);
   }
 
+
+  /**
+   * Opens the information page about the course.
+   */
   @FXML
   void openInformationTab(ActionEvent event) {
     try {
@@ -196,6 +202,10 @@ public class DiscussionController implements Initializable {
 
   }
 
+
+  /**
+   * Loads the list View and sets the text for the labels in the page.
+   */
   public void loadView() {
 
     listView.clear();
@@ -235,13 +245,14 @@ public class DiscussionController implements Initializable {
             setGraphic(commentListCell);
           } catch (ApiCallException e) {
             e.printStackTrace();
+            System.out.println("Dette fagets diskusjon har enda ingen kommentarer");
+            forumList.setItems(listView);
           }
 
         }
       });
 
     } else {
-
       System.out.println("Dette fagets diskusjon har enda ingen kommentarer");
       forumList.setItems(listView);
     }
