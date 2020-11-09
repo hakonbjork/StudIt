@@ -2,15 +2,16 @@ package studit.core.chatbot;
 
 import static studit.core.Commons.contains;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.primitives.Floats;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.primitives.Floats;
 
 public class KeywordLinker {
 
@@ -102,35 +103,36 @@ public class KeywordLinker {
 
     int matchID = -1;
     float matchPct = 0.0f;
+    int lastLen = 0;
 
     for (Map.Entry<Integer, String> entry : recognizedWords.entrySet()) {
-      int unions = 0;
+
+      StringBuffer wordToCheck = new StringBuffer(entry.getValue());
+      int differences = 0;
       int complements = 0;
-      int lastLen = 0;
-      String wordToCheck = entry.getValue();
 
-      for (int i = 0; i < wordToCheck.length(); i++) {
-        char c = wordToCheck.charAt(i);
+      for (int i = 0; i < word.length(); i++) {
+        char c = word.charAt(i);
 
-        if (word.indexOf(c) >= 0) {
-          unions++;
-        } else {
+        int matchIdx = wordToCheck.indexOf(String.valueOf(c));
+        if (matchIdx >= 0) {
           complements++;
+          wordToCheck.deleteCharAt(matchIdx);
+        } else {
+          differences++;
         }
       }
 
-      float pct = unions / (float) (unions + complements);
-      pct *= (word.length() - Math.abs(wordToCheck.length() - word.length())) / (float) word.length();
+      float pct = complements / (float) (complements + differences);
+      pct *= (word.length() - Math.abs(entry.getValue().length() - word.length())) / (float) word.length();
 
-      if (pct >= 0.65f && pct >= matchPct && wordToCheck.length() > lastLen) {
+      if (pct >= 0.65f && pct >= matchPct && wordToCheck.length() <= lastLen) {
         matchID = entry.getKey();
         matchPct = pct;
-        lastLen = wordToCheck.length();
+        lastLen = entry.getValue().length();
       }
     }
-
     return matchID;
-
   }
 
   /**
@@ -158,7 +160,6 @@ public class KeywordLinker {
       int idx = 0;
 
       for (Keyword[] keywords : entry.getValue()) {
-
         for (Keyword keyword : keywords) {
           if (contains(matchIDs, keyword.ID)) {
             matchWeights[idx] += keyword.weight;
@@ -169,7 +170,6 @@ public class KeywordLinker {
 
       matches.add(new Match(entry.getKey(), Floats.max(matchWeights), precedences.get(entry.getKey()),
           dataMatches.get(entry.getKey()) == null ? "" : dataMatches.get(entry.getKey())));
-
     }
 
     matches.sort((left, right) -> {

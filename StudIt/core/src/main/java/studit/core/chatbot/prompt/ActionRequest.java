@@ -26,7 +26,7 @@ public class ActionRequest {
   }
 
   public List<Object> getArguments() {
-    return arguments;
+    return arguments == null ?  new ArrayList<Object>() : arguments;
   }
 
   public void setArguments(List<Object> arguments) {

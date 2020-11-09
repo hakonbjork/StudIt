@@ -20,7 +20,7 @@ public class KeywordLinkerTest {
     dummyLinks = new ArrayList<>();
 
     dummyLinks.add(new KeywordLink("hils", null, 1, List.of( Map.of("hei", 1.0f, "hallo", 0.8f))));
-    dummyLinks.add(new KeywordLink("hade", null, 2, List.of( Map.of("hade", 0.8f, "adios", 0.2f))));
+    dummyLinks.add(new KeywordLink("hade", null, 2, List.of( Map.of("hade", 0.8f, "adios", 0.2f, "når", 0.2f, "er", 0.1f, "eksamen", 0.7f))));
 
     linker = new KeywordLinker(dummyLinks);
   }
@@ -28,7 +28,7 @@ public class KeywordLinkerTest {
   @Test
   public void testGetRecognizedWords() {
     Map<Integer, String> words = linker.getRecognizedWords();
-    List<String> recognizedWords = List.of("hei", "hallo", "hade", "adios");
+    List<String> recognizedWords = List.of("hei", "hallo", "hade", "adios", "når", "er", "eksamen");
   
     
     for (String word : words.values()) {
@@ -44,20 +44,23 @@ public class KeywordLinkerTest {
   public void testMatchCommand() {
     List<Match> match1 = linker.matchCommand(new String[] {"hei", "hva", "skjer"});
     List<Match> match2 = linker.matchCommand(new String[] {"hade", "hva", "skjer"});
+    List<Match> match3 = linker.matchCommand(new String[] {"bror", "når", "er", "eksamen"});
     
-    assertEquals(match1.get(0).match, 1.0f);
-    assertEquals(match1.get(0).precedence, 1);
+    assertEquals(1.0f, match1.get(0).match);
+    assertEquals(1.0f, match1.get(0).precedence);
     
     assertEquals(match2.get(0).match, 0.0f);
     assertEquals(match2.get(1).precedence, 2);
     assertEquals(match2.get(1).match, 0.8f);
+
+    assertEquals(match3.get(1).match, 1.0f);
     
   }
   
   @Test
   public void testKeyword() {
     Keyword keyword = linker.new Keyword("hei", 0.5f);
-    assertEquals("Keyword [ID=2, weight=0.5]", keyword.toString());
+    assertEquals("Keyword [ID=4, weight=0.5]", keyword.toString());
   }
 
 }

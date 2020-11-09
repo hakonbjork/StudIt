@@ -14,7 +14,7 @@ public class CommandManager {
     switch (match) {
       case "avslutt":
         addition = "Er du sikker på at du vil avslutte samtalen?";
-        response.setPrompt(List.of(new String[] {"ja", "exit"}, new String[] {"nei", "regret"}), null, null);
+        response.setPrompt(List.of(new String[] { "ja", "exit" }, new String[] { "nei", "regret" }), null, null);
         break;
       case "hade":
         addition = "Jeg håper jeg kunne være til hjelp! Takk for samtalen.";
@@ -22,29 +22,26 @@ public class CommandManager {
       case "hils":
         addition = "Hei! ";
         break;
-      case "nei":
-        addition = "Neivel. ";
-        break;
-      case "faginfo":
-        addition = "";
-        break;
       case "hyggelig":
         addition = "Så bra da! Hva kan jeg hjelpe deg med?";
         break;
-      case "uhyggelig":
-        addition = "Det var leit å høre... Hva kan jeg hjelpe deg med?";
-        break;
       case "høflig":
         addition = "Det går bra, takk, hvordan går det med deg?";
+        break;
+      case "nei":
+        addition = "Neivel. ";
+        break;
+      case "uhyggelig":
+        addition = "Det var leit å høre... Hva kan jeg hjelpe deg med?";
         break;
       case "takk":
         addition = "Bare hyggelig :)";
         break;
       default:
-        addition = "Oops, internal error -> unrecognized command";
+        addition = "";
         break;
     }
-    
+
     response.add(addition);
   }
 

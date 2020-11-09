@@ -30,6 +30,15 @@ public class Commands {
     return commands;
   }
 
+  /**
+   * This is called whenever user clicks the "nei" option in the prompt and we
+   * guessed the wrong course. Pring generic message to the user.
+   */
+  private void courseGuessDeclined() {
+    chatbotController.list_chat.getItems()
+        .add(new Message("Den er grei du, da eksisterer sannsynligvis ikke faget du har etterspurt.", "chatbot"));
+  }
+
   // ------------------------------------COMMANDS----------------------------------
 
   private void exit() {
@@ -37,7 +46,7 @@ public class Commands {
   }
 
   private void faginfo(List<Object> args) {
-    try {
+    if (!args.isEmpty()) {
       String fagkode = ((String) args.get(0)).toUpperCase();
       try {
         chatbotController.list_chat.getItems().add(new Message("Her kommer litt informasjon om " + fagkode + ": "
@@ -45,9 +54,10 @@ public class Commands {
       } catch (ApiCallException e) {
         chatbotController.list_chat.getItems().add(new Message("Could not establish connection to server", "chatbot"));
       }
-    } catch (IndexOutOfBoundsException e) {
-      // Do nothing, no args passed.
+    } else {
+      courseGuessDeclined();
     }
+
   }
 
   private void fagoversikt() {

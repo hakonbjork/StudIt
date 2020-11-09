@@ -100,7 +100,8 @@ public class ChatbotController implements Initializable {
               if (item.getPrompt() != null) {
                 text.setText(text.getText() + "\n");
                 flowTextLeft.getChildren().add(text);
-                new Prompt(item.getPrompt(), item.getArgs1(), item.getArgs2(), flowTextLeft, list_chat, item, chatbotController);
+                new Prompt(item.getPrompt(), item.getArgs1(), item.getArgs2(), flowTextLeft, list_chat, item,
+                    chatbotController);
               } else {
                 flowTextLeft.getChildren().add(text);
               }
@@ -230,6 +231,8 @@ public class ChatbotController implements Initializable {
       txt_user_entry.selectPositionCaret(0);
       Response response = AppController.getChatbot().manageInput(userInput);
       if (response.funcCall()) {
+        // We need to execute a command before receiving a chatbot response, typically
+        // an API call. This updates the Response object with the new message.
         try {
           executeCommand(response, remoteAccess.getCourseList());
         } catch (ApiCallException e) {
@@ -242,6 +245,7 @@ public class ChatbotController implements Initializable {
 
   /**
    * Used for testing purposes only.
+   * 
    * @param remoteAccess the remoteAccess to set
    */
   public void setRemoteAccess(RemoteStuditModelAccess remoteAccess) {
