@@ -262,6 +262,7 @@ public class DiscussionController implements Initializable {
 
   public void setStuditModelAccess(RemoteStuditModelAccess r) {
     this.remoteStuditModelAccess = r;
+    CommentListCell.setRemote(r);
   }
 
   public RemoteStuditModelAccess getStuditModelAcces() {

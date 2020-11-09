@@ -8,15 +8,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javassist.expr.Instanceof;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.ApiCallException;
+import studit.ui.remote.DirectStuditModelAccess;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class CommentListCell extends BorderPane {
 
-  RemoteStuditModelAccess remote = new RemoteStuditModelAccess();
+  private static RemoteStuditModelAccess remote = new RemoteStuditModelAccess();
   
   User currentUser;
   CourseItem courseItem;
@@ -68,13 +70,14 @@ public class CommentListCell extends BorderPane {
       } else {
 
         try {
-
-          this.remote.upvoteCommentByID(this.courseItem.getFagkode(), this.currentUser.getUsername(),
+          CommentListCell.remote.upvoteCommentByID(this.courseItem.getFagkode(), this.currentUser.getUsername(),
               this.comment.getUniqueID());
+
+          System.out.println("Hello after");
 
           int id = this.comment.getUniqueID();
 
-          this.comment = this.remote.getCommentById(this.courseItem.getFagkode(), id);
+          this.comment = CommentListCell.remote.getCommentById(this.courseItem.getFagkode(), id);
 
           updateView();
 
@@ -102,12 +105,12 @@ public class CommentListCell extends BorderPane {
 
         try {
 
-          this.remote.downvoteCommentByID(this.courseItem.getFagkode(), this.currentUser.getUsername(),
+          CommentListCell.remote.downvoteCommentByID(this.courseItem.getFagkode(), this.currentUser.getUsername(),
               this.comment.getUniqueID());
 
           int id = this.comment.getUniqueID();
 
-          this.comment = this.remote.getCommentById(this.courseItem.getFagkode(), id);
+          this.comment = CommentListCell.remote.getCommentById(this.courseItem.getFagkode(), id);
 
           updateView();
 
@@ -238,6 +241,14 @@ public class CommentListCell extends BorderPane {
   // methods for test
   public Body getBody() {
     return this.body;
+  }
+
+
+  /**
+   * @param remote the remote to set
+   */
+  public static void setRemote(RemoteStuditModelAccess r) {
+    CommentListCell.remote = r;
   }
 
 }
