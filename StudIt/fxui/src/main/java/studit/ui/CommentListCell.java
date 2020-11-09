@@ -95,7 +95,7 @@ public class CommentListCell extends BorderPane {
 
       if (downVoters.contains(this.currentUser.getUsername())) {
 
-        // Gi en visuell feedback
+        //Gi en visuell feedback
         System.out.println("allerede downvota");
 
       } else {
@@ -191,13 +191,16 @@ public class CommentListCell extends BorderPane {
     private Text upvotes = new Text();
     private Button upvoteButton = new Button("Upvote");
     private Button downvoteButton = new Button("Downvote");
+   
 
     /**
      * Instantiates a new body.
      */
     public Body() {
       // ****************TODO***************************************************************************/
-      // comment.getStyleClass().add("comment");
+      upvoteButton.getStyleClass().add("upvoteButton");
+
+      downvoteButton.getStyleClass().add("downvoteButton");
 
       VBox.setVgrow(this, Priority.ALWAYS);
       getChildren().addAll(comment, upvotes, upvoteButton, downvoteButton);

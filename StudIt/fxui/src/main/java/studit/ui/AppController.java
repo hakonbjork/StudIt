@@ -33,9 +33,6 @@ public class AppController {
 
   private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
-  private User user = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com",
-      "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
-
   /*
    * The user that is currently logged in.
    */
@@ -78,10 +75,6 @@ public class AppController {
 
   public static void newChatbot() {
     chatbot = new Chatbot();
-  }
-
-  public void addUser(User user) {
-    this.user = user;
   }
 
   /**

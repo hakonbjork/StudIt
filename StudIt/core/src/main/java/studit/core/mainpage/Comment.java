@@ -87,9 +87,7 @@ public class Comment {
     if (!upvoters.contains(username)) {
 
       if(downvoters.contains(username)){
-        downvoters.remove(username);
         upvotes++;
-        return true;
       }
 
       upvoters.add(username);
@@ -102,14 +100,11 @@ public class Comment {
   public boolean downvote(String username) {
     if (!downvoters.contains(username)) {
 
-      if(upvoters.contains(username)){
-        upvoters.remove(username);
-        upvotes--;
-        return true;
+      if(downvoters.contains(username)){
+        upvotes++;
       }
-
       downvoters.add(username);
-      upvotes--;
+      downvotes++;
       return true;
     }
     return false;
