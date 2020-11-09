@@ -219,7 +219,7 @@ public class AppController {
           // injecting second scene into the controller of the first scene
           CourseItem courseItem = coursesList.getSelectionModel().getSelectedItem();
           courseController.setCourseItem(courseItem);
-          courseController.setCurrentUser(user);
+          courseController.setCurrentUser(currentUser);
           courseController.updateView();
 
           Stage primaryStage = (Stage) ((Node) arg0.getSource()).getScene().getWindow();

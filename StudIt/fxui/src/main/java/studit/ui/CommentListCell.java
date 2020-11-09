@@ -1,10 +1,8 @@
 package studit.ui;
 
 import java.util.List;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
@@ -13,17 +11,13 @@ import javafx.scene.text.Text;
 import studit.core.mainpage.Comment;
 import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
-import studit.ui.DiscussionController;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class CommentListCell extends BorderPane {
 
   RemoteStuditModelAccess remote = new RemoteStuditModelAccess();
-  // DiscussionController controller;
-  // Linjen over dukket opp som spotbug siden feltet ikke er brukt senere, så
-  // kommentert ut inntil videre
-
+  
   User currentUser;
   CourseItem courseItem;
   private Comment comment;
@@ -60,8 +54,9 @@ public class CommentListCell extends BorderPane {
     body.setComment(this.comment.getKommentar());
     body.setUpvotes(String.valueOf(comment.getUpvotes()));
 
-    // TOOD Foo-method, må endre
-    body.button.setOnAction((event) -> {
+
+    //Listener for upVote button
+    body.upvoteButton.setOnAction((event) -> {
 
       List<String> upVoters = this.comment.getUpvoters();
 
@@ -70,14 +65,44 @@ public class CommentListCell extends BorderPane {
         // Gi en visuell feedback
         System.out.println("allerede upvota");
 
-        // fjern UpVote
-        /// updateView
-
       } else {
 
         try {
 
           this.remote.upvoteCommentByID(this.courseItem.getFagkode(), this.currentUser.getUsername(),
+              this.comment.getUniqueID());
+
+          int id = this.comment.getUniqueID();
+
+          this.comment = this.remote.getCommentById(this.courseItem.getFagkode(), id);
+
+          updateView();
+
+        } catch (Exception e) {
+
+          System.out.println(e);
+
+        }
+      }
+
+    });
+
+
+    //Listener for downVote button
+    body.downvoteButton.setOnAction((event) -> {
+
+      List<String> downVoters = this.comment.getDownvoters();
+
+      if (downVoters.contains(this.currentUser.getUsername())) {
+
+        // Gi en visuell feedback
+        System.out.println("allerede downvota");
+
+      } else {
+
+        try {
+
+          this.remote.downvoteCommentByID(this.courseItem.getFagkode(), this.currentUser.getUsername(),
               this.comment.getUniqueID());
 
           int id = this.comment.getUniqueID();
@@ -164,7 +189,8 @@ public class CommentListCell extends BorderPane {
 
     private Text comment = new Text();
     private Text upvotes = new Text();
-    private Button button = new Button("Upvote");
+    private Button upvoteButton = new Button("Upvote");
+    private Button downvoteButton = new Button("Downvote");
 
     /**
      * Instantiates a new body.
@@ -174,7 +200,7 @@ public class CommentListCell extends BorderPane {
       // comment.getStyleClass().add("comment");
 
       VBox.setVgrow(this, Priority.ALWAYS);
-      getChildren().addAll(comment, upvotes, button);
+      getChildren().addAll(comment, upvotes, upvoteButton, downvoteButton);
 
     }
 
@@ -196,8 +222,12 @@ public class CommentListCell extends BorderPane {
       this.upvotes.setText(upvotes);
     }
 
-    public Button getButton() {
-      return this.button;
+    public Button getUpvoteButton() {
+      return this.upvoteButton;
+    }
+
+     public Button getDownvoteButton() {
+      return this.downvoteButton;
     }
 
   }
