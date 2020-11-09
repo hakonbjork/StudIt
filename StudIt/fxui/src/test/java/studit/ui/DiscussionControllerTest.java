@@ -98,9 +98,9 @@ public class DiscussionControllerTest extends ApplicationTest {
     //selects the first item in the list view
     //CommentListCell cell1 = findCommentListCell(cell -> true, 0);
 
-    //ListView<Comment> listView = lookup("#forumList").query();
+    ListView<Comment> listView = lookup("#forumList").query();
     //listView.getItems().get(0).upvote(discussionController.getCurrentUser().getUsername());
-    Node node = lookup("#forumList").queryAll().iterator().next();
+    Node node = lookup("#forumList").query();
     clickOn(node.lookup(".upvoteButton"));
 
     //CommentListCell node = (CommentListCell) findNode(cell -> true, 0);
@@ -129,8 +129,7 @@ public class DiscussionControllerTest extends ApplicationTest {
     
 
     //check if upvotes is one for first comment after upvote
-    Comment com1;
-    com1 = this.discussionController.getStuditModelAcces().getCourseByFagkode("TDT4120").getDiskusjon().getComments().get(0);
+    Comment com1 = listView.getItems().get(0);
     assertEquals(1, com1.getUpvotes());
 
   }
