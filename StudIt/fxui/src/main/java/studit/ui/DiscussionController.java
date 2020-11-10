@@ -73,6 +73,9 @@ public class DiscussionController implements Initializable {
     this.courseItem = name;
   }
 
+  /**
+   * Method which handles when user adds a a new post.
+   */
   @FXML
   void addNewPost(ActionEvent event) {
 
@@ -209,6 +212,7 @@ public class DiscussionController implements Initializable {
    */
   public void loadView() {
 
+    //This method clears the list each time the method is triggered in order to keep duplicates away.
     listView.clear();
 
     if (this.courseItem.getDiskusjon() != null) {
@@ -225,6 +229,7 @@ public class DiscussionController implements Initializable {
 
       forumList.setItems(listView);
 
+      //for each Comment in the ListView, a custom ListCell is instantiated
       forumList.setCellFactory(param -> new ListCell<Comment>() {
 
         private CommentListCell commentListCell;
@@ -246,7 +251,8 @@ public class DiscussionController implements Initializable {
             setGraphic(commentListCell);
           } catch (ApiCallException e) {
             e.printStackTrace();
-            System.out.println("Dette fagets diskusjon har enda ingen kommentarer");
+            System.out.println("Det utløses en ApiCallException når custom listCellene settes. Les feilmeldingen som følger for å få mer info");
+            System.out.println(e.getMessage());
             forumList.setItems(listView);
           }
 
@@ -263,7 +269,7 @@ public class DiscussionController implements Initializable {
     this.currentUser = user;
   }
 
-  // Methods for test
+  //The following methods are used for test purposes.
   public TextField getInputField() {
     return this.newPostInputField;
   }
