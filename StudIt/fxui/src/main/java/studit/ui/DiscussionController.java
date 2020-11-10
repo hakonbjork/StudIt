@@ -86,6 +86,8 @@ public class DiscussionController implements Initializable {
       updateView();
       newPostInputField.clear();
     } catch (ApiCallException e) {
+      newPostInputField.clear();
+      //Her kunne vi gitt brukeren en visuell feedback.
       e.printStackTrace();
     }
   }
@@ -100,7 +102,6 @@ public class DiscussionController implements Initializable {
       this.courseItem = remoteStuditModelAccess.getCourseByFagkode(this.courseItem.getFagkode());
       setFagkode();
       setFagnavn();
-
       loadView();
 
     } catch (ApiCallException e) {
