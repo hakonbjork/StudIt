@@ -147,9 +147,26 @@ public class AppController {
     });
 
     SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
-    ObservableList<CourseItem> filtredList = FXCollections.observableArrayList();
-    filtredList.setAll(sortedData);
-    this.coursesList.setItems(filtredList);
+    ObservableList<CourseItem> filteredList = FXCollections.observableArrayList();
+    filteredList.setAll(sortedData);
+    this.coursesList.setItems(filteredList);
+
+    coursesList.setCellFactory(param -> new ListCell<CourseItem>() {
+
+      @Override
+      public void updateItem(CourseItem item, boolean empty) {
+        super.updateItem(item, empty);
+        if (empty) {
+          setText(null);
+          setGraphic(null);
+          return;
+        }
+
+        setText(item.getFagkode() + " " + item.getFagnavn());
+        setGraphic(null);
+      }
+    });
+
 
   }
 
