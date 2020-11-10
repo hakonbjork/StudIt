@@ -42,11 +42,14 @@ public class AppController {
    */
   private User currentUser = null;
 
-  @FXML BorderPane rootPane;
+  @FXML
+  private BorderPane rootPane;
 
-  @FXML TextField searchField;
+  @FXML
+  private TextField searchField;
 
-  @FXML ListView<CourseItem> coursesList;
+  @FXML
+  private ListView<CourseItem> coursesList;
 
   @FXML
   private Button chatbot_btn;
@@ -123,18 +126,7 @@ public class AppController {
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     // Actions on clicked list item
     mouseClicked();
-    setSearch();
   }
-
-
-
-  public void setSearch(){
-    // Wrap the ObservableList in a FilteredList (initially display all data).
-    FilteredList<CourseItem> filteredData = new FilteredList<>(this.getData(), (p -> true));
-    SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
-    ObservableList<CourseItem> filteredList = FXCollections.observableArrayList();
-  }
-
 
   /**
    * Function to search for subjects. The listview will then only show subjects
@@ -142,32 +134,36 @@ public class AppController {
    */
   @FXML
   public void handleSearchFieldAction() {
+    // Wrap the ObservableList in a FilteredList (initially display all data).
+    FilteredList<CourseItem> filteredData = new FilteredList<>(this.getData(), (p -> true));
+
     // Set the filter Predicate whenever the filter changes.
     searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+      System.out.println("textfield changed from " + oldValue + " to " + newValue);
 
       filteredData.setPredicate(courseItem -> {
-        // If filter text is empty, display all courses
+        // If filter text is empty, display all persons.
         if (newValue == null || newValue.isEmpty()) {
-          System.out.println("textfield is empty");
           return true;
         }
-        // Compare course name and course code of every CourseItem with the filter text
+        // Compare course name and course code of every CourseItem with the filter text.
         String lowerCaseFilter = newValue.toLowerCase();
 
         if ((courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter))
             || (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter))) {
-
-          System.out.println("textfield changed from " + oldValue + " to " + newValue);
           return true; // filter matches course name or course code
         }
 
-        System.out.println("no match");
         return false; // Does not match
+
       });
     });
-   
-    filteredList.setAll(sortedData);
-    this.coursesList.setItems(filteredList);
+
+    SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
+    ObservableList<CourseItem> filtredList = FXCollections.observableArrayList();
+    filtredList.setAll(sortedData);
+    this.coursesList.setItems(filtredList);
+
   }
 
   /**
@@ -220,9 +216,14 @@ public class AppController {
       // private String label;
       @Override
       public void handle(MouseEvent arg0) {
+        // System.out.println((coursesList.getSelectionModel().getSelectedItem()));
+        // setLabel(coursesList.getSelectionModel().getSelectedItem());
 
         try {
-          
+          // FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("App.fxml"));
+          // Parent mainPane = mainLoader.load();
+          // Scene mainScene = new Scene(mainPane);
+
           // getting loader and a pane for the second scene.
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
           Parent coursePane = courseLoader.load();
@@ -239,7 +240,7 @@ public class AppController {
           Scene courseScene = new Scene(coursePane);
 
           primaryStage.setScene(courseScene);
-          primaryStage.setTitle("Course");
+          primaryStage.setTitle("StudIt");
           primaryStage.show();
 
         } catch (Exception e) {
@@ -265,6 +266,7 @@ public class AppController {
    * @throws ApiCallException If connection to server could not be established.
    */
   private void loadData() throws ApiCallException {
+
     CourseList li = remoteStuditModelAccess.getCourseList();
 
     Collection<CourseItem> items = li.getCourseItems();
