@@ -1,6 +1,7 @@
 package studit.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -42,12 +43,21 @@ public class LoginControllerTest extends ApplicationTest {
   }
 
   @Test
-  public void testLoginButtonAction() {
+  public void testLoginButtonActionFail() {
     loginController.setRemote(this.remote);
     writeUserPassword();
     clickOn("#passwordField").write("fweg");
     clickOn("#login_btn");
     assertEquals("Feil brukernavn eller passord", loginController.loginInfoText.getText());
+  }
+
+  @Test
+  public void testLoginButtonActionSuccess() {
+    loginController.setRemote(this.remote);
+    LoginController.setTestingMode(true);
+    writeUserPassword();
+    clickOn("#login_btn");
+    FxAssert.verifyThat(window("StudIt"), WindowMatchers.isShowing());
   }
 
   @Test
@@ -60,6 +70,12 @@ public class LoginControllerTest extends ApplicationTest {
   @Test
   public void testGetCurrentUser() {
     assertNull(loginController.getCurrentUser());
+  }
+
+  @Test
+  public void testTestMode() {
+    LoginController.setTestingMode(false);
+    assertFalse(LoginController.getTestingMode());
   }
 
   public void writeUserPassword() {
