@@ -2,8 +2,8 @@
 This directory consists of the domain- and persistence layer for the studIt.
 
 ## Domain-layer
-Domenelaget inneholder alle klasser og logikk knyttet til dataene som applikasjonen handler om og håndterer. Dette laget skal være helt uavhengig av brukergrensesnittet eller lagingsteknikken som brukes.
-Vår app handler om samlinger av såkalte geo-lokasjoner, altså steder identifisert med lengde- og breddegrader. Domenelaget inneholder klasser for å representere og håndtere slike, og disse finnes i simpleex.core-pakken.
+The domain layer contains all classes and logic related to the data that the application is about and handles. This layer is completely independent of the user interface. 
+Our app is about courses at NTNU and chatbot which is supposed to simplify subject choice. The domain team contains classes to represent and manage such, and these can be found in the studit.core package.
 
 ## Persistence-layer
 The persistence-layer consists of all the classes and logic related to writing and reading (storage) of the data in the domain-layer. Our persistence-layer implements file storage with JSON-syntax. And this layer can be found in the studit.json-package.
