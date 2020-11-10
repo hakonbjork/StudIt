@@ -2,16 +2,15 @@ package studit.core.chatbot;
 
 import static studit.core.Commons.contains;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.primitives.Floats;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.primitives.Floats;
 
 public class KeywordLinker {
 

@@ -159,8 +159,7 @@ public class ChatbotController implements Initializable {
   @FXML
   private TextArea txt_user_entry;
 
-  // ----------------------------------------Widget
-  // Logic-----------------------------------------
+  // --------------------------------Widget Logic-------------------------------
 
   @FXML
   public void exitChatbot(ActionEvent event) {
@@ -169,13 +168,12 @@ public class ChatbotController implements Initializable {
       final Node source = (Node) event.getSource();
       stage = (Stage) source.getScene().getWindow();
     }
-    stage.close();
 
+    stage.close();
   }
 
   @FXML
-  void minimizeChatbot(ActionEvent event) {
-
+  public void minimizeChatbot(ActionEvent event) {
     if (stage == null) {
       final Node source = (Node) event.getSource();
       stage = (Stage) source.getScene().getWindow();
@@ -188,11 +186,9 @@ public class ChatbotController implements Initializable {
    * Moves our chatbot window when dragged by the toolbar.
    */
   @FXML
-  void moveWindow(MouseEvent event) {
-    if (stage != null) {
-      stage.setX(event.getScreenX() - xOffset);
-      stage.setY(event.getScreenY() - yOffset);
-    }
+  private void moveWindow(MouseEvent event) {
+    stage.setX(event.getScreenX() - xOffset);
+    stage.setY(event.getScreenY() - yOffset);
   }
 
   /**
@@ -216,7 +212,6 @@ public class ChatbotController implements Initializable {
    */
   @FXML
   private void userEntry(KeyEvent event) {
-
     if (stage == null) {
       final Node source = (Node) event.getSource();
       stage = (Stage) source.getScene().getWindow();
@@ -250,6 +245,13 @@ public class ChatbotController implements Initializable {
    */
   public void setRemoteAccess(RemoteStuditModelAccess remoteAccess) {
     this.remoteAccess = remoteAccess;
+  }
+
+  /**
+   * @return the stage
+   */
+  public Stage getStage() {
+    return stage;
   }
 
 }
