@@ -52,7 +52,7 @@ public class CommentListCell extends BorderPane {
     header.setTitle(this.comment.getBrukernavn());
     header.setDate(this.comment.getDato());
     body.setComment(this.comment.getKommentar());
-    body.setUpvotes(String.valueOf(comment.getUpvotes()));
+    body.setVotes(String.valueOf(comment.getUpvotes()));
 
 
     //Listener for upVote button
@@ -62,12 +62,14 @@ public class CommentListCell extends BorderPane {
 
       if (upVoters.contains(this.currentUser.getUsername())) {
 
-        // Gi en visuell feedback
+        //Her kunne vi gitt en visuell feedback
         System.out.println("allerede upvota");
 
       } else {
 
         try {
+
+          //Oppdater db etter upvote er klikket.
           CommentListCell.remote.upvoteCommentByID(this.courseItem.getFagkode(), this.currentUser.getUsername(),
               this.comment.getUniqueID());
 
@@ -75,6 +77,7 @@ public class CommentListCell extends BorderPane {
 
           int id = this.comment.getUniqueID();
 
+          //Oppdater kommentaren etter bruker har klikket på upVote
           this.comment = CommentListCell.remote.getCommentById(this.courseItem.getFagkode(), id);
 
           updateView();
@@ -88,7 +91,6 @@ public class CommentListCell extends BorderPane {
 
     });
 
-
     //Listener for downVote button
     body.downvoteButton.setOnAction((event) -> {
 
@@ -96,18 +98,20 @@ public class CommentListCell extends BorderPane {
 
       if (downVoters.contains(this.currentUser.getUsername())) {
 
-        //Gi en visuell feedback
+        //Her kunne vi gitt en visuell feedback
         System.out.println("allerede downvota");
 
       } else {
 
         try {
 
+          //Oppdater db etter downvote er klikket.
           CommentListCell.remote.downvoteCommentByID(this.courseItem.getFagkode(), this.currentUser.getUsername(),
               this.comment.getUniqueID());
 
           int id = this.comment.getUniqueID();
 
+          //Oppdater kommentaren etter bruker har klikket på downVote
           this.comment = CommentListCell.remote.getCommentById(this.courseItem.getFagkode(), id);
 
           updateView();
@@ -130,7 +134,7 @@ public class CommentListCell extends BorderPane {
     header.setTitle(this.comment.getBrukernavn());
     header.setDate(this.comment.getDato());
     body.setComment(this.comment.getKommentar());
-    body.setUpvotes(String.valueOf(this.comment.getUpvotes()));
+    body.setVotes(String.valueOf(this.comment.getUpvotes()));
 
   }
 
@@ -185,7 +189,7 @@ public class CommentListCell extends BorderPane {
   static class Body extends VBox {
 
     private Text comment = new Text();
-    private Text upvotes = new Text();
+    private Text votes = new Text();
     private Button upvoteButton = new Button("Upvote");
     private Button downvoteButton = new Button("Downvote");
    
@@ -199,7 +203,7 @@ public class CommentListCell extends BorderPane {
       downvoteButton.getStyleClass().add("downvoteButton");
 
       VBox.setVgrow(this, Priority.ALWAYS);
-      getChildren().addAll(comment, upvotes, upvoteButton, downvoteButton);
+      getChildren().addAll(comment, votes, upvoteButton, downvoteButton);
 
     }
 
@@ -217,8 +221,8 @@ public class CommentListCell extends BorderPane {
      *
      * @param amount amount of upvotes
      */
-    private void setUpvotes(String upvotes) {
-      this.upvotes.setText(upvotes);
+    private void setVotes(String votes) {
+      this.votes.setText(votes);
     }
 
     public Button getUpvoteButton() {
