@@ -52,7 +52,7 @@ public class Chatbot {
       Scene scene = new Scene(root);
 
       ChatbotController controller = (ChatbotController) loader.getController();
-      //controller.setStage(chatStage);
+      controller.setStage(chatStage);
 
       // Setting the background to be transparent, so we can create rounded corners in
       // our css file
