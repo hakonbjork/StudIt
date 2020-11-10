@@ -73,7 +73,6 @@ public class Prompt {
     Func func = chatbotController.commands.getCommands().get(action.getFuncKey());
 
     if (func != null) {
-
       try {
         func.execute(action.getArguments());
       } catch (ClassCastException e) {

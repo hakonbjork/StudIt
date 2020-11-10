@@ -22,14 +22,9 @@ public class ResponseManager {
         result = "Avslutter chatbot...";
         action.setFuncKey("exit");
         break;
-      case "faginfo": 
-        action.setFuncKey("faginfo");
-        break;
-      case "fagoversikt":
-        action.setFuncKey("fagoversikt");
-        break;
       default:
         result = "";
+        action.setFuncKey(command);
     }
     
     action.setChatbotResponse(result);

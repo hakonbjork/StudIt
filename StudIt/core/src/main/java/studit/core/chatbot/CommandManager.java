@@ -19,6 +19,9 @@ public class CommandManager {
       case "hade":
         addition = "Jeg håper jeg kunne være til hjelp! Takk for samtalen.";
         break;
+      case "hjelp":
+        addition = getHelpInfo();
+        break;
       case "hils":
         addition = "Hei! ";
         break;
@@ -43,6 +46,22 @@ public class CommandManager {
     }
 
     response.add(addition);
+  }
+
+  private String getHelpInfo() {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("Jeg er ganske fleksibel, og du trenger ikke å tenke på skrivefeil eller tegnsetting. Her er noen eksempler på spørsmål du kan stille: %S ");
+    buffer.append("Kan du fortelle meg litt om Statistikk? %S ");
+    buffer.append("Blir det hjemmeksamen i TMA4140? %S ");
+    buffer.append("I Diskret Matematikk, hvilke bøker anbefaler du? %S ");
+    buffer.append("Når er eksamen i Fysikk? %S ");
+    buffer.append("Har du noen tips i IT1901? %S ");
+    buffer.append("Jeg vil avslutte samtalen. %S ");
+    buffer.append("Kan jeg se fagoversikten? %S ");
+    buffer.append("Hvilke hjelpemidler er tillat på eksamen i Mekanikk 1? %S ");
+
+
+    return buffer.toString();
   }
 
 }

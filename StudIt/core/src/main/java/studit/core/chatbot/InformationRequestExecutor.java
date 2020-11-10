@@ -37,6 +37,12 @@ public class InformationRequestExecutor {
       case "hjelpemidler":
         requestHjelpemidler(response, courseList, args);
         break;
+      case "fagoversikt":
+        requestFagoversikt(response, courseList, args);
+        break;
+      case "tips":
+        requestTips(response, courseList, args);
+        break;
       case "pensum":
         requestPensum(response, courseList, args);
         break;
@@ -66,7 +72,7 @@ public class InformationRequestExecutor {
         break;
       case "1":
         String fagkode = identifyFagkode(args.get(1)) ? args.get(1).toUpperCase() : args.get(2).toUpperCase();
-        response.add("Dette anbefaler vi deg å lese i " + fagkode + ": "
+        response.add("Her har du våre anbefalinger i " + fagkode + ": "
             + courseList.getCourseByFagkode(fagkode).getAnbefaltLitteratur());
         break;
       default:
@@ -92,7 +98,7 @@ public class InformationRequestExecutor {
         break;
       case "1":
         String fagkode = identifyFagkode(args.get(1)) ? args.get(1).toUpperCase() : args.get(2).toUpperCase();
-        CourseItem course = courseList.getCourseByFagkode(fagkode.toUpperCase());
+        CourseItem course = courseList.getCourseByFagkode(fagkode);
         response.add("Her har du eksamensinformasjon for " + fagkode + ": " + "eksamensdato: "
             + course.getEksamensdato() + ", vurderingsform: " + course.getVurderingsform() + ", tillatte hjelpemidler: "
             + course.getHjelpemidler());
@@ -127,6 +133,25 @@ public class InformationRequestExecutor {
   }
 
   /**
+   * Prints the availible courses.
+   * 
+   * @param response   active Response object
+   * @param courseList active Courselist
+   * @param args       arguments obtained from response.
+   */
+  private static void requestFagoversikt(Response response, CourseList courseList, List<String> args) {
+
+    StringBuffer buffer = new StringBuffer("Fagoversikt: %S ");
+    for (CourseItem courseItem : courseList) {
+      String str = courseItem.getFagkode() + " - " + courseItem.getFagnavn();
+      buffer.append(str);
+      buffer.append(" %S ");
+    }
+
+    response.add(buffer.toString());
+  }
+
+  /**
    * Manage request where user wants information on permitted aids on the exam.
    * 
    * @param response   active Response object
@@ -153,6 +178,30 @@ public class InformationRequestExecutor {
   }
 
   /**
+   * Manage request where user wants to get some tips in the requested course.
+   * 
+   * @param response   active Response object
+   * @param courseList active Courselist
+   * @param args       arguments obtained from response.
+   */
+  private static void requestTips(Response response, CourseList courseList, List<String> args) {
+    switch (args.get(0)) {
+      case "-1":
+        dataMatchFailed(response, "Jeg forstår ikke helt, husk å spesifisere fag, f.eks 'Har du noen tips i Fysikk?'");
+        break;
+      case "0":
+        closeFagMatch(response, args, "tips");
+        break;
+      case "1":
+        String fagkode = identifyFagkode(args.get(1)) ? args.get(1).toUpperCase() : args.get(2).toUpperCase();
+        response.add("Her har du noen tips i " + fagkode + ": " + courseList.getCourseByFagkode(fagkode).getTips());
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**
    * Manage request where user wants information about the corricilum.
    * 
    * @param response   active Response object
@@ -162,16 +211,15 @@ public class InformationRequestExecutor {
   private static void requestPensum(Response response, CourseList courseList, List<String> args) {
     switch (args.get(0)) {
       case "-1":
-        dataMatchFailed(response,
-            "Jeg forstår ikke helt, husk å spesifisere fag, f.eks 'Hva er anbefalt lesestoff i TMA4140?'");
+        dataMatchFailed(response, "Jeg forstår ikke helt, husk å spesifisere fag, f.eks 'Hva er pensum i TMA4140?'");
         break;
       case "0":
         closeFagMatch(response, args, "anbefalt");
         break;
       case "1":
         String fagkode = identifyFagkode(args.get(1)) ? args.get(1).toUpperCase() : args.get(2).toUpperCase();
-        response.add("Dette anbefaler vi deg å lese i " + fagkode + ": "
-            + courseList.getCourseByFagkode(fagkode).getAnbefaltLitteratur());
+        response.add(
+            "Dette er pensum i " + fagkode + ": " + courseList.getCourseByFagkode(fagkode).getAnbefaltLitteratur());
         break;
       default:
         break;
@@ -236,8 +284,12 @@ public class InformationRequestExecutor {
    * @param funcName funcName to call when the user selects a prompt option.
    */
   private static void closeFagMatch(Response response, List<String> args, String funcName) {
-    response.add("Jeg er litt usiker på hvilket fag du mente, mente du '" + args.get(1) + "'?");
+
     String fagkode = identifyFagkode(args.get(1)) ? args.get(1) : args.get(2);
+
+    // If the closest fagmatch is a fagkode, we need to uppercase the letters
+    response.add("Jeg er litt usiker på hvilket fag du mente, mente du '"
+        + (args.get(1).equals(fagkode) ? fagkode.toUpperCase() : args.get(1)) + "'?");
     response.setPrompt(List.of(new String[] { "ja", funcName }, new String[] { "nei", funcName }),
         List.of(fagkode.toUpperCase()), null);
   }

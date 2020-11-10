@@ -73,7 +73,7 @@ public class ChatbotController implements Initializable {
           hBoxLeft.setAlignment(Pos.CENTER_LEFT);
           hBoxRight.setAlignment(Pos.CENTER_RIGHT);
           hBoxRight.setPadding(new Insets(5, 0, 5, 0));
-          hBoxLeft.setPadding(new Insets(5, 0, 5, 0));
+          hBoxLeft.setPadding(new Insets(5, 0, 5, 10));
         }
 
         @Override
@@ -86,7 +86,7 @@ public class ChatbotController implements Initializable {
           } else {
             if (item.getUser().equals("chatbot")) {
               flowTextLeft.setStyle("-fx-background-color: linear-gradient(to left, #ff512f, #dd2476);\r\n"
-                  + "    -fx-background-insets: -5 -25 -5 -5;\r\n"
+                  + "    -fx-background-insets: -5 -30 -5 -15;\r\n"
                   + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,0.5,0.5);\r\n"
                   + "    -fx-shape: \"M 94.658379,129.18587 H 46.277427 c -3.545458,0.23354 -5.32763,-1.59167 -5.14193,-4.67449\r\n"
                   + "    v -19.39913 c 0.405797,-3.73565 2.470637,-4.56641 5.14193,-4.90821 h 43.706464 c 2.572701,0.2361 4.604321,\r\n"

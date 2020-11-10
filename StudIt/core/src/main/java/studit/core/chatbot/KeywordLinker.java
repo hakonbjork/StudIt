@@ -103,7 +103,7 @@ public class KeywordLinker {
 
     int matchID = -1;
     float matchPct = 0.0f;
-    int lastLen = 0;
+    int lastLen = 100;
 
     for (Map.Entry<Integer, String> entry : recognizedWords.entrySet()) {
 

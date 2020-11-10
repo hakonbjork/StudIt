@@ -39,12 +39,18 @@ public class Message {
     StringBuffer output = new StringBuffer();
 
     for (String word : words) {
-      if (line.length() + word.length() > ChatbotController.lineBreakLength - 8) {
-        line.append('\n');
-        output.append(line);
-        line = new StringBuffer(word + " ");
+      // %S indicates we want a newline char
+      if (word.equals("%S")) {
+        output.append(line + "\n");
+        line = new StringBuffer();
       } else {
-        line.append(word + " ");
+        if (line.length() + word.length() > ChatbotController.lineBreakLength - 8) {
+          line.append('\n');
+          output.append(line);
+          line = new StringBuffer(word + " ");
+        } else {
+          line.append(word + " ");
+        }
       }
     }
 
@@ -90,7 +96,6 @@ public class Message {
   public List<Object> getArgs1() {
     return args1;
   }
-
 
   /**
    * Get args for second prompt action.

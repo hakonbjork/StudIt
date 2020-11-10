@@ -59,7 +59,8 @@ public class ChatbotManager {
       if (possibleMatch[0].equals("0") || possibleMatch[0].equals("1")) {
         response.add("Vennligst vær litt mer spesifikk, f.eks: 'Jeg vil vite mer om '" + possibleMatch[1]);
       } else {
-        response.add("Jeg beklager, men det forstod jeg ikke helt. Prøv å formulere setningen på en annen måte");
+        response.add(
+            "Jeg beklager, men det forstod jeg ikke helt. Prøv å formulere setningen på en annen måte. Skriv 'jeg trenger hjelp' hvis du står fast");
       }
 
     }
@@ -79,6 +80,8 @@ public class ChatbotManager {
 
     links.add(new KeywordLink("anbefalt", "course", 2, List.of(
         Map.of("hva", 0.1f, "er", 0.1f, "anbefalt", 0.6f, "litteratur", 0.4f, "lesestoff", 0.4f),
+        Map.of("hva", 0.05f, "er", 0.05f, "anbefalt", 0.6f, "å", 0.1f, "lese", 0.3f),
+        Map.of("hvilke", 0.2f, "hvilken", 0.2f, "bøker", 0.4f, "anbefaler", 0.4f, "du", 0.05f, "lese", 0.2f, "kjøpe",0.2f),
         Map.of("hvilke", 0.2f, "bøker", 0.6f, "bør", 0.2f, "må", 0.2f, "jeg", 0.05f, "lese", 0.2f, "kjøpe", 0.2f))));
 
     links.add(new KeywordLink("eksamen", "course", 2,
@@ -95,12 +98,22 @@ public class ChatbotManager {
         List.of(Map.of("jeg", 0.1f, "vil", 0.1f, "vite", 0.4f, "mer", 0.3f, "om", 0.3f),
             Map.of("kan", 0.1f, "du", 0.1f, "fortelle", 0.6f, "meg", 0.2f, "om", 0.2f))));
 
+    links.add(new KeywordLink("fagoversikt", "fagoversikt", 2,
+        List.of(Map.of("fagoversikt", 1.0f, "fagoversikten", 1.0f), Map.of("oversikt", 0.6f, "fag", 0.4f))));
+
     links.add(new KeywordLink("hade", null, 1, List.of(Map.of("hade", 1.0f, "adjø", 1.0f, "vi", 0.2f, "snakkes", 0.8f,
         "takk", 0.1f, "for", 0.1f, "hjelpen", 0.8f, "praten", 0.8f, "samtalen", 0.8f))));
 
     links.add(new KeywordLink("hjelpemidler", "course", 2,
         List.of(Map.of("hvilke", 0.4f, "hjelpemidler", 0.6f, "er", 0.1f, "tillatt", 0.2f, "på", 0.1f, "eksamen", 0.5f),
             Map.of("hva", 0.2f, "kan", 0.2f, "jeg", 0.2f, "ta", 0.2f, "med", 0.2f, "eksamen", 0.2f))));
+
+    links.add(new KeywordLink("hjelp", null, 2,
+        List.of(Map.of("jeg", 0.1f, "trenger", 0.2f, "hjelp", 0.7f),
+            Map.of("hva", 0.2f, "kan", 0.2f, "du", 0.1f, "gjøre", 0.5f),
+            Map.of("hva", 0.2f, "kan", 0.2f, "jeg", 0.1f, "spørre", 0.5f),
+            Map.of("jeg", 0.2f, "står", 0.2f, "fast", 0.6f), Map.of("jeg", 0.2f, "forstår", 0.5f, "ikke", 0.3f),
+            Map.of("hvilke", 0.2f, "hvilken", 0.2f, "kommandoer", 0.8f, "funksjoner", 0.8f))));
 
     links.add(
         new KeywordLink("hils", null, 1, List.of(Map.of("hei", 1.0f, "hallo", 1.0f, "heisann", 1.0f, "hoi", 1.0f))));
@@ -133,7 +146,8 @@ public class ChatbotManager {
 
     ObjectMapper mapper = new ObjectMapper();
     try {
-      mapper.writeValue(Paths.get("../core/src/main/resources/studit/db/keywordLinks.json").toFile(), links);
+      mapper.writerWithDefaultPrettyPrinter()
+          .writeValue(Paths.get("../core/src/main/resources/studit/db/keywordLinks.json").toFile(), links);
     } catch (IOException e) {
       System.out.println("Error occured while printing dummy json to file");
       e.printStackTrace();
