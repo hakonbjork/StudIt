@@ -12,8 +12,14 @@ class ResponseManagerTest {
     action.setFuncKey("exit");
     action.setChatbotResponse("Avslutter chatbot...");
     
-    assertTrue("exit" == pm.handlePrompt("exit").getFuncKey());
-    assertTrue("Avslutter chatbot..." == pm.handlePrompt("exit").getChatbotResponse());
+    assertEquals("exit", pm.handlePrompt("exit").getFuncKey());
+    assertEquals("Avslutter chatbot...", pm.handlePrompt("exit").getChatbotResponse());
+
+    assertNull(pm.handlePrompt("regret").getFuncKey());
+    assertEquals("Den er god du!", pm.handlePrompt("regret").getChatbotResponse());
+
+    assertEquals("foo", pm.handlePrompt("foo").getFuncKey());
+    assertEquals("", pm.handlePrompt("foo").getChatbotResponse());
   }
 
 
