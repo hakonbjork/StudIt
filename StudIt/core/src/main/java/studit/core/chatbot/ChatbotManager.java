@@ -144,8 +144,7 @@ public class ChatbotManager {
 
     ObjectMapper mapper = new ObjectMapper();
     try {
-      mapper.writerWithDefaultPrettyPrinter()
-          .writeValue(Paths.get("../core/src/main/resources/studit/db/keywordLinks.json").toFile(), links);
+      mapper.writeValue(Paths.get("../core/src/main/resources/studit/db/keywordLinks.json").toFile(), links);
     } catch (IOException e) {
       System.out.println("Error occured while printing dummy json to file");
       e.printStackTrace();

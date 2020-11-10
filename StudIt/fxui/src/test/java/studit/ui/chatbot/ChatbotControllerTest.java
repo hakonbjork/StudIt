@@ -9,6 +9,7 @@ import static org.testfx.api.FxAssert.verifyThat;
 import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxRobot;
 import org.testfx.api.FxToolkit;
@@ -22,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
+import studit.ui.AppController;
 import studit.ui.remote.DirectStuditModelAccess;
 import studit.ui.remote.RemoteStuditModelAccess;
 
@@ -50,7 +52,12 @@ public class ChatbotControllerTest extends ApplicationTest {
     stage.show();
     stage.toFront();
   }
-
+  
+  @BeforeEach
+  public void setUp () {
+    AppController.newChatbot(true);
+  }
+ 
   @Test
   public void testChatbot() {
     FxRobot robot = new FxRobot();

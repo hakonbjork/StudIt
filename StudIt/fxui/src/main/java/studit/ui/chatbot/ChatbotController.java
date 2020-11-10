@@ -202,7 +202,6 @@ public class ChatbotController implements Initializable {
       txt_user_entry.setText("");
       list_chat.getItems().add(new Message(userInput, "user"));
 
-      // Make sure that the caret is at first position for a new command!
       txt_user_entry.selectPositionCaret(0);
       Response response = AppController.getChatbot().manageInput(userInput);
       if (response.funcCall()) {

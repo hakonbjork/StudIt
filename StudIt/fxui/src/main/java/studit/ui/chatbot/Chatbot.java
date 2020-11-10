@@ -11,6 +11,7 @@ import studit.core.chatbot.ChatbotManager;
 import studit.core.chatbot.Response;
 import studit.core.mainpage.CourseList;
 import studit.ui.remote.ApiCallException;
+import studit.ui.remote.DirectStuditModelAccess;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class Chatbot {
@@ -21,6 +22,16 @@ public class Chatbot {
   public Chatbot() {
     displayWindow();
     RemoteStuditModelAccess remoteAccess = new RemoteStuditModelAccess();
+    try {
+      CourseList courseList = remoteAccess.getCourseList();
+      chatbotManager = new ChatbotManager(courseList.getCourseNameList());
+    } catch (ApiCallException e) {
+      e.printStackTrace();
+    }
+  }
+  
+  public Chatbot(boolean directAccess) {
+    RemoteStuditModelAccess remoteAccess = new DirectStuditModelAccess();
     try {
       CourseList courseList = remoteAccess.getCourseList();
       chatbotManager = new ChatbotManager(courseList.getCourseNameList());

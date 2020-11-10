@@ -72,6 +72,10 @@ public class AppController {
   public static void newChatbot() {
     chatbot = new Chatbot();
   }
+  
+  public static void newChatbot(boolean directAccess) {
+    chatbot = directAccess ? new Chatbot(true) : new Chatbot();
+  }
 
   public void addUser(User user) {
     this.user = user;
