@@ -164,21 +164,11 @@ public class ChatbotController implements Initializable {
   @FXML
   public void exitChatbot(ActionEvent event) {
     AppController.closeChatbot();
-    if (stage == null) {
-      final Node source = (Node) event.getSource();
-      stage = (Stage) source.getScene().getWindow();
-    }
-
     stage.close();
   }
 
   @FXML
   public void minimizeChatbot(ActionEvent event) {
-    if (stage == null) {
-      final Node source = (Node) event.getSource();
-      stage = (Stage) source.getScene().getWindow();
-    }
-
     stage.setIconified(true);
   }
 
@@ -197,11 +187,6 @@ public class ChatbotController implements Initializable {
    */
   @FXML
   private void setOffset(MouseEvent event) {
-    // If we have not yet loaded the current stage, load it from the event
-    if (stage == null) {
-      Node source = (Node) event.getSource();
-      stage = (Stage) source.getScene().getWindow();
-    }
     xOffset = event.getSceneX();
     yOffset = event.getSceneY();
   }
@@ -212,11 +197,6 @@ public class ChatbotController implements Initializable {
    */
   @FXML
   private void userEntry(KeyEvent event) {
-    if (stage == null) {
-      final Node source = (Node) event.getSource();
-      stage = (Stage) source.getScene().getWindow();
-    }
-
     if (event.getCode() == KeyCode.ENTER) {
       String userInput = txt_user_entry.getText();
       txt_user_entry.setText("");
@@ -252,6 +232,10 @@ public class ChatbotController implements Initializable {
    */
   public Stage getStage() {
     return stage;
+  }
+
+  public void setStage(Stage chatStage) {
+    this.stage = chatStage;
   }
 
 }

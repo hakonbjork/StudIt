@@ -33,11 +33,15 @@ public class Chatbot {
    * Opens a new window for our chatbot
    */
   private void displayWindow() {
-    Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("/studit/ui/Chatbot.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/studit/ui/Chatbot.fxml"));
+      final Parent root = loader.load();
+
       chatStage = new Stage();
       Scene scene = new Scene(root);
+
+      ChatbotController controller = (ChatbotController) loader.getController();
+      //controller.setStage(chatStage);
 
       // Setting the background to be transparent, so we can create rounded corners in
       // our css file
