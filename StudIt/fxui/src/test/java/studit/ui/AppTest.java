@@ -33,11 +33,12 @@ public class AppTest extends ApplicationTest {
   private DirectStuditModelAccess directStuditModelAccess = new DirectStuditModelAccess();
   private AppController appController = new AppController();
   private ObservableList<CourseItem> list = FXCollections.observableArrayList();
-  private ListView<CourseItem> listView;
+  private ListView<CourseItem> coursesList = appController.coursesList;
 
   @Override
   public void start(final Stage stage) throws Exception {
     final FXMLLoader appLoader = new FXMLLoader(getClass().getResource("App.fxml"));
+    LoginController.setTestingMode(true);
 
     final Parent root = appLoader.load();
     this.appController = appLoader.getController();
@@ -59,7 +60,7 @@ public class AppTest extends ApplicationTest {
   @BeforeEach
   public void setup() throws ApiCallException {
     list.addAll(directStuditModelAccess.getCourseList().getCourseItems());
-    listView.setItems(list);
+    coursesList.setItems(list);
   }
 
   @Test
@@ -83,7 +84,7 @@ public class AppTest extends ApplicationTest {
 
   @Test
   public void testListView() {
-    assertNotNull(this.listView);
+    assertNotNull(this.coursesList);
   }
 
   @Test

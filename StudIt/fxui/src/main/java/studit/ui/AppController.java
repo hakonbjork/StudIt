@@ -123,6 +123,16 @@ public class AppController {
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     // Actions on clicked list item
     mouseClicked();
+    setSearch();
+  }
+
+
+
+  public void setSearch(){
+    // Wrap the ObservableList in a FilteredList (initially display all data).
+    FilteredList<CourseItem> filteredData = new FilteredList<>(this.getData(), (p -> true));
+    SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
+    ObservableList<CourseItem> filteredList = FXCollections.observableArrayList();
   }
 
 
@@ -132,9 +142,6 @@ public class AppController {
    */
   @FXML
   public void handleSearchFieldAction() {
-    // Wrap the ObservableList in a FilteredList (initially display all data).
-    FilteredList<CourseItem> filteredData = new FilteredList<>(this.getData(), (p -> true));
-
     // Set the filter Predicate whenever the filter changes.
     searchField.textProperty().addListener((observable, oldValue, newValue) -> {
 
@@ -156,32 +163,11 @@ public class AppController {
 
         System.out.println("no match");
         return false; // Does not match
-
       });
     });
-
-    SortedList<CourseItem> sortedData = new SortedList<>(filteredData);
-    ObservableList<CourseItem> filteredList = FXCollections.observableArrayList();
+   
     filteredList.setAll(sortedData);
     this.coursesList.setItems(filteredList);
-
-    coursesList.setCellFactory(param -> new ListCell<CourseItem>() {
-
-      @Override
-      public void updateItem(CourseItem item, boolean empty) {
-        super.updateItem(item, empty);
-        if (empty) {
-          setText(null);
-          setGraphic(null);
-          return;
-        }
-
-        setText(item.getFagkode() + " " + item.getFagnavn());
-        setGraphic(null);
-      }
-    });
-
-
   }
 
   /**
@@ -253,7 +239,7 @@ public class AppController {
           Scene courseScene = new Scene(coursePane);
 
           primaryStage.setScene(courseScene);
-          primaryStage.setTitle("StudIt");
+          primaryStage.setTitle("Course");
           primaryStage.show();
 
         } catch (Exception e) {
