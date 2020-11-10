@@ -3,7 +3,6 @@ package studit.core.chatbot;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -32,12 +31,9 @@ public class ChatbotManager {
   public Response manageInput(String input) {
     // Splitting string by spaces, and removing all newline chars
     String[] command = input.replaceAll("[^a-zA-Z0-9 æøå]", "").toLowerCase().split(" ");
-    System.out.println("command: " + Arrays.toString(command));
 
     Response response = new Response();
     List<Match> matches = linker.matchCommand(command);
-    System.out.println(matches);
-
     int nextPrecedence = 1;
 
     for (Match match : matches) {
@@ -57,7 +53,7 @@ public class ChatbotManager {
     if (response.getResponse().length() == 0 && !response.funcCall()) {
       String[] possibleMatch = dataMatcher.findDataMatch(command, "course");
       if (possibleMatch[0].equals("0") || possibleMatch[0].equals("1")) {
-        response.add("Vennligst vær litt mer spesifikk, f.eks: 'Jeg vil vite mer om '" + possibleMatch[1]);
+        response.add("Vennligst vær litt mer spesifikk, f.eks: 'Jeg vil vite mer om " + possibleMatch[1] + "'");
       } else {
         response.add(
             "Jeg beklager, men det forstod jeg ikke helt. Prøv å formulere setningen på en annen måte. Skriv 'jeg trenger hjelp' hvis du står fast");
@@ -71,7 +67,7 @@ public class ChatbotManager {
   /**
    * Writes a list of dummy keyword connections to our json database.
    */
-  private void writeDefaultCommandsToDb() {
+  public void writeDefaultCommandsToDb() {
 
     List<KeywordLink> links = new ArrayList<>();
 
@@ -81,7 +77,8 @@ public class ChatbotManager {
     links.add(new KeywordLink("anbefalt", "course", 2, List.of(
         Map.of("hva", 0.1f, "er", 0.1f, "anbefalt", 0.6f, "litteratur", 0.4f, "lesestoff", 0.4f),
         Map.of("hva", 0.05f, "er", 0.05f, "anbefalt", 0.6f, "å", 0.1f, "lese", 0.3f),
-        Map.of("hvilke", 0.2f, "hvilken", 0.2f, "bøker", 0.4f, "anbefaler", 0.4f, "du", 0.05f, "lese", 0.2f, "kjøpe",0.2f),
+        Map.of("hvilke", 0.2f, "hvilken", 0.2f, "bøker", 0.4f, "anbefaler", 0.4f, "du", 0.05f, "lese", 0.2f, "kjøpe",
+            0.2f),
         Map.of("hvilke", 0.2f, "bøker", 0.6f, "bør", 0.2f, "må", 0.2f, "jeg", 0.05f, "lese", 0.2f, "kjøpe", 0.2f))));
 
     links.add(new KeywordLink("eksamen", "course", 2,
@@ -106,7 +103,8 @@ public class ChatbotManager {
 
     links.add(new KeywordLink("hjelpemidler", "course", 2,
         List.of(Map.of("hvilke", 0.4f, "hjelpemidler", 0.6f, "er", 0.1f, "tillatt", 0.2f, "på", 0.1f, "eksamen", 0.5f),
-            Map.of("hva", 0.2f, "kan", 0.2f, "jeg", 0.2f, "ta", 0.2f, "med", 0.2f, "eksamen", 0.2f))));
+            Map.of("hva", 0.2f, "kan", 0.2f, "jeg", 0.2f, "ta", 0.2f, "med", 0.2f, "eksamen", 0.2f),
+            Map.of("hva", 0.1f, "er", 0.1f, "tillatte", 0.6f, "hjelpemidler", 0.4f, "på", 0.1f, "eksamen", 0.2f))));
 
     links.add(new KeywordLink("hjelp", null, 2,
         List.of(Map.of("jeg", 0.1f, "trenger", 0.2f, "hjelp", 0.7f),
@@ -137,12 +135,13 @@ public class ChatbotManager {
             Map.of("jeg", 0.2f, "trenger", 0.2f, "tips", 0.8f, "vil", 0.2f, "ha", 0.2f))));
 
     links.add(new KeywordLink("uhyggelig", null, 1,
-        List.of(Map.of("det", 0.2f, "går", 0.2f, "dårlig", 0.6f, "ikke", 0.4f, "så", 0.05f, "bra", 0.05f),
-            Map.of("nei", 1.0f, "nope", 1.0f, "niks", 1.0f))));
+        List.of(Map.of("det", 0.2f, "går", 0.2f, "dårlig", 0.6f, "ikke", 0.4f, "så", 0.05f, "bra", 0.05f))));
+
+    links.add(new KeywordLink("nei", null, 1, List.of(Map.of("nei", 1.0f, "nope", 1.0f, "niks", 1.0f))));
 
     links.add(new KeywordLink("vurderingsform", "course", 2,
         List.of(Map.of("hva", 0.2f, "hvilken", 0.2f, "vurderingsform", 1.0f, "vurdering", 0.8f),
-            Map.of("hjemmeksamen", 1.0f, "skriftlig", 0.5f, "eksamen", 0.5f))));
+            Map.of("hjemmeksamen", 1.0f, "skriftlig", 0.5f, "eksamen", 0.5f, "hjemmeeksamen", 1.0f, "muntlig", 0.5f))));
 
     ObjectMapper mapper = new ObjectMapper();
     try {

@@ -28,7 +28,7 @@ public class KeywordLinkerTest {
   @Test
   public void testGetRecognizedWords() {
     Map<Integer, String> words = linker.getRecognizedWords();
-    List<String> recognizedWords = List.of("hei", "hallo", "hade", "adios", "når", "er", "eksamen");
+    List<String> recognizedWords = List.of("hei", "hallo", "hade", "adios", "når", "er", "eksamen", "eksamena");
   
     
     for (String word : words.values()) {
@@ -43,7 +43,7 @@ public class KeywordLinkerTest {
   public void testMatchCommand() {
     List<Match> match1 = linker.matchCommand(new String[] {"hei", "hva", "skjer"});
     List<Match> match2 = linker.matchCommand(new String[] {"hade", "hva", "skjer"});
-    List<Match> match3 = linker.matchCommand(new String[] {"bror", "når", "er", "eksamen"});
+    List<Match> match3 = linker.matchCommand(new String[] {"bror", "når", "er", "eksamen", "eksamena"});
     
     assertEquals(1.0f, match1.get(0).match);
     assertEquals(1.0f, match1.get(0).precedence);

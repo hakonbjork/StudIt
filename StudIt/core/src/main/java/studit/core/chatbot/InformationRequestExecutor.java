@@ -214,7 +214,7 @@ public class InformationRequestExecutor {
         dataMatchFailed(response, "Jeg forstår ikke helt, husk å spesifisere fag, f.eks 'Hva er pensum i TMA4140?'");
         break;
       case "0":
-        closeFagMatch(response, args, "anbefalt");
+        closeFagMatch(response, args, "pensum");
         break;
       case "1":
         String fagkode = identifyFagkode(args.get(1)) ? args.get(1).toUpperCase() : args.get(2).toUpperCase();
