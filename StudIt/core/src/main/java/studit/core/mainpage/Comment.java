@@ -83,6 +83,10 @@ public class Comment {
     return uniqueID;
   }
 
+  /**
+   * The user upvotes the comment. If already upvoted, it is not possible. Max 1 upvote per user.
+   * If the user regret upvoting, the upvote can be offset by clicking on the downvote button
+   */
   public boolean upvote(String username) {
     if (!upvoters.contains(username)) {
 
@@ -99,6 +103,10 @@ public class Comment {
     return false;
   }
 
+  /**
+   * The user downvotes the comment. If already downvoted, it is not possible. Max 1 downvote per user.
+   * If the user regret downvoting, the downvote can be offset by clicking on the upvote button
+   */
   public boolean downvote(String username) {
     if (!downvoters.contains(username)) {
 
