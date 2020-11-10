@@ -126,7 +126,7 @@ public class RemoteStuditModelAccess {
       return true;
     } catch (ApiCallException e) {
       if (!test) {
-        //e.printStackTrace();
+        // e.printStackTrace();
         System.out.println("Could not establish connection to server.");
       }
       return false;
@@ -279,6 +279,26 @@ public class RemoteStuditModelAccess {
       return false;
     }
     return true;
+  }
+
+  /**
+   * Get a User object by username.
+   * @param username requested user's username.
+   * @return User object if found, null if JsonProcessingException occurs.
+   * @throws ApiCallException if user with username does not exist.
+   */
+  public User getUserByUsername(String username) throws ApiCallException {
+    HttpResponse<String> response = newGetRequest(null, "users", "username", username);
+    
+    if (response.statusCode() == Status.NOT_FOUND.get()) {
+      throw new ApiCallException("User with username '" + username + "' does not exist.");
+    }
+    try {
+      return objectMapper.readValue(response.body(), User.class);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   /**

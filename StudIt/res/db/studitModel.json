@@ -2,62 +2,323 @@
   "courseList" : {
     "items" : [ {
       "fagkode" : "TMA4140",
-      "fagnavn" : "Diskret Matematikk 1",
-      "informasjon" : "Info",
-      "pensumlitteratur" : "Mathematics for dummies and retards",
-      "anbefaltLitteratur" : "Kompendium Diskmat",
-      "tips" : "Ikke kok",
+      "fagnavn" : "Diskret Matematikk",
+      "informasjon" : "Emnet gir en innføring i matematisk logikk og mengdelære, og elementær tallteori med modulær aritmetikk. Andre sentrale tema er: Følger, rekurrensrelasjoner, matematisk induksjon og kombinatoriske tellemetoder med anvendelser. I tillegg gis en innføring i teorien for relasjoner, grafer og trær, samt formelle språk, grammatikker og endelige automater.",
+      "pensumlitteratur" : "Kenneth H. Rosen's Discrete Mathematics and Its Applications, 8. edition (ISBN 978-1-260-09199-1).",
+      "anbefaltLitteratur" : "Kompendium Diskmat - Kjøpes hos Abakus",
+      "tips" : "Veldig store deler av pensum bygger på hverandre, svært viktig å følge med fra starten. Fokuser på å forstå beviser til eksamen, de er vanskelig å forbedre seg på.",
       "eksamensdato" : "03/12/2020",
       "vurderingsform" : "Hjemmeksamen",
-      "hjelpemidler" : "alle",
-      "vurderinger" : [ "3", "5", "9", "8" ],
+      "hjelpemidler" : "A - alle",
+      "vurderinger" : [ "3", "5", "2", "1" ],
       "diskusjon" : {
-        "prevAssignedID" : "2",
+        "prevAssignedID" : "3",
         "comments" : [ {
-          "brukernavn" : "BobbyBigBoi",
+          "brukernavn" : "Einar82",
           "kommentar" : "Bra saker!",
-          "dato" : "19-10-2020 11:29:09",
-          "upvotes" : "1",
-          "downvotes" : "1",
-          "uniqueID" : "0",
-          "upvoters" : [ "BobbyBigBoi" ],
-          "downvoters" : [ "BjarteBrorMor" ]
-        }, {
-          "brukernavn" : "BobbyBigBoi",
-          "kommentar" : "Ok saker :/",
-          "dato" : "19-10-2020 11:29:09",
-          "upvotes" : "0",
-          "downvotes" : "0",
-          "uniqueID" : "1",
-          "upvoters" : [ ],
-          "downvoters" : [ ]
-        }, {
-          "brukernavn" : "BjarteBrorMor",
-          "kommentar" : "Bobby er en idiot!",
           "dato" : "19-10-2020 11:29:09",
           "upvotes" : "2",
           "downvotes" : "0",
-          "uniqueID" : "2",
-          "upvoters" : [ "BjarteBrorMor", "BobbyBigBoi" ],
+          "uniqueID" : "0",
+          "upvoters" : [ "KristineKre", "Geirstein" ],
           "downvoters" : [ ]
+        }, {
+          "brukernavn" : "FridaFronse",
+          "kommentar" : "Kompendiet i Diskmat er udugelig!",
+          "dato" : "19-10-2020 11:29:09",
+          "upvotes" : "0",
+          "downvotes" : "3",
+          "uniqueID" : "1",
+          "upvoters" : [ ],
+          "downvoters" : [ "Pessimen", "Jossekaren", "Brilillia" ]
+        }, {
+          "brukernavn" : "helstad2",
+          "kommentar" : "Noen som har kok?",
+          "dato" : "19-10-2020 11:29:09",
+          "upvotes" : "0",
+          "downvotes" : "0",
+          "uniqueID" : "2",
+          "upvoters" : [  ],
+          "downvoters" : [  ]
+        }, {
+          "brukernavn" : "KaroKine",
+          "kommentar" : "Anbefaler å bruke YouTube! Mye bra som ligger ute",
+          "dato" : "19-10-2020 11:29:09",
+          "upvotes" : "2",
+          "downvotes" : "2",
+          "uniqueID" : "3",
+          "upvoters" : [ "Halida", "0x1" ],
+          "downvoters" : [ "Oscar", "fjellknausen" ]
         } ]
       }
     }, {
-      "fagkode" : "TDT4120",
-      "fagnavn" : "Informasjonsteknologi - Avansert kurs",
-      "informasjon" : "Masse informasjon her",
-      "pensumlitteratur" : "Informatics for dummies and retards",
-      "anbefaltLitteratur" : "Kompendium IT",
-      "tips" : "Ikke kok. Spis grønnsaker",
-      "eksamensdato" : "05/12/2020",
-      "vurderingsform" : "Muntlig eksamen",
-      "hjelpemidler" : "Mamma på telefon",
-      "vurderinger" : [ "3", "5", "9", "8" ],
-      "diskusjon" : null
+      "fagkode" : "IT1901",
+      "fagnavn" : "Informatikk Prosjektarbeid 1",
+      "informasjon" : "Emnet gir kunnskap og ferdigheter i smidig applikasjonsutvikling i team. Applikasjonen vil bruke en klientserverarkitektur, strukturert i moduler og konfigurert med et byggesystem. Gruppene vil bruke et system for sporing av utviklingsoppgaver, kildekodeadministrasjon og kodevurdering. Fokuset er mer på kodekvalitet og testing, enn på funksjonalitet.",
+      "pensumlitteratur" : "Forelesninger og videoer publisert på BlackBoard",
+      "anbefaltLitteratur" : "Mange gode YouYube-vidoer om smidig utvikling, scrum, testing, JavaFX m.m",
+      "tips" : "Les ofisiell dokumentasjon til rammeverkene og bruk Stackoverflow / YouTube aktivt for inspirasjon og kodeeksempler. Begynn med gode arbeidsvaner tidlig i semesteret, med fokus på struktur, dokumentasjon og leselighet av koden. Følg med i forelesning, mye nyttig informasjon å hente",
+      "eksamensdato" : "22/11/2020",
+      "vurderingsform" : "Skriftlige innleveringer og selvstendig rapport.",
+      "hjelpemidler" : "A - alle",
+      "vurderinger" : [ "5", "5", "4", "3" ],
+      "diskusjon" : {
+        "prevAssignedID" : "1",
+        "comments" : [ {
+          "brukernavn" : "Jodleren",
+          "kommentar" : "Bra skrevet, anbefaler å bruke checkstyle plugins i Eclipse for å gjøre formattering av koden enklere!",
+          "dato" : "19-08-2020 11:15:09",
+          "upvotes" : "3",
+          "downvotes" : "0",
+          "uniqueID" : "0",
+          "upvoters" : [ "KristineKre", "Geirstein", "isidi191919" ],
+          "downvoters" : [ ]
+        }, {
+          "brukernavn" : "frodigOgledig",
+          "kommentar" : "Savner mer utfyllende pensumbeskrivelse",
+          "dato" : "16-10-2020 10:40:09",
+          "upvotes" : "2",
+          "downvotes" : "2",
+          "uniqueID" : "1",
+          "upvoters" : [ "Halida", "samuelsteinbark" ],
+          "downvoters" : [ "Oscar", "hurpesnes" ]
+        } ]
+      }
+    }, {
+      "fagkode" : "TFY4104",
+      "fagnavn" : "Fysikk",
+      "informasjon" : "Hovedtema: Dynamikk, elektromagnetisme. Detaljert innhold: Dynamikk: Kinematikk. Newtons lover. Arbeid og energi. Dreiemoment. Treghetsmoment. Dreieimpuls. Konserveringslover. Harmonisk svingning, resonans. Elektromagnetisme: Elektrostatikk, magnetisme, elektromagnetisk induksjon, DC- og AC-kretser. Overordnet læringsmål: Gjennom basisemnet i fysikk skal studenten opparbeide en forståelse av fysikk som vitenskapelig disiplin, ulike fysiske fenomener og naturvitenskapelige tenkemåter og metoder. Videre skal studenten lære å beskrive fysiske fenomener med matematiske metoder og benytte disse metodene som basis for emner som realiserer spesifikke metodemessige læringsmål i sitt studieprogram.",
+      "pensumlitteratur" : "Young & Freedman: University Physics, J. R. Lien, G. Løvhøiden: Generell fysikk for universiteter og høgskoler. Bind 1 Mekanikk (er også fritt tilgjengelig digitalt), E. Lillestøl, O. Hunderi, J. R. Lien: Generell fysikk for universiteter og høgskoler. Bind 2 Varmelære og elektromagnetisme",
+      "anbefaltLitteratur" : "Fysiske Formler og deres Anveldelser - Kjøpes på Akademika",
+      "tips" : "Øvingstimene i dette faget har historisk sett vært veldig gode, så anbefaler å delta i dem. Gjør det godt kjent med formelheftet, da dette er tilgjenglig på eksamen",
+      "eksamensdato" : "23/11/2020",
+      "vurderingsform" : "Hjemmeksamen",
+      "hjelpemidler" : "A - alle",
+      "vurderinger" : [ "5", "3", "4", "3" ],
+      "diskusjon" : {
+        "prevAssignedID" : "0",
+        "comments" : [ {
+          "brukernavn" : "GnureGnassen",
+          "kommentar" : "Ryktes at det kommer epsilon-delta på eksamen! Pass på!",
+          "dato" : "16-08-2020 11:30:12",
+          "upvotes" : "4",
+          "downvotes" : "0",
+          "uniqueID" : "0",
+          "upvoters" : [ "Halida", "samuelsteinbark", "digbick69", "urgur" ],
+          "downvoters" : [  ]
+        } ]
+      }
+    }, {
+      "fagkode" : "IT1901",
+      "fagnavn" : "Algoritmer og Datastrukturer",
+      "informasjon" : "Metoder for å analysere effektiviteten av algoritmer, splitt- og hersk-teknikker, rekursive løsningsmetoder. Metoder for ordning, søking i og sortering av datamengder. Datastrukturer for effektiv gjenfinning av data, dynamisk programmering og grådighetsalgoritmer. Datastrukturer for etablering av grafer og nettverk, samt metoder for gjennomløping og leting. Algoritmer for å finne beste vei(er) og koplinger (matchinger), spenntrær og maksimal flyt. Teori for problemkompleksitet. Algoritmene uttrykkes mest mulig språkuavhengig.",
+      "pensumlitteratur" : "Introduction to Algorithms - Cormen, Thomas H. Leiserson, Charles E. Rivest, Ronald L.Stein, Clifford",
+      "anbefaltLitteratur" : "Veldig bra kompendium i algdat tilgjengelig, kjøpes hos Abakus",
+      "tips" : "Dette er et vanskelig fag å lære seg på kort tid. Bruk mye tid på å løse kodeoppgavene da de gir økt forståelse for pensum. Følg ekstra nøye med på kjøretid i begynnelsen av semesteret, dette er fundamentalt for alt pensum videre i kurset",
+      "eksamensdato" : "24/11/2020",
+      "vurderingsform" : "Hjemmeeksamen",
+      "hjelpemidler" : "A - alle",
+      "vurderinger" : [ "2", "1", "4", "3" ],
+      "diskusjon" : {
+        "prevAssignedID" : "1",
+        "comments" : [ {
+          "brukernavn" : "discoTom",
+          "kommentar" : "Last ned Pycharm og lag et prosjekt med alle øvingene, det er nyttig til eksamen!",
+          "dato" : "12-10-2020 06:24:23",
+          "upvotes" : "3",
+          "downvotes" : "1",
+          "uniqueID" : "0",
+          "upvoters" : [ "KristineKre", "Jamreboksen", "Donkeldass" ],
+          "downvoters" : [ "heraldHoHo" ]
+        }, {
+          "brukernavn" : "Gasspedalen",
+          "kommentar" : "Kjipt fag",
+          "dato" : "03-10-2020 13:42:18",
+          "upvotes" : "2",
+          "downvotes" : "2",
+          "uniqueID" : "1",
+          "upvoters" : [ "SnøStreiken", "roa93" ],
+          "downvoters" : [ "Ridini", "Halloumi" ]
+        } ]
+      }
+    }, {
+      "fagkode" : "TKT4116",
+      "fagnavn" : "Mekanikk 1",
+      "informasjon" : "De to grunnkursene Mekanikk 1 og Mekanikk 2 skal gi grunnleggende kunnskaper i statikk, fasthetslære. TKT4116/TKT4118 Mekanikk 1 er obligatorisk for studieprogrammene MTBYGG, MTING, MTMART og MTPROD samt MTIØT med teknologiretning Produktutvikling og produksjon. Emnene Mekanikk 1 og 2 danner et fundament for videregående emner i faststoffmekanikk. Faglig innhold: Statisk bestemte konstruksjoner: Bjelker, rammer og fagverk. Snittkrefter. Introduksjon til fasthetslæren: Spenning, tøyning og elastisitet. Elementær bjelketeori: Bøyespenninger, bjelkens differensialligning.",
+      "pensumlitteratur" : "Mekanikk for ingeniører; statikk og fasthetslære - Heftet, Norsk (bokmål), 2010 - Øistein Vollen",
+      "anbefaltLitteratur" : "Formelhefte og kompendium. (Kjøpes av Smørekoppen)",
+      "tips" : "Det finnes mange verktøy som gjør regning på statiske konstruksjoner enkelt -> www.mekanikkguruen.no er en god plass å simulere fagverk.",
+      "eksamensdato" : "24/12/2020",
+      "vurderingsform" : "Skriftlig Eksamen",
+      "hjelpemidler" : "C - Formelhefte tillatt",
+      "vurderinger" : [ "4", "2", "5", "3" ],
+      "diskusjon" : {
+        "prevAssignedID" : "1",
+        "comments" : [ {
+          "brukernavn" : "snuprikken",
+          "kommentar" : "Selger kompendium til 50 kroner, minimalt med tåreflekker!",
+          "dato" : "12-10-2020 06:24:23",
+          "upvotes" : "3",
+          "downvotes" : "1",
+          "uniqueID" : "0",
+          "upvoters" : [ "frostbitt", "surklehuet", "jegerfordumtilågåpåntnuhjelp" ],
+          "downvoters" : [ "humsen" ]
+        }, {
+          "brukernavn" : "tidfortoNohomo",
+          "kommentar" : "Kjøper kompmendium - kun tårefrie!",
+          "dato" : "03-11-2020 23:42:13",
+          "upvotes" : "2",
+          "downvotes" : "1",
+          "uniqueID" : "1",
+          "upvoters" : [ "hupihupi", "limstikken" ],
+          "downvoters" : [ "rimboksmedprim" ]
+        } ]
+      }
+    }, {
+      "fagkode" : "TDT4110",
+      "fagnavn" : "Informasjonsteknologi Grunnkurs",
+      "informasjon" : "Emnet består at to deler: IKT-teori (1/3) og grunnleggende prosedyreorientert programmering i Python (2/3). IKT-teori: Grunnleggende om datamaskiners oppbygging og virkemåte. Digital representasjon av informasjon. Nettverk og kommunikasjon. Prosedyreorientert programmering: Variabler og datatyper. Input og output. Kontrollstrukturer: Sekvens, valg, og repetisjon. Strukturering og oppdeling av programmer; funksjoner og moduler. Datastrukturer: Lister, tabeller, tekststrenger, mengder, tupler og poster (dictionary). Filbehandling, persistent lagring av informasjon, og unntak (exception). Representasjon av tall, enkel prosessering og visualisering av måledata og iterativ løsning av enkle ligninger. Python som programmeringsomgivelse.",
+      "pensumlitteratur" : "Theory Book - IT Intro, Fourth (or Third) Edition, Pearson, 2017",
+      "anbefaltLitteratur" : "The Complete Beginners Guide to Understanding Python and other Snakes - Roald Dahl",
+      "tips" : "Studassene er grundige når de skal rette øvingene, du trenger forståelse av pensum for å få godkjent. ProgrammingGeek2t2 er en bra YouTube-kanal som dekker mesteparten av pensum",
+      "eksamensdato" : "27/11/2020",
+      "vurderingsform" : "Digital Eksamen",
+      "hjelpemidler" : "E - Ingen hjelpemidler tillatt.",
+      "vurderinger" : [ "2", "1", "4", "5" ],
+      "diskusjon" : {
+        "prevAssignedID" : "1",
+        "comments" : [ {
+          "brukernavn" : "mammaGuro",
+          "kommentar" : "Eksamen blir utsatt i år, dere må oppdatere datoen.",
+          "dato" : "12-11-2020 13:22:13",
+          "upvotes" : "3",
+          "downvotes" : "1",
+          "uniqueID" : "0",
+          "upvoters" : [ "tomtom", "tindersjef", "branusjanus" ],
+          "downvoters" : [ "konkretMatematikk" ]
+        }, {
+          "brukernavn" : "konkretMatematikk",
+          "kommentar" : "Noen som vet hva 'def' gjør i python?",
+          "dato" : "03-11-2020 17:44:59",
+          "upvotes" : "2",
+          "downvotes" : "2",
+          "uniqueID" : "1",
+          "upvoters" : [ "durexsurex", "cnyder" ],
+          "downvoters" : [  ]
+        } ]
+      }
+    }, {
+      "fagkode" : "TMA4100",
+      "fagnavn" : "Matematikk 1",
+      "informasjon" : "Faglig innhold: Grenser, kontinuitet, derivasjon og integrasjon av funksjoner av én variabel. Skjæringssetningen, sekantsetningen (middelverditeoremet), maksima og minima, transcendente funksjoner, implisitt derivasjon, relaterte vekstrater, ubestemte former, Newtons metode. Riemann-summer, bestemt integral og analysens fundamentalteorem, integrasjonsteknikker og numerisk integrasjon. Areal, volum, buelengde, og areal av rotasjonsflater. Følger, rekker og potensrekker. Taylorrekker, Taylors formel. Førsteordens separable og lineære differensialligninger. Eulers metode. Eksempler på matematisk modellering og anvendelser innenfor naturvitenskap, teknologi og økonomi.",
+      "pensumlitteratur" : "Adams og Essex: Calculus, ninth edition. bok.jpgBoken kan kjøpes i en spesiell tobinds paperbackutgave (ISBN 9781784499907) på akademika.",
+      "anbefaltLitteratur" : "Mathematics or Plumbing - What's the difference, really? - Susan Tarthead, 2020-edition",
+      "tips" : "For alt du gjør: Les deg opp på Epsilon Delta. Du tror du slipper billig unna fordi det ikke har kommet på 11 år på eksamen, men så plutselig BOOM, så blir det stryk. Pass på!",
+      "eksamensdato" : "22/12/2020",
+      "vurderingsform" : "Skriftlig Eksamen",
+      "hjelpemidler" : "C - Kjæledyr tillat (utenom reptiler og andre illeluktende dyr)",
+      "vurderinger" : [ "4", "3", "1", "3" ],
+      "diskusjon" : {
+        "prevAssignedID" : "1",
+        "comments" : [ {
+          "brukernavn" : "våtoghawt",
+          "kommentar" : "Epsilon delta :( :(",
+          "dato" : "12-19-2020 03:40:20",
+          "upvotes" : "2",
+          "downvotes" : "1",
+          "uniqueID" : "0",
+          "upvoters" : [ "satansmann", "hyrdensmann"],
+          "downvoters" : [ "fjops" ]
+        }, {
+          "brukernavn" : "stor_men_glad_i_ho_mor",
+          "kommentar" : "Kjøper kompmendium, < 100kr",
+          "dato" : "08-11-2020 12:13:14",
+          "upvotes" : "2",
+          "downvotes" : "1",
+          "uniqueID" : "1",
+          "upvoters" : [ "ridepisken", "smechkl" ],
+          "downvoters" : [ "djingusdjangus" ]
+        } ]
+      }
+    }, {
+      "fagkode" : "TMT4106",
+      "fagnavn" : "Kjemi",
+      "informasjon" : "Kjemisk likevekt: pH-styrte likevekter, buffere, fellingsreaksjoner, komplekser, kombinasjon av likevekter. Heterogene likevekter: Gasser, gasslover, gassløselighet, aktiviteter, standardtilstand. Termokjemi: Termodynamikkens lover. Entalpi, entropi, Gibbs fri energi, kriterier for spontanitet, beregning av K, van't Hoff. Faselikevekter for vann og metaller, jern-karbon fasediagram og stål. Elektrokjemi: Beskrivelse og funksjon av galvaniske celler, Nernst ligning, konsentrasjonsceller, termodynamiske data og K fra elektrokjemi. Anvendt elektrokjemi: Korrosjon og korrosjonsbeskyttelse, passivitet og Pourbaix-diagram. Batterier, elektrolyse. Bindingslære: Kovalente bindinger, ionebindinger, metallbindinger. Væsker og faste stoff, krefter mellom molekyler, løselighet. Uorganisk kjemi: De viktigste uorganiske forbindelsene og deres egenskaper og reaksjoner, særlig relatert til materialer, mineraler og miljøproblemstillinger. Organisk kjemi: Hydrokarboner, N- og O-holdige forbindelser. Addisjons- og kondensasjonspolymere. Polymeres struktur og egenskaper. Eksempler på anvendelse av kjemien i teknologisk sammenheng og miljøproblemstillinger.",
+      "pensumlitteratur" : " R.H. Petrucci, F.G. Herring, J.D. Madura og C. Bissonnette, General Chemistry. Principles and Modern Applications”, 10 eller 11 utgave., Pearson Canada Inc., Toronto, Canada, 2011 eller 2017 (NTNU-utgave).",
+      "anbefaltLitteratur" : "Ares bok om Kjemi og sånt - Kjøpes brukt på Finn til rundt 200.",
+      "tips" : "Semesterprøvene i dette faget er svært krevende, det nytter ikke å sprengpugge på slutten av semesteret. Pensumdelen som omhandler redoksreaksjoner kommer sjeldent på eksamen og kan nedprioriteres",
+      "eksamensdato" : "29/11/2020",
+      "vurderingsform" : "Skriftlig Eksamen",
+      "hjelpemidler" : "C - Formelhefte tillatt",
+      "vurderinger" : [ "2", "1", "4", "5" ],
+      "diskusjon" : {
+        "prevAssignedID" : "1",
+        "comments" : [ {
+          "brukernavn" : "hvorErTrygve",
+          "kommentar" : "Håper på hjemmeksamen!",
+          "dato" : "12-11-2020 16:32:18",
+          "upvotes" : "3",
+          "downvotes" : "1",
+          "uniqueID" : "0",
+          "upvoters" : [ "JomfruMarie", "fnoldus", "greimheim" ],
+          "downvoters" : [ "kolmert" ]
+        }, {
+          "brukernavn" : "Drømmedamen",
+          "kommentar" : "Noen som vil studere sammen? Jeg har formelheftet",
+          "dato" : "03-11-2020 13:33:22",
+          "upvotes" : "2",
+          "downvotes" : "2",
+          "uniqueID" : "1",
+          "upvoters" : [ "VeganKampen", "durumDrax" ],
+          "downvoters" : [  ]
+        } ]
+      }
+    }, {
+      "fagkode" : "TMA4240",
+      "fagnavn" : "Statistikk",
+      "informasjon" : "Deskriptiv statistikk. Sannsynlighet for hendelser og stokastiske variabler. Uavhengige og avhengige stokastiske variabler. Betinget sannsynlighet. En- og flerdimensjonale sannsynlighetsfordelinger. De viktigste klasser av endimensjonale sannsynlighetsfordelinger. Ekstremvariabler. Parameterestimering, intervallestimering og hypotesetesting for et- og to-utvalgsdata. Enkel lineær regresjon.",
+      "pensumlitteratur" : "Walpole, Myers, Myers and Ye (2012): Probability and Statistics for engineers (9. utgave), Pearson / Prentice Hall. Dekker også pensum: NTNU (ISBN 978-1-78726-081-8) ",
+      "anbefaltLitteratur" : "Tabeller og Formler i Statisikk - Dette er en must, kjøp tidlig i semesteret og gjør deg godt kjent med denne. Tillatt på eksamen.",
+      "tips" : "Forståelsen i dette faget er veldig viktig, å kun pugge formler er ikke nok. Det er lurt å bruke mye tid i starten til å forstå de grunnleggende prinsippene for statistikk og sannsynlighet, da disse vil bli brukt videre i hele pensum.",
+      "eksamensdato" : "25/11/2020",
+      "vurderingsform" : "Skriftlig eksamen",
+      "hjelpemidler" : "C - Formelheftet og håndskrevet gult A3-ark med notater godkjent.",
+      "vurderinger" : [ "6", "5", "3", "3" ],
+      "diskusjon" : {
+        "prevAssignedID" : "2",
+        "comments" : [ {
+          "brukernavn" : "Frusmini",
+          "kommentar" : "Flott! Noen som har tips for å skrive formelark?",
+          "dato" : "19-08-2020 11:15:09",
+          "upvotes" : "3",
+          "downvotes" : "1",
+          "uniqueID" : "0",
+          "upvoters" : [ "Fjoald", "Dinge", "isidi191919" ],
+          "downvoters" : [ "bramlebussen" ]
+        }, {
+          "brukernavn" : "Marmstein",
+          "kommentar" : "Takk for infoen!",
+          "dato" : "12-07-2020 11:50:09",
+          "upvotes" : "1",
+          "downvotes" : "0",
+          "uniqueID" : "1",
+          "upvoters" : [ "Fjoald" ],
+          "downvoters" : [ ]
+        }, {
+          "brukernavn" : "nestenKok",
+          "kommentar" : "@Frusmini Jeg kan gjøre det for 30 kroner! Har veldig god håndskrift",
+          "dato" : "12-10-2020 12:40:18",
+          "upvotes" : "2",
+          "downvotes" : "2",
+          "uniqueID" : "2",
+          "upvoters" : [ "Halida", "samuelsteinbark" ],
+          "downvoters" : [ "Oscar", "hurpesnes" ]
+        } ]
+      }
     } ]
   },
   "users" : {
-    "prevAssignedID" : "1",
+    "prevAssignedID" : "2",
     "users" : [ {
       "name" : "Berte bjernsen",
       "username" : "Berte92",
@@ -70,6 +331,12 @@
       "mail" : "IdaElskerHunder@flyskflysk.com",
       "password" : "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3",
       "uniqueID" : "1"
+    }, {
+      "name" : "user",
+      "username" : "user",
+      "mail" : "user@mail.com",
+      "password" : "844b8ea36eca6a3bd97eac6644b7df5fd8d27a79fe26750c8d99df96d25dc216",
+      "uniqueID" : "2"
     } ]
   }
 }

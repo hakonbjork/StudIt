@@ -192,7 +192,7 @@ public class StuditServiceTest extends JerseyTest {
         .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
     assertEquals(200, getResponse2.getStatus());
 
-     try {
+    try {
       Comment comment = mapper.readValue(getResponse2.readEntity(String.class), Comment.class);
 
       Comment testComment = defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().getCommentByID(0);
@@ -357,6 +357,29 @@ public class StuditServiceTest extends JerseyTest {
         .queryParam("username", "IdaErBest").queryParam("password", "pomeranian123")
         .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").post(Entity.json(""));
     assertEquals(200, postResponse3.getStatus());
+  }
+
+  @Test
+  public void testGetUserByUsername() {
+    Response getResponse = target(StuditService.STUDIT_SERVICE_PATH + "/users/username/Berte92")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
+    assertEquals(200, getResponse.getStatus());
+
+    Response getResponse2 = target(StuditService.STUDIT_SERVICE_PATH + "/users/username/berte92")
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
+    assertEquals(404, getResponse2.getStatus());
+
+    try {
+
+      User user = defaultModel.getUsers().getUserByUsername("Berte92");
+      User testUser = mapper.readValue(getResponse.readEntity(String.class), User.class);
+
+      compareUser(user, testUser);
+
+    } catch (JsonProcessingException e) {
+      fail(e);
+    }
+
   }
 
   @Test

@@ -9,7 +9,7 @@ class CommandsTest {
 
   @Test
   void testCommands() {
-    Commands commands = new Commands(null);
+    Commands commands = new Commands(null, null);
     for (Entry<String, Func> entry : commands.getCommands().entrySet()) {
       try {
         entry.getValue().execute(null);

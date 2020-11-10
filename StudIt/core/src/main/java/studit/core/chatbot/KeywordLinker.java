@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 public class KeywordLinker {
 
   private List<KeywordLink> links;
@@ -58,7 +57,8 @@ public class KeywordLinker {
   }
 
   /**
-   * Create a list of Keyword-arrays that contain word IDS and their respective match.
+   * Create a list of Keyword-arrays that contain word IDS and their respective
+   * match.
    * 
    * @param keywordLinks list of links obtained from the KeywordLink class
    * @return list containing all of our keyword matches
@@ -102,45 +102,46 @@ public class KeywordLinker {
 
     int matchID = -1;
     float matchPct = 0.0f;
+    int lastLen = 100;
 
     for (Map.Entry<Integer, String> entry : recognizedWords.entrySet()) {
-      int unions = 0;
+
+      StringBuffer wordToCheck = new StringBuffer(entry.getValue());
+      int differences = 0;
       int complements = 0;
-      int lastLen = 0;
-      String wordToCheck = entry.getValue();
 
-      for (int i = 0; i < wordToCheck.length(); i++) {
-        char c = wordToCheck.charAt(i);
+      for (int i = 0; i < word.length(); i++) {
+        char c = word.charAt(i);
 
-        if (word.indexOf(c) >= 0) {
-          unions++;
-        } else {
+        int matchIdx = wordToCheck.indexOf(String.valueOf(c));
+        if (matchIdx >= 0) {
           complements++;
+          wordToCheck.deleteCharAt(matchIdx);
+        } else {
+          differences++;
         }
       }
 
-      float pct = unions / (float) (unions + complements);
-      pct *=
-          (word.length() - Math.abs(wordToCheck.length() - word.length())) / (float) word.length();
+      float pct = complements / (float) (complements + differences);
+      pct *= (word.length() - Math.abs(entry.getValue().length() - word.length())) / (float) word.length();
 
-      if (pct >= 0.65f && pct >= matchPct && wordToCheck.length() > lastLen) {
+      if (pct >= 0.65f && pct >= matchPct && wordToCheck.length() <= lastLen) {
         matchID = entry.getKey();
         matchPct = pct;
-        lastLen = wordToCheck.length();
+        lastLen = entry.getValue().length();
       }
     }
-
     return matchID;
-
   }
 
   /**
-   * Reads the user input and tries to match the input to the most probable command.
+   * Reads the user input and tries to match the input to the most probable
+   * command.
    * 
-   * @param words processed user input, where all special characters are removed and words are split
-   *        by spaces.
-   * @return Sorted list of Match objects, containing information about match percentage,
-   *         precedence, and the command key identifier
+   * @param words processed user input, where all special characters are removed
+   *              and words are split by spaces.
+   * @return Sorted list of Match objects, containing information about match
+   *         percentage, precedence, and the command key identifier
    */
   public List<Match> matchCommand(String[] words) {
 
@@ -158,7 +159,6 @@ public class KeywordLinker {
       int idx = 0;
 
       for (Keyword[] keywords : entry.getValue()) {
-
         for (Keyword keyword : keywords) {
           if (contains(matchIDs, keyword.ID)) {
             matchWeights[idx] += keyword.weight;
@@ -167,9 +167,8 @@ public class KeywordLinker {
         idx++;
       }
 
-      matches.add(
-          new Match(entry.getKey(), Floats.max(matchWeights), precedences.get(entry.getKey()), ""));
-
+      matches.add(new Match(entry.getKey(), Floats.max(matchWeights), precedences.get(entry.getKey()),
+          dataMatches.get(entry.getKey()) == null ? "" : dataMatches.get(entry.getKey())));
     }
 
     matches.sort((left, right) -> {

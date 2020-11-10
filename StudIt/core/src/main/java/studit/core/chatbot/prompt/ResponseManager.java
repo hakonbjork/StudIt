@@ -1,6 +1,6 @@
 package studit.core.chatbot.prompt;
 
-public class PromptManager {
+public class ResponseManager {
 
   /**
    * Handles the response when user has picked a chatbot option from the prompt.
@@ -24,6 +24,7 @@ public class PromptManager {
         break;
       default:
         result = "";
+        action.setFuncKey(command);
     }
     
     action.setChatbotResponse(result);

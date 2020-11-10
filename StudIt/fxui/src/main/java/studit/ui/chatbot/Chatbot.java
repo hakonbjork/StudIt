@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import studit.core.chatbot.ChatbotManager;
 import studit.core.chatbot.Response;
+import studit.core.mainpage.CourseList;
+import studit.ui.remote.ApiCallException;
+import studit.ui.remote.RemoteStuditModelAccess;
 
 public class Chatbot {
 
@@ -17,25 +20,35 @@ public class Chatbot {
 
   public Chatbot() {
     displayWindow();
-    chatbotManager = new ChatbotManager();
+    RemoteStuditModelAccess remoteAccess = new RemoteStuditModelAccess();
+    try {
+      CourseList courseList = remoteAccess.getCourseList();
+      chatbotManager = new ChatbotManager(courseList.getCourseNameList());
+    } catch (ApiCallException e) {
+      e.printStackTrace();
+    }
   }
 
   /*
    * Opens a new window for our chatbot
    */
   private void displayWindow() {
-    Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("/studit/ui/Chatbot.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/studit/ui/Chatbot.fxml"));
+      final Parent root = loader.load();
+
       chatStage = new Stage();
       Scene scene = new Scene(root);
 
-      // Setting the background to be transparent, so we can create rounded corners in our css file
+      ChatbotController controller = (ChatbotController) loader.getController();
+      //controller.setStage(chatStage);
+
+      // Setting the background to be transparent, so we can create rounded corners in
+      // our css file
       chatStage.initStyle(StageStyle.TRANSPARENT);
       scene.setFill(Color.TRANSPARENT);
 
-      scene.getStylesheets()
-          .setAll(getClass().getResource("/studit/ui/chatbot.css").toExternalForm());
+      scene.getStylesheets().setAll(getClass().getResource("/studit/ui/chatbot.css").toExternalForm());
       chatStage.setScene(scene);
       chatStage.setTitle("Chatbot");
       chatStage.show();
@@ -45,7 +58,7 @@ public class Chatbot {
     } catch (NullPointerException e) {
       // Doing this to prevent testing errors
     }
-    
+
   }
 
   public void show() {

@@ -1,7 +1,10 @@
 package studit.core.chatbot.prompt;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +40,10 @@ public class ActionRequestTest {
   
   @Test
   public void testGetArguments() {
+    action.setArguments(null);
+    List<Object> args = action.getArguments();
+    assertTrue(args.isEmpty());
+
     action.setArguments(List.of(1, "foo", true));
     assertEquals(List.of(1, "foo", true), action.getArguments());
   }
