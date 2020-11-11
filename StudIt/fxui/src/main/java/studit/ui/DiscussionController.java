@@ -28,7 +28,7 @@ public class DiscussionController implements Initializable {
 
   private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
-  //The currentUser is set via courseController
+  // The currentUser is set via courseController
   private User currentUser = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com",
       "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
@@ -48,7 +48,7 @@ public class DiscussionController implements Initializable {
   private Label fagnavn;
 
   @FXML
-  private Button mainPageAction;
+  private Button mainPage_btn;
 
   @FXML
   private Button chatbot_btn;
@@ -60,7 +60,7 @@ public class DiscussionController implements Initializable {
   private TextField newPostInputField;
 
   @FXML
-  private Button handleAddNewPost;
+  private Button newPostButton;
 
   @FXML
   private ListView<Comment> forumList;
@@ -87,13 +87,14 @@ public class DiscussionController implements Initializable {
       newPostInputField.clear();
     } catch (ApiCallException e) {
       newPostInputField.clear();
-      //Her kunne vi gitt brukeren en visuell feedback.
+      // Her kunne vi gitt brukeren en visuell feedback.
       e.printStackTrace();
     }
   }
 
   /**
-   * Method to update the view after actions that changes attributes in the core are triggered.
+   * Method to update the view after actions that changes attributes in the core
+   * are triggered.
    */
   public void updateView() {
 
@@ -140,6 +141,8 @@ public class DiscussionController implements Initializable {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
       Parent root = loader.load();
+      AppController appController = (AppController) loader.getController();
+      appController.setCurrentUser(this.currentUser);
 
       Stage stage2 = new Stage();
       stage2.setScene(new Scene(root));
@@ -176,7 +179,6 @@ public class DiscussionController implements Initializable {
     this.fagnavn.setText(label);
   }
 
-
   /**
    * Opens the information page about the course.
    */
@@ -207,13 +209,13 @@ public class DiscussionController implements Initializable {
 
   }
 
-
   /**
    * Loads the list View and sets the text for the labels in the page.
    */
   public void loadView() {
 
-    //This method clears the list each time the method is triggered in order to keep duplicates away.
+    // This method clears the list each time the method is triggered in order to
+    // keep duplicates away.
     listView.clear();
 
     if (this.courseItem.getDiskusjon() != null) {
@@ -230,7 +232,7 @@ public class DiscussionController implements Initializable {
 
       forumList.setItems(listView);
 
-      //for each Comment in the ListView, a custom ListCell is instantiated
+      // for each Comment in the ListView, a custom ListCell is instantiated
       forumList.setCellFactory(param -> new ListCell<Comment>() {
 
         private CommentListCell commentListCell;
@@ -252,7 +254,8 @@ public class DiscussionController implements Initializable {
             setGraphic(commentListCell);
           } catch (ApiCallException e) {
             e.printStackTrace();
-            System.out.println("Det utløses en ApiCallException når custom listCellene settes. Les feilmeldingen som følger for å få mer info");
+            System.out.println(
+                "Det utløses en ApiCallException når custom listCellene settes. Les feilmeldingen som følger for å få mer info");
             System.out.println(e.getMessage());
             forumList.setItems(listView);
           }
@@ -270,7 +273,7 @@ public class DiscussionController implements Initializable {
     this.currentUser = user;
   }
 
-  //The following methods are used for test purposes.
+  // The following methods are used for test purposes.
   public TextField getInputField() {
     return this.newPostInputField;
   }
