@@ -1,30 +1,18 @@
 package studit.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.*;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.LoadException;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import studit.core.users.User;
 import studit.ui.remote.DirectStuditModelAccess;
 import studit.ui.remote.RemoteStuditModelAccess;
 
@@ -32,18 +20,6 @@ public class LoginControllerTest extends ApplicationTest {
 
   private LoginController loginController;
   private final RemoteStuditModelAccess remote = new DirectStuditModelAccess();
-  // private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-  // private final PrintStream originalOut = System.out;
-
-  // @Before
-  // public void setUpStreams() {
-  //   System.setOut(new PrintStream(outContent));
-  // }
-
-  // @After
-  // public void restoreStreams() {
-  //   System.setOut(originalOut);
-  // }
 
   @Override
   public void start(final Stage stage) throws Exception {
@@ -57,12 +33,6 @@ public class LoginControllerTest extends ApplicationTest {
   @Test
   public void testLoginController() {
     loginController.setRemote(this.remote);
-    try {
-      ApplicationTest.launch(LoginApp.class);
-    } catch (Exception e) {
-      fail();
-      e.printStackTrace();
-    }
     assertNotNull(this.loginController);
   }
 
@@ -73,7 +43,7 @@ public class LoginControllerTest extends ApplicationTest {
   }
 
   @Test
-  public void testLoginButtonAction() {
+  public void testLoginButtonActionFail() {
     loginController.setRemote(this.remote);
     writeUserPassword();
     clickOn("#passwordField").write("fweg");
@@ -82,10 +52,44 @@ public class LoginControllerTest extends ApplicationTest {
   }
 
   @Test
+  public void testLoginButtonActionSuccess() {
+    loginController.setRemote(this.remote);
+    LoginController.setTestingMode(true);
+    writeUserPassword();
+    //clickOn("#login_btn");
+    clickOn("#passwordField").write("\n");
+    FxAssert.verifyThat(window("StudIt"), WindowMatchers.isShowing());
+  }
+
+  @Test
   public void testRegisterUserAction() {
     loginController.setRemote(this.remote);
     clickOn("#registerUser_btn");
     FxAssert.verifyThat(window("New User"), WindowMatchers.isShowing());
+  }
+
+  @Test
+  public void testGetCurrentUser() {
+    assertNull(loginController.getCurrentUser());
+  }
+
+  @Test
+  public void testTestMode() {
+    LoginController.setTestingMode(false);
+    assertFalse(LoginController.getTestingMode());
+  }
+
+  //This test contributes to newUserController
+  @Test
+  public void testWindowCloses() {
+    LoginController.setTestingMode(true);
+    clickOn("#registerUser_btn");
+    clickOn("#nameField").write("Ola Halvorsen");
+    clickOn("#usernameField").write("olahalla");
+    clickOn("#mailField").write("ola.halvorsen@gmail.com");
+    clickOn("#userPasswordField").write("olalalala");
+    clickOn("#saveNewUserButton");
+    FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
   }
 
   public void writeUserPassword() {
