@@ -192,6 +192,9 @@ public class RemoteStuditModelAccesTest {
     assertThrows(ApiCallException.class, () -> remoteModel.downvoteCommentByID("TMA4140", "Bobby", -1));
     assertThrows(ApiCallException.class, () -> remoteModel.downvoteCommentByID("FOO", "Bobby", 0));
     defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().downvote("Bobby", 0);
+    defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon().downvote("Bobby", 0);
+
+    assertTrue(remoteModel.downvoteCommentByID("TMA4140", "Bobby", 0));
     assertTrue(remoteModel.downvoteCommentByID("TMA4140", "Bobby", 0));
     assertThrows(ApiCallException.class, () -> remoteModel.downvoteCommentByID("TMA4140", "Bobby", 0));
     compareDiscussion(defaultModel.getCourseList().getCourseByFagkode("TMA4140").getDiskusjon(),
