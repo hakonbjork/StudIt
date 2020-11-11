@@ -115,14 +115,14 @@
 //   // FxAssert.verifyThat(window("Chatbot"), WindowMatchers.isShowing());
 //   // }
 
-//   // @SuppressWarnings("unchecked")
-//   // @Test
-//   // public void testClickOnCourse() {
-//   // ListView<String> listView = (ListView<String>) lookup("#coursesList");
-//   // clickOn(listView.getItems().get(2));
-//   // listView.getSelectionModel().getSelectedItem();
+  // @SuppressWarnings("unchecked")
+  // @Test
+  // public void testClickOnCourse() {
+  // ListView<String> listView = (ListView<String>) lookup("#coursesList");
+  // clickOn(listView.getItems().get(2));
+  // listView.getSelectionModel().getSelectedItem();
 
-//   // }
+  // }
 
 //   // @SuppressWarnings("#unchecked")
 //   // @Test

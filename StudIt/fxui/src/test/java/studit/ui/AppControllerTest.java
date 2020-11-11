@@ -1,5 +1,6 @@
 package studit.ui;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -11,13 +12,16 @@ import org.testfx.api.FxAssert;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import studit.core.mainpage.CourseItem;
 import studit.core.users.User;
 import studit.ui.remote.DirectStuditModelAccess;
 import studit.ui.remote.RemoteStuditModelAccess;
@@ -49,17 +53,18 @@ public class AppControllerTest extends ApplicationTest {
     appController.setCurrentUser(user);
     appController.setLabel(string);
     appController.setRemote(this.remote);
-    //appController.addUser(user);
     //AppController.newChatbot();
     assertEquals(user, appController.getCurrentUser());
     assertEquals(string, appController.getLabel());
   }
 
+  // @SuppressWarnings("unchecked")
   @Test
   public void testSearchField() {
-    clickOn("#searchField").write("Disk");
-
-
+    clickOn("#searchField").write("Diskret");
+    // ListView<CourseItem> coursesList = (ListView<CourseItem>) lookup("#coursesList");
+    // CourseItem courseItem = coursesList.getItems().get(0);
+    // assertEquals(courseItem.getFagnavn(), "Diskret Matematikk");
   }
 
   // @Test
@@ -83,17 +88,19 @@ public class AppControllerTest extends ApplicationTest {
     FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
   }
 
-  
+
+  @Test 
+  public void testclickOnCourse(){
+    clickOn("#coursesList");
+    FxAssert.verifyThat(window("Course"), WindowMatchers.isShowing());
+  }
 
 
    @Test
   public void hasLogoutButton() {
-  BorderPane rootNode = (BorderPane)
-  appController.rootPane.getScene().getRoot();
-  Button button = from(rootNode).lookup("Logg ut").query();
-  assertEquals("Logg ut", button.getText());
-  }
-
-  
-  
+    BorderPane rootNode = (BorderPane)
+    appController.rootPane.getScene().getRoot();
+    Button button = from(rootNode).lookup("Logg ut").query();
+    assertEquals("Logg ut", button.getText());
+  } 
 }
