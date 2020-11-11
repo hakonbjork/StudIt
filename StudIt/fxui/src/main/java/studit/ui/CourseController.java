@@ -22,8 +22,7 @@ public class CourseController implements Initializable {
 
   private User currentUser;
 
-  @FXML
-  private BorderPane rootPane;
+  @FXML BorderPane rootPane;
 
   @FXML
   private Button information_btn;
@@ -241,12 +240,6 @@ public class CourseController implements Initializable {
     }
   }
 
-  @FXML
-  void handleAddCommentAction(ActionEvent event) {
-    // TODO fikse metoden her?
-    // Send tilbakemeldingen til API serveren?
-  }
-
   // TODO funker ikke :()
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -271,5 +264,8 @@ public class CourseController implements Initializable {
   public void setCurrentUser(User user) {
     this.currentUser = user;
   }
+
+
+  // Methods for testing
 
 }
