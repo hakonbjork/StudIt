@@ -19,12 +19,15 @@ import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.Comment;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.DirectStuditModelAccess;
+import studit.ui.remote.RemoteStuditModelAccess;
 
 public class DiscussionControllerTest extends ApplicationTest {
 
   private DiscussionController discussionController;
 
   private CourseItem item;
+
+  private RemoteStuditModelAccess direct = new DirectStuditModelAccess();
 
   @Override
   public void start(final Stage stage) throws Exception {
@@ -41,23 +44,24 @@ public class DiscussionControllerTest extends ApplicationTest {
     stage.show();
   }
 
-   @Test
+  @Test
   public void testDiscussionController() {
     assertNotNull(this.discussionController);
   }
 
+  @Test
+  public void testOpenInformationTab() {
+    discussionController.setStuditModelAccess(this.direct);
+    clickOn("#information_btn");
+    FxAssert.verifyThat(window("Course"), WindowMatchers.isShowing());
+  }
 
-  //@Test
-  //public void testOpenInformationTab() {
-  //  clickOn("#information_btn");
-  //  FxAssert.verifyThat(window("Course"), WindowMatchers.isShowing());
-  //}
-
-  //@Test
-  //public void testClickOnMainPage() {
-  //  clickOn("#mainPage_btn");
-  //  FxAssert.verifyThat(window("StudIt"), WindowMatchers.isShowing());
-  //}
+  // @Test
+  // public void testClickOnMainPage() {
+  // discussionController.setStuditModelAccess(this.direct);
+  // clickOn("#mainPage_btn");
+  // FxAssert.verifyThat(window("App"), WindowMatchers.isShowing());
+  // }
 
   @Test
   public void testLogoutAction() {
@@ -65,14 +69,11 @@ public class DiscussionControllerTest extends ApplicationTest {
     FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
   }
 
-  @Test
-  public void testOpenChatBot() {
-    clickOn("#chatbot_btn");
-    FxAssert.verifyThat(window("Chatbot"), WindowMatchers.isShowing());
-  }
-
-  
-
+  // @Test
+  // public void testOpenChatBot() {
+  // clickOn("#chatbot_btn");
+  // FxAssert.verifyThat(window("Chatbot"), WindowMatchers.isShowing());
+  // }
 
   @Test
   public void testComments() throws ApiCallException {
@@ -84,14 +85,14 @@ public class DiscussionControllerTest extends ApplicationTest {
     // Checks if the first comment is inputed correctly.
     final String comment = "Jeg synes dette er et kjedelig fag";
     discussionController.getInputField().setText(comment);
-    clickOn("#information_btn");
+    clickOn("#newPostButton");
     Assertions.assertThat((discussionController.getForumList().getItems().get(0).getKommentar())
         .equals("Jeg synes dette er et kjedelig fag"));
 
     // Checks if the second comment is inputed correctly.
     final String comment2 = "Uenig, det er et kult fag";
     discussionController.getInputField().setText(comment2);
-    clickOn("#information_btn");
+    clickOn("#newPostButton");
     Assertions.assertThat(
         (discussionController.getForumList().getItems().get(1).getKommentar()).equals("Uenig, det er et kult fag"));
 
@@ -105,34 +106,32 @@ public class DiscussionControllerTest extends ApplicationTest {
     assertTrue((discussionController.getForumList().getItems().get(1).getBrukernavn())
         .equals(discussionController.getCurrentUser().getUsername()));
 
-
-    //Click on upVote
+    // Click on upVote
     ListView<Comment> listView = lookup("#forumList").query();
     Node node = lookup("#forumList").query();
     clickOn(node.lookup(".upvoteButton"));
 
-    //Check if upvotes is one for first comment after upvote
+    // Check if upvotes is one for first comment after upvote
     Comment com1 = listView.getItems().get(0);
     assertEquals(1, com1.getUpvotes());
 
-    //Click on upvote again, but it shouldn`t make any difference
+    // Click on upvote again, but it shouldn`t make any difference
     clickOn(node.lookup(".upvoteButton"));
-;
+    ;
 
-    //Check if upvotes is still one for first comment after upvote
+    // Check if upvotes is still one for first comment after upvote
     Comment com2 = listView.getItems().get(0);
     assertEquals(1, com2.getUpvotes());
-  
-    //Click on downVote to make the count zero
+
+    // Click on downVote to make the count zero
     clickOn(node.lookup(".downvoteButton"));
     Comment com3 = listView.getItems().get(0);
     assertEquals(0, com3.getUpvotes());
 
-    //Click on downVote again to make negative one
+    // Click on downVote again to make negative one
     clickOn(node.lookup(".downvoteButton"));
     Comment com4 = listView.getItems().get(0);
     assertEquals(-1, com4.getUpvotes());
   }
-
 
 }
