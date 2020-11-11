@@ -47,7 +47,7 @@ public class AppControllerTest extends ApplicationTest {
     appController.setCurrentUser(user);
     appController.setLabel(string);
     appController.setRemote(this.remote);
-    appController.addUser(user);
+    //appController.addUser(user);
     //AppController.newChatbot();
     assertEquals(user, appController.getCurrentUser());
     assertEquals(string, appController.getLabel());
@@ -59,14 +59,14 @@ public class AppControllerTest extends ApplicationTest {
     //Mer her, men tror ikke koden faktisk funker atm
   }
 
-  @Test
-  public void testChatBot() {
-    clickOn("#chatbot_btn");
-    clickOn("#chatbot_btn");
-    assertNotNull(AppController.getChatbot());
-    AppController.closeChatbot();
-    assertNull(AppController.getChatbot());
-  }
+  // @Test
+  // public void testChatBot() {
+  //   clickOn("#chatbot_btn");
+  //   clickOn("#chatbot_btn");
+  //   assertNotNull(AppController.getChatbot());
+  //   AppController.closeChatbot();
+  //   assertNull(AppController.getChatbot());
+  // }
 
   @Test
   public void testLogoutAction() {
