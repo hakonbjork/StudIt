@@ -128,7 +128,7 @@ public class AppController {
     loadData();
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     // Actions on clicked list item
-    mouseClicked();
+    clickOnCourse();
     initializeSearch();
   }
 
@@ -233,7 +233,7 @@ public class AppController {
   /**
    * A function that does something when an element in the listview is clicked on.
    */
-  public void mouseClicked() {
+  public void clickOnCourse() {
     // Detecting mouse clicked
     coursesList.setOnMouseClicked(new EventHandler<MouseEvent>() {
       // private String label;
@@ -258,7 +258,7 @@ public class AppController {
           Scene courseScene = new Scene(coursePane);
 
           primaryStage.setScene(courseScene);
-          primaryStage.setTitle("StudIt");
+          primaryStage.setTitle("Course");
           primaryStage.show();
 
         } catch (Exception e) {
