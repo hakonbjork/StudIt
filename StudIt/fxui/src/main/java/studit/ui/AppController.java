@@ -162,21 +162,6 @@ public class AppController {
     filteredList.setAll(sortedData);
     this.coursesList.setItems(filteredList);
 
-    coursesList.setCellFactory(param -> new ListCell<CourseItem>() {
-
-      @Override
-      public void updateItem(CourseItem item, boolean empty) {
-        super.updateItem(item, empty);
-        if (empty) {
-          setText(null);
-          setGraphic(null);
-          return;
-        }
-
-        setText(item.getFagkode() + " " + item.getFagnavn());
-        setGraphic(null);
-      }
-    });
   }
 
 
