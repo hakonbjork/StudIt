@@ -76,6 +76,10 @@ public class AppController {
   public static void newChatbot() {
     chatbot = new Chatbot();
   }
+  
+  public static void newChatbot(boolean directAccess) throws ApiCallException {
+    chatbot = directAccess ? new Chatbot(true) : new Chatbot();
+  }
 
   /**
    * Sets the current user (the user that is logged in from the input).

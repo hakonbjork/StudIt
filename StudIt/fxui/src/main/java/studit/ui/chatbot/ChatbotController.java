@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -51,7 +50,7 @@ public class ChatbotController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
 
     chatbotController = this;
-    commands = new Commands(chatbotController);
+    commands = new Commands(chatbotController, remoteAccess);
     promptManager = new ResponseManager();
     txt_user_entry.textProperty().addListener(l -> checkForLineBreak());
 
@@ -73,7 +72,7 @@ public class ChatbotController implements Initializable {
           hBoxLeft.setAlignment(Pos.CENTER_LEFT);
           hBoxRight.setAlignment(Pos.CENTER_RIGHT);
           hBoxRight.setPadding(new Insets(5, 0, 5, 0));
-          hBoxLeft.setPadding(new Insets(5, 0, 5, 0));
+          hBoxLeft.setPadding(new Insets(5, 0, 5, 10));
         }
 
         @Override
@@ -86,7 +85,7 @@ public class ChatbotController implements Initializable {
           } else {
             if (item.getUser().equals("chatbot")) {
               flowTextLeft.setStyle("-fx-background-color: linear-gradient(to left, #ff512f, #dd2476);\r\n"
-                  + "    -fx-background-insets: -5 -25 -5 -5;\r\n"
+                  + "    -fx-background-insets: -5 -30 -5 -15;\r\n"
                   + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,0.5,0.5);\r\n"
                   + "    -fx-shape: \"M 94.658379,129.18587 H 46.277427 c -3.545458,0.23354 -5.32763,-1.59167 -5.14193,-4.67449\r\n"
                   + "    v -19.39913 c 0.405797,-3.73565 2.470637,-4.56641 5.14193,-4.90821 h 43.706464 c 2.572701,0.2361 4.604321,\r\n"
@@ -100,7 +99,8 @@ public class ChatbotController implements Initializable {
               if (item.getPrompt() != null) {
                 text.setText(text.getText() + "\n");
                 flowTextLeft.getChildren().add(text);
-                new Prompt(item.getPrompt(), flowTextLeft, list_chat, item, chatbotController);
+                new Prompt(item.getPrompt(), item.getArgs1(), item.getArgs2(), flowTextLeft, list_chat, item,
+                    chatbotController);
               } else {
                 flowTextLeft.getChildren().add(text);
               }
@@ -158,28 +158,16 @@ public class ChatbotController implements Initializable {
   @FXML
   private TextArea txt_user_entry;
 
-  // ----------------------------------------Widget
-  // Logic-----------------------------------------
+  // --------------------------------Widget Logic-------------------------------
 
   @FXML
   public void exitChatbot(ActionEvent event) {
     AppController.closeChatbot();
-    if (stage == null) {
-      final Node source = (Node) event.getSource();
-      stage = (Stage) source.getScene().getWindow();
-    }
     stage.close();
-
   }
 
   @FXML
-  void minimizeChatbot(ActionEvent event) {
-
-    if (stage == null) {
-      final Node source = (Node) event.getSource();
-      stage = (Stage) source.getScene().getWindow();
-    }
-
+  public void minimizeChatbot(ActionEvent event) {
     stage.setIconified(true);
   }
 
@@ -187,11 +175,9 @@ public class ChatbotController implements Initializable {
    * Moves our chatbot window when dragged by the toolbar.
    */
   @FXML
-  void moveWindow(MouseEvent event) {
-    if (stage != null) {
-      stage.setX(event.getScreenX() - xOffset);
-      stage.setY(event.getScreenY() - yOffset);
-    }
+  private void moveWindow(MouseEvent event) {
+    stage.setX(event.getScreenX() - xOffset);
+    stage.setY(event.getScreenY() - yOffset);
   }
 
   /**
@@ -200,11 +186,6 @@ public class ChatbotController implements Initializable {
    */
   @FXML
   private void setOffset(MouseEvent event) {
-    // If we have not yet loaded the current stage, load it from the event
-    if (stage == null) {
-      Node source = (Node) event.getSource();
-      stage = (Stage) source.getScene().getWindow();
-    }
     xOffset = event.getSceneX();
     yOffset = event.getSceneY();
   }
@@ -215,21 +196,16 @@ public class ChatbotController implements Initializable {
    */
   @FXML
   private void userEntry(KeyEvent event) {
-
-    if (stage == null) {
-      final Node source = (Node) event.getSource();
-      stage = (Stage) source.getScene().getWindow();
-    }
-
     if (event.getCode() == KeyCode.ENTER) {
       String userInput = txt_user_entry.getText();
       txt_user_entry.setText("");
       list_chat.getItems().add(new Message(userInput, "user"));
 
-      // Make sure that the caret is at first position for a new command!
       txt_user_entry.selectPositionCaret(0);
       Response response = AppController.getChatbot().manageInput(userInput);
       if (response.funcCall()) {
+        // We need to execute a command before receiving a chatbot response, typically
+        // an API call. This updates the Response object with the new message.
         try {
           executeCommand(response, remoteAccess.getCourseList());
         } catch (ApiCallException e) {
@@ -242,10 +218,22 @@ public class ChatbotController implements Initializable {
 
   /**
    * Used for testing purposes only.
+   * 
    * @param remoteAccess the remoteAccess to set
    */
   public void setRemoteAccess(RemoteStuditModelAccess remoteAccess) {
     this.remoteAccess = remoteAccess;
+  }
+
+  /**
+   * @return the stage.
+   */
+  public Stage getStage() {
+    return stage;
+  }
+
+  public void setStage(Stage chatStage) {
+    this.stage = chatStage;
   }
 
 }

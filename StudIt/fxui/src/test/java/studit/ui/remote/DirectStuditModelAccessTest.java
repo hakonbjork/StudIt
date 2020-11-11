@@ -6,21 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static studit.ui.remote.RemoteStuditModelAccesTest.compareComment;
+import static studit.ui.remote.RemoteStuditModelAccesTest.compareCourseItem;
 import static studit.ui.remote.RemoteStuditModelAccesTest.compareCourseLists;
+import static studit.ui.remote.RemoteStuditModelAccesTest.compareDiscussion;
+import static studit.ui.remote.RemoteStuditModelAccesTest.compareStuditModels;
 import static studit.ui.remote.RemoteStuditModelAccesTest.compareUser;
 import static studit.ui.remote.RemoteStuditModelAccesTest.compareUsers;
-import static studit.ui.remote.RemoteStuditModelAccesTest.compareCourseItem;
-import static studit.ui.remote.RemoteStuditModelAccesTest.compareDiscussion;
-import static studit.ui.remote.RemoteStuditModelAccesTest.compareComment;
-import static studit.ui.remote.RemoteStuditModelAccesTest.compareStuditModels;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import studit.core.StuditModel;
+import studit.core.users.User;
 import studit.json.StuditPersistence;
 
 public class DirectStuditModelAccessTest {
@@ -79,6 +80,15 @@ public class DirectStuditModelAccessTest {
     assertEquals(defaultModel.getUsers().authenticateLogin("IdaErBest", "pomeranian123"),
         directModel.authenticateLogin("IdaErBest", "pomeranian123"));
     assertEquals(defaultModel.getUsers().authenticateLogin("foo", "foo"), directModel.authenticateLogin("foo", "foo"));
+  }
+
+  @Test
+  public void testGetUserByUsername() throws ApiCallException {
+    User user1 = directModel.getUserByUsername("Berte92");
+    User user2 = defaultModel.getUsers().getUserByUsername("Berte92");
+
+    compareUser(user1, user2);
+    assertNull(directModel.getUserByUsername("foo"));
   }
 
   @Test

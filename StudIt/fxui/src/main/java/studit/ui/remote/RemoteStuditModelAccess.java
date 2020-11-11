@@ -283,14 +283,13 @@ public class RemoteStuditModelAccess {
 
   /**
    * Get a User object by username.
-   * 
    * @param username requested user's username.
    * @return User object if found, null if JsonProcessingException occurs.
    * @throws ApiCallException if user with username does not exist.
    */
   public User getUserByUsername(String username) throws ApiCallException {
     HttpResponse<String> response = newGetRequest(null, "users", "username", username);
-
+    
     if (response.statusCode() == Status.NOT_FOUND.get()) {
       throw new ApiCallException("User with username '" + username + "' does not exist.");
     }

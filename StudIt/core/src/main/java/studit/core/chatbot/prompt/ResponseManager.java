@@ -24,6 +24,7 @@ public class ResponseManager {
         break;
       default:
         result = "";
+        action.setFuncKey(command);
     }
     
     action.setChatbotResponse(result);

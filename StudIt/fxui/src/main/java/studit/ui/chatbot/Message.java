@@ -8,6 +8,8 @@ public class Message {
   private String text;
   private String user;
   private List<String[]> prompt = null;
+  private List<Object> args1 = null;
+  private List<Object> args2 = null;
   private boolean clicked;
 
   public Message(Response response, String user) {
@@ -15,8 +17,10 @@ public class Message {
     this.prompt = response.getPrompt();
     this.user = user;
     this.clicked = false;
+    this.args1 = response.getArgs1();
+    this.args2 = response.getArgs2();
   }
-  
+
   public Message(String response, String user) {
     this.text = response;
     this.user = user;
@@ -35,12 +39,18 @@ public class Message {
     StringBuffer output = new StringBuffer();
 
     for (String word : words) {
-      if (line.length() + word.length() > ChatbotController.lineBreakLength - 8) {
-        line.append('\n');
-        output.append(line);
-        line = new StringBuffer(word + " ");
+      // %S indicates we want a newline char
+      if (word.equals("%S")) {
+        output.append(line + "\n");
+        line = new StringBuffer();
       } else {
-        line.append(word + " ");
+        if (line.length() + word.length() > ChatbotController.lineBreakLength - 8) {
+          line.append('\n');
+          output.append(line);
+          line = new StringBuffer(word + " ");
+        } else {
+          line.append(word + " ");
+        }
       }
     }
 
@@ -61,11 +71,11 @@ public class Message {
   public void setUser(String user) {
     this.user = user;
   }
-  
+
   public void setPromt(List<String[]> prompt) {
     this.prompt = prompt;
   }
-  
+
   public List<String[]> getPrompt() {
     return this.prompt;
   }
@@ -77,4 +87,23 @@ public class Message {
   public void click() {
     this.clicked = true;
   }
+
+  /**
+   * Get args for first prompt action.
+   * 
+   * @return the args1
+   */
+  public List<Object> getArgs1() {
+    return args1;
+  }
+
+  /**
+   * Get args for second prompt action.
+   * 
+   * @return the args2
+   */
+  public List<Object> getArgs2() {
+    return args2;
+  }
+
 }

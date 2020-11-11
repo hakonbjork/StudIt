@@ -6,9 +6,13 @@ import java.util.List;
 public class Response {
 
   private String response = "";
-  private List<String[]> prompt;
   private String funcKey = "null";
+
+  private List<String[]> prompt;
   private List<String> arguments = new ArrayList<>();
+  private List<Object> args1;
+  private List<Object> args2;
+
   private boolean callFunc = false;
 
   public void add(String addition) {
@@ -49,8 +53,10 @@ public class Response {
    * 
    * @param prompt the prompt to set
    */
-  public void setPrompt(List<String[]> prompt) {
+  public void setPrompt(List<String[]> prompt, List<Object> args1, List<Object> args2) {
     this.prompt = prompt;
+    this.args1 = args1;
+    this.args2 = args2;
   }
 
   public void handleMatchResult(String[] matchResult) {
@@ -91,5 +97,24 @@ public class Response {
   public List<String> getArguments() {
     return arguments;
   }
+
+  /**
+   * Get the first prompt arguments.
+   * 
+   * @return the args1
+   */
+  public List<Object> getArgs1() {
+    return args1;
+  }
+
+  /**
+   * Get the second prompt arguments.
+   * 
+   * @return the args2
+   */
+  public List<Object> getArgs2() {
+    return args2;
+  }
+
 
 }

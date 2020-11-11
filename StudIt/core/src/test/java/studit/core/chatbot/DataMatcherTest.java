@@ -43,6 +43,8 @@ public class DataMatcherTest {
     assertNull(result4[1]);
     assertNull(result4[2]);
 
+    assertNull(dataMatcher.findDataMatch(new String[] { "foo", "foo2" }, "foo"));
+
     String[] result5 = dataMatcher.findDataMatch(new String[] { "fortell", "meg", "om", "matematikk", "1" }, "course");
 
     assertEquals("0", result5[0]);

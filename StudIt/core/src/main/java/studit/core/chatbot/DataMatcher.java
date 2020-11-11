@@ -39,12 +39,14 @@ public class DataMatcher {
     }
 
     if (matchCandidates.isEmpty()) {
-      return new String[] {"-1", null, null};
+      return new String[] { "-1", null, null };
     }
 
     switch (dataMatch) {
       case "course":
         return matchCourse(matchCandidates);
+      case "fagoversikt":
+        return new String[] {"match"};
       default:
         return null;
     }
@@ -68,10 +70,12 @@ public class DataMatcher {
 
     int bestTitleMatchIdx = -1;
     float bestTitlePct = 0.0f;
+    int betsTitleLengthDiscrepancy = 0;
 
     for (int i = 0; i < courseNameList.size(); i++) {
       String[] titleFragments = courseNameList.get(i)[1].split(" "); // Split course title by spaces.
       float titlePct = 0.0f;
+      int titleMatches = 0;
 
       for (String candidate : matchCandidates) {
 
@@ -93,12 +97,21 @@ public class DataMatcher {
 
         if (tmpMaxTitlePct > 0) {
           titlePct += tmpMaxTitlePct;
+          titleMatches++;
         }
       }
 
       if (titlePct > bestTitlePct) {
         bestTitleMatchIdx = i;
         bestTitlePct = titlePct;
+        betsTitleLengthDiscrepancy = Math.abs(titleFragments.length - titleMatches);
+      } else if (titlePct == bestTitlePct) {
+        int titleLengthDescrepancy = Math.abs(titleFragments.length - titleMatches);
+        if (titleLengthDescrepancy <= betsTitleLengthDiscrepancy) {
+          bestTitleMatchIdx = i;
+          bestTitlePct = titlePct;
+          betsTitleLengthDiscrepancy = titleLengthDescrepancy;
+        }
       }
     }
 
@@ -111,13 +124,11 @@ public class DataMatcher {
     float matchPctPerWord = bestTitlePct / (float) titleSplitLength;
 
     if (matchPctPerWord >= 1.0f) {
-      return new String[] { "1", courseNameList.get(bestTitleMatchIdx)[1],
-          courseNameList.get(bestTitleMatchIdx)[0] };
+      return new String[] { "1", courseNameList.get(bestTitleMatchIdx)[1], courseNameList.get(bestTitleMatchIdx)[0] };
     }
 
     if (titleSplitLength == 1 && matchPctPerWord >= 0.7f || titleSplitLength > 1 && matchPctPerWord > 0.49) {
-      return new String[] { "0", courseNameList.get(bestTitleMatchIdx)[1],
-          courseNameList.get(bestTitleMatchIdx)[0] };
+      return new String[] { "0", courseNameList.get(bestTitleMatchIdx)[1], courseNameList.get(bestTitleMatchIdx)[0] };
     }
 
     return new String[] { "-1", null, null };
@@ -150,6 +161,7 @@ public class DataMatcher {
 
     float pct = unions / (float) (unions + complements);
     pct *= (word2.length() - Math.abs(word1.length() - word2.length())) / (float) word2.length();
+
     return pct;
   }
 

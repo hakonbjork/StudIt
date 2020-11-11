@@ -11,12 +11,14 @@ import studit.core.chatbot.ChatbotManager;
 import studit.core.chatbot.Response;
 import studit.core.mainpage.CourseList;
 import studit.ui.remote.ApiCallException;
+import studit.ui.remote.DirectStuditModelAccess;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class Chatbot {
 
   private Stage chatStage;
   private ChatbotManager chatbotManager;
+  private ChatbotController controller;
 
   public Chatbot() {
     displayWindow();
@@ -25,19 +27,30 @@ public class Chatbot {
       CourseList courseList = remoteAccess.getCourseList();
       chatbotManager = new ChatbotManager(courseList.getCourseNameList());
     } catch (ApiCallException e) {
-      e.printStackTrace();
+      System.out.println("Error -> Could not establish connection to server");
     }
+  }
+
+  public Chatbot(boolean directAccess) throws ApiCallException {
+    RemoteStuditModelAccess remoteAccess = new DirectStuditModelAccess();
+    CourseList courseList = remoteAccess.getCourseList();
+    chatbotManager = new ChatbotManager(courseList.getCourseNameList());
+
   }
 
   /*
    * Opens a new window for our chatbot
    */
   private void displayWindow() {
-    Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("/studit/ui/Chatbot.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/studit/ui/Chatbot.fxml"));
+      final Parent root = loader.load();
+
       chatStage = new Stage();
       Scene scene = new Scene(root);
+
+      ChatbotController controller = (ChatbotController) loader.getController();
+      controller.setStage(chatStage);
 
       // Setting the background to be transparent, so we can create rounded corners in
       // our css file
@@ -48,13 +61,11 @@ public class Chatbot {
       chatStage.setScene(scene);
       chatStage.setTitle("Chatbot");
       chatStage.show();
+
+      this.controller = controller;
     } catch (IOException e) {
       System.out.println("Error loading ChatbotController.FXML -> Is the file corrupt?");
-      e.printStackTrace();
-    } catch (NullPointerException e) {
-      // Doing this to prevent testing errors
     }
-
   }
 
   public void show() {
@@ -70,6 +81,15 @@ public class Chatbot {
    */
   public Response manageInput(String input) {
     return chatbotManager.manageInput(input);
+  }
+
+  /**
+   * Get the active Chatbot Controller.
+   * 
+   * @return the controller
+   */
+  public ChatbotController getController() {
+    return controller;
   }
 
 }

@@ -58,6 +58,7 @@ public class RemoteStuditModelAccesTest {
     testGetUserById();
     testAddRemoveUsers();
     testAuthenticateLogin();
+    testGetUserByUsername();
     testModifyFields();
     testGetCourseByFagkode();
     testGetDiscussionByFagkode();
@@ -117,6 +118,14 @@ public class RemoteStuditModelAccesTest {
     assertTrue(remoteModel.authenticateLogin("IdaErBest", "pomeranian123"));
     assertFalse(remoteModel.authenticateLogin("IdaErBest", "pomeranien124"));
     assertFalse(remoteModel.authenticateLogin("bjarne", "pomeranian123"));
+  }
+
+  public void testGetUserByUsername() throws ApiCallException {
+    User user1 = remoteModel.getUserByUsername("Berte92");
+    User user2 = defaultModel.getUsers().getUserByUsername("Berte92");
+    compareUser(user1, user2);
+
+    assertThrows(ApiCallException.class, () -> remoteModel.getUserByUsername("foo"));
   }
 
   public void testModifyFields() throws ApiCallException {
