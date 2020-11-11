@@ -66,6 +66,7 @@ public class Commands {
    * Exit the chatbot.
    */
   private void exit() {
+    System.out.println("hello\n\n\n\n\n\n\n");
     chatbotController.exitChatbot(null);
   }
 

@@ -73,7 +73,7 @@ public class AppController {
     chatbot = new Chatbot();
   }
   
-  public static void newChatbot(boolean directAccess) {
+  public static void newChatbot(boolean directAccess) throws ApiCallException {
     chatbot = directAccess ? new Chatbot(true) : new Chatbot();
   }
 

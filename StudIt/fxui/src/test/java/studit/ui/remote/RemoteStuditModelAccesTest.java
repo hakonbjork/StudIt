@@ -58,6 +58,7 @@ public class RemoteStuditModelAccesTest {
     testGetUserById();
     testAddRemoveUsers();
     testAuthenticateLogin();
+    testGetUserByUsername();
     testModifyFields();
     testGetCourseByFagkode();
     testGetDiscussionByFagkode();
