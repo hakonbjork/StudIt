@@ -3,7 +3,6 @@ package studit.core.chatbot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import studit.core.mainpage.CourseItem;
 import studit.core.mainpage.CourseList;
 
@@ -15,7 +14,6 @@ public class InformationRequestExecutor {
    * 
    * @param response   active Response object
    * @param courseList CourseList obtained from API
-   * @return the updaded Response object.
    */
   public static void executeCommand(Response response, CourseList courseList) {
 
@@ -253,7 +251,7 @@ public class InformationRequestExecutor {
   }
 
   /**
-   * Identify if a String is a fagkode or not
+   * Identify if a String is a fagkode or not.
    * 
    * @param str String to check
    * @return true if str is a fagkode, false if not.

@@ -14,7 +14,7 @@ public class Commands {
   private RemoteStuditModelAccess remoteAccess;
 
   /**
-   * Initialize the Commands class
+   * Initialize the Commands class.
    * 
    * @param chatbotController active ChatbotController
    * @param remoteAccess      active StuditModelAccess
@@ -43,7 +43,7 @@ public class Commands {
   }
 
   /**
-   * Get the command hashmap
+   * Get the command hashmap.
    * 
    * @return the command hashmap.
    */
@@ -158,7 +158,7 @@ public class Commands {
   }
 
   /**
-   * Print the allowed aids on the exam by the specified course
+   * Print the allowed aids on the exam by the specified course.
    * 
    * @param args list of arguments to pass to the method. Type must be either
    *             String or null.
@@ -179,7 +179,7 @@ public class Commands {
   }
 
   /**
-   * Print the allowed aids on the exam by the specified course
+   * Print the allowed aids on the exam by the specified course.
    * 
    * @param args list of arguments to pass to the method. Type must be either
    *             String or null.
@@ -188,8 +188,10 @@ public class Commands {
     if (!args.isEmpty()) {
       String fagkode = ((String) args.get(0)).toUpperCase();
       try {
-        chatbotController.list_chat.getItems().add(new Message("Her har du noen tips i " + fagkode + ": "
-            + remoteAccess.getCourseByFagkode(fagkode).getTips(), "chatbot"));
+        chatbotController.list_chat.getItems()
+            .add(new Message(
+                "Her har du noen tips i " + fagkode + ": " + remoteAccess.getCourseByFagkode(fagkode).getTips(),
+                "chatbot"));
       } catch (ApiCallException e) {
         chatbotController.list_chat.getItems()
             .add(new Message("Kunne ikke etablere tilkobling til serveren", "chatbot"));
@@ -200,7 +202,7 @@ public class Commands {
   }
 
   /**
-   * Print the curricilum of the specified course
+   * Print the curricilum of the specified course.
    * 
    * @param args list of arguments to pass to the method. Type must be either
    *             String or null.
