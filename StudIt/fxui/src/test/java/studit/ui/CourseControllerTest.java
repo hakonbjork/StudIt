@@ -12,9 +12,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import studit.core.mainpage.CourseItem;
 import studit.ui.remote.DirectStuditModelAccess;
 import studit.ui.remote.RemoteStuditModelAccess;
 
@@ -48,14 +51,49 @@ public class CourseControllerTest extends ApplicationTest {
   @Test
   public void testSetTips(){
     courseController.setTips("kjøp boka");
-    TextField tips = (TextField) lookup("#tips");
+    TextArea tips = (TextArea) lookup("#tips_tricks");
     assertEquals("kjøp boka", tips.getText());
+  }
+
+  @Test
+  public void testSetLitteratur(){
+    courseController.setLitterature("Kompendie");
+    TextArea litterature = (TextArea) lookup("#litterature");
+    assertEquals("Kompendie", litterature.getText());
+  }
+
+  @Test
+  public void testSetCourseInformation(){
+    courseController.setCourseInformation("bra fag");
+    TextArea courseInformation = (TextArea) lookup("#courseInformation");
+    assertEquals("bra fag", courseInformation.getText());
+  }
+
+  @Test
+  public void testSetVurderingsform(){
+    courseController.setLitterature("Eksamen");
+    TextField vurderingsform = (TextField) lookup("#vurderingsform");
+    assertEquals("Eksamen", vurderingsform.getText());
   }
 
   @Test
   public void testSetRating(){
     courseController.setRating(2.3);
     assertEquals(2.3, courseController.getRating());
+  }
+
+  @Test
+  public void testSetEksamensdato(){
+    courseController.setEksamensdato("30.10.2020");
+    TextField eksamensdato = (TextField) lookup("#eksamensdato");
+    assertEquals("30.10.2020", eksamensdato.getText());
+  }
+
+  @Test
+  public void testSetFagnavn(){
+    courseController.setFagnavn("Diskret matte");
+    Label fagnavn = (Label) lookup("#fagnavn");
+    assertEquals("Diskret matte", fagnavn);
   }
 
   @Test
@@ -77,5 +115,4 @@ public class CourseControllerTest extends ApplicationTest {
     clickOn("#openDiscussion");
     FxAssert.verifyThat(window("Discussion"), WindowMatchers.isShowing());
   }
-  
 }
