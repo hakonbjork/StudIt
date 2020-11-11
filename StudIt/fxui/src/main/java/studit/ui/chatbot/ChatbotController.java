@@ -226,6 +226,8 @@ public class ChatbotController implements Initializable {
   }
 
   /**
+   * Gets the current stage.
+   * 
    * @return the stage.
    */
   public Stage getStage() {

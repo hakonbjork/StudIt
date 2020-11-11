@@ -6,8 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import studit.ui.remote.ApiCallException;
-import studit.ui.remote.RemoteStuditModelAccess;
 import studit.ui.remote.DirectStuditModelAccess;
+import studit.ui.remote.RemoteStuditModelAccess;
 
 public class NewUserController {
 
