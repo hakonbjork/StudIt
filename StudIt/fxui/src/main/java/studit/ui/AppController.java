@@ -40,7 +40,8 @@ public class AppController {
    */
   private User currentUser = null;
 
-  @FXML BorderPane rootPane;
+  @FXML
+  BorderPane rootPane;
 
   @FXML
   private TextField searchField;
@@ -83,13 +84,14 @@ public class AppController {
   public static void newChatbot() {
     chatbot = new Chatbot();
   }
-  
+
   public static void newChatbot(boolean directAccess) throws ApiCallException {
     chatbot = directAccess ? new Chatbot(true) : new Chatbot();
   }
 
   /**
    * For testing purposes only. Changes the remote.
+   * 
    * @param remote - The new remote to be set
    */
   public void setRemote(RemoteStuditModelAccess remote) {
@@ -122,8 +124,6 @@ public class AppController {
   public void initialize() throws ApiCallException {
     if (LoginController.getTestingMode()) {
       setRemote(new DirectStuditModelAccess());
-    } else {
-      System.out.println("Using old remote :( \n");
     }
     loadData();
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -139,7 +139,6 @@ public class AppController {
       this.filteredData.setPredicate(courseItem -> {
         // If filter text is empty, display all courses
         if (newValue == null || newValue.isEmpty()) {
-          System.out.println("textfield is empty");
           return true;
         }
         // Compare course name and course code of every CourseItem with the filter text
@@ -148,11 +147,8 @@ public class AppController {
         if ((courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter))
             || (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter))) {
 
-          System.out.println("textfield changed from " + oldValue + " to " + newValue);
           return true; // filter matches course name or course code
         }
-
-        System.out.println("no match");
         return false; // Does not match
       });
     });
@@ -162,8 +158,7 @@ public class AppController {
 
   }
 
-
-/**
+  /**
    * Function to search for subjects. The listview will then only show subjects
    * with the letters in the search field.
    */
@@ -173,7 +168,6 @@ public class AppController {
     this.coursesList.setItems(filteredList);
   }
 
-  
   /**
    * Opens chatbot.
    */
@@ -224,9 +218,9 @@ public class AppController {
       // private String label;
       @Override
       public void handle(MouseEvent arg0) {
-        
+
         try {
-         
+
           // getting loader and a pane for the second scene.
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
           Parent coursePane = courseLoader.load();
