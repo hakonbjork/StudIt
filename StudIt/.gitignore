@@ -10,5 +10,7 @@ bin/
 studit.iml
 /.idea/
 .class
+*.json
+!res/**/*.json
 
 /target/
