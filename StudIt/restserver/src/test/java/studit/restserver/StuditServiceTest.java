@@ -35,7 +35,7 @@ import studit.restapi.StuditService;
 
 public class StuditServiceTest extends JerseyTest {
 
-  protected final boolean DEBUG = true;
+  protected final boolean DEBUG = false;
   protected final String PATH = StuditService.STUDIT_SERVICE_PATH;
   protected ObjectMapper mapper;
   protected StuditModel defaultModel = DefaultGenerator
