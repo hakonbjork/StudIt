@@ -72,8 +72,6 @@ public class CourseController implements Initializable {
   @FXML
   private Button addCommentAction;
 
-  // private Scene mainScene;
-
   private CourseItem courseItem;
 
   public void setCourseItem(CourseItem courseItem) {
@@ -257,7 +255,6 @@ public class CourseController implements Initializable {
       this.tips_tricks.setText(courseItem.getTips());
       this.courseInformation.setText(courseItem.getInformasjon());
       this.eksamensdato.setText(courseItem.getEksamensdato());
-
     }
   }
 
@@ -290,5 +287,8 @@ public class CourseController implements Initializable {
   }
   public String getFagkode(){
     return this.fagkode.getText();
+  }
+  public User getCurrentUser(){
+    return this.currentUser;
   }
 }
