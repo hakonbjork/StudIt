@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
+import static org.testfx.api.FxAssert.verifyThat;
 
+
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -70,11 +73,16 @@ public class CourseControllerTest extends ApplicationTest {
     assertEquals("Eksamen", courseController.getVurderingsform());
   }
 
-  // @Test
-  // public void testSetRating() {
-  //   courseController.setRating(0.4);
-  //   assertEquals(0.4, courseController.getRating());
-  // }
+   @Test
+  public void testSetRating() {
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        courseController.setRating(1.0);
+        assertEquals(1.0, courseController.getRating());
+      }
+    });
+  }
 
   @Test
   public void testSetEksamensdato() {
@@ -114,24 +122,41 @@ public class CourseControllerTest extends ApplicationTest {
     assertEquals(berte, courseController.getCurrentUser());
   }
 
-  // @Test
-  // public void testSetFagkode() {
-  //   String fagkode = "IT1901";
-  //   courseController.setFagkode(fagkode);
-  //   assertEquals("IT1901", courseController.getFagkode());
-  // }
+  @Test
+  public void testSetFagkode() {
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        String fagkode = "IT1901";
+        courseController.setFagkode(fagkode);
+        assertEquals("IT1901", courseController.getFagkode());
+      }
+    });
+  }
+
+  @Test
+  public void testSetFagNavn() {
+    Platform.runLater(new Runnable() {
+      @Override
+      public void run() {
+        String fagnavn = "Informatikk";
+        courseController.setFagnavn(fagnavn);
+        assertEquals("Informatikk", courseController.getFagnavn());
+      }
+    });
+  }
 
   // @Test
-  // public void testSetFagNavn() {
-  //   String fagnavn = "Informatikk";
-  //   courseController.setFagnavn(fagnavn);
-  //   assertEquals("Informatikk", courseController.getFagnavn());
+  // public void testOpenChatbot(){
+  //   clickOn("#chatbot_btn");
   // }
 
-
-  // @Test
-  // public void testClickOnDiscussion() {
-  //   clickOn("#discussion_btn");
-  //   FxAssert.verifyThat(window("Discussion"), WindowMatchers.isShowing());
-  // }
+  @Test
+  public void testClickOnDiscussion() throws ApiCallException {
+    CourseItem courseItem = remoteStuditModelAccess.getCourseByFagkode("IT1909");
+    User berte = remoteStuditModelAccess.getUserByUsername("Berte92");
+    courseController.setCurrentUser(berte);
+    courseController.setCourseItem(courseItem);
+    clickOn("#discussion_btn");
+  }
 }
