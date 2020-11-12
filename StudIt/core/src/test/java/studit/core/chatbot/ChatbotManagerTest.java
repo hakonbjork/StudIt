@@ -83,5 +83,5 @@ public class ChatbotManagerTest {
   private String politeResponse = "Det går bra, takk, hvordan går det med deg?";
   private String declineResponse = "Neivel. ";
   private String sadResponse = "Det var leit å høre... Hva kan jeg hjelpe deg med?";
-  private String welcomeResponse = "Bare hyggelig :)";
+  private String welcomeResponse = "Bare hyggelig :) ";
 }

@@ -44,7 +44,7 @@ public class CommandManager {
         addition = "Det var leit å høre... Hva kan jeg hjelpe deg med?";
         break;
       case "takk":
-        addition = "Bare hyggelig :)";
+        addition = "Bare hyggelig :) ";
         break;
       default:
         addition = "";

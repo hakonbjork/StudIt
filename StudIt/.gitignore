@@ -12,5 +12,6 @@ studit.iml
 .class
 *.json
 !res/**/*.json
+.DS_Store
 
 /target/
