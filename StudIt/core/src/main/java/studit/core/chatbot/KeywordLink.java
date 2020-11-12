@@ -17,7 +17,7 @@ public class KeywordLink {
   }
 
   /**
-   * Initalize a new KeywordLink
+   * Initalize a new KeywordLink.
    * 
    * @param command          command key.
    * @param dataMatch        datamatch key if we request a datamatch, empty

@@ -82,7 +82,7 @@ public class Message {
   }
 
   /**
-   * Get the user
+   * Get the user.
    * 
    * @return active user.
    */

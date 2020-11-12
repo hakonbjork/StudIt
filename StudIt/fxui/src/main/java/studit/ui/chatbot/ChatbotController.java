@@ -179,7 +179,7 @@ public class ChatbotController implements Initializable {
   // ------------------------------ Widget Logic -------------------------------
 
   /**
-   * Exit the chatbot gracefully
+   * Exit the chatbot gracefully.
    * 
    * @param event ActionEvent
    */

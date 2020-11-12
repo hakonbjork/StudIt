@@ -9,11 +9,11 @@ import studit.ui.remote.ApiCallException;
 import studit.ui.remote.RemoteStuditModelAccess;
 
 public class Commands {
+  private final static String connectionFailedMsg = "Kunne ikke etablere tilkobling til serveren";
+
   private HashMap<String, Func> commands;
   private ChatbotController chatbotController;
   private RemoteStuditModelAccess remoteAccess;
-
-  private final static String connectionFailedMsg = "Kunne ikke etablere tilkobling til serveren";
 
   /**
    * Initialize the Commands class.
