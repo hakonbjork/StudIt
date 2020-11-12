@@ -33,7 +33,7 @@ import studit.ui.remote.RemoteStuditModelAccess;
 
 public class AppController {
 
-  private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
+  private static RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
   /*
    * The user that is currently logged in.
@@ -82,11 +82,11 @@ public class AppController {
   }
 
   public static void newChatbot() {
-    chatbot = new Chatbot();
+    chatbot = new Chatbot(remoteStuditModelAccess);
   }
 
   public static void newChatbot(boolean directAccess) throws ApiCallException {
-    chatbot = directAccess ? new Chatbot(true) : new Chatbot();
+    chatbot = directAccess ? new Chatbot(true) : new Chatbot(remoteStuditModelAccess);
   }
 
   /**
@@ -95,7 +95,7 @@ public class AppController {
    * @param remote - The new remote to be set
    */
   public void setRemote(RemoteStuditModelAccess remote) {
-    this.remoteStuditModelAccess = remote;
+    remoteStuditModelAccess = remote;
   }
 
   /**
@@ -174,7 +174,7 @@ public class AppController {
   @FXML
   void openChatBot(ActionEvent event) {
     if (chatbot == null) {
-      chatbot = new Chatbot();
+      chatbot = new Chatbot(remoteStuditModelAccess);
     } else {
       chatbot.show();
     }

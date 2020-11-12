@@ -69,12 +69,22 @@ public class ChatbotControllerTest extends ApplicationTest {
     robot.write("kan jeg få se fagoversikten?", 10);
     robot.push(KeyCode.ENTER);
     assertTrue(this.chatbotController.list_chat.getItems().get(4).getText().contains("\n"));
-    
+
   }
 
   @Test
-  public void testLoginController() {
+  public void testChatbotController() {
     assertNotNull(this.chatbotController);
+    assertNotNull(chatbotController.getStage());
+    chatbotController.setRemoteAccess(new RemoteStuditModelAccess());
+
+    FxRobot robot = new FxRobot();
+    robot.clickOn("#txt_user_entry").write("jeg vil se fagoversikten", 10);
+    robot.push(KeyCode.ENTER);
+
+    assertEquals(
+        "Error -> could not establish connection to server ",
+        this.chatbotController.list_chat.getItems().get(2).getText().replaceAll("\n", ""));
   }
 
   @Test

@@ -36,13 +36,13 @@ public class ChatbotController implements Initializable {
   private Stage stage = null;
   private double xOffset = 0;
   private double yOffset = 0;
-  // private CallToActionBuffer callToActionBuffer = null;
   // This value is hardcoded as it is based on current font, size and more, hard
   // to make dynamic.
   public static final int lineBreakLength = 48;
   public ResponseManager promptManager;
   private ChatbotController chatbotController;
   private RemoteStuditModelAccess remoteAccess = new RemoteStuditModelAccess();
+  private boolean displayContent = true;
 
   public Commands commands;
 
@@ -77,46 +77,50 @@ public class ChatbotController implements Initializable {
 
         @Override
         protected void updateItem(Message item, boolean empty) {
-          super.updateItem(item, empty);
 
-          if (empty) {
-            setText(null);
-            setGraphic(null);
-          } else {
-            if (item.getUser().equals("chatbot")) {
-              flowTextLeft.setStyle("-fx-background-color: linear-gradient(to left, #ff512f, #dd2476);\r\n"
-                  + "    -fx-background-insets: -5 -30 -5 -15;\r\n"
-                  + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,0.5,0.5);\r\n"
-                  + "    -fx-shape: \"M 94.658379,129.18587 H 46.277427 c -3.545458,0.23354 -5.32763,-1.59167 -5.14193,-4.67449\r\n"
-                  + "    v -19.39913 c 0.405797,-3.73565 2.470637,-4.56641 5.14193,-4.90821 h 43.706464 c 2.572701,0.2361 4.604321,\r\n"
-                  + "    1.68288 4.674488,4.90821 v 19.39913 c 0.436089,3.14572 2.890695,3.57304 4.908212,4.67449 z\";");
-              flowTextLeft.getChildren().clear();
+          if (displayContent) {
+            super.updateItem(item, empty);
 
-              Text text = new Text(item.getText());
-              text.setFill(Color.WHITE);
-
-              // We want the user to choose between a certain set of options
-              if (item.getPrompt() != null) {
-                text.setText(text.getText() + "\n");
-                flowTextLeft.getChildren().add(text);
-                new Prompt(item.getPrompt(), item.getArgs1(), item.getArgs2(), flowTextLeft, list_chat, item,
-                    chatbotController);
-              } else {
-                flowTextLeft.getChildren().add(text);
-              }
-              setGraphic(hBoxLeft);
+            if (empty) {
+              setText(null);
+              setGraphic(null);
             } else {
-              lblTextRight.setStyle("-fx-background-color: linear-gradient(to left, #4776e6, #8e54e9);\r\n"
-                  + "    -fx-background-insets: -5 -5 -5 -34;\r\n"
-                  + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,-0.5,-0.5);\r\n"
-                  + "    -fx-shape: \"m 46.030545,129.18592 h 48.380952 c 3.54546,0.23355 5.32763,-1.59167 5.14193,-4.67449\r\n"
-                  + "    V 105.1123 c -0.4058,-3.73565 -2.47064,-4.56641 -5.14193,-4.90821 H 50.705033\r\n"
-                  + "    c -2.572701,0.2361 -4.604321,1.68288 -4.674488,4.90821 v 19.39913\r\n"
-                  + "    c -0.436089,3.14572 -2.890695,3.57304 -4.908212,4.67449 z\";");
-              lblTextRight.setText(item.getText());
-              setGraphic(hBoxRight);
+              if (item.getUser().equals("chatbot")) {
+                flowTextLeft.setStyle("-fx-background-color: linear-gradient(to left, #ff512f, #dd2476);\r\n"
+                    + "    -fx-background-insets: -5 -30 -5 -15;\r\n"
+                    + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,0.5,0.5);\r\n"
+                    + "    -fx-shape: \"M 94.658379,129.18587 H 46.277427 c -3.545458,0.23354 -5.32763,-1.59167 -5.14193,-4.67449\r\n"
+                    + "    v -19.39913 c 0.405797,-3.73565 2.470637,-4.56641 5.14193,-4.90821 h 43.706464 c 2.572701,0.2361 4.604321,\r\n"
+                    + "    1.68288 4.674488,4.90821 v 19.39913 c 0.436089,3.14572 2.890695,3.57304 4.908212,4.67449 z\";");
+                flowTextLeft.getChildren().clear();
+
+                Text text = new Text(item.getText());
+                text.setFill(Color.WHITE);
+
+                // We want the user to choose between a certain set of options
+                if (item.getPrompt() != null) {
+                  text.setText(text.getText() + "\n");
+                  flowTextLeft.getChildren().add(text);
+                  new Prompt(item.getPrompt(), item.getArgs1(), item.getArgs2(), flowTextLeft, list_chat, item,
+                      chatbotController);
+                } else {
+                  flowTextLeft.getChildren().add(text);
+                }
+                setGraphic(hBoxLeft);
+              } else {
+                lblTextRight.setStyle("-fx-background-color: linear-gradient(to left, #4776e6, #8e54e9);\r\n"
+                    + "    -fx-background-insets: -5 -5 -5 -34;\r\n"
+                    + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,-0.5,-0.5);\r\n"
+                    + "    -fx-shape: \"m 46.030545,129.18592 h 48.380952 c 3.54546,0.23355 5.32763,-1.59167 5.14193,-4.67449\r\n"
+                    + "    V 105.1123 c -0.4058,-3.73565 -2.47064,-4.56641 -5.14193,-4.90821 H 50.705033\r\n"
+                    + "    c -2.572701,0.2361 -4.604321,1.68288 -4.674488,4.90821 v 19.39913\r\n"
+                    + "    c -0.436089,3.14572 -2.890695,3.57304 -4.908212,4.67449 z\";");
+                lblTextRight.setText(item.getText());
+                setGraphic(hBoxRight);
+              }
             }
           }
+
         }
 
       };
@@ -163,7 +167,11 @@ public class ChatbotController implements Initializable {
   @FXML
   public void exitChatbot(ActionEvent event) {
     AppController.closeChatbot();
-    stage.close();
+    try {
+      stage.close();
+    } catch (IllegalStateException e) {
+      System.out.println("Warning -> Application can only be exited from UI thread");
+    }
   }
 
   @FXML
@@ -236,6 +244,15 @@ public class ChatbotController implements Initializable {
 
   public void setStage(Stage chatStage) {
     this.stage = chatStage;
+  }
+
+  /**
+   * Set weather we want our listview to automatically update.
+   * 
+   * @param displayContent the displayContent to set
+   */
+  public void setDisplayContent(boolean displayContent) {
+    this.displayContent = displayContent;
   }
 
 }

@@ -13,6 +13,8 @@ public class Commands {
   private ChatbotController chatbotController;
   private RemoteStuditModelAccess remoteAccess;
 
+  private final static String connectionFailedMsg = "Kunne ikke etablere tilkobling til serveren";
+
   /**
    * Initialize the Commands class.
    * 
@@ -66,7 +68,6 @@ public class Commands {
    * Exit the chatbot.
    */
   private void exit() {
-    System.out.println("hello\n\n\n\n\n\n\n");
     chatbotController.exitChatbot(null);
   }
 
@@ -84,7 +85,7 @@ public class Commands {
             + remoteAccess.getCourseByFagkode(fagkode).getAnbefaltLitteratur(), "chatbot"));
       } catch (ApiCallException e) {
         chatbotController.list_chat.getItems()
-            .add(new Message("Kunne ikke etablere tilkobling til serveren", "chatbot"));
+            .add(new Message(connectionFailedMsg, "chatbot"));
       }
     } else {
       courseGuessDeclined();
@@ -108,7 +109,7 @@ public class Commands {
                 + ", tillatte hjelpemidler: " + course.getHjelpemidler(), "chatbot"));
       } catch (ApiCallException e) {
         chatbotController.list_chat.getItems()
-            .add(new Message("Kunne ikke etablere tilkobling til serveren", "chatbot"));
+            .add(new Message(connectionFailedMsg, "chatbot"));
       }
     } else {
       courseGuessDeclined();
@@ -129,7 +130,7 @@ public class Commands {
             "Eksamen i " + fagkode + " blir " + remoteAccess.getCourseByFagkode(fagkode).getEksamensdato(), "chatbot"));
       } catch (ApiCallException e) {
         chatbotController.list_chat.getItems()
-            .add(new Message("Kunne ikke etablere tilkobling til serveren", "chatbot"));
+            .add(new Message(connectionFailedMsg, "chatbot"));
       }
     } else {
       courseGuessDeclined();
@@ -150,7 +151,7 @@ public class Commands {
             + remoteAccess.getCourseByFagkode(fagkode).getInformasjon(), "chatbot"));
       } catch (ApiCallException e) {
         chatbotController.list_chat.getItems()
-            .add(new Message("Kunne ikke etablere tilkobling til serveren", "chatbot"));
+            .add(new Message(connectionFailedMsg, "chatbot"));
       }
     } else {
       courseGuessDeclined();
@@ -171,7 +172,7 @@ public class Commands {
             + remoteAccess.getCourseByFagkode(fagkode).getHjelpemidler(), "chatbot"));
       } catch (ApiCallException e) {
         chatbotController.list_chat.getItems()
-            .add(new Message("Kunne ikke etablere tilkobling til serveren", "chatbot"));
+            .add(new Message(connectionFailedMsg, "chatbot"));
       }
     } else {
       courseGuessDeclined();
@@ -194,7 +195,7 @@ public class Commands {
                 "chatbot"));
       } catch (ApiCallException e) {
         chatbotController.list_chat.getItems()
-            .add(new Message("Kunne ikke etablere tilkobling til serveren", "chatbot"));
+            .add(new Message(connectionFailedMsg, "chatbot"));
       }
     } else {
       courseGuessDeclined();
@@ -217,7 +218,7 @@ public class Commands {
                 "chatbot"));
       } catch (ApiCallException e) {
         chatbotController.list_chat.getItems()
-            .add(new Message("Kunne ikke etablere tilkobling til serveren", "chatbot"));
+            .add(new Message(connectionFailedMsg, "chatbot"));
       }
     } else {
       courseGuessDeclined();
@@ -239,7 +240,7 @@ public class Commands {
             "chatbot"));
       } catch (ApiCallException e) {
         chatbotController.list_chat.getItems()
-            .add(new Message("Kunne ikke etablere tilkobling til serveren", "chatbot"));
+            .add(new Message(connectionFailedMsg, "chatbot"));
       }
     } else {
       courseGuessDeclined();
@@ -260,7 +261,7 @@ public class Commands {
       }
       chatbotController.list_chat.getItems().add(new Message(buffer.toString(), "chatbot"));
     } catch (ApiCallException e) {
-      chatbotController.list_chat.getItems().add(new Message("Could not establish connection to server", "chatbot"));
+      chatbotController.list_chat.getItems().add(new Message(connectionFailedMsg, "chatbot"));
     }
   }
 }

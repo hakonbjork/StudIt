@@ -20,9 +20,8 @@ public class Chatbot {
   private ChatbotManager chatbotManager;
   private ChatbotController controller;
 
-  public Chatbot() {
+  public Chatbot(RemoteStuditModelAccess remoteAccess) {
     displayWindow();
-    RemoteStuditModelAccess remoteAccess = new RemoteStuditModelAccess();
     try {
       CourseList courseList = remoteAccess.getCourseList();
       chatbotManager = new ChatbotManager(courseList.getCourseNameList());
