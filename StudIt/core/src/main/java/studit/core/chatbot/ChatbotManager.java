@@ -167,7 +167,7 @@ public class ChatbotManager {
     links.add(new KeywordLink("uhyggelig", null, 1,
         List.of(Map.of("det", 0.2f, "går", 0.2f, "dårlig", 0.6f, "ikke", 0.4f, "så", 0.05f, "bra", 0.05f))));
 
-    links.add(new KeywordLink("nei", null, 1, List.of(Map.of("nei", 1.0f, "nope", 1.0f, "niks", 1.0f))));
+    links.add(new KeywordLink("nei", null, 1, List.of(Map.of("nei", 1.0f, "nope", 1.0f, "niks", 1.0f, "hei", -1.0f))));
 
     links.add(new KeywordLink("vurderingsform", "course", 2,
         List.of(Map.of("hva", 0.2f, "hvilken", 0.2f, "vurderingsform", 1.0f, "vurdering", 0.8f),

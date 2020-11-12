@@ -78,7 +78,7 @@ public class DataMatcher {
     int bestFagkodeMatchIdx = -1;
     float bestFagkodePct = 0.0f;
 
-    int bestTitleMatchIdx = -1;
+    int bestTitleMatchIdx = 0;
     float bestTitlePct = 0.0f;
     int betsTitleLengthDiscrepancy = 0;
 
@@ -144,7 +144,7 @@ public class DataMatcher {
       return new String[] { bestFagkodePct >= 1.0f ? "1" : "0", courseNameList.get(bestFagkodeMatchIdx)[0],
           courseNameList.get(bestFagkodeMatchIdx)[1] };
     }
-
+    
     int titleSplitLength = courseNameList.get(bestTitleMatchIdx)[1].split(" ").length;
     float matchPctPerWord = bestTitlePct / (float) titleSplitLength;
 

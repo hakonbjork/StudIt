@@ -254,6 +254,7 @@ public class ChatbotController implements Initializable {
         }
       }
       list_chat.getItems().add(new Message(response, "chatbot"));
+      list_chat.scrollTo(list_chat.getItems().size() -1);
     }
   }
 

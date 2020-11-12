@@ -82,6 +82,10 @@ public class KeywordLink {
 
     return words;
   }
+  
+  public void setWords(List<String> words) {
+   
+  }
 
   /**
    * Get the precedence of the KeywordLink.
