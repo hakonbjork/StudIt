@@ -20,6 +20,11 @@ public class Chatbot {
   private ChatbotManager chatbotManager;
   private ChatbotController controller;
 
+  /**
+   * Initialize a new Chatbot instance and display the chatbot to the screen.
+   * 
+   * @param remoteAccess Direct/Remote access.
+   */
   public Chatbot(RemoteStuditModelAccess remoteAccess) {
     displayWindow();
     try {
@@ -30,11 +35,17 @@ public class Chatbot {
     }
   }
 
+  /**
+   * Intialize a new chatbot instance without UI and with offline remoteAccess ->
+   * used for testing purposes only.
+   * 
+   * @param directAccess dummy value.
+   * @throws ApiCallException unknown cause, should never be thrown.
+   */
   public Chatbot(boolean directAccess) throws ApiCallException {
     RemoteStuditModelAccess remoteAccess = new DirectStuditModelAccess();
     CourseList courseList = remoteAccess.getCourseList();
     chatbotManager = new ChatbotManager(courseList.getCourseNameList());
-
   }
 
   /*
@@ -42,12 +53,14 @@ public class Chatbot {
    */
   private void displayWindow() {
     try {
+      // Load the FXML
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/studit/ui/Chatbot.fxml"));
       final Parent root = loader.load();
 
       chatStage = new Stage();
       Scene scene = new Scene(root);
 
+      // Get the active controller and set its stage.
       ChatbotController controller = (ChatbotController) loader.getController();
       controller.setStage(chatStage);
 
@@ -56,6 +69,7 @@ public class Chatbot {
       chatStage.initStyle(StageStyle.TRANSPARENT);
       scene.setFill(Color.TRANSPARENT);
 
+      // Load css.
       scene.getStylesheets().setAll(getClass().getResource("/studit/ui/chatbot.css").toExternalForm());
       chatStage.setScene(scene);
       chatStage.setTitle("Chatbot");
@@ -67,11 +81,14 @@ public class Chatbot {
     }
   }
 
+  /**
+   * If the chatbot is minimized, move it to the front.
+   */
   public void show() {
     chatStage.setIconified(false);
   }
 
-  /*
+  /**
    * Manages the user entered input and executes commands accordingly.
    * 
    * @param input - the user input we want to process

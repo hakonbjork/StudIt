@@ -15,6 +15,11 @@ public class Response {
 
   private boolean callFunc = false;
 
+  /**
+   * Add a new message to the chatbot response.
+   * 
+   * @param addition new message to be added.
+   */
   public void add(String addition) {
     if (!addition.isEmpty()) {
       this.response += addition;

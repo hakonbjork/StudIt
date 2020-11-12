@@ -36,27 +36,37 @@ public class ChatbotController implements Initializable {
   private Stage stage = null;
   private double xOffset = 0;
   private double yOffset = 0;
-  // This value is hardcoded as it is based on current font, size and more, hard
-  // to make dynamic.
   public static final int lineBreakLength = 48;
-  public ResponseManager promptManager;
+  public ResponseManager responseManager;
   private ChatbotController chatbotController;
   private RemoteStuditModelAccess remoteAccess = new RemoteStuditModelAccess();
   private boolean displayContent = true;
 
   public Commands commands;
 
+  /**
+   * Called when a new controller instance is created.
+   * 
+   * @param location  default
+   * @param resources default
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
     chatbotController = this;
+
+    // Create new Commands instance and ResponseManager
     commands = new Commands(chatbotController, remoteAccess);
-    promptManager = new ResponseManager();
+    responseManager = new ResponseManager();
+
+    // Add a listener to the text entry of the chatbot
     txt_user_entry.textProperty().addListener(l -> checkForLineBreak());
 
     ObservableList<Message> chatMessages = FXCollections.observableArrayList();
 
     list_chat.setItems(chatMessages); // attach the observable list to the listview
+
+    // Initialize all UI logic for the listcell items.
     list_chat.setCellFactory(param -> {
 
       ListCell<Message> cell = new ListCell<Message>() {
@@ -69,23 +79,25 @@ public class ChatbotController implements Initializable {
         HBox hBoxRight = new HBox(lblTextRight, lblUserRight);
 
         {
+          // Make sure that there is enough padding between the cells
           hBoxLeft.setAlignment(Pos.CENTER_LEFT);
           hBoxRight.setAlignment(Pos.CENTER_RIGHT);
           hBoxRight.setPadding(new Insets(5, 0, 5, 0));
           hBoxLeft.setPadding(new Insets(5, 0, 5, 10));
         }
 
+        // This function is called whenever the list_chat is modified.
         @Override
         protected void updateItem(Message item, boolean empty) {
-
           if (displayContent) {
-            super.updateItem(item, empty);
+            super.updateItem(item, empty); // Call super to prevent update complications.
 
-            if (empty) {
+            if (empty) { // We have nothing to display.
               setText(null);
               setGraphic(null);
             } else {
               if (item.getUser().equals("chatbot")) {
+                // Chatbot response, style the TextFlow accordingly.
                 flowTextLeft.setStyle("-fx-background-color: linear-gradient(to left, #ff512f, #dd2476);\r\n"
                     + "    -fx-background-insets: -5 -30 -5 -15;\r\n"
                     + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,0.5,0.5);\r\n"
@@ -97,7 +109,8 @@ public class ChatbotController implements Initializable {
                 Text text = new Text(item.getText());
                 text.setFill(Color.WHITE);
 
-                // We want the user to choose between a certain set of options
+                // We want the user to choose between a certain set of options, initializes a
+                // new prompt.
                 if (item.getPrompt() != null) {
                   text.setText(text.getText() + "\n");
                   flowTextLeft.getChildren().add(text);
@@ -108,6 +121,7 @@ public class ChatbotController implements Initializable {
                 }
                 setGraphic(hBoxLeft);
               } else {
+                // User message, style the TextFlow accordingly.
                 lblTextRight.setStyle("-fx-background-color: linear-gradient(to left, #4776e6, #8e54e9);\r\n"
                     + "    -fx-background-insets: -5 -5 -5 -34;\r\n"
                     + "    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.08),2,1.0,-0.5,-0.5);\r\n"
@@ -128,6 +142,7 @@ public class ChatbotController implements Initializable {
       return cell;
     });
 
+    // Default message when creating opening a new Chatbot window.
     list_chat.getItems()
         .add(new Message("Hei! Jeg er din nye assistent, chatbotten Gunnar. Hva kan jeg hjelpe deg med?", "chatbot"));
   }
@@ -144,8 +159,7 @@ public class ChatbotController implements Initializable {
 
   }
 
-  // ----------------------------------Member
-  // Initialization-----------------------------------
+  // ----------------------- Member Initialization --------------------------
 
   @FXML
   private BorderPane pane_chatbot;
@@ -162,8 +176,13 @@ public class ChatbotController implements Initializable {
   @FXML
   private TextArea txt_user_entry;
 
-  // --------------------------------Widget Logic-------------------------------
+  // ------------------------------ Widget Logic -------------------------------
 
+  /**
+   * Exit the chatbot gracefully
+   * 
+   * @param event ActionEvent
+   */
   @FXML
   public void exitChatbot(ActionEvent event) {
     AppController.closeChatbot();
@@ -174,13 +193,20 @@ public class ChatbotController implements Initializable {
     }
   }
 
+  /**
+   * Minimize the chatbot window.
+   * 
+   * @param event ActionEvent
+   */
   @FXML
   public void minimizeChatbot(ActionEvent event) {
     stage.setIconified(true);
   }
 
   /**
-   * Moves our chatbot window when dragged by the toolbar.
+   * Moves the chatbot window when dragged by the toolbar.
+   * 
+   * @param event MouseEvent
    */
   @FXML
   private void moveWindow(MouseEvent event) {
@@ -191,6 +217,8 @@ public class ChatbotController implements Initializable {
   /**
    * Sets new cursor location (x & yOffset) so that we can drag our application by
    * the toolbar.
+   *
+   * @param event MouseEvent
    */
   @FXML
   private void setOffset(MouseEvent event) {
@@ -201,15 +229,20 @@ public class ChatbotController implements Initializable {
   /**
    * When user presses enter key, send the input to the Chatbot to perform an
    * action accordingly.
+   * 
+   * @param event KeyEvent
    */
   @FXML
   private void userEntry(KeyEvent event) {
+    // The user pressed Enter.
     if (event.getCode() == KeyCode.ENTER) {
       String userInput = txt_user_entry.getText();
       txt_user_entry.setText("");
       list_chat.getItems().add(new Message(userInput, "user"));
 
-      txt_user_entry.selectPositionCaret(0);
+      txt_user_entry.selectPositionCaret(0); // Reset the caret position.
+
+      // Formulate chatbot response based on core logic.
       Response response = AppController.getChatbot().manageInput(userInput);
       if (response.funcCall()) {
         // We need to execute a command before receiving a chatbot response, typically
