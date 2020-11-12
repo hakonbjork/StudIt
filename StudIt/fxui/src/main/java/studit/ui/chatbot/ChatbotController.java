@@ -255,4 +255,13 @@ public class ChatbotController implements Initializable {
     this.displayContent = displayContent;
   }
 
+  /**
+   * Set a the Commands object for the controller.
+   * 
+   * @param commands the commands to set
+   */
+  public void setCommands(Commands commands) {
+    this.commands = commands;
+  }
+
 }

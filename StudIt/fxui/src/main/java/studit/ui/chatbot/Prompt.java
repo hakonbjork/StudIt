@@ -71,20 +71,10 @@ public class Prompt {
     }
 
     Func func = chatbotController.commands.getCommands().get(action.getFuncKey());
-
-    if (func != null) {
-      try {
-        func.execute(action.getArguments());
-      } catch (ClassCastException e) {
-        e.printStackTrace();
-        System.out.println(
-            "^ Error occured casting function arguments from '" + action.getFuncKey() + "'. Update code immediately");
-      }
-    }
+    func.execute(action.getArguments());
 
     // Make sure all commands are disabled if the ListView is not updated (does not
-    // perform isClicked
-    // check)
+    // perform isClicked check)
     for (Hyperlink command : commands) {
       command.setOnAction(null);
     }

@@ -68,10 +68,6 @@ public class Message {
     return user;
   }
 
-  public void setUser(String user) {
-    this.user = user;
-  }
-
   public void setPromt(List<String[]> prompt) {
     this.prompt = prompt;
   }

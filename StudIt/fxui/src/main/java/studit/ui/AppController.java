@@ -94,7 +94,7 @@ public class AppController {
    * 
    * @param remote - The new remote to be set
    */
-  public void setRemote(RemoteStuditModelAccess remote) {
+  public static void setRemote(RemoteStuditModelAccess remote) {
     remoteStuditModelAccess = remote;
   }
 

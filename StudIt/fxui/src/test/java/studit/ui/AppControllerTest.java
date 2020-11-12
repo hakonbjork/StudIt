@@ -42,7 +42,7 @@ public class AppControllerTest extends ApplicationTest {
     String string = "testString";
     appController.setCurrentUser(user);
     appController.setLabel(string);
-    appController.setRemote(this.remote);
+    AppController.setRemote(this.remote);
     assertEquals(user, appController.getCurrentUser());
     assertEquals(string, appController.getLabel());
   }
