@@ -23,7 +23,7 @@ The project uses maven for building and running.
 
 * To run the server, you have to run: `mvn jetty:run -f servlet/pom.xml`
 
-* To run the project: First you need to install the project `mvn install`, then run the server, and finally run mvn javafx:run -f fxui/pom.xml
+* To run the project: First you need to install the project `mvn install`, then run the server, and finally run `mvn javafx:run -f fxui/pom.xml`
 
 * For unit testing and code coverage, run `mvn test`  
 
