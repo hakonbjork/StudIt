@@ -122,7 +122,9 @@ public class AppController {
    * @throws ApiCallException If connection to server could not be established.
    */
   public void initialize() throws ApiCallException {
-    if (LoginController.getTestingMode()) {
+
+    //This check is only used for testing purposes in order to set the RemoteStuditModel to DirectStuditModelAccess
+    if (LoginController.getTestingMode() || DiscussionController.getTestingMode()) {
       setRemote(new DirectStuditModelAccess());
     }
     loadData();
