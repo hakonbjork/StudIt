@@ -267,5 +267,28 @@ public class CourseController implements Initializable {
 
 
   // Methods for testing
-
+  public String getHjelpemidler(){
+    return this.hjelpemidler.getText();
+  }
+  public String getEksamensdato(){
+    return this.eksamensdato.getText();
+  }
+  public String getLitterature(){
+    return this.litterature.getText();
+  }
+  public String getTipsTricks(){
+    return this.tips_tricks.getText();
+  }
+  public String getVurderingsform(){
+    return this.vurderingsform.getText();
+  }
+  public String getCourseInformation(){
+    return this.courseInformation.getText();
+  }
+  public String getFagnavn(){
+    return this.fagnavn.getText();
+  }
+  public String getFagkode(){
+    return this.fagkode.getText();
+  }
 }
