@@ -98,15 +98,6 @@ public class CourseController implements Initializable {
     this.litterature.setText(litteratur);
   }
 
-  /*
-  public void setRating(Float rating) {
-    this.rating.setText(rating.toString());
-  } */
-
-  // public void setMainScene(Scene scene) {
-  // this.mainScene = scene;
-  // }
-
   public void setFagkode(String fagkode) {
     this.fagkode.setText(fagkode);
   }
@@ -114,8 +105,6 @@ public class CourseController implements Initializable {
   /**
    * Function to set the label - the name of the subject on the top of the page.
    */
-
-  @FXML
   public void setFagnavn(String fagnavn) {
     this.fagnavn.setText(fagnavn);
   }
@@ -210,7 +199,6 @@ public class CourseController implements Initializable {
         Parent root = loader.load();
         DiscussionController discussionController = (DiscussionController) loader.getController();
 
-        // TODO sjekke om den nede funker? Virker som det ikke gjør det.
         if (this.courseItem != null) {
           discussionController.addCourse(this.courseItem);
           discussionController.setCurrentUser(this.currentUser);
@@ -223,7 +211,7 @@ public class CourseController implements Initializable {
         stage2.setScene(new Scene(root));
         stage2.setTitle("Discussion");
         stage2.show();
-
+                
         Stage stage = (Stage) rootPane.getScene().getWindow();
         stage.hide();
 
