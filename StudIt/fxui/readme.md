@@ -11,4 +11,4 @@ In addition, we use various code quality analysis tools (jacoco with jacoco, spo
 
 ## Sequence diagram visualising the relationship between some of the controllers
 After you have logged inn and clicked on one of the courses in the main page of StudIt, you can for instance open the discussion of the respective course. The sequence diagram below shows the dynamics of the controllers under the hood. 
-![Seqdiagram](segdiagram.png)
+![Seqdiagram](seqdiagram.png)
