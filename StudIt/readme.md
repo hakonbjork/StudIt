@@ -1,4 +1,4 @@
-# NTNU - Choose the right course?
+# StudIt - Choose the right course? [NTNU Edition]
 
 * This project is a three-layer application, with domain, user interface (UI) and persistence. The project consists of tests with good coverage and is configured to use **maven** as build tool.
 
