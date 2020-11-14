@@ -1,0 +1,30 @@
+@startuml
+actor User
+User -> "~#discussion_btn: Button" as openDiscussion: click
+
+openDiscussion -> CourseController: openDiscussion()
+
+CourseController -> DiscussionController: addCourse()
+CourseController -> DiscussionController: setCurrentUser()
+CourseController -> DiscussionController: updateView()
+
+DiscussionController -> RemoteStuditModelAccess: getCourseByFagkode()
+RemoteStuditModelAccess --> DiscussionController: CourseItem
+
+DiscussionController -> RemoteStuditModelAccess: 
+
+
+alt if discussion not empty
+
+    loop n times, n: number of comments in the forumList
+        DiscussionController -> RemoteStuditModelAccess: getCommentByFagkode()
+        RemoteStuditModelAccess --> DiscussionController: Comment
+    end
+
+else if discussion empty
+    end
+
+
+
+
+@enduml
