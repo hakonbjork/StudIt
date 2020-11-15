@@ -2,8 +2,6 @@
 class CourseItem {
   - String fagnavn
   - String fagkode
-  - String fagkode;
-  - String fagnavn;
   - String informasjon;
   - String pensumlitteratur;
   - String anbefaltLitteratur;
@@ -21,20 +19,45 @@ class CourseController {
   - CourseItem courseItem
   - User currentUser
 
+  ~ openDiscussion()
+  ~ openChatBot
+  ~ handleMainPageAction()
+  ~ handleLogoutAction()
 }
 
 
-class Discussion {
-    - ObservableList<Comment> listView
+class DiscussionController {
     - CourseItem courseItem
     - ListView<Comment> forumList
     - User currentUser
 
-    ~ addNewPost() package protected
+    ~ addNewPost() 
     + addCourse()
     + loadView()
     + setCurrentUser()
+    ~ openInformationtab()
     ~ openChatBot()
+    ~ handleLogoutAction()
+    ~ handleMainPageAction()
+}
+
+class Discussion {
+    - Map<Integer, Comment> comments
+    - int prevAssignedID = -1
+
+    + getComments()
+    + setComments()
+}
+
+class Comment {
+    - String brukernavn;
+    - String kommentar;
+    - String dato;
+    - int upvotes;
+    - int downvotes;
+    - int uniqueID;
+    - List<String> upvoters;
+    - List<String> downvoters;
 }
 
 
@@ -50,15 +73,16 @@ class User {
 class AppController {
     - User currentUser
     - Chatbot chatbot
-    - ObservableList<CourseItem> list
     - List<CourseItem> courseList
     - String label
 
-    ~ openChatBot()
-    + closeChatbot()
     + addUser()
     + loadData()
     + clickOnCourse()
+    + setRemote()
+    ~ openChatBot
+    ~ handleMainPageAction()
+    ~ handleLogoutAction()
 }
 
 class Chatbot{
@@ -85,14 +109,16 @@ class ChatbotController {
 
 
 
+AppController o-- CourseItem: 0..*
+AppController --> CourseController
+AppController -- Chatbot
+Chatbot *-- ChatbotController: 1..1
 
-AppController o-- CourseItem: courses: *
-AppController *-- CourseController: coursecontroller: 1
-AppController *-- Chatbot: 1
-Chatbot *-- ChatbotController: 1
+CourseController -- CourseItem 
+CourseController <-> DiscussionController
+CourseItem <-> DiscussionController
+CourseItem *-- Discussion
+Discussion *-- Comment: 0..*
 
-CourseController --> CourseItem : courses: *
-CourseController --> Discussion : discussion: *
-
-User <-- AppController: 1
+AppController --> User: Authenticate
 @enduml
