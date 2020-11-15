@@ -64,11 +64,11 @@ public class DiscussionControllerTest extends ApplicationTest {
     assertEquals(berte, discussionController.getCurrentUser());
   }
 
-  @Test
-  public void testClickOnMainPage() {
-    clickOn("#mainPage_btn");
-    FxAssert.verifyThat(window("App"), WindowMatchers.isShowing());
-  }
+  // @Test
+  // public void testClickOnMainPage() {
+  //   clickOn("#mainPage_btn");
+  //   FxAssert.verifyThat(window("App"), WindowMatchers.isShowing());
+  // }
 
   @Test
   public void testLogoutAction() {
