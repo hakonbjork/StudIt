@@ -2,8 +2,6 @@
 class CourseItem {
   - String fagnavn
   - String fagkode
-  - String fagkode;
-  - String fagnavn;
   - String informasjon;
   - String pensumlitteratur;
   - String anbefaltLitteratur;
@@ -12,81 +10,24 @@ class CourseItem {
   - String vurderingsform;
   - String hjelpemidler;
   - float averageVurdering;
-  - List<Integer> vurderinger;
   - Discussion diskusjon;
-
-  + setFagkode()
-  + getFagkode()
-
-  + setFagnavn()
-  + getFagnavn()
-
-  + setVurderingsForm()
-  + getVurderingsForm()
-  
-  + setCourseInformation()
-  + getCourseInformation()
-
-  + setEksamensdato()
-  + getEksamensdato()
-
-  + setHjelpemidler()
-  + getHjelpemidler()
-
-  + setLitterature()
-  + getLitterature()
-
-  + setTips()
-  + getTips()
-
-  + setRating()
-  + getRating()
-
-  + getDiskusjon()
-  + setDiskusjon()
 }
 
 
-class CourseController{
+class CourseController {
   - CourseItem courseItem
   - User currentUser
-  
-  + setFagkode()
-  + setFagnavn()
-  + setVurderingsForm()
-  + setCourseInformation()
-  + setEksamensdato()
-  + setHjelpemidler()
-  + setLitterature()
-  + setTips()
-  + setRating()
-  + getRating()
-  + setCurrentUser()
-  + updateView()
-  ~ handleLogoutAction()
-  ~ handleMainPageAction()
-  ~ openChatBot()
-  ~ openDiscussion()
 }
 
 
-class DiscussionController{
-    - ObservableList<Comment> listView
+class Discussion {
     - CourseItem courseItem
     - ListView<Comment> forumList
     - User currentUser
 
-    + setFagkode()
-    + setFagnavn()
-    ~ addNewPost() package protected
+    ~ addNewPost()
     + addCourse()
-    + updateView()
     + loadView()
-    + setCurrentUser()
-    ~ handleLogoutAction()
-    ~ handleMainPageAction()
-    ~ openChatBot()
-    ~ openInformationTab()
 }
 
 
@@ -97,64 +38,60 @@ class User {
     - String password;
     - int uniqueID;
 
-    + getName()
-    + setName()
-
-    + getUsername()
-    + setUsername()
-
-    + getMail()
-    + setMail()
-
-    + getPassword()
-    + setPassword()
-
-    + getUniqueID()
-    + setUniqueID()
+    setName()
+    setUsername()
+    setMail()
+    setPassword()
+    setID()
 }
 
  
 class AppController {
-    - RemoteStuditModelAccess remoteStuditModelAccess
     - User currentUser
-    - private static Chatbot chatbot
-    - ObservableList<CourseItem> list
+    - Chatbot chatbot
     - List<CourseItem> courseList
     - String label
-    - FilteredList<CourseItem> filteredData
-    - SortedList<CourseItem> sortedData 
-    - ObservableList<CourseItem> filteredList 
 
-    + setLabel()
-    + getLabel()
-
-    + newChatbot()
-    + getChatbot()
     ~ openChatBot()
     + closeChatbot()
-
     + addUser()
-    + setRemote()
-    + setCurrentUser()
-    + getCurrentUser()
-    + initialize()
-    + handleSearchFieldAction()
     + loadData()
-    + getData()
-    ~ handleLogoutAction()
-    ~ handleMainPageAction()
-    ~ mouseClicked()
-   
+    + clickOnCourse()
+}
+
+class Chatbot{
+    - Stage chatStage
+    - ChatbotManager chatbotManager
+    - ChatbotController controller
+
+    - displayWindow()
+    + show()
+    + manageInput()
+    + getController()
+}
+
+class ChatbotController {
+    - Stage stage     
+    + exitChatbot()
+    + minimizeChatbot()
+    + userEntry()
+}
+
+class DirectStuditModelAcess {
+    - StuditModel studitModel    
 }
 
 
-AppController --> CourseItem: courses: *
-AppController --> CourseController: coursecontroller: 1
+User <-- AppController: Login
 
+AppController o-- CourseItem: courses: *
+AppController <-- DirectStuditModelAcess: 1
+
+AppController o-- CourseController: coursecontroller: 1
+AppController o-- Chatbot: 1
+Chatbot *-- ChatbotController: 1
+
+CourseItem --> Discussion: *
 CourseController --> CourseItem : courses: *
-CourseController --> DiscussionController : discussions: *
-
-DiscussionController --> CourseItem : courses: *
-
-User <-- AppController : 1
+CourseController *-- Discussion : discussion: *
 @enduml
