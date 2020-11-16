@@ -21,13 +21,46 @@ class CourseController {
 
 
 class Discussion {
+
+  ~ openDiscussion()
+  ~ openChatBot
+  ~ handleMainPageAction()
+  ~ handleLogoutAction()
+}
+
+
+class DiscussionController {
     - CourseItem courseItem
     - ListView<Comment> forumList
     - User currentUser
 
-    ~ addNewPost()
+    ~ addNewPost() 
     + addCourse()
     + loadView()
+    + setCurrentUser()
+    ~ openInformationtab()
+    ~ openChatBot()
+    ~ handleLogoutAction()
+    ~ handleMainPageAction()
+}
+
+class Discussion {
+    - Map<Integer, Comment> comments
+    - int prevAssignedID = -1
+
+    + getComments()
+    + setComments()
+}
+
+class Comment {
+    - String brukernavn;
+    - String kommentar;
+    - String dato;
+    - int upvotes;
+    - int downvotes;
+    - int uniqueID;
+    - List<String> upvoters;
+    - List<String> downvoters;
 }
 
 
@@ -52,11 +85,35 @@ class AppController {
     - List<CourseItem> courseList
     - String label
 
-    ~ openChatBot()
-    + closeChatbot()
     + addUser()
     + loadData()
     + clickOnCourse()
+    + setRemote()
+    ~ openChatBot
+    ~ handleMainPageAction()
+    ~ handleLogoutAction()
+}
+
+class Chatbot{
+    - Stage chatStage
+    - ChatbotManager chatbotManager
+    - ChatbotController controller
+
+    - displayWindow()
+    + show()
+    + manageInput()
+    + getController()
+}
+
+class ChatbotController {
+    - Stage stage 
+    - double xOffset 
+    - double yOffset 
+    - ChatbotController chatbotController
+    
+    + exitChatbot()
+    + minimizeChatbot()
+    + userEntry()
 }
 
 class Chatbot{
