@@ -190,8 +190,8 @@ public class CommentListCell extends BorderPane {
 
     private Text comment = new Text();
     private Text votes = new Text();
-    private Button upvoteButton = new Button("Upvote");
-    private Button downvoteButton = new Button("Downvote");
+    private Button upvoteButton = new Button("Stem opp");
+    private Button downvoteButton = new Button("Stem ned");
    
 
     /**
@@ -222,7 +222,7 @@ public class CommentListCell extends BorderPane {
      * @param amount amount of upvotes
      */
     private void setVotes(String votes) {
-      this.votes.setText(votes);
+      this.votes.setText("Stemmer: " + votes);
     }
 
     public Button getUpvoteButton() {
