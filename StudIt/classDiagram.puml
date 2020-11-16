@@ -17,15 +17,13 @@ class CourseItem {
 class CourseController {
   - CourseItem courseItem
   - User currentUser
-}
 
-
-class Discussion {
-
+  + updateView()
   ~ openDiscussion()
-  ~ openChatBot
   ~ handleMainPageAction()
+  ~ openChatBot()
   ~ handleLogoutAction()
+
 }
 
 
@@ -33,36 +31,33 @@ class DiscussionController {
     - CourseItem courseItem
     - ListView<Comment> forumList
     - User currentUser
+    + RemoteStuditModelAcess remoteStuditModelAcess
 
-    ~ addNewPost() 
+    ~ addNewPost()
     + addCourse()
     + loadView()
-    + setCurrentUser()
-    ~ openInformationtab()
+
+    ~ handleMainPageAction()
     ~ openChatBot()
     ~ handleLogoutAction()
-    ~ handleMainPageAction()
+
 }
 
 class Discussion {
-    - Map<Integer, Comment> comments
+    - Map<Integer, Comment> comments = 
     - int prevAssignedID = -1
-
-    + getComments()
-    + setComments()
 }
 
 class Comment {
     - String brukernavn;
     - String kommentar;
-    - String dato;
-    - int upvotes;
-    - int downvotes;
-    - int uniqueID;
-    - List<String> upvoters;
-    - List<String> downvoters;
+    -  String dato;
+    -  int upvotes;
+    -  int downvotes;
+    -  int uniqueID;
+    -  List<String> upvoters;
+    -  List<String> downvoters;
 }
-
 
 class User {
     - String name;
@@ -70,12 +65,6 @@ class User {
     - String mail;
     - String password;
     - int uniqueID;
-
-    setName()
-    setUsername()
-    setMail()
-    setPassword()
-    setID()
 }
 
  
@@ -85,36 +74,13 @@ class AppController {
     - List<CourseItem> courseList
     - String label
 
+    ~ openChatBot()
+    + closeChatbot()
     + addUser()
     + loadData()
     + clickOnCourse()
-    + setRemote()
-    ~ openChatBot
-    ~ handleMainPageAction()
-    ~ handleLogoutAction()
 }
 
-class Chatbot{
-    - Stage chatStage
-    - ChatbotManager chatbotManager
-    - ChatbotController controller
-
-    - displayWindow()
-    + show()
-    + manageInput()
-    + getController()
-}
-
-class ChatbotController {
-    - Stage stage 
-    - double xOffset 
-    - double yOffset 
-    - ChatbotController chatbotController
-    
-    + exitChatbot()
-    + minimizeChatbot()
-    + userEntry()
-}
 
 class Chatbot{
     - Stage chatStage
@@ -134,21 +100,27 @@ class ChatbotController {
     + userEntry()
 }
 
-class DirectStuditModelAcess {
+class RemoteStuditModelAcess {
     - StuditModel studitModel    
 }
 
 
-User <-- AppController: Login
 
-AppController o-- CourseItem: courses: *
-AppController <-- DirectStuditModelAcess: 1
+User <-- AppController: Authenticate through LoginController
+AppController -- RemoteStuditModelAcess: uses >
+ChatbotController -- RemoteStuditModelAcess: uses >
+DiscussionController -- RemoteStuditModelAcess: uses >
 
-AppController o-- CourseController: coursecontroller: 1
-AppController o-- Chatbot: 1
-Chatbot *-- ChatbotController: 1
+AppController o-- "*" CourseItem: has >
+AppController -- CourseController
+AppController <-- DiscussionController
+AppController --> Chatbot: opens >
+Chatbot *-- "1" ChatbotController 
 
-CourseItem --> Discussion: *
-CourseController --> CourseItem : courses: *
-CourseController *-- Discussion : discussion: *
+CourseItem *-- "1" Discussion: has >
+DiscussionController -- CourseController
+DiscussionController o-- "1" CourseItem
+Discussion *-- "*" Comment: has >
+CourseController o-- "1" CourseItem
+
 @enduml
