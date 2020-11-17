@@ -61,11 +61,11 @@ public class Users {
    */
   public String[] addUser(String name, String username, String mail, String password) {
     if (name == null || username == null || mail == null || password == null) {
-      return new String[] { null, "Missing fields, expected name, username, mail and password", "-1" };
+      return new String[] { null, "Manglende felt, forventet navn, brukernavn, mail, og passord", "-1" };
     }
     if (isUnique(username) && !username.isBlank()) {
       if (!isValidEmailAddress(mail)) {
-        return new String[] { null, "'" + mail + "'" + " is not a valid email address", "-4" };
+        return new String[] { null, "'" + mail + "'" + " er ikke en gyldig mailadresse", "-4" };
       }
 
       String[] passwordHash = Hashing.hashPassword(password);
@@ -77,7 +77,7 @@ public class Users {
       users.put(prevAssignedID, new User(name, username, mail, passwordHash[0], prevAssignedID));
       return new String[] { String.valueOf(prevAssignedID), null, "0" };
     }
-    return new String[] { null, "'" + username + "' is not a unique username", "-2" };
+    return new String[] { null, "Brukernavnet '" + username + "' er allerede i bruk", "-2" };
   }
 
   private boolean isUnique(String username) {
