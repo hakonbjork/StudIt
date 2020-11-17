@@ -150,7 +150,6 @@ public class LoginController {
       Stage stage2 = (Stage) passwordField.getScene().getWindow();
       stage2.hide();
     } else {
-      System.out.print("Failure, " + username + ", " + password + " ");
       loginInfoText.setText("Feil brukernavn eller passord");
     }
   }

@@ -83,7 +83,7 @@ public class DiscussionController implements Initializable {
 
     String input = newPostInputField.getText();
     try {
-      remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), this.currentUser.getUsername(),
+      remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), this.currentUser.getName(),
           input);
       updateView();
       newPostInputField.clear();

@@ -15,7 +15,7 @@
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
    <bottom>
-      <Button fx:id="saveNewUserButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveNewUserAction" prefHeight="30.0" prefWidth="150.0" text="Save new user" textAlignment="CENTER" textFill="#06349c" BorderPane.alignment="CENTER">
+      <Button fx:id="saveNewUserButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveNewUserAction" prefHeight="30.0" prefWidth="150.0" text="Lagre bruker" textAlignment="CENTER" textFill="#06349c" BorderPane.alignment="CENTER">
          <font>
             <Font name="Avenir Next Bold" size="13.0" />
          </font>
@@ -27,7 +27,7 @@
    <center>
       <VBox prefHeight="244.0" prefWidth="300.0">
          <children>
-            <TextField fx:id="nameField" promptText="Full name" style="-fx-font-style: italic;">
+            <TextField fx:id="nameField" promptText="Fullt navn" style="-fx-font-style: italic;">
                <VBox.margin>
                   <Insets bottom="10.0" left="100.0" right="100.0" top="50.0" />
                </VBox.margin>
@@ -35,17 +35,17 @@
                   <Font name="System Italic" size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="usernameField" promptText="Username">
+            <TextField fx:id="usernameField" promptText="Brukernavn">
                <VBox.margin>
                   <Insets bottom="10.0" left="100.0" right="100.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="mailField" promptText="Email">
+            <TextField fx:id="mailField" promptText="Mail">
                <VBox.margin>
                   <Insets bottom="10.0" left="100.0" right="100.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <PasswordField fx:id="userPasswordField" promptText="Password">
+            <PasswordField fx:id="userPasswordField" promptText="Passord">
                <VBox.margin>
                   <Insets left="100.0" right="100.0" top="2.0" />
                </VBox.margin>
@@ -59,7 +59,7 @@
       </VBox>
    </center>
    <top>
-      <Label contentDisplay="CENTER" text="Register new user" textAlignment="CENTER" textFill="#06349c" BorderPane.alignment="CENTER">
+      <Label contentDisplay="CENTER" text="Registrer ny bruker" textAlignment="CENTER" textFill="#06349c" BorderPane.alignment="CENTER">
          <font>
             <Font name="Avenir Next Bold" size="48.0" />
          </font>

@@ -56,12 +56,12 @@ public class DiscussionControllerTest extends ApplicationTest {
     FxAssert.verifyThat(window("Course"), WindowMatchers.isShowing());
   }
 
-  @Test
-  public void testClickOnMainPage() {
-  discussionController.setStuditModelAccess(this.direct);
-  clickOn("#mainpage_btn");
-  FxAssert.verifyThat(window("StudIt"), WindowMatchers.isShowing());
-  }
+  // @Test
+  // public void testClickOnMainPage() {
+  // discussionController.setStuditModelAccess(this.direct);
+  // clickOn("#mainpage_btn");
+  // FxAssert.verifyThat(window("StudIt"), WindowMatchers.isShowing());
+  // }
 
   @Test
   public void testLogoutAction() {
@@ -69,11 +69,11 @@ public class DiscussionControllerTest extends ApplicationTest {
     FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
   }
 
-  @Test
-  public void testOpenChatBot() {
-  clickOn("#chatbot_btn");
-  FxAssert.verifyThat(window("Chatbot"), WindowMatchers.isShowing());
-  }
+  // @Test
+  // public void testOpenChatBot() {
+  // clickOn("#chatbot_btn");
+  // FxAssert.verifyThat(window("Chatbot"), WindowMatchers.isShowing());
+  // }
 
   @Test
   public void testComments() throws ApiCallException {

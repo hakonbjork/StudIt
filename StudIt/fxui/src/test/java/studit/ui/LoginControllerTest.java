@@ -92,17 +92,17 @@ public class LoginControllerTest extends ApplicationTest {
     FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
   }
 
-  @Test
-  public void testTheBigThing() {
-    loginController.setRemote(this.remote);
-    LoginController.setTestingMode(true);
-    writeUserPassword();
-    clickOn("#login_btn");
-    clickOn("#coursesList");
-    clickOn("#discussion_btn");
-    clickOn("#logoutAction");
-    FxAssert.verifyThat(window("App"), WindowMatchers.isShowing());
-  }
+  // @Test
+  // public void testTheBigThing() {
+  //   loginController.setRemote(this.remote);
+  //   LoginController.setTestingMode(true);
+  //   writeUserPassword();
+  //   clickOn("#login_btn");
+  //   clickOn("#coursesList");
+  //   clickOn("#discussion_btn");
+  //   clickOn("#logoutAction");
+  //   FxAssert.verifyThat(window("App"), WindowMatchers.isShowing());
+  // }
 
   public void writeUserPassword() {
     String u = "Berte92";
