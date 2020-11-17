@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ public class UsersTest {
     String[] v = u.addUser("name", "username", null, "password");
     String[] w = u.addUser("name", "username", "mail", null);
 
-    String expected = "Missing fields, expected name, username, mail and password";
+    String expected = "Manglende felt, forventet navn, brukernavn, mail, og passord";
     assertEquals(expected, s[1]);
     assertEquals(expected, t[1]);
     assertEquals(expected, v[1]);
@@ -87,7 +88,7 @@ public class UsersTest {
 
     addRandomUser();
     String t = u.changePassword(0, "short");
-    String message = "Password must be between 8 and 32 characters";
+    String message = "Passordet må være mellom 8 og 32 tegn";
     assertEquals(message, t);
 
     String v = u.changePassword(0, "newPassword");

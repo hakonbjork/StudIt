@@ -24,16 +24,16 @@ public class HashingTest {
     String illegalChar = "|password";
     
     String pass1[] = hashPassword(shortPassword);
-    assertEquals("Password must be between 8 and 32 characters", pass1[1]);
+    assertEquals("Passordet må være mellom 8 og 32 tegn", pass1[1]);
 
     String pass2[] = hashPassword(longPassword);
-    assertEquals("Password must be between 8 and 32 characters", pass2[1]);
+    assertEquals("Passordet må være mellom 8 og 32 tegn", pass2[1]);
 
     String pass3[] = hashPassword(spacePassword);
-    assertEquals("Password cannot contain spaces", pass3[1]);
+    assertEquals("Passordet kan ikke inneholde mellomrom", pass3[1]);
 
     String pass4[] = hashPassword(illegalChar);
-    assertEquals("Your password contains the following illegal chars: '" + "|" + "'", pass4[1]);
+    assertEquals("Passordet har de følgende ulovlige tegnene: '" + "|" + "'", pass4[1]);
   }
 
 }

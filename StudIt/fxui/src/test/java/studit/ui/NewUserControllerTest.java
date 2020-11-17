@@ -36,7 +36,7 @@ public class NewUserControllerTest extends ApplicationTest {
     remote.addUser("Ola Halvorsen", "olahalla", "ola.halvorsen@gmail.com", "olalalala");
     writeNewUserFields();
     clickOn("#saveNewUserButton");
-    assertEquals("\'olahalla\' is not a unique username", controller.infoTextField.getText());
+    assertEquals("Brukernavnet \'olahalla\' er allerede i bruk", controller.infoTextField.getText());
   }
 
   public void writeNewUserFields() {

@@ -143,6 +143,13 @@ public class LoginController {
     String username = usernameField.getText();
     String password = passwordField.getText();
 
+    // Check if connection to server is present
+    Boolean connectedToServer = remote.ping();
+    if (!connectedToServer) {
+      loginInfoText.setText("Feil: Ingen tilkobling til server");
+      return;
+    }
+
     // Check if username and password is correct
     if (remote.authenticateLogin(username, password)) {
       loginInfoText.setText("");

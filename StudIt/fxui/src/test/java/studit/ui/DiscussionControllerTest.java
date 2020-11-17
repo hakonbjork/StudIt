@@ -102,9 +102,9 @@ public class DiscussionControllerTest extends ApplicationTest {
 
     // Checks if the user is the same as the author of the recent comments
     assertTrue((discussionController.getForumList().getItems().get(0).getBrukernavn())
-        .equals(discussionController.getCurrentUser().getUsername()));
+        .equals(discussionController.getCurrentUser().getName()));
     assertTrue((discussionController.getForumList().getItems().get(1).getBrukernavn())
-        .equals(discussionController.getCurrentUser().getUsername()));
+        .equals(discussionController.getCurrentUser().getName()));
 
     // Click on upVote
     ListView<Comment> listView = lookup("#forumList").query();
