@@ -6,3 +6,9 @@
 
 ## Architecture Diagram
 ![Architecture](architecture.png)
+
+## Class Diagram
+![Sequence](sequence.png)
+
+## Class Diagram
+![Class](class.png)
