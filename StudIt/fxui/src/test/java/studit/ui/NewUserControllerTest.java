@@ -2,7 +2,6 @@ package studit.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +36,7 @@ public class NewUserControllerTest extends ApplicationTest {
     remote.addUser("Ola Halvorsen", "olahalla", "ola.halvorsen@gmail.com", "olalalala");
     writeNewUserFields();
     clickOn("#saveNewUserButton");
-    assertEquals("\'olahalla\' is not a unique username", controller.infoTextField.getText());
+    assertEquals("Brukernavnet \'olahalla\' er allerede i bruk", controller.infoTextField.getText());
   }
 
   public void writeNewUserFields() {

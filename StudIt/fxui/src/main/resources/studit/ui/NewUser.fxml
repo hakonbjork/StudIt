@@ -15,7 +15,7 @@
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
    <bottom>
-      <Button fx:id="saveNewUserButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveNewUserAction" prefHeight="30.0" prefWidth="150.0" text="Lagre ny bruker" textAlignment="CENTER" textFill="#06349c" BorderPane.alignment="CENTER">
+      <Button fx:id="saveNewUserButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveNewUserAction" prefHeight="30.0" prefWidth="150.0" text="Lagre bruker" textAlignment="CENTER" textFill="#06349c" BorderPane.alignment="CENTER">
          <font>
             <Font name="Avenir Next Bold" size="13.0" />
          </font>

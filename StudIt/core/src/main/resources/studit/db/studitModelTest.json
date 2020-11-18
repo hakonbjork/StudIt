@@ -16,16 +16,16 @@
         "comments" : [ {
           "brukernavn" : "BobbyBigBoi",
           "kommentar" : "Bra saker!",
-          "dato" : "10-11-2020 10:38:41",
-          "upvotes" : "1",
-          "downvotes" : "1",
+          "dato" : "12-11-2020 01:45:21",
+          "upvotes" : "0",
+          "downvotes" : "0",
           "uniqueID" : "0",
           "upvoters" : [ "BobbyBigBoi" ],
           "downvoters" : [ "BjarteBrorMor" ]
         }, {
           "brukernavn" : "BobbyBigBoi",
           "kommentar" : "Ok saker :/",
-          "dato" : "10-11-2020 10:38:41",
+          "dato" : "12-11-2020 01:45:21",
           "upvotes" : "0",
           "downvotes" : "0",
           "uniqueID" : "1",
@@ -34,7 +34,7 @@
         }, {
           "brukernavn" : "BjarteBrorMor",
           "kommentar" : "Bobby er en idiot!",
-          "dato" : "10-11-2020 10:38:41",
+          "dato" : "12-11-2020 01:45:21",
           "upvotes" : "2",
           "downvotes" : "0",
           "uniqueID" : "2",
@@ -43,7 +43,7 @@
         }, {
           "brukernavn" : "WhamMaster28",
           "kommentar" : "Dinglepop!",
-          "dato" : "10-11-2020 10:38:41",
+          "dato" : "12-11-2020 01:45:21",
           "upvotes" : "0",
           "downvotes" : "0",
           "uniqueID" : "3",
@@ -57,10 +57,10 @@
       "informasjon" : "Masse informasjon her",
       "pensumlitteratur" : "Informatics for dummies and retards",
       "anbefaltLitteratur" : "Kompendium IT",
-      "tips" : "Ikke kok. Spis gr�nnsaker",
+      "tips" : "Ikke kok. Spis grønnsaker",
       "eksamensdato" : "05/12/2020",
       "vurderingsform" : "Muntlig eksamen",
-      "hjelpemidler" : "Mamma p� telefon",
+      "hjelpemidler" : "Mamma på telefon",
       "vurderinger" : [ "3", "5", "9", "8" ],
       "diskusjon" : {
         "prevAssignedID" : "-1",

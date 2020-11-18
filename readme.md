@@ -4,11 +4,11 @@
 
 
 ## Project structure
-The project is seperated into two modules:
+The project is seperated into five modules:
 * Application logic is under *studit/core/..*  
 * GUI implementations is under *studit/fxui/..*
 * The RESTApi is under *studit/fxui/restapi/..*
-* Server (Grizzly) source code is under *studit/restserver/..*
+* Server (Grizzly) server code is under *studit/restserver/..*
 * Servlet (Jersey) is under *studit/servlet/..*
 ---
 Main code for each module is found under *src/main/..*  
@@ -21,13 +21,15 @@ The project uses maven for building and running.
 
 * To build the project without testes run: `mvn install -Dmaven.test.skip=true` in the root folder
 
-* To run the project, you have to use the fxmui-module and therefore run `mvn install`
-
 * To run the server, you have to run: `mvn jetty:run -f servlet/pom.xml`
+
+* To run the project: First you need to install the project `mvn install`, then run the server, and finally run `mvn javafx:run -f fxui/pom.xml`
 
 * For unit testing and code coverage, run `mvn test`  
 
-To login once the application is started, enter *user* as username and *password* as password
+To login once the application is started, enter *user* as username and *password* as password, or create a new user.
+
+If you are curious about how to use the chatbot, check the documentation found in studit/core/chatbot
 
 Code coverage is found under *target/site/jacoco*
 

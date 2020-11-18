@@ -66,8 +66,9 @@ public class DiscussionControllerTest extends ApplicationTest {
 
   // @Test
   // public void testClickOnMainPage() {
-  //   clickOn("#mainPage_btn");
-  //   FxAssert.verifyThat(window("App"), WindowMatchers.isShowing());
+  // discussionController.setStuditModelAccess(this.direct);
+  // clickOn("#mainpage_btn");
+  // FxAssert.verifyThat(window("StudIt"), WindowMatchers.isShowing());
   // }
 
   @Test
@@ -108,9 +109,9 @@ public class DiscussionControllerTest extends ApplicationTest {
 
     // Checks if the user is the same as the author of the recent comments
     assertTrue((discussionController.getForumList().getItems().get(0).getBrukernavn())
-        .equals(discussionController.getCurrentUser().getUsername()));
+        .equals(discussionController.getCurrentUser().getName()));
     assertTrue((discussionController.getForumList().getItems().get(1).getBrukernavn())
-        .equals(discussionController.getCurrentUser().getUsername()));
+        .equals(discussionController.getCurrentUser().getName()));
 
     // Click on upVote
     ListView<Comment> listView = lookup("#forumList").query();

@@ -26,6 +26,13 @@ import studit.ui.remote.RemoteStuditModelAccess;
 
 public class DiscussionController implements Initializable {
 
+  private static Boolean testingMode = false;
+
+  private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
+
+  // The currentUser is set via courseController
+  private User currentUser;
+
   @FXML
   private BorderPane rootPane;
 
@@ -42,7 +49,7 @@ public class DiscussionController implements Initializable {
   private Label fagnavn;
 
   @FXML
-  private Button mainPage_btn;
+  private Button mainpage_btn;
 
   @FXML
   private Button chatbot_btn;
@@ -58,11 +65,6 @@ public class DiscussionController implements Initializable {
 
   @FXML
   private ListView<Comment> forumList;
-
-  private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
-
-  // The currentUser is set via courseController
-  private User currentUser;
 
   private ObservableList<Comment> listView = FXCollections.observableArrayList();
 
@@ -81,7 +83,7 @@ public class DiscussionController implements Initializable {
 
     String input = newPostInputField.getText();
     try {
-      remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), this.currentUser.getUsername(),
+      remoteStuditModelAccess.addCommentToDiscussion(this.courseItem.getFagkode(), this.currentUser.getName(),
           input);
       updateView();
       newPostInputField.clear();
@@ -137,7 +139,7 @@ public class DiscussionController implements Initializable {
    * Opens main-page scene and closes the current scene.
    */
   @FXML
-  void handleMainPageAction(ActionEvent actionEvent) {
+  void handleMainPageAction(ActionEvent event) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
       Parent root = loader.load();
@@ -293,6 +295,18 @@ public class DiscussionController implements Initializable {
 
   public User getCurrentUser() {
     return this.currentUser;
+  }
+
+   public static void setTestingMode(Boolean bol) {
+    if (bol) {
+      testingMode = true;
+    } else {
+      testingMode = false;
+    }
+  }
+
+  public static Boolean getTestingMode() {
+    return testingMode;
   }
 
 }

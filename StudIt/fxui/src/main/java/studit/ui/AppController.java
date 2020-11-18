@@ -19,8 +19,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import studit.core.mainpage.CourseItem;
@@ -84,13 +84,14 @@ public class AppController {
   public static void newChatbot() {
     chatbot = new Chatbot();
   }
-  
+
   public static void newChatbot(boolean directAccess) throws ApiCallException {
     chatbot = directAccess ? new Chatbot(true) : new Chatbot();
   }
 
   /**
    * For testing purposes only. Changes the remote.
+   * 
    * @param remote - The new remote to be set
    */
   public void setRemote(RemoteStuditModelAccess remote) {
@@ -121,10 +122,10 @@ public class AppController {
    * @throws ApiCallException If connection to server could not be established.
    */
   public void initialize() throws ApiCallException {
-    if (LoginController.getTestingMode()) {
+
+    //This check is only used for testing purposes in order to set the RemoteStuditModel to DirectStuditModelAccess
+    if (LoginController.getTestingMode() || DiscussionController.getTestingMode()) {
       setRemote(new DirectStuditModelAccess());
-    } else {
-      System.out.println("Using old remote :( \n");
     }
     loadData();
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -160,23 +161,7 @@ public class AppController {
     filteredList.setAll(sortedData);
     this.coursesList.setItems(filteredList);
 
-    coursesList.setCellFactory(param -> new ListCell<CourseItem>() {
-
-      @Override
-      public void updateItem(CourseItem item, boolean empty) {
-        super.updateItem(item, empty);
-        if (empty) {
-          setText(null);
-          setGraphic(null);
-          return;
-        }
-
-        setText(item.getFagkode() + " " + item.getFagnavn());
-        setGraphic(null);
-      }
-    });
   }
-
 
   /**
    * Function to search for subjects. The listview will then only show subjects
@@ -188,7 +173,6 @@ public class AppController {
     this.coursesList.setItems(filteredList);
   }
 
-  
   /**
    * Opens chatbot.
    */
@@ -239,7 +223,7 @@ public class AppController {
       // private String label;
       @Override
       public void handle(MouseEvent arg0) {
-        
+
         try {
          
           // getting loader and a pane for the course scene.

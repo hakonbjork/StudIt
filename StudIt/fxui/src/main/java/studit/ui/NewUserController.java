@@ -23,8 +23,6 @@ public class NewUserController {
   public void initialize() {
     if (LoginController.getTestingMode()) {
       setRemote(new DirectStuditModelAccess());
-    } else {
-      System.out.println("Using old remote :( \n");
     }
   }
 
@@ -68,10 +66,6 @@ public class NewUserController {
     String password = userPasswordField.getText();
     String[] feedback = remote.addUser(name, username, mail, password);
 
-    // Løkken under er bare for testing, kan tas bort i ferdig implementasjon
-    for (int i = 0; i < feedback.length; i++) {
-      System.out.println("i: " + i + ", message \"" + feedback[i] + "\"");
-    }
     if (feedback[1] != null) {
       infoTextField.setText(feedback[1]);
       return;
