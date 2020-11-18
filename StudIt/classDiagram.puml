@@ -119,8 +119,8 @@ User <-- LoginController: has <
 User <-- DiscussionController: has <
 
 LoginController .. AppController
-LoginController .. CourseController
-LoginController .. DiscussionController
+LoginController <.. CourseController
+LoginController <.. DiscussionController
 
 
 AppController --> Chatbot: opens >
@@ -139,5 +139,4 @@ DiscussionController .. CourseController
 DiscussionController o-- "1" CourseItem: has >
 Discussion *-- "*" Comment: has >
 CourseController o-- "1" CourseItem: has >
-
 @enduml
