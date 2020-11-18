@@ -40,7 +40,8 @@ public class AppController {
    */
   private User currentUser = null;
 
-  @FXML BorderPane rootPane;
+  @FXML 
+  BorderPane rootPane;
 
   @FXML
   private TextField searchField;
@@ -132,6 +133,10 @@ public class AppController {
     initializeSearch();
   }
 
+
+  /**
+   * Function to initialize the search function.
+   */
   public void initializeSearch() {
     // Set the filter Predicate whenever the filter changes.
     searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -139,7 +144,6 @@ public class AppController {
       this.filteredData.setPredicate(courseItem -> {
         // If filter text is empty, display all courses
         if (newValue == null || newValue.isEmpty()) {
-          System.out.println("textfield is empty");
           return true;
         }
         // Compare course name and course code of every CourseItem with the filter text
@@ -147,12 +151,8 @@ public class AppController {
 
         if ((courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter))
             || (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter))) {
-
-          System.out.println("textfield changed from " + oldValue + " to " + newValue);
           return true; // filter matches course name or course code
         }
-
-        System.out.println("no match");
         return false; // Does not match
       });
     });
@@ -178,7 +178,7 @@ public class AppController {
   }
 
 
-/**
+  /**
    * Function to search for subjects. The listview will then only show subjects
    * with the letters in the search field.
    */
@@ -242,13 +242,10 @@ public class AppController {
         
         try {
          
-          // getting loader and a pane for the second scene.
+          // getting loader and a pane for the course scene.
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
           Parent coursePane = courseLoader.load();
-          // injecting first scene into the controller of the second scene
           CourseController courseController = (CourseController) courseLoader.getController();
-          // courseController.setMainScene(mainScene);
-          // injecting second scene into the controller of the first scene
           CourseItem courseItem = coursesList.getSelectionModel().getSelectedItem();
           courseController.setCourseItem(courseItem);
           courseController.setCurrentUser(currentUser);

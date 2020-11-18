@@ -20,9 +20,8 @@ import studit.core.users.User;
 
 public class CourseController implements Initializable {
 
-  private User currentUser;
-
-  @FXML BorderPane rootPane;
+  @FXML 
+  BorderPane rootPane;
 
   @FXML
   private Button information_btn;
@@ -73,6 +72,8 @@ public class CourseController implements Initializable {
   private Button addCommentAction;
 
   private CourseItem courseItem;
+
+  private User currentUser;
 
   public void setCourseItem(CourseItem courseItem) {
     this.courseItem = courseItem;
@@ -189,6 +190,11 @@ public class CourseController implements Initializable {
     this.courseInformation.setText(information.toString());
   }
 
+
+  /**
+   * Function that opens the Discussion scene
+   * @param event triggered when the user clicks on a course in the ListView
+   */
   @FXML
   void openDiscussion(ActionEvent event) {
 
@@ -202,8 +208,6 @@ public class CourseController implements Initializable {
         if (this.courseItem != null) {
           discussionController.addCourse(this.courseItem);
           discussionController.setCurrentUser(this.currentUser);
-      
-          System.out.println("addet courseItem");
           discussionController.updateView();
         }
 
@@ -226,12 +230,9 @@ public class CourseController implements Initializable {
     }
   }
 
-  // TODO funker ikke :()
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-
-  }
-
+  /**
+   * Function that updates the information about the course 
+   */
   public void updateView() {
     if (this.courseItem != null) {
       this.fagnavn.setText(courseItem.getFagnavn());
@@ -246,6 +247,10 @@ public class CourseController implements Initializable {
     }
   }
 
+  /**
+   * Function that sets the current user.
+   * @param user the user to be set
+   */
   public void setCurrentUser(User user) {
     this.currentUser = user;
   }
@@ -278,5 +283,10 @@ public class CourseController implements Initializable {
   }
   public User getCurrentUser(){
     return this.currentUser;
+  }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+
   }
 }
