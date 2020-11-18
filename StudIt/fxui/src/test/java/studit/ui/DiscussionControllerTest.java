@@ -64,23 +64,11 @@ public class DiscussionControllerTest extends ApplicationTest {
     assertEquals(berte, discussionController.getCurrentUser());
   }
 
-  // @Test
-  // public void testClickOnMainPage() {
-  // discussionController.setStuditModelAccess(this.direct);
-  // clickOn("#mainpage_btn");
-  // FxAssert.verifyThat(window("StudIt"), WindowMatchers.isShowing());
-  // }
-
   @Test
   public void testLogoutAction() {
     clickOn("#logout_btn");
     FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
   }
-
-  // @Test
-  // public void testOpenChatBot() {
-  //   clickOn("#chatbot_btn");
-  // }
 
   @Test
   public void testComments() throws ApiCallException {
