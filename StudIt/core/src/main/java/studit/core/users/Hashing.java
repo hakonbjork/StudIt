@@ -48,15 +48,15 @@ public class Hashing {
    */
   public static String[] hashPassword(String password) {
     if (password.length() < 8 || password.length() > 32) {
-      return new String[] { null, "Password must be between 8 and 32 characters" };
+      return new String[] { null, "Passordet må være mellom 8 og 32 tegn" };
     }
     if (password.contains(" ")) {
-      return new String[] { null, "Password cannot contain spaces" };
+      return new String[] { null, "Passordet kan ikke inneholde mellomrom" };
     }
     String charCheck = password
         .replaceAll("[a-zA-ZÆØÅ0-9\\.\\!\\@\\£\\#\\$\\¤\\€\\%\\&\\/\\(\\)\\=\\?\\+\\[\\]\\{\\}\\_\\-\\.\\,]", "");
     if (!charCheck.equals("")) {
-      return new String[] { null, "Your password contains the following illegal chars: '" + charCheck + "'" };
+      return new String[] { null, "Passordet har de følgende ulovlige tegnene: '" + charCheck + "'" };
     }
 
     return new String[] { sha256(password + salt), null };

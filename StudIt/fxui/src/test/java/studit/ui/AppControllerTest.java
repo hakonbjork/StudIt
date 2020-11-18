@@ -47,6 +47,7 @@ public class AppControllerTest extends ApplicationTest {
     assertEquals(string, appController.getLabel());
   }
 
+  // @SuppressWarnings("unchecked")
   @Test
   public void testSearchField() {
     clickOn("#searchField").write("");
@@ -72,5 +73,4 @@ public class AppControllerTest extends ApplicationTest {
     Button button = from(rootNode).lookup("Logg ut").query();
     assertEquals("Logg ut", button.getText());
   }
-
 }

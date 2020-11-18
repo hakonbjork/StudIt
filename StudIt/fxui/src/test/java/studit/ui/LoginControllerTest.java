@@ -79,18 +79,30 @@ public class LoginControllerTest extends ApplicationTest {
     assertFalse(LoginController.getTestingMode());
   }
 
-  //This test contributes to newUserController
-  @Test
-  public void testWindowCloses() {
-    LoginController.setTestingMode(true);
-    clickOn("#registerUser_btn");
-    clickOn("#nameField").write("Ola Halvorsen");
-    clickOn("#usernameField").write("olahalla");
-    clickOn("#mailField").write("ola.halvorsen@gmail.com");
-    clickOn("#userPasswordField").write("olalalala");
-    clickOn("#saveNewUserButton");
-    FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
-  }
+  // //This test contributes to newUserController
+  // @Test
+  // public void testWindowCloses() {
+  //   LoginController.setTestingMode(true);
+  //   clickOn("#registerUser_btn");
+  //   clickOn("#nameField").write("Ola Halvorsen");
+  //   clickOn("#usernameField").write("olahalla");
+  //   clickOn("#mailField").write("ola.halvorsen@gmail.com");
+  //   clickOn("#userPasswordField").write("olalalala");
+  //   clickOn("#saveNewUserButton");
+  //   FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
+  // }
+
+  // @Test
+  // public void testTheBigThing() {
+  //   loginController.setRemote(this.remote);
+  //   LoginController.setTestingMode(true);
+  //   writeUserPassword();
+  //   clickOn("#login_btn");
+  //   clickOn("#coursesList");
+  //   clickOn("#discussion_btn");
+  //   clickOn("#logoutAction");
+  //   FxAssert.verifyThat(window("App"), WindowMatchers.isShowing());
+  // }
 
   public void writeUserPassword() {
     String u = "Berte92";

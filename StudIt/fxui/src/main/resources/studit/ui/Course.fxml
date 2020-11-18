@@ -151,7 +151,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Text>
-            <Button id="discussion_btn" fx:id="discussion_btn" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" mnemonicParsing="false" onAction="#openDiscussion" prefHeight="37.0" prefWidth="119.0" style="-fx-background-color: #90CDF4;" text="Diskusjon" textAlignment="CENTER" textFill="#242424ed" VBox.vgrow="ALWAYS">
+            <Button id="discussion_btn" fx:id="discussion_btn" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" mnemonicParsing="false" onAction="#openDiscussion" prefHeight="37.0" prefWidth="119.0" text="Diskusjon" textAlignment="CENTER" textFill="#242424ed" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Avenir Next Bold" size="18.0" />
                </font>

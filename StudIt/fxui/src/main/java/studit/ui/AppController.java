@@ -40,7 +40,7 @@ public class AppController {
    */
   private User currentUser = null;
 
-  @FXML
+  @FXML 
   BorderPane rootPane;
 
   @FXML
@@ -122,16 +122,22 @@ public class AppController {
    * @throws ApiCallException If connection to server could not be established.
    */
   public void initialize() throws ApiCallException {
-    if (LoginController.getTestingMode()) {
+
+    //This check is only used for testing purposes in order to set the RemoteStuditModel to DirectStuditModelAccess
+    if (LoginController.getTestingMode() || DiscussionController.getTestingMode()) {
       setRemote(new DirectStuditModelAccess());
     }
     loadData();
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     // Actions on clicked list item
-    mouseClicked();
+    clickOnCourse();
     initializeSearch();
   }
 
+
+  /**
+   * Function to initialize the search function.
+   */
   public void initializeSearch() {
     // Set the filter Predicate whenever the filter changes.
     searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -146,7 +152,6 @@ public class AppController {
 
         if ((courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter))
             || (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter))) {
-
           return true; // filter matches course name or course code
         }
         return false; // Does not match
@@ -212,7 +217,7 @@ public class AppController {
   /**
    * A function that does something when an element in the listview is clicked on.
    */
-  public void mouseClicked() {
+  public void clickOnCourse() {
     // Detecting mouse clicked
     coursesList.setOnMouseClicked(new EventHandler<MouseEvent>() {
       // private String label;
@@ -220,14 +225,11 @@ public class AppController {
       public void handle(MouseEvent arg0) {
 
         try {
-
-          // getting loader and a pane for the second scene.
+         
+          // getting loader and a pane for the course scene.
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
           Parent coursePane = courseLoader.load();
-          // injecting first scene into the controller of the second scene
           CourseController courseController = (CourseController) courseLoader.getController();
-          // courseController.setMainScene(mainScene);
-          // injecting second scene into the controller of the first scene
           CourseItem courseItem = coursesList.getSelectionModel().getSelectedItem();
           courseController.setCourseItem(courseItem);
           courseController.setCurrentUser(currentUser);
@@ -237,7 +239,7 @@ public class AppController {
           Scene courseScene = new Scene(coursePane);
 
           primaryStage.setScene(courseScene);
-          primaryStage.setTitle("StudIt");
+          primaryStage.setTitle("Course");
           primaryStage.show();
 
         } catch (Exception e) {
@@ -247,18 +249,9 @@ public class AppController {
     });
   }
 
-  private CourseItem findCourseItem(String name) {
-    for (CourseItem courseItem : this.courseList) {
-      if (courseItem.getFagnavn().equals(name)) {
-        return courseItem;
-      }
-    }
-    return null;
-  }
 
   /**
-   * This function should actually fetch data from a database. This will be
-   * implemented later.
+   * Function that loads the courses from the server
    *
    * @throws ApiCallException If connection to server could not be established.
    */
