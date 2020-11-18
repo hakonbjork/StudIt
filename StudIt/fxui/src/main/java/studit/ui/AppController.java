@@ -275,8 +275,7 @@ public class AppController {
   }
 
   /**
-   * This function should actually fetch data from a database. This will be
-   * implemented later.
+   * Function that loads the courses from the server
    *
    * @throws ApiCallException If connection to server could not be established.
    */

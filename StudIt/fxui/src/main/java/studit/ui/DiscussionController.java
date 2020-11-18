@@ -74,7 +74,7 @@ public class DiscussionController implements Initializable {
   }
 
   /**
-   * Method which handles when user adds a a new post.
+   * Method that handles when user adds a a new post.
    */
   @FXML
   public void addNewPost(ActionEvent event) {
@@ -112,7 +112,7 @@ public class DiscussionController implements Initializable {
   }
 
   /**
-   * logs user out, and goes to login scene closes the current window.
+   * logs user out, goes to the login scene and closes the current window.
    */
   @FXML
   void handleLogoutAction(ActionEvent event) {
