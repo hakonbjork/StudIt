@@ -20,10 +20,15 @@ public class KeywordLinker {
   private Map<String, Integer> precedences;
   private Map<String, String> dataMatches;
 
+  /**
+   * Initialize a new KeywordLinker instance to prepare for future command
+   * macthing.
+   * 
+   * @param links List of known KeywordLinks.
+   */
   public KeywordLinker(List<KeywordLink> links) {
     this.links = links;
     extractKeywords();
-
   }
 
   /**
@@ -37,6 +42,7 @@ public class KeywordLinker {
 
     Set<String> uniqueWords = new HashSet<>();
 
+    // Populate the set of unique words, along with the precedences and dataMatches.
     for (KeywordLink link : links) {
       uniqueWords.addAll(link.getWords());
       precedences.put(link.getCommand(), link.getPrecedence());
@@ -45,11 +51,13 @@ public class KeywordLinker {
 
     int id = 0;
 
+    // Assign a unique ID to all known words.
     for (String word : uniqueWords) {
       recognizedWords.put(id, word);
       id += 1;
     }
 
+    // Assign the unique word ID's to the commandIDs HashMap.
     for (KeywordLink link : links) {
       commandIDs.put(link.getCommand(), getKeywordArrayList(link.getKeywords()));
     }
@@ -57,7 +65,7 @@ public class KeywordLinker {
   }
 
   /**
-   * Create a list of Keyword-arrays that contain word IDS and their respective
+   * Create a list of Keyword-arrays that contain word IDs and their respective
    * match.
    * 
    * @param keywordLinks list of links obtained from the KeywordLink class
@@ -67,27 +75,39 @@ public class KeywordLinker {
 
     List<Keyword[]> keywordArrayList = new ArrayList<>();
 
+    // Iterate over all keyword links.
     for (Map<String, Float> link : keywordLinks) {
       Keyword[] keywords = new Keyword[link.size()];
 
       int i = 0;
-      for (Map.Entry<String, Float> entry : link.entrySet()) {
 
+      // Populate the keywordArrayList with new Keyword instances based on words and
+      // their respective weight
+      for (Map.Entry<String, Float> entry : link.entrySet()) {
         keywords[i] = new Keyword(entry.getKey(), entry.getValue());
         i += 1;
       }
-
       keywordArrayList.add(keywords);
-
     }
 
     return keywordArrayList;
   }
 
+  /**
+   * Get the HashMap of recognized words, where the keys are the ID's and the
+   * values are the corresponding words.
+   * 
+   * @return HashMap of recognized words.
+   */
   public Map<Integer, String> getRecognizedWords() {
     return recognizedWords;
   }
 
+  /**
+   * Get a list of the recognized words.
+   * 
+   * @return a list of recognized words.
+   */
   public List<String> getRecognizedWordsList() {
     return new ArrayList<String>(recognizedWords.values());
   }
@@ -104,16 +124,21 @@ public class KeywordLinker {
     float matchPct = 0.0f;
     int lastLen = 100;
 
+    // Iterate over the recognized words.
     for (Map.Entry<Integer, String> entry : recognizedWords.entrySet()) {
 
+      // Create a new stringbuffer for our potential word match.
       StringBuffer wordToCheck = new StringBuffer(entry.getValue());
       int differences = 0;
       int complements = 0;
 
+      // Iterate over all chars in the word we match against.
       for (int i = 0; i < word.length(); i++) {
         char c = word.charAt(i);
-
         int matchIdx = wordToCheck.indexOf(String.valueOf(c));
+
+        // If both words contain the same char, increment the complements and delete the
+        // char from the wordToCheck stringbuffer.
         if (matchIdx >= 0) {
           complements++;
           wordToCheck.deleteCharAt(matchIdx);
@@ -122,9 +147,13 @@ public class KeywordLinker {
         }
       }
 
+      // Calculate match percentage based on the matching chars along with word length
+      // difference.
       float pct = complements / (float) (complements + differences);
       pct *= (word.length() - Math.abs(entry.getValue().length() - word.length())) / (float) word.length();
 
+      // If the match is above 0.65 and better than the last one, update the ID,
+      // percentage, and lastLen.
       if (pct >= 0.65f && pct >= matchPct && wordToCheck.length() <= lastLen) {
         matchID = entry.getKey();
         matchPct = pct;
@@ -147,19 +176,24 @@ public class KeywordLinker {
 
     Integer[] matchIDs = new Integer[words.length];
 
+    // Find all the unique word ids of the words to match.
     for (int i = 0; i < words.length; i++) {
       matchIDs[i] = getKeywordID(words[i]);
     }
 
     List<Match> matches = new ArrayList<>();
 
+    // Iterate over all commandIDs
     for (Map.Entry<String, List<Keyword[]>> entry : commandIDs.entrySet()) {
 
       float[] matchWeights = new float[entry.getValue().size()];
       int idx = 0;
 
+      // Iterate over all the keyword[] of the spesific command we want to check
       for (Keyword[] keywords : entry.getValue()) {
         for (Keyword keyword : keywords) {
+          // If there is a word match, update the matchWeights with the weight of the
+          // words.
           if (contains(matchIDs, keyword.ID)) {
             matchWeights[idx] += keyword.weight;
           }
@@ -167,10 +201,14 @@ public class KeywordLinker {
         idx++;
       }
 
+      // Add a new Match object to the list, containing information on matcPct,
+      // precedence and command key.
       matches.add(new Match(entry.getKey(), Floats.max(matchWeights), precedences.get(entry.getKey()),
           dataMatches.get(entry.getKey()) == null ? "" : dataMatches.get(entry.getKey())));
     }
 
+    // Sort the matches, first by precedence, then by match pct. Precedences are
+    // sorted in ascending order, matchh percentages are sorted in descending order.
     matches.sort((left, right) -> {
       if (left.precedence > right.precedence) {
         return 1;
@@ -189,6 +227,13 @@ public class KeywordLinker {
     public int ID;
     public float weight;
 
+    /**
+     * Intialize a new Keyword instance.
+     * 
+     * @param word   the keyword.
+     * @param weight the weight the keyword is carrying. (A measure of how important
+     *               the word is in a match.)
+     */
     public Keyword(String word, float weight) {
       ID = recognizedWords.inverse().get(word);
       this.weight = weight;

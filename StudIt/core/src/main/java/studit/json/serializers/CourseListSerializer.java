@@ -9,8 +9,6 @@ import studit.core.mainpage.CourseList;
 
 public class CourseListSerializer extends JsonSerializer<CourseList> {
 
-  // TODO: remove this class (deprecated)
-
   /*
    * format: { "items": [ ... ] }
    */

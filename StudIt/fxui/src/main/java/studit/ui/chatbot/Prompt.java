@@ -17,12 +17,23 @@ public class Prompt {
   private ResponseManager responseManager;
   private ChatbotController chatbotController;
 
+  /**
+   * Create a new prompt instance to display a set of options to the user.
+   * 
+   * @param prompts           list of prompts.
+   * @param args1             arguments to be passed to the first function.
+   * @param args2             arguments to be passed to the second function.
+   * @param text              TextFlow instance of the prompt.
+   * @param listChat          ListView instance.
+   * @param message           Message instance related to the prompt.
+   * @param chatbotController active chatbotcontroller instance.
+   */
   public Prompt(List<String[]> prompts, List<Object> args1, List<Object> args2, TextFlow text,
       ListView<Message> listChat, Message message, ChatbotController chatbotController) {
 
     this.commands = new ArrayList<>();
     this.listChat = listChat;
-    this.responseManager = chatbotController.promptManager;
+    this.responseManager = chatbotController.responseManager;
     this.chatbotController = chatbotController;
 
     boolean first = false;
@@ -33,11 +44,13 @@ public class Prompt {
       // clicks
       if (!message.isClicked()) {
         if (!first) {
+          // Set the action of the first prompt option
           command.setOnAction(e -> {
             handleHyperlinkClick(prompt[1], args1);
             message.click();
           });
         } else {
+          // Set the action of the second prompt option
           command.setOnAction(e -> {
             handleHyperlinkClick(prompt[1], args2);
             message.click();
@@ -60,31 +73,26 @@ public class Prompt {
    * @param option user selected option
    */
   private void handleHyperlinkClick(String option, List<Object> args) {
+    
+    // Asign proper funcKey and create a new ActionRequest.
 
     ActionRequest action = responseManager.handlePrompt(option);
-
     action.setArguments(args);
     String result = action.getChatbotResponse();
 
+    // If we already have a response to display before executing the function, print it.
     if (!result.isEmpty()) {
       listChat.getItems().add(new Message(result, "chatbot"));
     }
 
+    // Get a new Func instance from the Commands instance based on the funcKey.
     Func func = chatbotController.commands.getCommands().get(action.getFuncKey());
 
-    if (func != null) {
-      try {
-        func.execute(action.getArguments());
-      } catch (ClassCastException e) {
-        e.printStackTrace();
-        System.out.println(
-            "^ Error occured casting function arguments from '" + action.getFuncKey() + "'. Update code immediately");
-      }
-    }
+    // Execute the function with the proper arguments. See studit/ui/Commands for more info.
+    func.execute(action.getArguments());
 
     // Make sure all commands are disabled if the ListView is not updated (does not
-    // perform isClicked
-    // check)
+    // perform isClicked check)
     for (Hyperlink command : commands) {
       command.setOnAction(null);
     }

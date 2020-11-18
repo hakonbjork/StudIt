@@ -8,6 +8,12 @@ public class CommandManager {
 
   }
 
+  /**
+   * Set the appropriate response by the specified match.
+   * 
+   * @param match    command key found in keywordlinks.json
+   * @param response current response object we wish to further build on.
+   */
   public void executeCommand(String match, Response response) {
     String addition = "";
 
@@ -38,7 +44,7 @@ public class CommandManager {
         addition = "Det var leit å høre... Hva kan jeg hjelpe deg med?";
         break;
       case "takk":
-        addition = "Bare hyggelig :)";
+        addition = "Bare hyggelig :) ";
         break;
       default:
         addition = "";
@@ -48,9 +54,15 @@ public class CommandManager {
     response.add(addition);
   }
 
+  /**
+   * Print to the user some examples of what the chatboc can do.
+   * 
+   * @return String to print to the user.
+   */
   private String getHelpInfo() {
     StringBuffer buffer = new StringBuffer();
-    buffer.append("Jeg er ganske fleksibel, og du trenger ikke å tenke på skrivefeil eller tegnsetting. Her er noen eksempler på spørsmål du kan stille: %S ");
+    buffer.append(
+        "Jeg er ganske fleksibel, og du trenger ikke å tenke på skrivefeil eller tegnsetting. Her er noen eksempler på spørsmål du kan stille: %S ");
     buffer.append("Kan du fortelle meg litt om Statistikk? %S ");
     buffer.append("Blir det hjemmeksamen i TMA4140? %S ");
     buffer.append("I Diskret Matematikk, hvilke bøker anbefaler du? %S ");
@@ -59,7 +71,6 @@ public class CommandManager {
     buffer.append("Jeg vil avslutte samtalen. %S ");
     buffer.append("Kan jeg se fagoversikten? %S ");
     buffer.append("Hvilke hjelpemidler er tillat på eksamen i Mekanikk 1? %S ");
-
 
     return buffer.toString();
   }

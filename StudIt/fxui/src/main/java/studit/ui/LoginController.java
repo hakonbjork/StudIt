@@ -41,6 +41,14 @@ public class LoginController {
   private User currentUser;
   private static Boolean testingMode = false;
 
+  /**
+   * Sets the boolean testingMode to true or false. If true, AppController will
+   * launch with DirectStuditAccessModel instead of RemoteStuditAccessModel,
+   * making proper testing possible.
+   * 
+   * @param bol - The boolean to be set. True makes testingMode true and false
+   *            makes testingMode false.
+   */
   public static void setTestingMode(Boolean bol) {
     if (bol) {
       testingMode = true;
@@ -49,6 +57,12 @@ public class LoginController {
     }
   }
 
+  /**
+   * Gets the testing mode. Can be used by other controllers to decide which
+   * remote they should use.
+   * 
+   * @return - True if testingMode is true, else false.
+   */
   public static Boolean getTestingMode() {
     return testingMode;
   }
@@ -101,7 +115,6 @@ public class LoginController {
             loginButtonAction();
           } catch (Exception e) {
             System.out.println("Error occured while logging in");
-            e.printStackTrace();
           }
         }
       }
@@ -129,6 +142,13 @@ public class LoginController {
     String username = usernameField.getText();
     String password = passwordField.getText();
 
+    // Check if connection to server is present
+    Boolean connectedToServer = remote.ping();
+    if (!connectedToServer) {
+      loginInfoText.setText("Feil: Ingen tilkobling til server");
+      return;
+    }
+
     // Check if username and password is correct
     if (remote.authenticateLogin(username, password)) {
       loginInfoText.setText("");
@@ -140,6 +160,7 @@ public class LoginController {
       AppController appController = (AppController) loader.getController();
       appController.setCurrentUser(this.currentUser);
 
+      //Sets the new stage
       Scene scene = new Scene(root);
       Stage stage = new Stage();
       stage.setScene(scene);
@@ -150,7 +171,6 @@ public class LoginController {
       Stage stage2 = (Stage) passwordField.getScene().getWindow();
       stage2.hide();
     } else {
-      System.out.print("Failure, " + username + ", " + password + " ");
       loginInfoText.setText("Feil brukernavn eller passord");
     }
   }

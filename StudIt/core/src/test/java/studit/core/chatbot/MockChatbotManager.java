@@ -20,7 +20,7 @@ public class MockChatbotManager {
           new StuditPersistence().readStuditModel(reader).getCourseList().getCourseNameList());
       return chatbotManager;
     } catch (IOException e) {
-      System.out.println("Couldn't read default studitModel");
+      //System.out.println("Couldn't read default studitModel");
     }
     return null;
   }

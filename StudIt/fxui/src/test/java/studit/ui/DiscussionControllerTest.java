@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import studit.core.mainpage.CourseItem;
+import studit.core.users.User;
 import studit.core.mainpage.Comment;
 import studit.ui.remote.ApiCallException;
 import studit.ui.remote.DirectStuditModelAccess;
@@ -55,25 +56,19 @@ public class DiscussionControllerTest extends ApplicationTest {
     clickOn("#information_btn");
     FxAssert.verifyThat(window("Course"), WindowMatchers.isShowing());
   }
-
-  // @Test
-  // public void testClickOnMainPage() {
-  // discussionController.setStuditModelAccess(this.direct);
-  // clickOn("#mainPage_btn");
-  // FxAssert.verifyThat(window("App"), WindowMatchers.isShowing());
-  // }
+  
+  @Test
+  public void testSetCurrentUser() throws ApiCallException {
+    User berte = direct.getUserByUsername("Berte92");
+    discussionController.setCurrentUser(berte);
+    assertEquals(berte, discussionController.getCurrentUser());
+  }
 
   @Test
   public void testLogoutAction() {
     clickOn("#logout_btn");
     FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
   }
-
-  // @Test
-  // public void testOpenChatBot() {
-  // clickOn("#chatbot_btn");
-  // FxAssert.verifyThat(window("Chatbot"), WindowMatchers.isShowing());
-  // }
 
   @Test
   public void testComments() throws ApiCallException {

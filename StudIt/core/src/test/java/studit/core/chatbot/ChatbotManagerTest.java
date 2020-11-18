@@ -27,7 +27,7 @@ public class ChatbotManagerTest {
     try (Reader reader = new FileReader("../res/db/studitModel.json", StandardCharsets.UTF_8)) {
       defaultModel = new StuditPersistence().readStuditModel(reader);
     } catch (IOException e) {
-      System.out.println("Couldn't read default studitModel");
+      //System.out.println("Couldn't read default studitModel");
     }
 
     chatbotManager = new ChatbotManager(defaultModel.getCourseList().getCourseNameList());
@@ -83,5 +83,5 @@ public class ChatbotManagerTest {
   private String politeResponse = "Det går bra, takk, hvordan går det med deg?";
   private String declineResponse = "Neivel. ";
   private String sadResponse = "Det var leit å høre... Hva kan jeg hjelpe deg med?";
-  private String welcomeResponse = "Bare hyggelig :)";
+  private String welcomeResponse = "Bare hyggelig :) ";
 }

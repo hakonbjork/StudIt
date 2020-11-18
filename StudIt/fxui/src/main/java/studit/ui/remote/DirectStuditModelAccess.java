@@ -86,7 +86,6 @@ public class DirectStuditModelAccess extends RemoteStuditModelAccess {
   @Override
   public String[] changeUsername(int id, String newUsername) throws ApiCallException {
     String result = studitModel.getUsers().changeUsername(id, newUsername);
-    System.out.println(result);
     return new String[] { result == null ? null : "-1", result == null ? "Success" : result };
   }
 

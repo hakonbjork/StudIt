@@ -2,7 +2,6 @@ package studit.ui;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -33,14 +32,14 @@ import studit.ui.remote.RemoteStuditModelAccess;
 
 public class AppController {
 
-  private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
+  private static RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
   /*
    * The user that is currently logged in.
    */
   private User currentUser = null;
 
-  @FXML
+  @FXML 
   BorderPane rootPane;
 
   @FXML
@@ -58,8 +57,6 @@ public class AppController {
   private static Chatbot chatbot = null;
 
   private ObservableList<CourseItem> list = FXCollections.observableArrayList();
-
-  private List<CourseItem> courseList;
 
   private FilteredList<CourseItem> filteredData = new FilteredList<>(this.getData(), (p -> true));
 
@@ -82,11 +79,11 @@ public class AppController {
   }
 
   public static void newChatbot() {
-    chatbot = new Chatbot();
+    chatbot = new Chatbot(remoteStuditModelAccess);
   }
 
   public static void newChatbot(boolean directAccess) throws ApiCallException {
-    chatbot = directAccess ? new Chatbot(true) : new Chatbot();
+    chatbot = directAccess ? new Chatbot(true) : new Chatbot(remoteStuditModelAccess);
   }
 
   /**
@@ -94,8 +91,8 @@ public class AppController {
    * 
    * @param remote - The new remote to be set
    */
-  public void setRemote(RemoteStuditModelAccess remote) {
-    this.remoteStuditModelAccess = remote;
+  public static void setRemote(RemoteStuditModelAccess remote) {
+    remoteStuditModelAccess = remote;
   }
 
   /**
@@ -122,16 +119,22 @@ public class AppController {
    * @throws ApiCallException If connection to server could not be established.
    */
   public void initialize() throws ApiCallException {
-    if (LoginController.getTestingMode()) {
+
+    //This check is only used for testing purposes in order to set the RemoteStuditModel to DirectStuditModelAccess
+    if (LoginController.getTestingMode() || DiscussionController.getTestingMode()) {
       setRemote(new DirectStuditModelAccess());
     }
     loadData();
     coursesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     // Actions on clicked list item
-    mouseClicked();
+    clickOnCourse();
     initializeSearch();
   }
 
+
+  /**
+   * Function to initialize the search function.
+   */
   public void initializeSearch() {
     // Set the filter Predicate whenever the filter changes.
     searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -146,7 +149,6 @@ public class AppController {
 
         if ((courseItem.getFagnavn().toLowerCase().contains(lowerCaseFilter))
             || (courseItem.getFagkode().toLowerCase().contains(lowerCaseFilter))) {
-
           return true; // filter matches course name or course code
         }
         return false; // Does not match
@@ -174,7 +176,7 @@ public class AppController {
   @FXML
   void openChatBot(ActionEvent event) {
     if (chatbot == null) {
-      chatbot = new Chatbot();
+      chatbot = new Chatbot(remoteStuditModelAccess);
     } else {
       chatbot.show();
     }
@@ -203,16 +205,15 @@ public class AppController {
 
       Stage stage = (Stage) rootPane.getScene().getWindow();
       stage.hide();
-
     } catch (IOException e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
   }
 
   /**
    * A function that does something when an element in the listview is clicked on.
    */
-  public void mouseClicked() {
+  public void clickOnCourse() {
     // Detecting mouse clicked
     coursesList.setOnMouseClicked(new EventHandler<MouseEvent>() {
       // private String label;
@@ -220,14 +221,11 @@ public class AppController {
       public void handle(MouseEvent arg0) {
 
         try {
-
-          // getting loader and a pane for the second scene.
+         
+          // getting loader and a pane for the course scene.
           FXMLLoader courseLoader = new FXMLLoader(getClass().getResource("Course.fxml"));
           Parent coursePane = courseLoader.load();
-          // injecting first scene into the controller of the second scene
           CourseController courseController = (CourseController) courseLoader.getController();
-          // courseController.setMainScene(mainScene);
-          // injecting second scene into the controller of the first scene
           CourseItem courseItem = coursesList.getSelectionModel().getSelectedItem();
           courseController.setCourseItem(courseItem);
           courseController.setCurrentUser(currentUser);
@@ -237,7 +235,7 @@ public class AppController {
           Scene courseScene = new Scene(coursePane);
 
           primaryStage.setScene(courseScene);
-          primaryStage.setTitle("StudIt");
+          primaryStage.setTitle("Course");
           primaryStage.show();
 
         } catch (Exception e) {
@@ -247,18 +245,9 @@ public class AppController {
     });
   }
 
-  private CourseItem findCourseItem(String name) {
-    for (CourseItem courseItem : this.courseList) {
-      if (courseItem.getFagnavn().equals(name)) {
-        return courseItem;
-      }
-    }
-    return null;
-  }
 
   /**
-   * This function should actually fetch data from a database. This will be
-   * implemented later.
+   * Function that loads the courses from the server.
    *
    * @throws ApiCallException If connection to server could not be established.
    */
@@ -267,7 +256,6 @@ public class AppController {
     CourseList li = remoteStuditModelAccess.getCourseList();
 
     Collection<CourseItem> items = li.getCourseItems();
-    this.courseList = (List<CourseItem>) items;
 
     for (CourseItem c : items) {
       this.list.add(c);

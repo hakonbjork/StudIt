@@ -14,6 +14,16 @@ public class ChatbotManager {
   private CommandManager cmg;
   private DataMatcher dataMatcher;
 
+  /**
+   * Initalize a new instance of the Chatbotmanager. This will perform all core
+   * logic and determine what the respsonse should be to the user, if we want to
+   * execute any further commands in the UI module and if we should present the
+   * user with a prompt.
+   * 
+   * @param courseNameList list containing all the coursenames and fagkodes of the
+   *                       active database. On the form List{[courseName,
+   *                       fagkode], [courseName2, fagkode2]...}
+   */
   public ChatbotManager(List<String[]> courseNameList) {
     writeDefaultCommandsToDb();
     linker = new KeywordLinker(loadJson("keywordLinks.json"));
@@ -32,39 +42,59 @@ public class ChatbotManager {
     String[] command = input.replaceAll("[^a-zA-Z0-9 æøå]", "").toLowerCase().split(" ");
 
     Response response = new Response();
+
+    // Match the user input with the availible commands, and get a list of possible
+    // matches sorted by precedence and match percentage / weight.
     List<Match> matches = linker.matchCommand(command);
+
+    // To make sure that a command with a given precedence is only executed once,
+    // note what the next precedence to check is.
     int nextPrecedence = 1;
 
+    // Iterate over the possible matches
     for (Match match : matches) {
+
+      // Skip all matches if we've already found a match at the given precedence.
       if (match.precedence == nextPrecedence) {
+
+        // Confidence of match accuracy is above 1.0 -> Execute the current command.
         if (match.match >= 1.0) {
           cmg.executeCommand(match.command, response);
+
+          // If the dataMatch is not empty, this signifies that we are fishing for some
+          // extra information, typically a course.
           if (!match.dataMatch.isEmpty()) {
+            // Check weather we identified data of the requested type and update our
+            // response accordingly.
             response.handleMatchResult(dataMatcher.findDataMatch(command, match.dataMatch));
             response.setFuncKey(match.command);
           }
         }
         nextPrecedence += 1;
       }
-      // System.out.println(match);
     }
 
+    // We did not find any matches with confidence >= 1.0
     if (response.getResponse().length() == 0 && !response.funcCall()) {
       String[] possibleMatch = dataMatcher.findDataMatch(command, "course");
+
+      // We found a dataMatch, but did not find a command to link it to.
       if (possibleMatch[0].equals("0") || possibleMatch[0].equals("1")) {
         response.add("Vennligst vær litt mer spesifikk, f.eks: 'Jeg vil vite mer om " + possibleMatch[1] + "'");
       } else {
+        // We have no clue what the user wanted, print generic message.
         response.add(
             "Jeg beklager, men det forstod jeg ikke helt. Prøv å formulere setningen på en annen måte. Skriv 'jeg trenger hjelp' hvis du står fast");
       }
 
     }
+
     return response;
 
   }
 
   /**
-   * Writes a list of dummy keyword connections to our json database.
+   * Writes a list of default keyword connections to our json database.
    */
   public void writeDefaultCommandsToDb() {
 
@@ -136,17 +166,16 @@ public class ChatbotManager {
     links.add(new KeywordLink("uhyggelig", null, 1,
         List.of(Map.of("det", 0.2f, "går", 0.2f, "dårlig", 0.6f, "ikke", 0.4f, "så", 0.05f, "bra", 0.05f))));
 
-    links.add(new KeywordLink("nei", null, 1, List.of(Map.of("nei", 1.0f, "nope", 1.0f, "niks", 1.0f))));
+    links.add(new KeywordLink("nei", null, 1, List.of(Map.of("nei", 1.0f, "nope", 1.0f, "niks", 1.0f, "hei", -1.0f))));
 
     links.add(new KeywordLink("vurderingsform", "course", 2,
         List.of(Map.of("hva", 0.2f, "hvilken", 0.2f, "vurderingsform", 1.0f, "vurdering", 0.8f),
             Map.of("hjemmeksamen", 1.0f, "skriftlig", 0.5f, "eksamen", 0.5f, "hjemmeeksamen", 1.0f, "muntlig", 0.5f))));
-
+    
     ObjectMapper mapper = new ObjectMapper();
     try {
       mapper.writeValue(Paths.get("../core/src/main/resources/studit/db/keywordLinks.json").toFile(), links);
     } catch (IOException e) {
-      System.out.println("Error occured while printing dummy json to file");
       e.printStackTrace();
     }
 
@@ -168,7 +197,6 @@ public class ChatbotManager {
       return links;
     } catch (IOException e) {
       System.out.println("Error occured while reading json '" + filename + "'.");
-      e.printStackTrace();
     }
     return null;
   }

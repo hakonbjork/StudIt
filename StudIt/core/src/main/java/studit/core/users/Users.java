@@ -10,18 +10,38 @@ public class Users {
   private Map<Integer, User> users = new HashMap<>();
   private int prevAssignedID = -1;
 
+  /**
+   * Gets the users in the class.
+   * 
+   * @return - A Map with the users.
+   */
   public Map<Integer, User> getUsers() {
     return users;
   }
 
+  /**
+   * Sets the users in the class.
+   * 
+   * @param users - A Map with the users to be set.
+   */
   public void setUsers(Map<Integer, User> users) {
     this.users = users;
   }
 
+  /**
+   * Gets the previously assigned ID. Can be used to set an unique uniqueID.
+   * 
+   * @return - int: The previously assigned ID.
+   */
   public int getPrevAssignedID() {
     return prevAssignedID;
   }
 
+  /**
+   * Sets the previously assignes ID.
+   * 
+   * @param prevAssignedID - The ID to be set.
+   */
   public void setPrevAssignedID(int prevAssignedID) {
     this.prevAssignedID = prevAssignedID;
   }
@@ -41,11 +61,11 @@ public class Users {
    */
   public String[] addUser(String name, String username, String mail, String password) {
     if (name == null || username == null || mail == null || password == null) {
-      return new String[] { null, "Missing fields, expected name, username, mail and password", "-1" };
+      return new String[] { null, "Manglende felt, forventet navn, brukernavn, mail, og passord", "-1" };
     }
     if (isUnique(username) && !username.isBlank()) {
       if (!isValidEmailAddress(mail)) {
-        return new String[] { null, "'" + mail + "'" + " is not a valid email address", "-4" };
+        return new String[] { null, "'" + mail + "'" + " er ikke en gyldig mailadresse", "-4" };
       }
 
       String[] passwordHash = Hashing.hashPassword(password);
@@ -57,7 +77,7 @@ public class Users {
       users.put(prevAssignedID, new User(name, username, mail, passwordHash[0], prevAssignedID));
       return new String[] { String.valueOf(prevAssignedID), null, "0" };
     }
-    return new String[] { null, "'" + username + "' is not a unique username", "-2" };
+    return new String[] { null, "Brukernavnet '" + username + "' er allerede i bruk", "-2" };
   }
 
   private boolean isUnique(String username) {
@@ -191,6 +211,12 @@ public class Users {
     return null;
   }
 
+  /**
+   * Checks if an email is valid.
+   * 
+   * @param email - The email to be checked.
+   * @return - True if the email is valid, else false.
+   */
   public static boolean isValidEmailAddress(String email) {
     boolean result = true;
     try {

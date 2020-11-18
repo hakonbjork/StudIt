@@ -26,6 +26,8 @@ import studit.ui.remote.RemoteStuditModelAccess;
 
 public class DiscussionController implements Initializable {
 
+  private static Boolean testingMode = false;
+
   private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
   // The currentUser is set via courseController
@@ -48,7 +50,7 @@ public class DiscussionController implements Initializable {
   private Label fagnavn;
 
   @FXML
-  private Button mainPage_btn;
+  private Button mainpage_btn;
 
   @FXML
   private Button chatbot_btn;
@@ -74,10 +76,10 @@ public class DiscussionController implements Initializable {
   }
 
   /**
-   * Method which handles when user adds a a new post.
+   * Method that handles when user adds a a new post.
    */
   @FXML
-  void addNewPost(ActionEvent event) {
+  public void addNewPost(ActionEvent event) {
 
     String input = newPostInputField.getText();
     try {
@@ -112,7 +114,7 @@ public class DiscussionController implements Initializable {
   }
 
   /**
-   * logs user out, and goes to login scene closes the current window.
+   * logs user out, goes to the login scene and closes the current window.
    */
   @FXML
   void handleLogoutAction(ActionEvent event) {
@@ -137,7 +139,7 @@ public class DiscussionController implements Initializable {
    * Opens main-page scene and closes the current scene.
    */
   @FXML
-  void handleMainPageAction(ActionEvent actionEvent) {
+  void handleMainPageAction(ActionEvent event) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
       Parent root = loader.load();
@@ -293,6 +295,18 @@ public class DiscussionController implements Initializable {
 
   public User getCurrentUser() {
     return this.currentUser;
+  }
+
+  public static void setTestingMode(Boolean bol) {
+    if (bol) {
+      testingMode = true;
+    } else {
+      testingMode = false;
+    }
+  }
+
+  public static Boolean getTestingMode() {
+    return testingMode;
   }
 
 }

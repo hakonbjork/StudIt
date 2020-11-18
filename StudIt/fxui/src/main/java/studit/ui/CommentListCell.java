@@ -38,7 +38,7 @@ public class CommentListCell extends BorderPane {
     try {
       initialize();
     } catch (Exception e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
     setCenter(contentWrapper);
     setMargin(contentWrapper, new Insets(0, 0, 0, 15));
@@ -61,10 +61,7 @@ public class CommentListCell extends BorderPane {
       List<String> upVoters = this.comment.getUpvoters();
 
       if (upVoters.contains(this.currentUser.getUsername())) {
-
-        //Her kunne vi gitt en visuell feedback
-        System.out.println("allerede upvota");
-
+        // Visuell feedback
       } else {
 
         try {
@@ -72,8 +69,6 @@ public class CommentListCell extends BorderPane {
           //Oppdater db etter upvote er klikket.
           CommentListCell.remote.upvoteCommentByID(this.courseItem.getFagkode(), this.currentUser.getUsername(),
               this.comment.getUniqueID());
-
-          System.out.println("Hello after");
 
           int id = this.comment.getUniqueID();
 
@@ -83,9 +78,7 @@ public class CommentListCell extends BorderPane {
           updateView();
 
         } catch (Exception e) {
-
-          System.out.println(e);
-
+          e.printStackTrace();
         }
       }
 
@@ -97,10 +90,7 @@ public class CommentListCell extends BorderPane {
       List<String> downVoters = this.comment.getDownvoters();
 
       if (downVoters.contains(this.currentUser.getUsername())) {
-
         //Her kunne vi gitt en visuell feedback
-        System.out.println("allerede downvota");
-
       } else {
 
         try {
@@ -117,9 +107,7 @@ public class CommentListCell extends BorderPane {
           updateView();
 
         } catch (Exception e) {
-
-          System.out.println(e);
-
+          e.printStackTrace();
         }
       }
 
@@ -190,8 +178,8 @@ public class CommentListCell extends BorderPane {
 
     private Text comment = new Text();
     private Text votes = new Text();
-    private Button upvoteButton = new Button("Upvote");
-    private Button downvoteButton = new Button("Downvote");
+    private Button upvoteButton = new Button("Stem opp");
+    private Button downvoteButton = new Button("Stem ned");
    
 
     /**
@@ -222,7 +210,7 @@ public class CommentListCell extends BorderPane {
      * @param amount amount of upvotes
      */
     private void setVotes(String votes) {
-      this.votes.setText(votes);
+      this.votes.setText("Stemmer: " + votes);
     }
 
     public Button getUpvoteButton() {

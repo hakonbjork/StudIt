@@ -1,0 +1,142 @@
+@startuml
+class AppController {
+    - User currentUser
+    - Chatbot chatbot
+    - List<CourseItem> courseList
+    - RemoteStuditModelAccess remoteStuditModelAccess
+
+    ~ openChatBot()
+    + closeChatbot()
+    + addUser()
+    + loadData()
+    + clickOnCourse()
+}
+
+class User {
+    - String name;
+    - String username;
+    - String mail;
+    - String password;
+    - int uniqueID;
+}
+
+class LoginController {
+    - RemoteStuditModelAccess remote
+    - User currentUser
+
+    + registerUser()
+    + loginButtonAction()    
+}
+
+class CourseController {
+  - CourseItem courseItem
+  - User currentUser
+
+  + updateView()
+  ~ openDiscussion()
+  ~ handleMainPageAction()
+  ~ openChatBot()
+  ~ handleLogoutAction()
+
+}
+
+class CourseItem {
+  - String fagnavn
+  - String fagkode
+  - String informasjon;
+  - String pensumlitteratur;
+  - String anbefaltLitteratur;
+  - String tips;
+  - String eksamensdato;
+  - String vurderingsform;
+  - String hjelpemidler;
+  - float averageVurdering;
+  - Discussion diskusjon;
+}
+
+
+
+class DiscussionController {
+    - CourseItem courseItem
+    - ListView<Comment> forumList
+    - User currentUser
+    + RemoteStuditModelAcess remoteStuditModelAcess
+
+    + addNewPost()
+    + addCourse()
+    + loadView()
+    ~ handleMainPageAction()
+    ~ openChatBot()
+    ~ handleLogoutAction()
+
+}
+
+class Discussion {
+    - Map<Integer, Comment> comments = 
+    - int prevAssignedID = -1
+}
+
+class Comment {
+    - String brukernavn;
+    - String kommentar;
+    -  String dato;
+    -  int upvotes;
+    -  int downvotes;
+    -  int uniqueID;
+    -  List<String> upvoters;
+    -  List<String> downvoters;
+}
+
+
+class Chatbot{
+    - Stage chatStage
+    - ChatbotManager chatbotManager
+    - ChatbotController controller
+
+    - displayWindow()
+    + show()
+    + manageInput()
+    + getController()
+}
+
+class ChatbotController {
+    - Stage stage     
+    + exitChatbot()
+    + minimizeChatbot()
+    + userEntry()
+}
+
+class RemoteStuditModelAcess {
+    - StuditModel studitModel    
+}
+
+
+
+
+User <-- AppController: has <
+User <-- CourseController: has <
+User <-- LoginController: has <
+User <-- DiscussionController: has <
+
+LoginController .. AppController
+LoginController <.. CourseController
+LoginController <.. DiscussionController
+
+
+AppController --> Chatbot: opens >
+
+AppController o-- RemoteStuditModelAcess: uses >
+ChatbotController o-- RemoteStuditModelAcess: uses >
+DiscussionController o-- RemoteStuditModelAcess: uses >
+
+AppController o-- "*" CourseItem: has >
+AppController .. CourseController
+AppController <.. DiscussionController
+Chatbot *-- "1" ChatbotController 
+
+CourseItem *-- "1" Discussion: has >
+DiscussionController .. CourseController
+DiscussionController o-- "1" CourseItem: has >
+Discussion *-- "*" Comment: has >
+CourseController o-- "1" CourseItem: has >
+@enduml

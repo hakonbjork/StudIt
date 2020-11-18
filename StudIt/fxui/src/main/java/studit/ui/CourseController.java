@@ -20,10 +20,8 @@ import studit.core.users.User;
 
 public class CourseController implements Initializable {
 
-  private User currentUser;
-
   @FXML
-  private BorderPane rootPane;
+  BorderPane rootPane;
 
   @FXML
   private Button information_btn;
@@ -73,9 +71,9 @@ public class CourseController implements Initializable {
   @FXML
   private Button addCommentAction;
 
-  // private Scene mainScene;
-
   private CourseItem courseItem;
+
+  private User currentUser;
 
   public void setCourseItem(CourseItem courseItem) {
     this.courseItem = courseItem;
@@ -101,15 +99,6 @@ public class CourseController implements Initializable {
     this.litterature.setText(litteratur);
   }
 
-  /*
-  public void setRating(Float rating) {
-    this.rating.setText(rating.toString());
-  } */
-
-  // public void setMainScene(Scene scene) {
-  // this.mainScene = scene;
-  // }
-
   public void setFagkode(String fagkode) {
     this.fagkode.setText(fagkode);
   }
@@ -117,8 +106,6 @@ public class CourseController implements Initializable {
   /**
    * Function to set the label - the name of the subject on the top of the page.
    */
-
-  @FXML
   public void setFagnavn(String fagnavn) {
     this.fagnavn.setText(fagnavn);
   }
@@ -203,6 +190,11 @@ public class CourseController implements Initializable {
     this.courseInformation.setText(information.toString());
   }
 
+  /**
+   * Function that opens the Discussion scene.
+   * 
+   * @param event triggered when the user clicks on a course in the ListView
+   */
   @FXML
   void openDiscussion(ActionEvent event) {
 
@@ -213,12 +205,9 @@ public class CourseController implements Initializable {
         Parent root = loader.load();
         DiscussionController discussionController = (DiscussionController) loader.getController();
 
-        // TODO sjekke om den nede funker? Virker som det ikke gjør det.
         if (this.courseItem != null) {
           discussionController.addCourse(this.courseItem);
           discussionController.setCurrentUser(this.currentUser);
-      
-          System.out.println("addet courseItem");
           discussionController.updateView();
         }
 
@@ -235,24 +224,13 @@ public class CourseController implements Initializable {
       }
 
     } else {
-
-      System.out.println("Kunne ikke gå til diskusjon med riktig informasjon");
-
+      //Kunne ikke gå til diskusjon med riktig informasjon
     }
   }
 
-  @FXML
-  void handleAddCommentAction(ActionEvent event) {
-    // TODO fikse metoden her?
-    // Send tilbakemeldingen til API serveren?
-  }
-
-  // TODO funker ikke :()
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-
-  }
-
+  /**
+   * Function that updates the information about the course.
+   */
   public void updateView() {
     if (this.courseItem != null) {
       this.fagnavn.setText(courseItem.getFagnavn());
@@ -264,12 +242,57 @@ public class CourseController implements Initializable {
       this.tips_tricks.setText(courseItem.getTips());
       this.courseInformation.setText(courseItem.getInformasjon());
       this.eksamensdato.setText(courseItem.getEksamensdato());
-
     }
   }
 
+  /**
+   * Function that sets the current user.
+   * 
+   * @param user the user to be set
+   */
   public void setCurrentUser(User user) {
     this.currentUser = user;
   }
 
+  // Methods for testing
+  public String getHjelpemidler() {
+    return this.hjelpemidler.getText();
+  }
+
+  public String getEksamensdato() {
+    return this.eksamensdato.getText();
+  }
+
+  public String getLitterature() {
+    return this.litterature.getText();
+  }
+
+  public String getTipsTricks() {
+    return this.tips_tricks.getText();
+  }
+
+  public String getVurderingsform() {
+    return this.vurderingsform.getText();
+  }
+
+  public String getCourseInformation() {
+    return this.courseInformation.getText();
+  }
+
+  public String getFagnavn() {
+    return this.fagnavn.getText();
+  }
+
+  public String getFagkode() {
+    return this.fagkode.getText();
+  }
+
+  public User getCurrentUser() {
+    return this.currentUser;
+  }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+
+  }
 }

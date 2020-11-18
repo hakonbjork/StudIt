@@ -12,6 +12,12 @@ public class Message {
   private List<Object> args2 = null;
   private boolean clicked;
 
+  /**
+   * Create a new Message instance.
+   * 
+   * @param response active Repsose object.
+   * @param user     either "chatbot" or "user"
+   */
   public Message(Response response, String user) {
     this.text = response.getResponse();
     this.prompt = response.getPrompt();
@@ -21,6 +27,12 @@ public class Message {
     this.args2 = response.getArgs2();
   }
 
+  /**
+   * Intialize new Message instance with simple response String.
+   * 
+   * @param response message to print to the user.
+   * @param user     either "chatbot" or "user"
+   */
   public Message(String response, String user) {
     this.text = response;
     this.user = user;
@@ -60,30 +72,54 @@ public class Message {
 
   }
 
+  /**
+   * Set the text.
+   * 
+   * @param text the text to set.
+   */
   public void setText(String text) {
     this.text = text;
   }
 
+  /**
+   * Get the user.
+   * 
+   * @return active user.
+   */
   public String getUser() {
     return user;
   }
 
-  public void setUser(String user) {
-    this.user = user;
-  }
-
+  /**
+   * Set the prompt.
+   * 
+   * @param prompt the prompt to set.
+   */
   public void setPromt(List<String[]> prompt) {
     this.prompt = prompt;
   }
 
+  /**
+   * Get the current prompt.
+   * 
+   * @return the current prompt.
+   */
   public List<String[]> getPrompt() {
     return this.prompt;
   }
 
+  /**
+   * Check weather a user har clicked on a prompt option.
+   * 
+   * @return true if user has clicked a prompt option, false otherwise.
+   */
   public boolean isClicked() {
     return clicked;
   }
 
+  /**
+   * Called whenever a user has clicked on a prompt option.
+   */
   public void click() {
     this.clicked = true;
   }

@@ -15,6 +15,7 @@ import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -51,7 +52,7 @@ public class ChatbotControllerTest extends ApplicationTest {
   @Test
   public void testChatbot() {
     FxRobot robot = new FxRobot();
-    robot.clickOn("#txt_user_entry").write("hei", 10);
+    robot.clickOn("#txt_user_entry").write("hei", 2);
     robot.push(KeyCode.ENTER);
 
     assertEquals("Hei! Jeg er din nye assistent, chatbotten Gunnar. Hva kan jeg hjelpe deg med? ",
@@ -60,21 +61,72 @@ public class ChatbotControllerTest extends ApplicationTest {
     assertEquals("hei ", this.chatbotController.list_chat.getItems().get(1).getText());
     assertEquals("Hei! ", this.chatbotController.list_chat.getItems().get(2).getText());
 
-    robot.write("kan du fortelle litt om", 10);
+    robot.write("kan du fortelle litt om", 2);
     robot.push(KeyCode.ENTER);
     assertEquals(
         "Jeg forstår ikke hvilken informasjon du etterspør, husk å spesifisere hvilket fag du vil vite mer om. ",
         this.chatbotController.list_chat.getItems().get(4).getText().replaceAll("\n", ""));
 
-    robot.write("kan jeg få se fagoversikten?", 10);
+    robot.write("kan jeg få se fagoversikten?", 2);
     robot.push(KeyCode.ENTER);
     assertTrue(this.chatbotController.list_chat.getItems().get(4).getText().contains("\n"));
-    
+
   }
 
   @Test
-  public void testLoginController() {
+  public void testChatbotController() {
     assertNotNull(this.chatbotController);
+    assertNotNull(chatbotController.getStage());
+    chatbotController.setRemoteAccess(new RemoteStuditModelAccess());
+
+    FxRobot robot = new FxRobot();
+    robot.clickOn("#txt_user_entry").write("jeg vil se fagoversikten", 5);
+    robot.push(KeyCode.ENTER);
+
+    assertEquals("Error -> could not establish connection to server ",
+        this.chatbotController.list_chat.getItems().get(2).getText().replaceAll("\n", ""));
+  }
+
+  @Test
+  public void testPrompt() throws ApiCallException {
+    chatbotController.setCommands(new Commands(chatbotController, remote));
+    FxRobot robot = new FxRobot();
+    robot.clickOn("#txt_user_entry").write("hva er anbefalt lesestoff i TMA4130?", 2);
+    robot.push(KeyCode.ENTER);
+
+    Node node = robot.lookup(".hyperlink").nth(0).query();
+    robot.clickOn(node);
+    assertEquals(
+        "Her har du våre anbefalinger i " + "TMA4140" + ": "
+            + remote.getCourseByFagkode("TMA4140").getAnbefaltLitteratur() + " ",
+        chatbotController.list_chat.getItems().get(3).getText().replaceAll("\n", ""));
+
+    Node node2 = robot.lookup(".hyperlink").nth(1).query();
+    robot.clickOn(node2);
+    assertTrue(chatbotController.list_chat.getItems().size() == 4);
+
+    robot.clickOn("#txt_user_entry").write("hva er anbefalt lesestoff i TMA4130?", 2);
+    robot.push(KeyCode.ENTER);
+
+    Node node3 = robot.lookup(".hyperlink").nth(1).query();
+    robot.clickOn(node3);
+
+    assertEquals("Den er grei du, da eksisterer sannsynligvis ikke faget du har etterspurt. ",
+        chatbotController.list_chat.getItems().get(6).getText().replaceAll("\n", ""));
+
+    Node node4 = robot.lookup(".hyperlink").nth(2).query();
+    robot.clickOn(node4);
+    assertTrue(chatbotController.list_chat.getItems().size() == 7);
+  }
+
+  @Test
+  public void testExitByPrompt() {
+    FxRobot robot = new FxRobot();
+    robot.clickOn("#txt_user_entry").write("Jeg vil avslutte", 2);
+    robot.push(KeyCode.ENTER);
+    Node node = robot.lookup(".hyperlink").nth(0).query();
+    clickOn(node);
+    assertThrows(NoSuchElementException.class, () -> window("chatbot"));
   }
 
   @Test
