@@ -265,14 +265,6 @@ public class AppController {
     });
   }
 
-  private CourseItem findCourseItem(String name) {
-    for (CourseItem courseItem : this.courseList) {
-      if (courseItem.getFagnavn().equals(name)) {
-        return courseItem;
-      }
-    }
-    return null;
-  }
 
   /**
    * Function that loads the courses from the server
