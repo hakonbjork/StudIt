@@ -108,7 +108,7 @@ public class ChatbotControllerTest extends ApplicationTest {
     robot.clickOn("#txt_user_entry").write("hva er anbefalt lesestoff i TMA4130?", 2);
     robot.push(KeyCode.ENTER);
 
-    Node node3 = robot.lookup(".hyperlink").nth(3).query();
+    Node node3 = robot.lookup(".hyperlink").nth(1).query();
     robot.clickOn(node3);
 
     assertEquals("Den er grei du, da eksisterer sannsynligvis ikke faget du har etterspurt. ",
