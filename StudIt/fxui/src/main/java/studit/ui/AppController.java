@@ -2,7 +2,6 @@ package studit.ui;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -58,8 +57,6 @@ public class AppController {
   private static Chatbot chatbot = null;
 
   private ObservableList<CourseItem> list = FXCollections.observableArrayList();
-
-  private List<CourseItem> courseList;
 
   private FilteredList<CourseItem> filteredData = new FilteredList<>(this.getData(), (p -> true));
 
@@ -208,9 +205,8 @@ public class AppController {
 
       Stage stage = (Stage) rootPane.getScene().getWindow();
       stage.hide();
-
     } catch (IOException e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
   }
 
@@ -251,7 +247,7 @@ public class AppController {
 
 
   /**
-   * Function that loads the courses from the server
+   * Function that loads the courses from the server.
    *
    * @throws ApiCallException If connection to server could not be established.
    */
@@ -260,7 +256,6 @@ public class AppController {
     CourseList li = remoteStuditModelAccess.getCourseList();
 
     Collection<CourseItem> items = li.getCourseItems();
-    this.courseList = (List<CourseItem>) items;
 
     for (CourseItem c : items) {
       this.list.add(c);

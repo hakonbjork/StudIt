@@ -20,7 +20,7 @@ public class UsersTest {
   }
 
   private void addRandomUser(){
-    String[] s = u.addUser("Bjarne", "bjarn", "bjarne@gmail.com", "Bjarne123");
+    u.addUser("Bjarne", "bjarn", "bjarne@gmail.com", "Bjarne123");
   }
 
   @Test

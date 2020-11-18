@@ -27,7 +27,7 @@ public class ChatbotManagerTest {
     try (Reader reader = new FileReader("../res/db/studitModel.json", StandardCharsets.UTF_8)) {
       defaultModel = new StuditPersistence().readStuditModel(reader);
     } catch (IOException e) {
-      System.out.println("Couldn't read default studitModel");
+      //System.out.println("Couldn't read default studitModel");
     }
 
     chatbotManager = new ChatbotManager(defaultModel.getCourseList().getCourseNameList());

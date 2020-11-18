@@ -29,7 +29,7 @@ public class InformationRequestExecutorTest {
       courseList = new StuditPersistence().readStuditModel(reader).getCourseList();
       chatbotManager = new ChatbotManager(courseList.getCourseNameList());
     } catch (IOException e) {
-      System.out.println("Couldn't read default studitModel");
+      //System.out.println("Couldn't read default studitModel");
     }
   }
 

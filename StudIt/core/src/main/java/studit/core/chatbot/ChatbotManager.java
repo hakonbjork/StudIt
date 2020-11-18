@@ -72,7 +72,6 @@ public class ChatbotManager {
         }
         nextPrecedence += 1;
       }
-      // System.out.println(match);
     }
 
     // We did not find any matches with confidence >= 1.0
@@ -177,7 +176,6 @@ public class ChatbotManager {
     try {
       mapper.writeValue(Paths.get("../core/src/main/resources/studit/db/keywordLinks.json").toFile(), links);
     } catch (IOException e) {
-      System.out.println("Error occured while printing dummy json to file");
       e.printStackTrace();
     }
 
@@ -199,7 +197,6 @@ public class ChatbotManager {
       return links;
     } catch (IOException e) {
       System.out.println("Error occured while reading json '" + filename + "'.");
-      e.printStackTrace();
     }
     return null;
   }

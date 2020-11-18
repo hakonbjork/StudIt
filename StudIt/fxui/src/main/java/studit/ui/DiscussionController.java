@@ -34,7 +34,6 @@ public class DiscussionController implements Initializable {
   private User currentUser = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com",
       "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
-
   @FXML
   private BorderPane rootPane;
 
@@ -71,7 +70,6 @@ public class DiscussionController implements Initializable {
   private ObservableList<Comment> listView = FXCollections.observableArrayList();
 
   private CourseItem courseItem;
-
 
   public void addCourse(CourseItem name) {
     this.courseItem = name;
@@ -299,7 +297,7 @@ public class DiscussionController implements Initializable {
     return this.currentUser;
   }
 
-   public static void setTestingMode(Boolean bol) {
+  public static void setTestingMode(Boolean bol) {
     if (bol) {
       testingMode = true;
     } else {

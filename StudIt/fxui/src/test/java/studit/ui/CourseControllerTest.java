@@ -7,9 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
-import static org.testfx.api.FxAssert.verifyThat;
-
-
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -73,7 +70,7 @@ public class CourseControllerTest extends ApplicationTest {
     assertEquals("Eksamen", courseController.getVurderingsform());
   }
 
-   @Test
+  @Test
   public void testSetRating() {
     Platform.runLater(new Runnable() {
       @Override
@@ -148,7 +145,7 @@ public class CourseControllerTest extends ApplicationTest {
 
   // @Test
   // public void testOpenChatbot(){
-  //   clickOn("#chatbot_btn");
+  // clickOn("#chatbot_btn");
   // }
 
   @Test

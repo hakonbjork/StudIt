@@ -20,7 +20,7 @@ import studit.core.users.User;
 
 public class CourseController implements Initializable {
 
-  @FXML 
+  @FXML
   BorderPane rootPane;
 
   @FXML
@@ -190,9 +190,9 @@ public class CourseController implements Initializable {
     this.courseInformation.setText(information.toString());
   }
 
-
   /**
-   * Function that opens the Discussion scene
+   * Function that opens the Discussion scene.
+   * 
    * @param event triggered when the user clicks on a course in the ListView
    */
   @FXML
@@ -215,7 +215,7 @@ public class CourseController implements Initializable {
         stage2.setScene(new Scene(root));
         stage2.setTitle("Discussion");
         stage2.show();
-                
+
         Stage stage = (Stage) rootPane.getScene().getWindow();
         stage.hide();
 
@@ -224,14 +224,12 @@ public class CourseController implements Initializable {
       }
 
     } else {
-
-      System.out.println("Kunne ikke gå til diskusjon med riktig informasjon");
-
+      //Kunne ikke gå til diskusjon med riktig informasjon
     }
   }
 
   /**
-   * Function that updates the information about the course 
+   * Function that updates the information about the course.
    */
   public void updateView() {
     if (this.courseItem != null) {
@@ -249,39 +247,47 @@ public class CourseController implements Initializable {
 
   /**
    * Function that sets the current user.
+   * 
    * @param user the user to be set
    */
   public void setCurrentUser(User user) {
     this.currentUser = user;
   }
 
-
   // Methods for testing
-  public String getHjelpemidler(){
+  public String getHjelpemidler() {
     return this.hjelpemidler.getText();
   }
-  public String getEksamensdato(){
+
+  public String getEksamensdato() {
     return this.eksamensdato.getText();
   }
-  public String getLitterature(){
+
+  public String getLitterature() {
     return this.litterature.getText();
   }
-  public String getTipsTricks(){
+
+  public String getTipsTricks() {
     return this.tips_tricks.getText();
   }
-  public String getVurderingsform(){
+
+  public String getVurderingsform() {
     return this.vurderingsform.getText();
   }
-  public String getCourseInformation(){
+
+  public String getCourseInformation() {
     return this.courseInformation.getText();
   }
-  public String getFagnavn(){
+
+  public String getFagnavn() {
     return this.fagnavn.getText();
   }
-  public String getFagkode(){
+
+  public String getFagkode() {
     return this.fagkode.getText();
   }
-  public User getCurrentUser(){
+
+  public User getCurrentUser() {
     return this.currentUser;
   }
 

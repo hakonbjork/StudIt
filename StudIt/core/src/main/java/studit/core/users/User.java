@@ -122,7 +122,7 @@ public class User {
   }
 
   /**
-   * Sets the user's uniqueID
+   * Sets the user's uniqueID.
    * 
    * @param uniqueID - The uniqueID to be set.
    */

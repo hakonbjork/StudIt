@@ -145,7 +145,6 @@ class CommandsTest extends ApplicationTest {
   private void testFagoversikt() throws ApiCallException {
     Func func = commands.get("fagoversikt");
     executeFunc(func, List.of());
-    System.out.println(getLastItem());
     assertTrue(getLastItem().startsWith("Fagoversikt: " + fagkode));
   }
 

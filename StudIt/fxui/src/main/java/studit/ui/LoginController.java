@@ -115,7 +115,6 @@ public class LoginController {
             loginButtonAction();
           } catch (Exception e) {
             System.out.println("Error occured while logging in");
-            e.printStackTrace();
           }
         }
       }
