@@ -10,5 +10,5 @@ Our maven-build is set up with add-ons for java applications in general and with
 In addition, we use various code quality analysis tools (jacoco with jacoco, spotbugs with com.github.spotbugs and checkstyle with checkstyle). These are set up so that they do not stop the building unless everything is in order.
 
 ## Sequence diagram visualising the relationship between some of the controllers
-After you have logged inn and clicked on one of the courses in the main page of StudIt, you can for instance open the discussion of the respective course. The sequence diagram below shows the dynamics of the controllers and the remoteStuditModelAccess under the hood.(Assuming the user already clicked on a course)
+After you have logged in and clicked on one of the courses in the main page of StudIt, you can for instance open the discussion of the respective course. The sequence diagram below shows the dynamics of the controllers and the remoteStuditModelAccess. (Assuming the user already clicked on a course)
 ![Seqdiagram](seqdiagram.png)
