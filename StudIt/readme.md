@@ -7,9 +7,10 @@
 ## Architecture Diagram
 ![Architecture](architecture.png)
 
+
 # Class diagram
 
-The purpose of this diagram is to show the functionality of our application, thus we show the most central classes. To display it in the best and most understandable way, we have let out some classes, variables and methods. No setter and getter methods are present, because they don’t serve a significant purpose in understanding the functionality. The choices we have made are explained underneath, and we recommend reading this when looking at the diagram. 
+The purpose of this diagram is to show the functionality of our application, thus we show the most central classes. To display it in the best and most understandable way, we have let out some classes, variables and methods. No setter and getter methods are present, because they don’t serve a significant purpose in understanding the functionality. The choices we have made are explained underneath, and we recommend reading this when looking at the diagram to understand it properly. 
 
 The other classes in the application are not shown in the diagram simply because they are not that necessary to understand the system. E.g the NewUserController or CommentListCell. These classes are only adding extra functionality to the classes shown.
 
@@ -17,5 +18,4 @@ The Chatbot-window can be opened through AppController, CourseController and Dis
 
 There are many ways to draw a class diagram, but we have chosen to show a two-way association with no arrows, and one-way associations with one arrow pointing towards the class accessed. The dotted lines represent dependencies - e.g the DiscussionController can open the CourseController, and vice versa. 
 
-## Class Diagram
 ![Class](classDiagram.png)
