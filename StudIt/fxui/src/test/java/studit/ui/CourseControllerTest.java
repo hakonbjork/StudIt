@@ -143,11 +143,6 @@ public class CourseControllerTest extends ApplicationTest {
     });
   }
 
-  // @Test
-  // public void testOpenChatbot(){
-  // clickOn("#chatbot_btn");
-  // }
-
   @Test
   public void testClickOnDiscussion() throws ApiCallException {
     CourseItem courseItem = remoteStuditModelAccess.getCourseByFagkode("IT1909");

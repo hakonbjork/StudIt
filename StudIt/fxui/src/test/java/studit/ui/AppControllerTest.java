@@ -60,13 +60,6 @@ public class AppControllerTest extends ApplicationTest {
     FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
   }
 
-  // @Test
-  // public void testChatbot() {
-  //   appController.setRemote(this.remote);
-  //   clickOn("#chatbot_btn");
-  // }
-
-
   @Test
   public void hasLogoutButton() {
     BorderPane rootNode = (BorderPane) appController.rootPane.getScene().getRoot();
