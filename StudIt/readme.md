@@ -7,8 +7,12 @@
 ## Architecture Diagram
 ![Architecture](architecture.png)
 
+<<<<<<< HEAD
 
 # Class diagram
+=======
+## Class diagram
+>>>>>>> 2760dee1842e4ccaf898e8bfed6be669f16fe9b7
 
 The purpose of this diagram is to show the functionality of our application, thus we show the most central classes. To display it in the best and most understandable way, we have let out some classes, variables and methods. No setter and getter methods are present, because they don’t serve a significant purpose in understanding the functionality. The choices we have made are explained underneath, and we recommend reading this when looking at the diagram to understand it properly. 
 
