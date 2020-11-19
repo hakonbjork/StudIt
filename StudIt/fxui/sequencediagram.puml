@@ -11,8 +11,6 @@ CourseController -> DiscussionController: updateView()
 DiscussionController -> RemoteStuditModelAccess: getCourseByFagkode()
 RemoteStuditModelAccess --> DiscussionController: CourseItem
 
-DiscussionController -> RemoteStuditModelAccess: 
-
 
 alt if discussion not empty
 
