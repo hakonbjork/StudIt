@@ -7,6 +7,13 @@ public class Hashing {
   // password.
   private static final String salt = "6%b2A/662&cX[";
 
+  /**
+   * Hashes a string using the SHA256 hashing algoritm to ensure passwords are
+   * stored safely.
+   * 
+   * @param base string to hash
+   * @return the hashed string
+   */
   public static String sha256(String base) {
     try {
       MessageDigest digest = MessageDigest.getInstance("SHA-256");
