@@ -31,6 +31,7 @@ public class DiscussionController implements Initializable {
   private RemoteStuditModelAccess remoteStuditModelAccess = new RemoteStuditModelAccess();
 
   // The currentUser is set via courseController
+  // Ida is default used for testing
   private User currentUser = new User("Ida Idasen", "IdaErBest", "IdaElskerHunder@flyskflysk.com",
       "0f0b30a66731e73240b9e331116b57de84f715ab2aea0389bb68129fcf099da3", 1);
 
@@ -71,12 +72,13 @@ public class DiscussionController implements Initializable {
 
   private CourseItem courseItem;
 
-  public void addCourse(CourseItem name) {
-    this.courseItem = name;
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+
   }
 
   /**
-   * Method that handles when user adds a a new post.
+   * This method is triggered when a new post is added.
    */
   @FXML
   public void addNewPost(ActionEvent event) {
@@ -92,6 +94,10 @@ public class DiscussionController implements Initializable {
       // Her kunne vi gitt brukeren en visuell feedback.
       e.printStackTrace();
     }
+  }
+
+  public void addCourse(CourseItem name) {
+    this.courseItem = name;
   }
 
   /**
@@ -206,11 +212,6 @@ public class DiscussionController implements Initializable {
     }
   }
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-
-  }
-
   /**
    * Loads the list View and sets the text for the labels in the page.
    */
@@ -271,6 +272,11 @@ public class DiscussionController implements Initializable {
     }
   }
 
+  /**
+   * This method sets the currentUser in discussionController.
+   * 
+   * @param user the user currently logged in.
+   */
   public void setCurrentUser(User user) {
     this.currentUser = user;
   }
