@@ -14,7 +14,7 @@ The purpose of this diagram is to show the functionality of our application, thu
 
 The other classes in the application are not shown in the diagram simply because they are not that necessary to understand the system. E.g the NewUserController or CommentListCell. These classes are only adding extra functionality to the classes shown.
 
-The Chatbot-window can be opened through AppController, CourseController and DiscussionController, however the two latter do it through a method call in AppController, and there are no associations from them to the Chatbot in the diagram. We find that the extra lines would make the diagram too messy.
+The Chatbot-window can be opened through AppController, CourseController and DiscussionController, however the two latter do it through a method call in AppController, hence there are no associations from them to the Chatbot in the diagram. We find that the extra lines would make the diagram too messy.
 
 There are many ways to draw a class diagram, but we have chosen to show a two-way association with no arrows, and one-way associations with one arrow pointing towards the class accessed. The dotted lines represent dependencies - e.g the DiscussionController can open the CourseController, and vice versa. 
 
