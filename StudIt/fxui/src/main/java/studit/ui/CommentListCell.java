@@ -61,7 +61,7 @@ public class CommentListCell extends BorderPane {
       List<String> upVoters = this.comment.getUpvoters();
 
       if (upVoters.contains(this.currentUser.getUsername())) {
-        // Visuell feedback
+        // Visuell feedback kunne vært implementert
       } else {
 
         try {
