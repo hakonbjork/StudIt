@@ -33,6 +33,13 @@ If you are curious about how to use the chatbot, check the documentation found i
 
 Code coverage is found under *target/site/jacoco*
 
+---
+**NOTE**
+
+TestFx is not stable during testing of the fxui module, and sometimes a `NoSuchElementException` will be thrown during the test phase of the build. Should this occur, simply rebuilding the module usually resolves the issue. 
+
+---
+
 ## User Stories
 
 - As a coming student I want to find information about a subject I am going to take at NTNU, so that I can be prepared when I start to study
