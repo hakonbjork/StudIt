@@ -5,11 +5,14 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.testfx.util.WaitForAsyncUtils.waitForFxEvents;
+
 import javafx.scene.Node;
 import org.assertj.core.api.Assertions;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.WindowMatchers;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -67,6 +70,7 @@ public class DiscussionControllerTest extends ApplicationTest {
   @Test
   public void testLogoutAction() {
     clickOn("#logout_btn");
+    waitForFxEvents();
     FxAssert.verifyThat(window("Login"), WindowMatchers.isShowing());
   }
 
