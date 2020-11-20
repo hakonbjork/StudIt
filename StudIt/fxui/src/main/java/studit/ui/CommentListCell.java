@@ -223,11 +223,10 @@ public class CommentListCell extends BorderPane {
 
   }
 
-  // The following methods are used for testing.
+  // The following methods are used for testing purposes.
   public Body getBody() {
     return this.body;
   }
-
 
  
   /**
